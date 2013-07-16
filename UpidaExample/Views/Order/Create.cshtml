@@ -1,0 +1,73 @@
+@{
+    ViewBag.Title = "New Order";
+    ViewBag.ViewModel = "Order/Create.js";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<a data-bind="attr: {'href': clientsLink}">CLIENTS</a>&nbsp;|
+<a data-bind="attr: {'href': indexLink}">ORDERS</a>&nbsp;|
+<h2>New Order</h2>
+<hr />
+<br />
+<table>
+	<tr>
+		<td>Ship to Country</td>
+		<td>
+			<input type="text" data-bind="value: shipCountry" />
+			<span class="error" data-bind="html: errors.get('ShipCountry')"></span>
+		</td>
+	</tr>
+	<tr>
+		<td>Ship to City</td>
+		<td>
+			<input type="text" data-bind="value: shipCity" />
+			<span class="error" data-bind="html: errors.get('ShipCity')"></span>
+		</td>
+	</tr>
+	<tr>
+		<td>Ship to Zip</td>
+		<td>
+			<input type="text" data-bind="value: shipZip" />
+			<span class="error" data-bind="html: errors.get('ShipZip')"></span>
+		</td>
+	</tr>
+	<tr>
+		<td>Ship to Address</td>
+		<td>
+			<input type="text" data-bind="value: shipAddress" />
+			<span class="error" data-bind="html: errors.get('ShipAddress')"></span>
+		</td>
+	</tr>
+	<tr>
+		<td>Total ($)</td>
+		<td>
+			<input type="text" data-bind="value: total" />
+			<span class="error" data-bind="html: errors.get('Total')"></span>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2"><hr /></td>
+	</tr>
+	<tr>
+		<td>Products:</td>
+		<td>
+			<!-- ko foreach: orderItemRows -->
+			Product:
+			<select data-bind="options: $root.products, value: productId, optionsText: 'name', optionsValue: 'id', optionsCaption: 'Select...'"></select>
+			<span class="error" data-bind="html: $root.errors.get('OrderItems['+ $index() + '].ProductId')"></span>
+			&nbsp;&nbsp;Count:
+			<input data-bind="value: count" />
+			<span class="error" data-bind="html: $root.errors.get('OrderItems['+ $index() + '].Count')"></span>
+			&nbsp;&nbsp;Price:
+			<input data-bind="value: price" />
+			<span class="error" data-bind="html: $root.errors.get('OrderItems['+ $index() + '].Price')"></span>
+			&nbsp;&nbsp;
+			<input type="button" data-bind="click: $root.removeProduct" value="remove" />
+			<br />
+			<!-- /ko -->
+			<input type="button" data-bind="click: addProduct" value="add" />
+			<span class="error" data-bind="html: errors.get('OrderItems')"></span>
+		</td>
+	</tr>
+</table>
+<hr />
+<input type="button" data-bind="click: onSave" value="Save" />

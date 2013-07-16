@@ -1,0 +1,29 @@
+@{
+    ViewBag.Title = "Clients";
+    ViewBag.ViewModel = "Client/Index.js";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<a data-bind="attr: {'href': createLink}">NEW CLIENT</a>&nbsp;|
+<h2>Clients</h2>
+<hr />
+<table border="1" style="width: 50%;">
+<thead>
+	<tr class="head">
+		<th>ID</th>
+		<th>NAME</th>
+		<th colspan="2">ACTIONS</th>
+	</tr>
+</thead>
+<tbody data-bind="foreach: clientRows">
+	<tr>
+		<td data-bind="idtext: id"></td>
+		<td data-bind="text: name"></td>
+		<td>
+			<a data-bind="attr: {'href': ordersLink}">Orders</a>
+		</td>
+		<td>
+			<a data-bind="attr: {'href': newOrderLink}">New Order</a>
+		</td>
+	</tr>
+</tbody>
+</table>

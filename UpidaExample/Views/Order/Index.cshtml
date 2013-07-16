@@ -1,0 +1,46 @@
+@{
+    ViewBag.Title = "Orders";
+    ViewBag.ViewModel = "Order/Index.js";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<a data-bind="attr: {'href': clientsLink}">CLIENTS</a>&nbsp;|
+<a data-bind="attr: {'href': createLink}">NEW ORDER</a>&nbsp;|
+<h2>Orders</h2>
+<hr />
+<br />
+<table border="1" style="width: 80%;">
+<thead>
+	<tr class="head">
+		<th rowspan="2">ID</th>
+		<th colspan="4">Shipping</th>
+		<th rowspan="2">CreatedOn</th>
+		<th rowspan="2">Total</th>
+		<th rowspan="2" colspan="2">ACTIONS</th>
+	</tr>
+	<tr class="head">
+		<th>Country</th>
+		<th>City</th>
+		<th>Zip</th>
+		<th>Address</th>
+	</tr>
+</thead>
+<tbody data-bind="foreach: orderRows">
+	<tr>
+		<td>
+			<a data-bind="idtext: id, attr: {'href': viewLink}"></a>
+		</td>
+		<td data-bind="text: shipCountry"></td>
+		<td data-bind="text: shipCity"></td>
+		<td data-bind="text: shipZip"></td>
+		<td data-bind="text: shipAddress"></td>
+		<td data-bind="date: createdOn"></td>
+		<td data-bind="text: total"></td>
+		<td>
+			<a data-bind="attr: {'href': editLink}">Edit</a>
+		</td>
+		<td>
+			<a data-bind="attr: {'href': editItemsLink}">Edit Items</a>
+		</td>
+	</tr>
+</tbody>
+</table>

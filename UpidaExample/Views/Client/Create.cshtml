@@ -1,0 +1,20 @@
+@{
+    ViewBag.Title = "New Client";
+    ViewBag.ViewModel = "Client/Create.js";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<a data-bind="attr: { 'href': indexLink }">ALL CLIENTS</a>|
+<h2>New Client</h2>
+<hr />
+<br />
+<table>
+	<tr>
+		<td>Name</td>
+		<td>
+			<input type="text" data-bind="value: name" />
+			<span class="error" data-bind="html: errors.get('Name')"></span>
+		</td>
+	</tr>
+</table>
+<hr />
+<input type="button" data-bind="click: onSave" value="Save" />

@@ -1,0 +1,77 @@
+@{
+    ViewBag.Title = "View Order";
+    ViewBag.ViewModel = "Order/Show.js";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<a data-bind="attr: {'href': clientsLink}">CLIENTS</a>&nbsp;|
+<a data-bind="attr: {'href': indexLink}">ORDERS</a>&nbsp;|
+<h2>View Order</h2>
+<hr />
+<br />
+<table>
+	<tr>
+		<td>
+			<a data-bind="attr: {'href': editLink}">Edit</a>
+		</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>Client</td>
+		<td>
+			<b data-bind="text: client"></b>
+		</td>
+	</tr>
+	<tr>
+		<td>Ship to Country</td>
+		<td>
+			<b data-bind="text: shipCountry"></b>
+		</td>
+	</tr>
+	<tr>
+		<td>Ship to City</td>
+		<td>
+			<b data-bind="text: shipCity"></b>
+		</td>
+	</tr>
+	<tr>
+		<td>Ship to Zip</td>
+		<td>
+			<b data-bind="text: shipZip"></b>
+		</td>
+	</tr>
+	<tr>
+		<td>Ship to Address</td>
+		<td>
+			<b data-bind="text: shipAddress"></b>
+		</td>
+	</tr>
+	<tr>
+		<td>Total ($)</td>
+		<td>
+			<b data-bind="text: total"></b>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2"><hr /></td>
+	</tr>
+	<tr>
+		<td>
+			<a data-bind="attr: {'href': editItemsLink}">Edit</a>
+		</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>Products:</td>
+		<td>
+			<!-- ko foreach: orderItemRows -->
+			Product:
+			<b data-bind="text: product"></b>
+			&nbsp;&nbsp;Count:
+			<b data-bind="text: count"></b>
+			&nbsp;&nbsp;Price:
+			<b data-bind="text: price"></b>
+			<br />
+			<!-- /ko -->
+		</td>
+	</tr>
+</table>
