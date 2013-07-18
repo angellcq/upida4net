@@ -75,7 +75,7 @@ namespace Upida
             }
         }
 
-        private Object parseValue(JToken node, PropertyMeta propertyDef)
+        private object parseValue(JToken node, PropertyMeta propertyDef)
         {
             string text = node.Value<string>();
             if (string.IsNullOrEmpty(text))

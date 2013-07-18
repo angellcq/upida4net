@@ -29,6 +29,15 @@ namespace Upida
         private readonly Type CHAR_TYPE = typeof(char?);
         private readonly Type DATE_TYPE = typeof(DateTime?);
 
+        private readonly Type LONG_PRIM = typeof(long);
+        private readonly Type INTEGER_PRIM = typeof(int);
+        private readonly Type SHORT_PRIM = typeof(short);
+        private readonly Type BYTE_PRIM = typeof(byte);
+        private readonly Type DOUBLE_PRIM = typeof(double);
+        private readonly Type FLOAT_PRIM = typeof(float);
+        private readonly Type BOOLEAN_PRIM = typeof(bool);
+        private readonly Type CHAR_PRIM = typeof(char);
+
         public PropertyMeta[] GetPropertyDefs(Type type)
         {
             PropertyMeta[] defs;
@@ -64,39 +73,39 @@ namespace Upida
                 {
                     parser = StandardParsers.STRING_PARSER;
                 }
-                else if(this.LONG_TYPE == type)
+                else if(this.LONG_TYPE == type || this.LONG_PRIM == type)
                 {
                     parser = StandardParsers.LONG_PARSER;
                 }
-                else if(this.INTEGER_TYPE == type)
+                else if (this.INTEGER_TYPE == type || this.INTEGER_PRIM == type)
                 {
                     parser = StandardParsers.INT_PARSER;
                 }
-                else if(this.DOUBLE_TYPE == type)
+                else if (this.DOUBLE_TYPE == type || this.DOUBLE_PRIM == type)
                 {
                     parser = StandardParsers.DOUBLE_PARSER;
                 }
-                else if(this.DATE_TYPE == type)
+                else if (this.DATE_TYPE == type)
                 {
                     parser = StandardParsers.DATETIME_PARSER;
                 }
-                else if(this.BOOLEAN_TYPE == type)
+                else if (this.BOOLEAN_TYPE == type || this.BOOLEAN_PRIM == type)
                 {
                     parser = StandardParsers.BOOL_PARSER;
                 }
-                else if(this.SHORT_TYPE == type)
+                else if (this.SHORT_TYPE == type || this.SHORT_PRIM == type)
                 {
                     parser = StandardParsers.SHORT_PARSER;
                 }
-                else if(this.BYTE_TYPE == type)
+                else if (this.BYTE_TYPE == type || this.BYTE_PRIM == type)
                 {
                     parser = StandardParsers.BYTE_PARSER;
                 }
-                else if(this.FLOAT_TYPE == type)
+                else if (this.FLOAT_TYPE == type || this.FLOAT_PRIM == type)
                 {
                     parser = StandardParsers.FLOAT_PARSER;
                 }
-                else if(this.CHAR_TYPE == type)
+                else if (this.CHAR_TYPE == type || this.CHAR_PRIM == type)
                 {
                     parser = StandardParsers.CHAR_PARSER;
                 }
