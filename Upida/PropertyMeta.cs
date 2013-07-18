@@ -88,7 +88,7 @@ namespace Upida
             this.descriptor.SetValue(target, value);
         }
 
-        public Object Read(Dtobase target)
+        public object Read(Dtobase target)
         {
             return this.descriptor.GetValue(target);
         }

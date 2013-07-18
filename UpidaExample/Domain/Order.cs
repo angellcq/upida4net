@@ -1,8 +1,8 @@
-﻿using iesi = Iesi.Collections.Generic;
-using System;
+﻿using System;
 using Upida;
 using Upida.Validation;
 using UpidaExample.Validation;
+using iesi = Iesi.Collections.Generic;
 
 namespace UpidaExample.Domain
 {
@@ -40,13 +40,8 @@ namespace UpidaExample.Domain
 
         public override bool Equals(object obj)
         {
-            bool areEquals = false;
-            if (obj is Order)
-            {
-                areEquals = Util.AreSame(this.Id, ((Order)obj).Id);
-            }
-
-            return areEquals;
+            if (!(obj is Order)) return false;
+            return Util.AreSame(this.Id, (obj as Order).Id);
         }
     }
 }

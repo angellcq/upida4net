@@ -19,7 +19,8 @@ namespace UpidaExample.Domain
 
         public override bool Equals(object obj)
         {
-            return Util.AreSame(this.Id, ((Client)obj).Id);
+            if (!(obj is Client)) return false;
+            return Util.AreSame(this.Id, (obj as Client).Id);
         }
     }
 }

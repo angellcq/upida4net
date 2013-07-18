@@ -1,6 +1,4 @@
 ﻿using System.Web.Mvc;
-using Upida;
-using Upida.Validation;
 
 namespace UpidaExample.Controllers.UI
 {

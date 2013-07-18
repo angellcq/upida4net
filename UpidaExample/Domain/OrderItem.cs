@@ -25,7 +25,8 @@ namespace UpidaExample.Domain
 
         public override bool Equals(object obj)
         {
-            return Util.AreSame(this.Id, ((OrderItem)obj).Id);
+            if (!(obj is OrderItem)) return false;
+            return Util.AreSame(this.Id, (obj as OrderItem).Id);
         }
 
         public virtual void connectToParent(object parent)

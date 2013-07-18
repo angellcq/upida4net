@@ -138,6 +138,7 @@
     <Compile Include="Controllers\Api\ControllerBase.cs" />
     <Compile Include="Controllers\Api\OrderController.cs" />
     <Compile Include="Controllers\UI\ClientController.cs" />
+    <Compile Include="Controllers\UI\HomeController.cs" />
     <Compile Include="Controllers\UI\OrderController.cs" />
     <Compile Include="Dao\IClientDao.cs" />
     <Compile Include="Dao\IDaobase.cs" />
@@ -210,6 +211,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Domain\Mapping\nhibernate-mapping.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Views\Client\Create.cshtml" />
     <None Include="Views\Client\Index.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />

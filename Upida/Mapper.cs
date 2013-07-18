@@ -7,6 +7,9 @@ namespace Upida
 {
     public class Mapper
     {
+        private static Type SET_TYPE = typeof(ISet);
+        private static Type LIST_TYPE = typeof(IList);
+
         /// <summary>
         /// Recursively copies fields from incoming source object to persistent dest object.
         /// </summary>
@@ -56,22 +59,38 @@ namespace Upida
         }
 
         /// <summary>
-        /// Recursively copies fields from incoming sourceList to persistent destSet;
+        /// Recursively copies fields from incoming collection of domain objects to the persistent collection
         /// </summary>
-        /// <param name="sourceList">Must be a collection of Dtobase derived objects</param>
-        /// <param name="destSet">Must be ISet</param>
+        /// <param name="sourceList">Incoming collection of domain objects</param>
+        /// <param name="destSet">Persistent collection (ISet or IList)</param>
         /// <param name="parent"></param>
-        public void MapTo(IEnumerable sourceList, IEnumerable destSet, Dtobase parent)
+        public void MapTo(IEnumerable sourceCollection, IEnumerable destCollection, Dtobase parent)
         {
             List<Dtobase> destItems = new List<Dtobase>();
-            foreach(Dtobase item in destSet)
+            foreach (Dtobase item in destCollection)
             {
                 destItems.Add(item);
             }
 
-            ISet destList = (ISet)destSet;
-            destList.Clear();
-            foreach(Dtobase item in sourceList)
+            IList destList = null;
+            ISet destSet = null;
+            Type destCollectionType = destCollection.GetType();
+            if (SET_TYPE.IsAssignableFrom(destCollectionType))
+            {
+                destSet = (ISet)destCollection;
+                destSet.Clear();
+            }
+            else if (LIST_TYPE.IsAssignableFrom(destCollectionType))
+            {
+                destList = (IList)destCollection;
+                destList.Clear();
+            }
+            else
+            {
+                throw new ApplicationException("Collection is neither IList nor ISet: " + destCollectionType.FullName);
+            }
+
+            foreach (Dtobase item in sourceCollection)
             {
                 Dtobase matchedDestItem = null;
                 foreach (Dtobase destItem in destItems)
@@ -86,11 +105,26 @@ namespace Upida
                 if(null != matchedDestItem)
                 {
                     this.MapTo(item, matchedDestItem);
-                    destList.Add(matchedDestItem);
+                    if (null != destSet)
+                    {
+                        destSet.Add(matchedDestItem);
+                    }
+                    else if (null != destList)
+                    {
+                        destList.Add(matchedDestItem);
+                    }
                 }
                 else
                 {
-                    destList.Add(item);
+                    if (null != destSet)
+                    {
+                        destSet.Add(item);
+                    }
+                    else if (null != destList)
+                    {
+                        destList.Add(item);
+                    }
+
                     if(item is IChild)
                     {
                         ((IChild)item).connectToParent(parent);
@@ -99,6 +133,11 @@ namespace Upida
             }
         }
 
+        /// <summary>
+        /// Recursively goes through fields of incoming domain object and assigns parents to nested objects
+        /// </summary>
+        /// <typeparam name="T">Must derive from Dtobase</typeparam>
+        /// <param name="source">Incoming domain object</param>
         public void Map<T>(T source)
             where T : Dtobase
         {
@@ -106,10 +145,11 @@ namespace Upida
         }
 
         /// <summary>
-        /// Recursively goes through fields and assigns parents to nested objects.
+        /// Recursively goes through fields of incoming domain object and assigns parents to nested objects
         /// </summary>
-        /// <typeparam name="T">Must be Dtobase derived</typeparam>
-        /// <param name="source">Target object</param>
+        /// <typeparam name="T">Must derive from Dtobase</typeparam>
+        /// <param name="source">Incoming domain object</param>
+        /// <param name="type">Type of the incoming domain object</param>
         public void Map(Dtobase source, Type type)
         {
             try
