@@ -59,6 +59,7 @@
     <Compile Include="Validation\ValidationException.cs" />
     <Compile Include="Validation\Validator.cs" />
     <Compile Include="Validation\ValidatorBase.cs" />
+    <Compile Include="Validation\ValidatorExtentions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -7,40 +7,40 @@ namespace UpidaExample.Validation
     {
         public override void Validate()
         {
-            this.Field(this.target.Id, "Id")
+            this.Field(this.Target.Id, "Id")
                 .MustBeUnassigned(Errors.MUST_BE_EMPTY);
 
-            this.Field(this.target.CreatedOn, "CreatedOn")
+            this.Field(this.Target.CreatedOn, "CreatedOn")
                 .MustBeUnassigned(Errors.MUST_BE_EMPTY);
 
-            this.Field(this.target.ShipAddress, "ShipAddress")
+            this.Field(this.Target.ShipAddress, "ShipAddress")
                 .NotNull(Errors.CANNOT_BE_EMPTY)
                 .Stop()
                 .Length(5, 256, Errors.LENGTH_WRONG);
 
-            this.Field(this.target.ShipCity, "ShipCity")
+            this.Field(this.Target.ShipCity, "ShipCity")
                 .NotNull(Errors.CANNOT_BE_EMPTY)
                 .Stop()
                 .Length(2, 256, Errors.LENGTH_WRONG);
 
-            this.Field(this.target.ShipCountry, "ShipCountry")
+            this.Field(this.Target.ShipCountry, "ShipCountry")
                 .NotNull(Errors.CANNOT_BE_EMPTY)
                 .Stop()
                 .Length(2, 256, Errors.LENGTH_WRONG);
 
-            this.Field(this.target.ShipZip, "ShipZip")
+            this.Field(this.Target.ShipZip, "ShipZip")
                 .NotNull(Errors.CANNOT_BE_EMPTY)
                 .Stop()
                 .Length(5, 5, Errors.LENGTH_WRONG);
 
-            this.Field(this.target.Total, "Total")
+            this.Field(this.Target.Total, "Total")
                 .ValidFormat(Errors.INVALID_NUMBER)
                 .Stop()
                 .NotNull(Errors.CANNOT_BE_EMPTY)
                 .Stop()
                 .GreaterThan(0f, Errors.GREATER_ZERO);
 
-            this.Field(this.target.OrderItems, "OrderItems")
+            this.Field(this.Target.OrderItems, "OrderItems")
                 .Size(1, 500, Errors.WRONG_COUNT)
                 .NestedList<OrderItem>(Groups.SAVE);
         }

@@ -7,30 +7,30 @@ namespace UpidaExample.Validation
     {
         public override void Validate()
         {
-            this.Field(target.Id, "Id")
+            this.Field(Target.Id, "Id")
                 .ValidFormat(Errors.INVALID_NUMBER)
                 .Stop()
                 .NotNull(Errors.CANNOT_BE_EMPTY);
 
-            this.Field(target.CreatedOn, "CreatedOn")
+            this.Field(Target.CreatedOn, "CreatedOn")
                 .MustBeUnassigned(Errors.MUST_BE_EMPTY);
 
-            this.Field(target.ShipAddress, "ShipAddress")
+            this.Field(Target.ShipAddress, "ShipAddress")
                 .MustBeUnassigned(Errors.MUST_BE_EMPTY);
 
-            this.Field(target.ShipCity, "ShipCity")
+            this.Field(Target.ShipCity, "ShipCity")
                 .MustBeUnassigned(Errors.MUST_BE_EMPTY);
 
-            this.Field(target.ShipCountry, "ShipCountry")
+            this.Field(Target.ShipCountry, "ShipCountry")
                 .MustBeUnassigned(Errors.MUST_BE_EMPTY);
 
-            this.Field(target.ShipZip, "ShipZip")
+            this.Field(Target.ShipZip, "ShipZip")
                 .MustBeUnassigned(Errors.MUST_BE_EMPTY);
 
-            this.Field(target.Total, "Total")
+            this.Field(Target.Total, "Total")
                 .MustBeUnassigned(Errors.MUST_BE_EMPTY);
 
-            this.Field(target.OrderItems, "OrderItems")
+            this.Field(Target.OrderItems, "OrderItems")
                 .Size(1, 500, Errors.WRONG_COUNT)
                 .NestedList<OrderItem>(Groups.SAVE_OR_UPDATE);
         }

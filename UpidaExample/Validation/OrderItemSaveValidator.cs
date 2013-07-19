@@ -7,24 +7,24 @@ namespace UpidaExample.Validation
     {
         public override void Validate()
         {
-            this.Field(this.target.Id, "Id")
+            this.Field(this.Target.Id, "Id")
                 .MustBeUnassigned(Errors.MUST_BE_EMPTY);
 
-            this.Field(this.target.Count, "Count")
+            this.Field(this.Target.Count, "Count")
                 .ValidFormat(Errors.INVALID_NUMBER)
                 .Stop()
                 .NotNull(Errors.CANNOT_BE_EMPTY)
                 .Stop()
                 .GreaterThan(0, Errors.GREATER_ZERO);
-            this.Field(this.target.Price, "Price")
+            this.Field(this.Target.Price, "Price")
                 .ValidFormat(Errors.INVALID_NUMBER)
                 .Stop()
                 .NotNull(Errors.CANNOT_BE_EMPTY)
                 .Stop()
                 .GreaterThan(0f, Errors.GREATER_ZERO);
-            this.Field(this.target.ProductId, "ProductId")
+            this.Field(this.Target.ProductId, "ProductId")
                 .NotNull(Errors.CANNOT_BE_EMPTY);
-            this.Field(this.target.Order, "Order")
+            this.Field(this.Target.Order, "Order")
                 .MustBeUnassigned(Errors.MUST_BE_EMPTY);
         }
     }

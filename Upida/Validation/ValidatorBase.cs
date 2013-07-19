@@ -12,13 +12,65 @@ namespace Upida.Validation
         private string name;
         private object value;
         private IValidatorBase parent;
-        protected T target;
+        private T target;
 
         private bool validTarget;
         private bool validField;
         private bool stopped;
         private IList<Failure> failures;
 
+        /// <summary>
+        /// True if current field is valid so far
+        /// </summary>
+        public bool IsValidField
+        {
+            get { return this.validField; }
+        }
+
+        /// <summary>
+        /// True is the target object is valid so far
+        /// </summary>
+        public bool IsValid
+        {
+            get { return this.validTarget; }
+        }
+
+        /// <summary>
+        /// True if validation is stopped for the current field. You can stop validation for current field only if Stop() method is called and the field is invalid
+        /// </summary>
+        public bool Stopped
+        {
+            get { return this.stopped; }
+        }
+
+        /// <summary>
+        /// Represents target object
+        /// </summary>
+        public T Target
+        {
+            get { return this.target; }
+        }
+
+        /// <summary>
+        /// Represents value of the current field
+        /// </summary>
+        public object Value
+        {
+            get { return this.value; }
+        }
+
+        /// <summary>
+        /// Represents name of the current field
+        /// </summary>
+        public string Name
+        {
+            get { return this.name; }
+        }
+
+        /// <summary>
+        /// Returns list of failures for the target object
+        /// </summary>
+        /// <returns></returns>
         public IList<Failure> GetFailures()
         {
             return this.failures;
@@ -57,239 +109,6 @@ namespace Upida.Validation
             if(!this.validField)
             {
                 this.stopped = true;
-            }
-            return this;
-        }
-
-        public ValidatorBase<T> MustBeAssigned(string msg)
-        {
-            if(this.stopped) return this;
-
-            if(!this.target.isFieldAssigned(this.name))
-            {
-                this.Fail(msg);
-            }
-            return this;
-        }
-
-        /// <summary>
-        /// Validates field is assigned some value by parser
-        /// </summary>
-        /// <param name="msg">failure message</param>
-        /// <returns></returns>
-        public ValidatorBase<T> MustBeUnassigned(string msg)
-        {
-            if(this.stopped) return this;
-
-            if(this.target.isFieldAssigned(this.name))
-            {
-                this.Fail(msg);
-            }
-            return this;
-        }
-
-        /// <summary>
-        /// Validates field is correctly parsed
-        /// </summary>
-        /// <param name="msg">failure message</param>
-        /// <returns></returns>
-        public ValidatorBase<T> ValidFormat(string msg)
-        {
-            if(this.stopped) return this;
-
-            if(this.target.isFieldWrong(this.name))
-            {
-                this.Fail(msg);
-            }
-
-            return this;
-        }
-
-        /// <summary>
-        /// Validates if field value is null
-        /// </summary>
-        /// <param name="msg">failure message</param>
-        /// <returns></returns>
-        public ValidatorBase<T> MustBeNull(string msg)
-        {
-            if(this.stopped) return this;
-
-            if(null != this.value)
-            {
-                this.Fail(msg);
-            }
-            return this;
-        }
-
-        /// <summary>
-        /// Validates if field value is equal to destination value
-        /// </summary>
-        /// <param name="value">destination value</param>
-        /// <param name="msg">failure message</param>
-        /// <returns></returns>
-        public ValidatorBase<T> MustEqualTo(T value, string msg)
-        {
-            if(this.stopped) return this;
-
-            if(!value.Equals(this.value))
-            {
-                this.Fail(msg);
-            }
-            return this;
-        }
-
-        /// <summary>
-        /// Validates field value not equal to destination value
-        /// </summary>
-        /// <param name="value">destination value</param>
-        /// <param name="msg">failure message</param>
-        /// <returns></returns>
-        public ValidatorBase<T> NotEqualTo(T value, string msg)
-        {
-            if(this.stopped) return this;
-
-            if(value.Equals(this.value))
-            {
-                this.Fail(msg);
-            }
-            return this;
-        }
-
-        /// <summary>
-        /// Validates field value is not null
-        /// </summary>
-        /// <param name="msg">failure message</param>
-        /// <returns></returns>
-        public ValidatorBase<T> NotNull(string msg)
-        {
-            if(this.stopped) return this;
-
-            if(null == this.value)
-            {
-                this.Fail(msg);
-            }
-            return this;
-        }
-
-        /// <summary>
-        /// Validates String's length is between min and max values
-        /// </summary>
-        /// <param name="min"></param>
-        /// <param name="max"></param>
-        /// <param name="msg">failure message</param>
-        /// <returns></returns>
-        public ValidatorBase<T> Length(int min, int max, string msg)
-        {
-            if(this.stopped) return this;
-
-            string val = (string)this.value;
-            if(val.Length < min || val.Length > max)
-            {
-                this.Fail(msg);
-            }
-
-            return this;
-        }
-
-        /// <summary>
-        /// Validates field value is less than or equal to 'm'
-        /// </summary>
-        /// <param name="m"></param>
-        /// <param name="msg">failure message</param>
-        /// <returns></returns>
-        public ValidatorBase<T> LessOrEqualTo(Object m, String msg)
-        {
-            if(this.stopped || null == m) return this;
-
-            if(((IComparable)this.value).CompareTo(m) > 0)
-            {
-                this.Fail(msg);
-            }
-            return this;
-        }
-
-        /// <summary>
-        /// Validates field value is less than 'm'
-        /// </summary>
-        /// <param name="m"></param>
-        /// <param name="msg">failure message</param>
-        /// <returns></returns>
-        public ValidatorBase<T> LessThan(object m, string msg)
-        {
-            if(this.stopped || null == m) return this;
-
-            if (((IComparable)this.value).CompareTo(m) >= 0)
-            {
-                this.Fail(msg);
-            }
-            return this;
-        }
-
-        /// <summary>
-        /// Validates field value is greater than or equal to 'm'
-        /// </summary>
-        /// <param name="m"></param>
-        /// <param name="msg">failure message</param>
-        /// <returns></returns>
-        public ValidatorBase<T> GreaterOrEqualTo(object m, string msg)
-        {
-            if(this.stopped || null == m) return this;
-
-            if (((IComparable)this.value).CompareTo(m) < 0)
-            {
-                this.Fail(msg);
-            }
-            return this;
-        }
-
-        /// <summary>
-        /// Validates field value is greater than 'm'
-        /// </summary>
-        /// <param name="m"></param>
-        /// <param name="msg">failure message</param>
-        /// <returns></returns>
-        public ValidatorBase<T> GreaterThan(object m, String msg)
-        {
-            if(this.stopped || null == m) return this;
-
-            if(((IComparable)this.value).CompareTo(m) <= 0)
-            {
-                this.Fail(msg);
-            }
-            return this;
-        }
-
-        /// <summary>
-        /// Validates collection size is between min and max values inclusively
-        /// </summary>
-        /// <param name="min">min value</param>
-        /// <param name="max">max value</param>
-        /// <param name="msg">failure message</param>
-        /// <returns></returns>
-        public ValidatorBase<T> Size(int min, int max, string msg)
-        {
-            if(this.stopped) return this;
-
-            ICollection collection = (ICollection)this.value;
-            if (collection.Count < min || collection.Count > max)
-            {
-                this.Fail(msg);
-            }
-            return this;
-        }
-
-        /// <summary>
-        /// Validates if field qualifies to regular expression
-        /// </summary>
-        /// <param name="expr">regular expression</param>
-        /// <param name="msg">failure message</param>
-        /// <returns></returns>
-        public ValidatorBase<T> Regexpr(string expr, string msg)
-        {
-            Match match = Regex.Match((string)this.value, expr, RegexOptions.IgnoreCase);
-            if (!match.Success)
-            {
-                this.Fail(msg);
             }
             return this;
         }
@@ -341,16 +160,6 @@ namespace Upida.Validation
             }
 
             return this;
-        }
-
-        public bool IsValidField
-        {
-            get { return this.validField; }
-        }
-
-        public bool IsValid
-        {
-            get { return this.validTarget; }
         }
 
         /// <summary>

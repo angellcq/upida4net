@@ -8,10 +8,10 @@ namespace UpidaExample.Validation
     {
         public override void Validate()
         {
-            this.Field(target.Id, "Id")
+            this.Field(Target.Id, "Id")
                 .MustBeUnassigned(Errors.MUST_BE_EMPTY);
 
-            this.Field(target.Name, "Name")
+            this.Field(Target.Name, "Name")
                 .MustBeAssigned(Errors.CANNOT_BE_EMPTY)
                 .Stop()
                 .NotNull(Errors.CANNOT_BE_EMPTY)
