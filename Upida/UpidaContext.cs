@@ -60,66 +60,71 @@ namespace Upida
 
         public IParser BuildParser(PropertyMeta propertyDef)
         {
+            IParser parser = null;
             try
             {
-                if(null != propertyDef.Annotation.Parser)
+                if (null != propertyDef.Annotation.Parser)
                 {
-                    Activator.CreateInstance(propertyDef.Annotation.Parser);
+                    parser = (IParser)Activator.CreateInstance(propertyDef.Annotation.Parser);
+                    return parser;
                 }
-
-                Type type = propertyDef.PropertyClass;
-                IParser parser = null;
-                if(this.STRING_TYPE == type)
-                {
-                    parser = StandardParsers.STRING_PARSER;
-                }
-                else if(this.LONG_TYPE == type || this.LONG_PRIM == type)
-                {
-                    parser = StandardParsers.LONG_PARSER;
-                }
-                else if (this.INTEGER_TYPE == type || this.INTEGER_PRIM == type)
-                {
-                    parser = StandardParsers.INT_PARSER;
-                }
-                else if (this.DOUBLE_TYPE == type || this.DOUBLE_PRIM == type)
-                {
-                    parser = StandardParsers.DOUBLE_PARSER;
-                }
-                else if (this.DATE_TYPE == type)
-                {
-                    parser = StandardParsers.DATETIME_PARSER;
-                }
-                else if (this.BOOLEAN_TYPE == type || this.BOOLEAN_PRIM == type)
-                {
-                    parser = StandardParsers.BOOL_PARSER;
-                }
-                else if (this.SHORT_TYPE == type || this.SHORT_PRIM == type)
-                {
-                    parser = StandardParsers.SHORT_PARSER;
-                }
-                else if (this.BYTE_TYPE == type || this.BYTE_PRIM == type)
-                {
-                    parser = StandardParsers.BYTE_PARSER;
-                }
-                else if (this.FLOAT_TYPE == type || this.FLOAT_PRIM == type)
-                {
-                    parser = StandardParsers.FLOAT_PARSER;
-                }
-                else if (this.CHAR_TYPE == type || this.CHAR_PRIM == type)
-                {
-                    parser = StandardParsers.CHAR_PARSER;
-                }
-                else if(type.IsEnum)
-                {
-                    parser = StandardParsers.ENUM_PARSER;
-                }
-
-                return parser;
             }
-            catch
+            catch(Exception ex)
             {
-                throw new Exception("Unable to build parser -  property:" + propertyDef.Name + " of type:" + propertyDef.PropertyClass.Name);
+                throw new ApplicationException("Unable to instantiate parser for - property:" + propertyDef.Name + " of type:" + propertyDef.PropertyClass.Name, ex);
             }
+
+            Type type = propertyDef.PropertyClass;
+            if (this.STRING_TYPE == type)
+            {
+                parser = StandardParsers.STRING_PARSER;
+            }
+            else if (this.LONG_TYPE == type || this.LONG_PRIM == type)
+            {
+                parser = StandardParsers.LONG_PARSER;
+            }
+            else if (this.INTEGER_TYPE == type || this.INTEGER_PRIM == type)
+            {
+                parser = StandardParsers.INT_PARSER;
+            }
+            else if (this.DOUBLE_TYPE == type || this.DOUBLE_PRIM == type)
+            {
+                parser = StandardParsers.DOUBLE_PARSER;
+            }
+            else if (this.DATE_TYPE == type)
+            {
+                parser = StandardParsers.DATETIME_PARSER;
+            }
+            else if (this.BOOLEAN_TYPE == type || this.BOOLEAN_PRIM == type)
+            {
+                parser = StandardParsers.BOOL_PARSER;
+            }
+            else if (this.SHORT_TYPE == type || this.SHORT_PRIM == type)
+            {
+                parser = StandardParsers.SHORT_PARSER;
+            }
+            else if (this.BYTE_TYPE == type || this.BYTE_PRIM == type)
+            {
+                parser = StandardParsers.BYTE_PARSER;
+            }
+            else if (this.FLOAT_TYPE == type || this.FLOAT_PRIM == type)
+            {
+                parser = StandardParsers.FLOAT_PARSER;
+            }
+            else if (this.CHAR_TYPE == type || this.CHAR_PRIM == type)
+            {
+                parser = StandardParsers.CHAR_PARSER;
+            }
+            else if (type.IsEnum)
+            {
+                parser = StandardParsers.ENUM_PARSER;
+            }
+            else
+            {
+                throw new ApplicationException("Unable to find parser for property: " + propertyDef.Name + ", of type: " + type.FullName + ". You must setup custom parser for this property in the Dto attribute.");
+            }
+
+            return parser;
         }
 
         public object BuildList(Type type)
