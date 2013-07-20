@@ -4,7 +4,7 @@ namespace Upida.Validation
 {
     public class Validator
     {
-        public void Validate<T>(T target, int group)
+        public void Validate<T>(T target, object group)
             where T : Dtobase
         {
             ValidatorBase<T> validator = FluentAttribute.BuildValidator<T>(group);

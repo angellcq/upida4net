@@ -6,9 +6,9 @@ namespace Upida.Validation
     public class FluentAttribute : Attribute
     {
         private Type validator;
-        private int group;
+        private object group;
 
-        public FluentAttribute(Type validator, int group)
+        public FluentAttribute(Type validator, object group)
         {
             this.validator = validator;
             this.group = group;
@@ -19,12 +19,12 @@ namespace Upida.Validation
             get { return this.validator; }
         }
 
-        public int Group
+        public object Group
         {
             get { return this.group; }
         }
 
-        public static ValidatorBase<T> BuildValidator<T>(int group)
+        public static ValidatorBase<T> BuildValidator<T>(object group)
             where T : Dtobase
         {
             object[] fluents = typeof(T).GetCustomAttributes(typeof(FluentAttribute), false);
@@ -32,7 +32,7 @@ namespace Upida.Validation
             {
                 Type validatorType = null;
                 FluentAttribute fluent = (FluentAttribute)fluents[i];
-                if (fluent.group == group)
+                if (object.Equals(fluent.group, group))
                 {
                     validatorType = fluent.Validator;
                     ValidatorBase<T> nestedValidator = (ValidatorBase<T>)Activator.CreateInstance(validatorType);
