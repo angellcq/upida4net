@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Upida
 {
@@ -12,7 +8,8 @@ namespace Upida
     {
         private static readonly UpidaContext CURRENT = new UpidaContext();
 
-        public static UpidaContext Current() {
+        public static UpidaContext Current()
+        {
             return CURRENT;
         }
 
@@ -20,9 +17,13 @@ namespace Upida
 
         private readonly Type STRING_TYPE = typeof(string);
         private readonly Type LONG_TYPE = typeof(long?);
+        private readonly Type ULONG_TYPE = typeof(ulong?);
         private readonly Type INTEGER_TYPE = typeof(int?);
+        private readonly Type UINTEGER_TYPE = typeof(uint?);
         private readonly Type SHORT_TYPE = typeof(short?);
+        private readonly Type USHORT_TYPE = typeof(ushort?);
         private readonly Type BYTE_TYPE = typeof(byte?);
+        private readonly Type SBYTE_TYPE = typeof(sbyte?);
         private readonly Type DOUBLE_TYPE = typeof(double?);
         private readonly Type FLOAT_TYPE = typeof(float?);
         private readonly Type BOOLEAN_TYPE = typeof(bool?);
@@ -30,9 +31,13 @@ namespace Upida
         private readonly Type DATE_TYPE = typeof(DateTime?);
 
         private readonly Type LONG_PRIM = typeof(long);
+        private readonly Type ULONG_PRIM = typeof(ulong);
         private readonly Type INTEGER_PRIM = typeof(int);
+        private readonly Type UINTEGER_PRIM = typeof(uint);
         private readonly Type SHORT_PRIM = typeof(short);
+        private readonly Type USHORT_PRIM = typeof(ushort);
         private readonly Type BYTE_PRIM = typeof(byte);
+        private readonly Type SBYTE_PRIM = typeof(sbyte);
         private readonly Type DOUBLE_PRIM = typeof(double);
         private readonly Type FLOAT_PRIM = typeof(float);
         private readonly Type BOOLEAN_PRIM = typeof(bool);
@@ -83,9 +88,17 @@ namespace Upida
             {
                 parser = StandardParsers.LONG_PARSER;
             }
+            else if (this.ULONG_TYPE == type || this.ULONG_PRIM == type)
+            {
+                parser = StandardParsers.ULONG_PARSER;
+            }
             else if (this.INTEGER_TYPE == type || this.INTEGER_PRIM == type)
             {
                 parser = StandardParsers.INT_PARSER;
+            }
+            else if (this.UINTEGER_TYPE == type || this.UINTEGER_PRIM == type)
+            {
+                parser = StandardParsers.UINT_PARSER;
             }
             else if (this.DOUBLE_TYPE == type || this.DOUBLE_PRIM == type)
             {
@@ -106,6 +119,10 @@ namespace Upida
             else if (this.BYTE_TYPE == type || this.BYTE_PRIM == type)
             {
                 parser = StandardParsers.BYTE_PARSER;
+            }
+            else if (this.SBYTE_TYPE == type || this.SBYTE_PRIM == type)
+            {
+                parser = StandardParsers.SBYTE_PARSER;
             }
             else if (this.FLOAT_TYPE == type || this.FLOAT_PRIM == type)
             {

@@ -10,9 +10,13 @@ namespace Upida
     {
         public static readonly IParser STRING_PARSER = new StringParser();
         public static readonly IParser LONG_PARSER = new LongParser();
+        public static readonly IParser ULONG_PARSER = new ULongParser();
         public static readonly IParser INT_PARSER = new IntParser();
+        public static readonly IParser UINT_PARSER = new UIntParser();
         public static readonly IParser SHORT_PARSER = new ShortParser();
+        public static readonly IParser USHORT_PARSER = new UShortParser();
         public static readonly IParser BYTE_PARSER = new ByteParser();
+        public static readonly IParser SBYTE_PARSER = new SByteParser();
         public static readonly IParser DOUBLE_PARSER = new DoubleParser();
         public static readonly IParser FLOAT_PARSER = new FloatParser();
         public static readonly IParser BOOL_PARSER = new BoolParser();
@@ -36,11 +40,27 @@ namespace Upida
             }
         }
 
+        private class ULongParser : IParser
+        {
+            public object parseTextValue(Type type, string text)
+            {
+                return ulong.Parse(text);
+            }
+        }
+
         private class IntParser : IParser
         {
             public object parseTextValue(Type type, string text)
             {
                 return int.Parse(text);
+            }
+        }
+
+        private class UIntParser : IParser
+        {
+            public object parseTextValue(Type type, string text)
+            {
+                return uint.Parse(text);
             }
         }
 
@@ -52,11 +72,27 @@ namespace Upida
             }
         }
 
+        private class UShortParser : IParser
+        {
+            public object parseTextValue(Type type, string text)
+            {
+                return ushort.Parse(text);
+            }
+        }
+
         private class ByteParser : IParser
         {
             public object parseTextValue(Type type, string text)
             {
                 return byte.Parse(text);
+            }
+        }
+
+        private class SByteParser : IParser
+        {
+            public object parseTextValue(Type type, string text)
+            {
+                return sbyte.Parse(text);
             }
         }
 
