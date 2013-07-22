@@ -78,7 +78,7 @@ $(function () {
 			else {
 				upida.utils.ajaxCallback(callback);
 			}
-		}, 500);
+		}, 300);
 	};
 
 	upida.utils.ajaxStart = function() {
