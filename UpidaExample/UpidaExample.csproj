@@ -162,6 +162,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Validation\ClientSaveValidator.cs" />
     <Compile Include="Validation\Errors.cs" />
+    <Compile Include="Validation\MyExtendedValidatorExtentions.cs" />
     <Compile Include="Validation\OrderItemSaveOrUpdateValidator.cs" />
     <Compile Include="Validation\OrderItemSaveValidator.cs" />
     <Compile Include="Validation\OrderSaveValidator.cs" />

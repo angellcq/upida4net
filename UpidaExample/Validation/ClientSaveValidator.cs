@@ -1,5 +1,4 @@
-﻿using System;
-using Upida.Validation;
+﻿using Upida.Validation;
 using UpidaExample.Domain;
 
 namespace UpidaExample.Validation
@@ -8,15 +7,12 @@ namespace UpidaExample.Validation
     {
         public override void Validate()
         {
-            this.Field(Target.Id, "Id")
-                .MustBeUnassigned(Errors.MUST_BE_EMPTY);
+            this.MissingField("Id");
 
-            this.Field(Target.Name, "Name")
-                .MustBeAssigned(Errors.CANNOT_BE_EMPTY)
-                .Stop()
-                .NotNull(Errors.CANNOT_BE_EMPTY)
-                .Stop()
-                .Length(1, 256, Errors.LENGTH_WRONG);
+            this.Field("Name", Target.Name);
+            this.Required();
+            this.Length(1, 256, Errors.LENGTH_WRONG);
+            this.Email(Errors.NOT_EMAIL);
         }
     }
 }

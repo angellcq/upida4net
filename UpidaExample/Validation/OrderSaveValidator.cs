@@ -7,42 +7,35 @@ namespace UpidaExample.Validation
     {
         public override void Validate()
         {
-            this.Field(this.Target.Id, "Id")
-                .MustBeUnassigned(Errors.MUST_BE_EMPTY);
+            this.MissingField("Id");
+            this.MissingField("CreatedOn");
 
-            this.Field(this.Target.CreatedOn, "CreatedOn")
-                .MustBeUnassigned(Errors.MUST_BE_EMPTY);
+            this.Field("ShipAddress", this.Target.ShipAddress);
+            this.Required();
+            this.Length(5, 256, Errors.LENGTH_WRONG);
 
-            this.Field(this.Target.ShipAddress, "ShipAddress")
-                .NotNull(Errors.CANNOT_BE_EMPTY)
-                .Stop()
-                .Length(5, 256, Errors.LENGTH_WRONG);
+            this.Field("ShipCity", this.Target.ShipCity);
+            this.Required();
+            this.Length(2, 256, Errors.LENGTH_WRONG);
 
-            this.Field(this.Target.ShipCity, "ShipCity")
-                .NotNull(Errors.CANNOT_BE_EMPTY)
-                .Stop()
-                .Length(2, 256, Errors.LENGTH_WRONG);
+            this.Field("ShipCountry", this.Target.ShipCountry);
+            this.Required();
+            this.Length(2, 256, Errors.LENGTH_WRONG);
 
-            this.Field(this.Target.ShipCountry, "ShipCountry")
-                .NotNull(Errors.CANNOT_BE_EMPTY)
-                .Stop()
-                .Length(2, 256, Errors.LENGTH_WRONG);
+            this.Field("ShipZip", this.Target.ShipZip);
+            this.Required();
+            this.Length(5, 5, Errors.LENGTH_WRONG);
 
-            this.Field(this.Target.ShipZip, "ShipZip")
-                .NotNull(Errors.CANNOT_BE_EMPTY)
-                .Stop()
-                .Length(5, 5, Errors.LENGTH_WRONG);
+            this.Field("Total", this.Target.Total);
+            this.RequiredNumber();
+            this.GreaterThan(0f, Errors.GREATER_ZERO);
 
-            this.Field(this.Target.Total, "Total")
-                .ValidFormat(Errors.INVALID_NUMBER)
-                .Stop()
-                .NotNull(Errors.CANNOT_BE_EMPTY)
-                .Stop()
-                .GreaterThan(0f, Errors.GREATER_ZERO);
+            this.Field("OrderItems", this.Target.OrderItems);
+            this.Size(1, 500, Errors.WRONG_COUNT);
+            this.NestedList<OrderItem>(Groups.SAVE);
 
-            this.Field(this.Target.OrderItems, "OrderItems")
-                .Size(1, 500, Errors.WRONG_COUNT)
-                .NestedList<OrderItem>(Groups.SAVE);
+            this.Field("Client", this.Target.Client);
+            this.Required();
         }
     }
 }

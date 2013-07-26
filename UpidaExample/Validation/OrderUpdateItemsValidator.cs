@@ -7,32 +7,21 @@ namespace UpidaExample.Validation
     {
         public override void Validate()
         {
-            this.Field(Target.Id, "Id")
-                .ValidFormat(Errors.INVALID_NUMBER)
-                .Stop()
-                .NotNull(Errors.CANNOT_BE_EMPTY);
+            this.Field("Id", Target.Id);
+            this.RequiredNumber();
 
-            this.Field(Target.CreatedOn, "CreatedOn")
-                .MustBeUnassigned(Errors.MUST_BE_EMPTY);
+            this.MissingField("CreatedOn");
+            this.MissingField("ShipAddress");
+            this.MissingField("ShipCity");
+            this.MissingField("ShipCountry");
+            this.MissingField("ShipZip");
+            this.MissingField("Total");
 
-            this.Field(Target.ShipAddress, "ShipAddress")
-                .MustBeUnassigned(Errors.MUST_BE_EMPTY);
+            this.Field("OrderItems", Target.OrderItems);
+            this.Size(1, 500, Errors.WRONG_COUNT);
+            this.NestedList<OrderItem>(Groups.SAVE_OR_UPDATE);
 
-            this.Field(Target.ShipCity, "ShipCity")
-                .MustBeUnassigned(Errors.MUST_BE_EMPTY);
-
-            this.Field(Target.ShipCountry, "ShipCountry")
-                .MustBeUnassigned(Errors.MUST_BE_EMPTY);
-
-            this.Field(Target.ShipZip, "ShipZip")
-                .MustBeUnassigned(Errors.MUST_BE_EMPTY);
-
-            this.Field(Target.Total, "Total")
-                .MustBeUnassigned(Errors.MUST_BE_EMPTY);
-
-            this.Field(Target.OrderItems, "OrderItems")
-                .Size(1, 500, Errors.WRONG_COUNT)
-                .NestedList<OrderItem>(Groups.SAVE_OR_UPDATE);
+            this.MissingField("Client");
         }
     }
 }
