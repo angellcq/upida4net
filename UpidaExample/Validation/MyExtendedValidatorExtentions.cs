@@ -46,5 +46,15 @@ namespace UpidaExample.Validation
             validator.Field(field);
             validator.MustBeUnassigned(Errors.MUST_BE_EMPTY);
         }
+
+        public static void ValidNumberOrNull<T>(this ValidatorBase<T> validator)
+            where T : Dtobase
+        {
+            if (validator.Target.isFieldAssigned(validator.Name))
+            {
+                validator.ValidFormat(Errors.INVALID_NUMBER);
+                validator.Stop();
+            }
+        }
     }
 }

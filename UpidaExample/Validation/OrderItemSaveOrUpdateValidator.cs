@@ -7,12 +7,8 @@ namespace UpidaExample.Validation
     {
         public override void Validate()
         {
-            if (this.Target.isFieldAssigned("Id"))
-            {
-                // Validate for update
-                this.Field("Id", this.Target.Id);
-                this.RequiredNumber();
-            }
+            this.Field("Id", this.Target.Id);
+            this.ValidNumberOrNull();
 
             this.Field("Count", this.Target.Count);
             this.RequiredNumber();
