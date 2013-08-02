@@ -35,21 +35,21 @@ namespace UpidaExample.Controllers.Api
         public void Save(JToken data)
         {
             Order item = this.jsonParser.Parse<Order>(data);
-            this.validator.Validate<Order>(item, Groups.SAVE);
+            this.validator.ValidateAndThrow<Order>(item, Groups.SAVE);
             this.orderBusiness.Save(item);
         }
 
         public void Update(JToken data)
         {
             Order item = this.jsonParser.Parse<Order>(data);
-            this.validator.Validate<Order>(item, Groups.UPDATE);
+            this.validator.ValidateAndThrow<Order>(item, Groups.UPDATE);
             this.orderBusiness.Update(item);
         }
 
         public void UpdateItems(JToken data)
         {
             Order item = this.jsonParser.Parse<Order>(data);
-            this.validator.Validate<Order>(item, Groups.UPDATE_ITEMS);
+            this.validator.ValidateAndThrow<Order>(item, Groups.UPDATE_ITEMS);
             this.orderBusiness.Update(item);
         }
     }

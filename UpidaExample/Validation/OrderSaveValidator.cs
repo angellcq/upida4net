@@ -31,6 +31,7 @@ namespace UpidaExample.Validation
             this.GreaterThan(0f, Errors.GREATER_ZERO);
 
             this.Field("OrderItems", this.Target.OrderItems);
+            this.Required();
             this.Size(1, 500, Errors.WRONG_COUNT);
             this.NestedList<OrderItem>(Groups.SAVE);
 

@@ -9,6 +9,7 @@ namespace Upida
     public class JsonParser
     {
         public T Parse<T>(JToken node)
+            where T : Dtobase
         {
             return (T)this.Parse(node, typeof(T));
         }

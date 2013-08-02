@@ -18,6 +18,7 @@ namespace UpidaExample.Validation
             this.MissingField("Total");
 
             this.Field("OrderItems", Target.OrderItems);
+            this.Required();
             this.Size(1, 500, Errors.WRONG_COUNT);
             this.NestedList<OrderItem>(Groups.SAVE_OR_UPDATE);
 
