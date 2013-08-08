@@ -11,5 +11,6 @@ namespace UpidaExample.Validation
         public const string INVALID_NUMBER = "must be valid number";
         public const string WRONG_COUNT = "is wrong count";
         public const string MUST_BE_ASSIGNED = "must be assigned";
+        public const string NOT_EMAIL = "must be email address";
     }
 }

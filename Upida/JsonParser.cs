@@ -9,6 +9,7 @@ namespace Upida
     public class JsonParser
     {
         public T Parse<T>(JToken node)
+            where T : Dtobase
         {
             return (T)this.Parse(node, typeof(T));
         }
@@ -39,14 +40,14 @@ namespace Upida
                         {
                             if(PropertyMeta.ClassType.Value == propertyDef.PropertyClassType)
                             {
-                                propertyDef.Write(dto, this.parseValue(propertyValue, propertyDef));
                                 dto.addAssignedField(propertyDef.Name);
+                                propertyDef.Write(dto, this.parseValue(propertyValue, propertyDef));
                             }
                             else if(PropertyMeta.ClassType.Class == propertyDef.PropertyClassType ||
                                 PropertyMeta.ClassType.CustomType == propertyDef.PropertyClassType)
                             {
-                                propertyDef.Write(dto, this.Parse(propertyValue, propertyDef.PropertyClass));
                                 dto.addAssignedField(propertyDef.Name);
+                                propertyDef.Write(dto, this.Parse(propertyValue, propertyDef.PropertyClass));
                             }
                             else if(PropertyMeta.ClassType.Collection == propertyDef.PropertyClassType ||
                                 PropertyMeta.ClassType.CustomTypeCollection == propertyDef.PropertyClassType)

@@ -88,29 +88,40 @@ namespace Upida.Validation
         /// <summary>
         /// Sets current validated field value and name
         /// </summary>
-        /// <param name="value">field value</param>
         /// <param name="name">name of the field</param>
+        /// <param name="value">field value</param>
         /// <returns></returns>
-        protected ValidatorBase<T> Field(object value, string name)
+        public void Field(string name, object value)
         {
             this.value = value;
             this.name = name;
             this.stopped = false;
             this.validField = true;
-            return this;
+        }
+
+        /// <summary>
+        /// Sets current validated field name and value as NULL
+        /// </summary>
+        /// <param name="name">name of the field</param>
+        /// <returns></returns>
+        public void Field(string name)
+        {
+            this.value = null;
+            this.name = name;
+            this.stopped = false;
+            this.validField = true;
         }
 
         /// <summary>
         /// Disables validation for the current field if it is allready failed
         /// </summary>
         /// <returns></returns>
-        public ValidatorBase<T> Stop()
+        public void Stop()
         {
             if(!this.validField)
             {
                 this.stopped = true;
             }
-            return this;
         }
 
         /// <summary>
@@ -119,10 +130,10 @@ namespace Upida.Validation
         /// <typeparam name="R">Type of the validated object</typeparam>
         /// <param name="group">validation group</param>
         /// <returns></returns>
-        public ValidatorBase<T> Nested<R>(int group)
+        public void Nested<R>(int group)
             where R : Dtobase
         {
-            if (this.stopped) return this;
+            if (this.stopped) return;
 
             ValidatorBase<R> nestedValidator = FluentAttribute.BuildValidator<R>(group);
             if (null != nestedValidator)
@@ -131,8 +142,6 @@ namespace Upida.Validation
                 nestedValidator.SetTarget((this.value as R), fullPath, this);
                 nestedValidator.Validate();
             }
-
-            return this;
         }
 
         /// <summary>
@@ -141,10 +150,10 @@ namespace Upida.Validation
         /// <typeparam name="R">Type of the validated object</typeparam>
         /// <param name="group">validation group</param>
         /// <returns></returns>
-        public ValidatorBase<T> NestedList<R>(object group)
+        public void NestedList<R>(object group)
             where R : Dtobase
         {
-            if (this.stopped) return this;
+            if (this.stopped) return;
 
             ValidatorBase<R> nestedValidator = FluentAttribute.BuildValidator<R>(group);
             if (null != nestedValidator)
@@ -158,8 +167,6 @@ namespace Upida.Validation
                     index++;
                 }
             }
-
-            return this;
         }
 
         /// <summary>

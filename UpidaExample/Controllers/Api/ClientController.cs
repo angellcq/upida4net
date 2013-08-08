@@ -25,7 +25,7 @@ namespace UpidaExample.Controllers.Api
         public void Save(JToken item)
         {
             Client data = this.jsonParser.Parse<Client>(item);
-            this.validator.Validate(data, Groups.SAVE);
+            this.validator.ValidateAndThrow(data, Groups.SAVE);
             this.clientBusiness.Save(data);
         }
     }
