@@ -108,7 +108,9 @@ $(function () {
 		}
 	};
 
-	upida.utils.bind = function(vm) {
+	upida.vm = null;
+	upida.utils.bind = function (vm) {
+		upida.vm = vm;
 		upida.vm.errors = ko.observableDictionary();
 		ko.applyBindings(vm);
 	};

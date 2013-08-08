@@ -17,7 +17,6 @@ $(function () {
 	upida.vm.onSave = function () {
 		var item = {};
 		item.Id = upida.vm.id;
-		item.Client = upida.utils.getReff(upida.vm.clientId);
 		item.ShipCountry = upida.vm.shipCountry();
 		item.ShipCity = upida.vm.shipCity();
 		item.ShipZip = upida.vm.shipZip();
