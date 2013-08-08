@@ -78,9 +78,9 @@ namespace Upida
             }
         }
 
-        public bool HasRule(byte rule)
+        public bool HasLevel(byte level)
         {
-            return rule >= this.annotation.Value;
+            return level >= this.annotation.Value;
         }
 
         public void Write(Dtobase target, Object value)

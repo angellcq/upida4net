@@ -19,7 +19,7 @@ namespace UpidaExample.Business
         public IList<Client> GetAll()
         {
             IList<Client> items = this.clientDao.GetAll();
-            return this.mapper.OutList(items, Rules.GRID);
+            return this.mapper.OutList(items, Levels.GRID);
         }
 
         public void Save(Client item)

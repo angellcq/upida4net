@@ -49,7 +49,7 @@ namespace UpidaExample.Controllers.Api
         public void UpdateItems(JToken data)
         {
             Order item = this.jsonParser.Parse<Order>(data);
-            this.validator.ValidateAndThrow<Order>(item, Groups.UPDATE_ITEMS);
+            this.validator.ValidateAndThrow<Order>(item, Groups.UPDATE_A);
             this.orderBusiness.Update(item);
         }
     }

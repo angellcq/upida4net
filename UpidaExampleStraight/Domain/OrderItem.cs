@@ -8,19 +8,19 @@ namespace UpidaExampleStraight.Domain
     [Fluent(typeof(OrderItemSaveOrUpdateValidator), Groups.SAVE_OR_UPDATE)]
     public class OrderItem : Dtobase, IChild
     {
-        [Dto(Rules.ID)]
+        [Dto(Levels.ID)]
         public virtual int? Id { get; set; }
 
-        [Dto(Rules.LOOKUP)]
+        [Dto(Levels.LOOKUP)]
         public virtual int? ProductId { get; set; }
 
-        [Dto(Rules.LOOKUP)]
+        [Dto(Levels.LOOKUP)]
         public virtual int? Count { get; set; }
 
-        [Dto(Rules.LOOKUP)]
+        [Dto(Levels.LOOKUP)]
         public virtual float? Price { get; set; }
 
-        [Dto(Rules.FULL, Nested=Rules.ID)]
+        [Dto(Levels.FULL, Nested = Levels.ID)]
         public virtual Order Order { get; set; }
 
         public override bool Equals(object obj)

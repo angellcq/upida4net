@@ -8,13 +8,13 @@ namespace UpidaExampleStraight.Domain
     [Fluent(typeof(ClientSaveValidator), Groups.SAVE)]
     public class Client : Dtobase
     {
-        [Dto(Rules.ID)]
+        [Dto(Levels.ID)]
         public virtual int? Id { get; set; }
 
-        [Dto(Rules.LOOKUP)]
+        [Dto(Levels.LOOKUP)]
         public virtual string Name { get; set; }
 
-        [Dto(Rules.FULL, Nested=Rules.ID)]
+        [Dto(Levels.FULL, Nested = Levels.ID)]
         public virtual iesi.ISet<Order> Orders { get; set; }
 
         public override bool Equals(object obj)

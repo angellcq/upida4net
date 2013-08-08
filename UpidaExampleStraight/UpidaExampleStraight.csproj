@@ -142,10 +142,8 @@
     <Compile Include="Dao\Support\OrderItemDao.cs" />
     <Compile Include="Dao\Support\SessionFactory.cs" />
     <Compile Include="Domain\Client.cs" />
-    <Compile Include="Domain\Groups.cs" />
     <Compile Include="Domain\Order.cs" />
     <Compile Include="Domain\OrderItem.cs" />
-    <Compile Include="Domain\Rules.cs" />
     <Compile Include="Domain\Util.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

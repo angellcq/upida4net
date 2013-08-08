@@ -190,32 +190,32 @@ namespace Upida
             }
         }
 
-        public IList<T> OutList<T>(IList<T> items, byte rule)
+        public IList<T> OutList<T>(IList<T> items, byte level)
             where T : Dtobase
         {
-            return (IList<T>)this.OutList(items, typeof(T), rule);
+            return (IList<T>)this.OutList(items, typeof(T), level);
         }
 
-        public T Out<T>(T item, byte rule)
+        public T Out<T>(T item, byte level)
             where T : Dtobase
         {
-            return (T)this.Out(item, typeof(T), rule);
+            return (T)this.Out(item, typeof(T), level);
         }
 
-        private IList OutList(IEnumerable items, Type type, byte rule)
+        private IList OutList(IEnumerable items, Type type, byte level)
         {
             IList list = (IList)UpidaContext.Current().BuildList(type);
 
             foreach (Dtobase item in items)
             {
-                Dtobase dto = this.Out(item, type, rule);
+                Dtobase dto = this.Out(item, type, level);
                 list.Add(dto);
             }
 
             return list;
         }
 
-        private Dtobase Out(Dtobase item, Type type, byte rule)
+        private Dtobase Out(Dtobase item, Type type, byte level)
         {
             try
             {
@@ -228,7 +228,7 @@ namespace Upida
                 for(int i = 0; i < properties.Length; i++)
                 {
                     PropertyMeta property = properties[i];
-                    if(!property.IsValid || !property.HasRule(rule))
+                    if(!property.IsValid || !property.HasLevel(level))
                     {
                         continue;
                     }
@@ -242,26 +242,26 @@ namespace Upida
                     }
                     else if(PropertyMeta.ClassType.Class == property.PropertyClassType)
                     {
-                        byte nestedRule = property.Annotation.Nested;
-                        if (rule != property.Annotation.Value)
+                        byte nestedLevel = property.Annotation.Nested;
+                        if (level != property.Annotation.Value)
                         {
-                            nestedRule = (byte)(nestedRule + rule - property.Annotation.Value);
+                            nestedLevel = (byte)(nestedLevel + level - property.Annotation.Value);
                         }
 
                         property.Write(dto,
-                            this.Out((Dtobase)value, property.PropertyClass, nestedRule));
+                            this.Out((Dtobase)value, property.PropertyClass, nestedLevel));
 
                     }
                     else if(PropertyMeta.ClassType.Collection ==  property.PropertyClassType)
                     {
-                        byte nestedRule = property.Annotation.Nested;
-                        if (rule != property.Annotation.Value)
+                        byte nestedLevel = property.Annotation.Nested;
+                        if (level != property.Annotation.Value)
                         {
-                            nestedRule = (byte)(nestedRule + rule - property.Annotation.Value);
+                            nestedLevel = (byte)(nestedLevel + level - property.Annotation.Value);
                         }
 
                         property.Write(dto,
-                            this.OutList((IEnumerable)value, property.NestedType, nestedRule));
+                            this.OutList((IEnumerable)value, property.NestedType, nestedLevel));
                     }
                 }
 

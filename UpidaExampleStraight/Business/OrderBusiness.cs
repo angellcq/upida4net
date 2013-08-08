@@ -20,19 +20,19 @@ namespace UpidaExampleStraight.Business
         public IList<Order> GetByClient(int clientId)
         {
             IList<Order> items = this.orderDao.GetByClient(clientId);
-            return this.mapper.OutList(items, Rules.GRID);
+            return this.mapper.OutList(items, Levels.GRID);
         }
 
         public Order Get(int id)
         {
             Order item = this.orderDao.GetById(id);
-            return this.mapper.Out(item, Rules.DEEP);
+            return this.mapper.Out(item, Levels.DEEP);
         }
 
         public Order GetFull(int id)
         {
             Order item = this.orderDao.GetById(id);
-            return this.mapper.Out(item, Rules.FULL);
+            return this.mapper.Out(item, Levels.FULL);
         }
 
         public void Save(Order item)

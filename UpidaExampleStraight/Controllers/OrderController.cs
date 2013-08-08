@@ -95,7 +95,7 @@ namespace UpidaExampleStraight.Controllers
         public ActionResult UpdateItems(int id, int clientId)
         {
             Order item = this.formParser.Parse<Order>(this.Request.Form);
-            bool success = this.validator.ValidateAndPublish(item, Groups.UPDATE_ITEMS, this.ModelState);
+            bool success = this.validator.ValidateAndPublish(item, Groups.UPDATE_A, this.ModelState);
             if (!success)
             {
                 ViewResult view = View(item);
