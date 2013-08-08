@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
   <metadata>
     <id>Autofac.Mvc4</id>
     <version>3.1.0</version>
@@ -18,5 +18,8 @@
     <dependencies>
       <dependency id="Autofac" version="3.1.0" />
     </dependencies>
+    <references>
+      <reference file="Autofac.Integration.Mvc.dll" />
+    </references>
   </metadata>
 </package>
