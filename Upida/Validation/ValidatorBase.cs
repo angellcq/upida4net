@@ -136,7 +136,7 @@ namespace Upida.Validation
         }
 
         /// <summary>
-        /// Triggers validation on each object from the nested colection of objects against specific group
+        /// Triggers validation on each object from the nested collection of objects against specific group
         /// </summary>
         /// <typeparam name="R">Type of the validated object</typeparam>
         /// <param name="group">validation group</param>
@@ -163,7 +163,7 @@ namespace Upida.Validation
         }
 
         /// <summary>
-        /// Refisters a failure against the current property.
+        /// Registers a failure against the current property.
         /// Current property is determined by the last call of the Field() method.
         /// </summary>
         /// <param name="msg">failure message</param>

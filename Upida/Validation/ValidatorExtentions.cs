@@ -25,7 +25,7 @@ namespace Upida.Validation
         }
 
         /// <summary>
-        /// Validates field is clean - never assigned any value by parser
+        /// Validates if field is clean - never assigned any value by parser
         /// </summary>
         /// <param name="msg">failure message</param>
         /// <returns></returns>
@@ -42,7 +42,7 @@ namespace Upida.Validation
         }
 
         /// <summary>
-        /// Validates field is correctly parsed
+        /// Validates if field is correctly parsed
         /// </summary>
         /// <param name="msg">failure message</param>
         /// <returns></returns>
@@ -130,7 +130,7 @@ namespace Upida.Validation
         }
 
         /// <summary>
-        /// Validates String's length is between min and max values
+        /// Validates String length is between min and max values
         /// </summary>
         /// <param name="min"></param>
         /// <param name="max"></param>
@@ -223,7 +223,7 @@ namespace Upida.Validation
         }
 
         /// <summary>
-        /// Validates collection size is between min and max values inclusively
+        /// Validates collection size is between min and max values inclusively (field must be a collection)
         /// </summary>
         /// <param name="min">min value</param>
         /// <param name="max">max value</param>
