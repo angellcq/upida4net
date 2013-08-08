@@ -242,14 +242,26 @@ namespace Upida
                     }
                     else if(PropertyMeta.ClassType.Class == property.PropertyClassType)
                     {
+                        byte nestedRule = property.Annotation.Nested;
+                        if (rule != property.Annotation.Value)
+                        {
+                            nestedRule = (byte)(nestedRule + rule - property.Annotation.Value);
+                        }
+
                         property.Write(dto,
-                            this.Out((Dtobase)value, property.PropertyClass, property.Annotation.Nested));
+                            this.Out((Dtobase)value, property.PropertyClass, nestedRule));
 
                     }
                     else if(PropertyMeta.ClassType.Collection ==  property.PropertyClassType)
                     {
+                        byte nestedRule = property.Annotation.Nested;
+                        if (rule != property.Annotation.Value)
+                        {
+                            nestedRule = (byte)(nestedRule + rule - property.Annotation.Value);
+                        }
+
                         property.Write(dto,
-                            this.OutList((IEnumerable)value, property.NestedType, property.Annotation.Nested));
+                            this.OutList((IEnumerable)value, property.NestedType, nestedRule));
                     }
                 }
 
