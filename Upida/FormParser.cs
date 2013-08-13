@@ -1,12 +1,17 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Collections.Specialized;
 
 namespace Upida
 {
     public class FormParser
     {
+        /// <summary>
+        /// Parses HTTP POST key-value pairs into domain object
+        /// </summary>
+        /// <typeparam name="T">domain object type</typeparam>
+        /// <param name="form">key-Value pair collection</param>
+        /// <returns>parsed domain object</returns>
         public T Parse<T>(NameValueCollection form)
             where T : Dtobase
         {
@@ -21,7 +26,7 @@ namespace Upida
             return (T)this.Parse("", keys, form, typeof(T));
         }
 
-        public Dtobase Parse(string path, string[] keys, NameValueCollection form, Type type)
+        private Dtobase Parse(string path, string[] keys, NameValueCollection form, Type type)
         {
             try
             {

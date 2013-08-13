@@ -1,6 +1,4 @@
-﻿using Iesi.Collections;
-using Iesi.Collections.Generic;
-using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json.Linq;
 using System;
 using System.Collections;
 
@@ -8,6 +6,12 @@ namespace Upida
 {
     public class JsonParser
     {
+        // <summary>
+        /// Parses JSON data into domain object
+        /// </summary>
+        /// <typeparam name="T">domain object type</typeparam>
+        /// <param name="form">JSON tree</param>
+        /// <returns>parsed domain object</returns>
         public T Parse<T>(JToken node)
             where T : Dtobase
         {

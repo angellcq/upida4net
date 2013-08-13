@@ -190,12 +190,26 @@ namespace Upida
             }
         }
 
+        /// <summary>
+        /// Recursively copies data from the incoming domain object list to the outgoing one, taking serializations levels into account
+        /// </summary>
+        /// <typeparam name="T">type of the domain object</typeparam>
+        /// <param name="items">incoming domain object list</param>
+        /// <param name="level">serialization level</param>
+        /// <returns>outgoing domain object list</returns>
         public IList<T> OutList<T>(IList<T> items, byte level)
             where T : Dtobase
         {
             return (IList<T>)this.OutList(items, typeof(T), level);
         }
 
+        /// <summary>
+        /// Recursively copies data from the incoming domain object to the outgoing one, taking serializations levels into account
+        /// </summary>
+        /// <typeparam name="T">type of the domain object</typeparam>
+        /// <param name="item">incoming domain object</param>
+        /// <param name="level">serialization level</param>
+        /// <returns>outgoing domain object</returns>
         public T Out<T>(T item, byte level)
             where T : Dtobase
         {

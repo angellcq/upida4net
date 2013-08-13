@@ -8,9 +8,25 @@ namespace Upida.Validation
         private Type validator;
         private object group;
 
+        /// <summary>
+        /// Creates new instance of the DtoAttribute
+        /// </summary>
+        /// <param name="validator">validator class</param>
+        /// <param name="group">validaton group (you can use Upida.Validation.Groups enumeration)</param>
         public FluentAttribute(Type validator, object group)
         {
             this.validator = validator;
+            this.group = group;
+        }
+
+        /// <summary>
+        /// Creates new instance of the DtoAttribute
+        /// </summary>
+        /// <param name="validatorType">Fully qualified name of the validator class</param>
+        /// <param name="group">validaton group (you can use Upida.Validation.Groups enumeration)</param>
+        public FluentAttribute(string validatorType, object group)
+        {
+            this.validator = Type.GetType(validatorType);
             this.group = group;
         }
 
