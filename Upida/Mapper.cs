@@ -127,7 +127,7 @@ namespace Upida
 
                     if(item is IChild)
                     {
-                        ((IChild)item).connectToParent(parent);
+                        ((IChild)item).ConnectToParent(parent);
                     }
                 }
             }
@@ -177,7 +177,7 @@ namespace Upida
                             {
                                 if(item is IChild)
                                 {
-                                    ((IChild) item).connectToParent(source);
+                                    (item as IChild).ConnectToParent(source);
                                 }
                             }
                         }

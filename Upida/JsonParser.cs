@@ -40,13 +40,13 @@ namespace Upida
                         {
                             if(PropertyMeta.ClassType.Value == propertyDef.PropertyClassType)
                             {
-                                dto.addAssignedField(propertyDef.Name);
+                                dto.AddAssignedField(propertyDef.Name);
                                 propertyDef.Write(dto, this.parseValue(propertyValue, propertyDef));
                             }
                             else if(PropertyMeta.ClassType.Class == propertyDef.PropertyClassType ||
                                 PropertyMeta.ClassType.CustomType == propertyDef.PropertyClassType)
                             {
-                                dto.addAssignedField(propertyDef.Name);
+                                dto.AddAssignedField(propertyDef.Name);
                                 propertyDef.Write(dto, this.Parse(propertyValue, propertyDef.PropertyClass));
                             }
                             else if(PropertyMeta.ClassType.Collection == propertyDef.PropertyClassType ||
@@ -59,12 +59,12 @@ namespace Upida
                                 }
 
                                 propertyDef.Write(dto, list);
-                                dto.addAssignedField(propertyDef.Name);
+                                dto.AddAssignedField(propertyDef.Name);
                             }
                         }
                         catch
                         {
-                            dto.addWrongField(propertyDef.Name);
+                            dto.AddWrongField(propertyDef.Name);
                         }
                     }
                 }
@@ -84,7 +84,7 @@ namespace Upida
                 return null;
             }
 
-            return propertyDef.Parser.parseTextValue(propertyDef.PropertyClass, text);
+            return propertyDef.Parser.ParseTextValue(propertyDef.PropertyClass, text);
         }
     }
 }

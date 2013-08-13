@@ -9,6 +9,6 @@ namespace Upida
         /// </summary>
         /// <param name="?"></param>
         /// <returns></returns>
-        Object parseTextValue(Type type, String text);
+        object ParseTextValue(Type type, string text);
     }
 }

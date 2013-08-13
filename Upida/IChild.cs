@@ -4,6 +4,6 @@ namespace Upida
 {
     public interface IChild
     {
-        void connectToParent(Object parent);
+        void ConnectToParent(Object parent);
     }
 }

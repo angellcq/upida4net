@@ -8,7 +8,7 @@ namespace Upida
         private ISet<string> assignedFields;
         private ISet<string> wrongFields;
 
-        public virtual void addAssignedField(string field)
+        public virtual void AddAssignedField(string field)
         {
             if (null == this.assignedFields)
             {
@@ -18,7 +18,7 @@ namespace Upida
             this.assignedFields.Add(field);
         }
 
-        public virtual void addWrongField(string field)
+        public virtual void AddWrongField(string field)
         {
             if (null == this.wrongFields)
             {
@@ -28,14 +28,14 @@ namespace Upida
             this.wrongFields.Add(field);
         }
 
-        public virtual bool isFieldAssigned(string field)
+        public virtual bool IsFieldAssigned(string field)
         {
             return null == this.assignedFields
                 ? false
                 : this.assignedFields.Contains(field);
         }
 
-        public virtual bool isFieldWrong(string field)
+        public virtual bool IsFieldWrong(string field)
         {
             return null == this.wrongFields
                 ? false

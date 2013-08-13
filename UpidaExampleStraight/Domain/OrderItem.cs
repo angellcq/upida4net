@@ -29,7 +29,7 @@ namespace UpidaExampleStraight.Domain
             return Util.AreSame(this.Id, (obj as OrderItem).Id);
         }
 
-        public virtual void connectToParent(object parent)
+        public virtual void ConnectToParent(object parent)
         {
             if (parent is Order)
             {

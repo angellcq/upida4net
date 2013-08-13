@@ -32,7 +32,7 @@ namespace Upida
         }
 
         public bool isAssigned(Dtobase target) {
-            return target.isFieldAssigned(this.descriptor.Name);
+            return target.IsFieldAssigned(this.descriptor.Name);
         }
 
         public bool IsValid

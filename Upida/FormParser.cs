@@ -43,7 +43,7 @@ namespace Upida
                         {
                             if (null != propertyValue)
                             {
-                                dto.addAssignedField(propertyDef.Name);
+                                dto.AddAssignedField(propertyDef.Name);
                                 propertyDef.Write(dto, this.ParseValue(propertyValue, propertyDef));
                             }
                         }
@@ -51,7 +51,7 @@ namespace Upida
                         {
                             if (this.HasChildren(propertyPath + ".", keys))
                             {
-                                dto.addAssignedField(propertyDef.Name);
+                                dto.AddAssignedField(propertyDef.Name);
                                 Dtobase obj = (Dtobase)this.Parse(propertyPath + ".", keys, form, propertyDef.PropertyClass);
                                 propertyDef.Write(dto, obj);
                             }
@@ -89,14 +89,14 @@ namespace Upida
                                 if (list.Count > 0)
                                 {
                                     propertyDef.Write(dto, list);
-                                    dto.addAssignedField(propertyDef.Name);
+                                    dto.AddAssignedField(propertyDef.Name);
                                 }
                             }
                         }
                     }
                     catch (Exception)
                     {
-                        dto.addWrongField(propertyDef.Name);
+                        dto.AddWrongField(propertyDef.Name);
                     }
                 }
 
@@ -114,7 +114,7 @@ namespace Upida
                 return null;
             }
 
-            return propertyDef.Parser.parseTextValue(propertyDef.PropertyClass, text);
+            return propertyDef.Parser.ParseTextValue(propertyDef.PropertyClass, text);
         }
 
         private bool HasChildren(string prefix, string[] keys)

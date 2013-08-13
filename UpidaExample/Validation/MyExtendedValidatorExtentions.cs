@@ -50,7 +50,7 @@ namespace UpidaExample.Validation
         public static void ValidNumberOrNull<T>(this ValidatorBase<T> validator)
             where T : Dtobase
         {
-            if (validator.Target.isFieldAssigned(validator.Name))
+            if (validator.Target.IsFieldAssigned(validator.Name))
             {
                 validator.ValidFormat(Errors.INVALID_NUMBER);
                 validator.Stop();

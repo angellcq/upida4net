@@ -16,7 +16,7 @@ namespace Upida.Validation
         {
             if (validator.Stopped) return;
 
-            if (!validator.Target.isFieldAssigned(validator.Name))
+            if (!validator.Target.IsFieldAssigned(validator.Name))
             {
                 validator.Fail(msg);
             }
@@ -32,7 +32,7 @@ namespace Upida.Validation
         {
             if (validator.Stopped) return;
 
-            if (validator.Target.isFieldAssigned(validator.Name))
+            if (validator.Target.IsFieldAssigned(validator.Name))
             {
                 validator.Fail(msg);
             }
@@ -48,7 +48,7 @@ namespace Upida.Validation
         {
             if (validator.Stopped) return;
 
-            if (validator.Target.isFieldWrong(validator.Name))
+            if (validator.Target.IsFieldWrong(validator.Name))
             {
                 validator.Fail(msg);
             }

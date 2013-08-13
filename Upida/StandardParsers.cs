@@ -26,7 +26,7 @@ namespace Upida
 
         private class StringParser : IParser
         {
-            public object parseTextValue(Type type, string text)
+            public object ParseTextValue(Type type, string text)
             {
                 return text;
             }
@@ -34,7 +34,7 @@ namespace Upida
 
         private class LongParser : IParser
         {
-            public object parseTextValue(Type type, string text)
+            public object ParseTextValue(Type type, string text)
             {
                 return long.Parse(text);
             }
@@ -42,7 +42,7 @@ namespace Upida
 
         private class ULongParser : IParser
         {
-            public object parseTextValue(Type type, string text)
+            public object ParseTextValue(Type type, string text)
             {
                 return ulong.Parse(text);
             }
@@ -50,7 +50,7 @@ namespace Upida
 
         private class IntParser : IParser
         {
-            public object parseTextValue(Type type, string text)
+            public object ParseTextValue(Type type, string text)
             {
                 return int.Parse(text);
             }
@@ -58,7 +58,7 @@ namespace Upida
 
         private class UIntParser : IParser
         {
-            public object parseTextValue(Type type, string text)
+            public object ParseTextValue(Type type, string text)
             {
                 return uint.Parse(text);
             }
@@ -66,7 +66,7 @@ namespace Upida
 
         private class ShortParser : IParser
         {
-            public object parseTextValue(Type type, string text)
+            public object ParseTextValue(Type type, string text)
             {
                 return short.Parse(text);
             }
@@ -74,7 +74,7 @@ namespace Upida
 
         private class UShortParser : IParser
         {
-            public object parseTextValue(Type type, string text)
+            public object ParseTextValue(Type type, string text)
             {
                 return ushort.Parse(text);
             }
@@ -82,7 +82,7 @@ namespace Upida
 
         private class ByteParser : IParser
         {
-            public object parseTextValue(Type type, string text)
+            public object ParseTextValue(Type type, string text)
             {
                 return byte.Parse(text);
             }
@@ -90,7 +90,7 @@ namespace Upida
 
         private class SByteParser : IParser
         {
-            public object parseTextValue(Type type, string text)
+            public object ParseTextValue(Type type, string text)
             {
                 return sbyte.Parse(text);
             }
@@ -98,7 +98,7 @@ namespace Upida
 
         private class DoubleParser : IParser
         {
-            public object parseTextValue(Type type, string text)
+            public object ParseTextValue(Type type, string text)
             {
                 return double.Parse(text);
             }
@@ -106,7 +106,7 @@ namespace Upida
 
         private class FloatParser : IParser
         {
-            public object parseTextValue(Type type, string text)
+            public object ParseTextValue(Type type, string text)
             {
                 return float.Parse(text);
             }
@@ -114,7 +114,7 @@ namespace Upida
 
         private class BoolParser : IParser
         {
-            public object parseTextValue(Type type, string text)
+            public object ParseTextValue(Type type, string text)
             {
                 return bool.Parse(text);
             }
@@ -122,7 +122,7 @@ namespace Upida
 
         private class CharParser : IParser
         {
-            public object parseTextValue(Type type, string text)
+            public object ParseTextValue(Type type, string text)
             {
                 return text[0];
             }
@@ -130,7 +130,7 @@ namespace Upida
 
         private class EnumParser : IParser
         {
-            public object parseTextValue(Type type, string text)
+            public object ParseTextValue(Type type, string text)
             {
                 return Enum.Parse(type, text);
             }
@@ -138,7 +138,7 @@ namespace Upida
 
         private class DateTimeParser : IParser
         {
-            public object parseTextValue(Type type, string text)
+            public object ParseTextValue(Type type, string text)
             {
                 return DateTime.FromOADate(double.Parse(text));
             }
