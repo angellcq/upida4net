@@ -135,7 +135,7 @@ namespace Upida.Validation
         {
             if (this.stopped) return;
 
-            ValidatorBase<R> nestedValidator = FluentAttribute.BuildValidator<R>(group);
+            ValidatorBase<R> nestedValidator = ValidateWithAttribute.BuildValidator<R>(group);
             if (null != nestedValidator)
             {
                 string fullPath = string.Concat(this.path, this.name, ".");
@@ -155,7 +155,7 @@ namespace Upida.Validation
         {
             if (this.stopped) return;
 
-            ValidatorBase<R> nestedValidator = FluentAttribute.BuildValidator<R>(group);
+            ValidatorBase<R> nestedValidator = ValidateWithAttribute.BuildValidator<R>(group);
             if (null != nestedValidator)
             {
                 int index = 0;

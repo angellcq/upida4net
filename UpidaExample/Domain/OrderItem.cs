@@ -4,8 +4,8 @@ using UpidaExample.Validation;
 
 namespace UpidaExample.Domain
 {
-    [Fluent(typeof(OrderItemSaveValidator), Groups.SAVE)]
-    [Fluent(typeof(OrderItemSaveOrUpdateValidator), Groups.SAVE_OR_UPDATE)]
+    [ValidateWith(typeof(OrderItemSaveValidator), Groups.SAVE)]
+    [ValidateWith(typeof(OrderItemSaveOrUpdateValidator), Groups.SAVE_OR_UPDATE)]
     public class OrderItem : Dtobase, IChild
     {
         [Dto(Levels.ID)]

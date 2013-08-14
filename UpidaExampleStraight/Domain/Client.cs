@@ -5,7 +5,7 @@ using iesi = Iesi.Collections.Generic;
 
 namespace UpidaExampleStraight.Domain
 {
-    [Fluent(typeof(ClientSaveValidator), Groups.SAVE)]
+    [ValidateWith(typeof(ClientSaveValidator), Groups.SAVE)]
     public class Client : Dtobase
     {
         [Dto(Levels.ID)]

@@ -64,7 +64,7 @@
     <Compile Include="UpidaContext.cs" />
     <Compile Include="Validation\FailResponse.cs" />
     <Compile Include="Validation\Failure.cs" />
-    <Compile Include="Validation\FluentAttribute.cs" />
+    <Compile Include="Validation\ValidateWithAttribute.cs" />
     <Compile Include="Validation\Groups.cs" />
     <Compile Include="Validation\IValidator.cs" />
     <Compile Include="Validation\IValidatorBase.cs" />

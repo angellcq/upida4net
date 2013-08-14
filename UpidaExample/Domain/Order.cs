@@ -6,9 +6,9 @@ using iesi = Iesi.Collections.Generic;
 
 namespace UpidaExample.Domain
 {
-    [Fluent(typeof(OrderSaveValidator), Groups.SAVE)]
-    [Fluent(typeof(OrderUpdateValidator), Groups.UPDATE)]
-    [Fluent(typeof(OrderUpdateItemsValidator), Groups.UPDATE_A)]
+    [ValidateWith(typeof(OrderSaveValidator), Groups.SAVE)]
+    [ValidateWith(typeof(OrderUpdateValidator), Groups.UPDATE)]
+    [ValidateWith(typeof(OrderUpdateItemsValidator), Groups.UPDATE_A)]
     public class Order : Dtobase
     {
         [Dto(Levels.ID)]

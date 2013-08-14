@@ -11,7 +11,7 @@ namespace Upida.Validation
         public void ValidateAndThrow<T>(T target, object group)
             where T : Dtobase
         {
-            ValidatorBase<T> validator = FluentAttribute.BuildValidator<T>(group);
+            ValidatorBase<T> validator = ValidateWithAttribute.BuildValidator<T>(group);
             if (null != validator)
             {
                 validator.SetTarget(target, null, null);
@@ -28,7 +28,7 @@ namespace Upida.Validation
             where T : Dtobase
         {
             HttpRequest request = HttpContext.Current.Request;
-            ValidatorBase<T> validator = FluentAttribute.BuildValidator<T>(group);
+            ValidatorBase<T> validator = ValidateWithAttribute.BuildValidator<T>(group);
             if (null != validator)
             {
                 validator.SetTarget(target, null, null);

@@ -3,7 +3,7 @@
 namespace Upida.Validation
 {
     [AttributeUsage(AttributeTargets.Class, AllowMultiple=true)]
-    public class FluentAttribute : Attribute
+    public class ValidateWithAttribute : Attribute
     {
         private Type validator;
         private object group;
@@ -13,7 +13,7 @@ namespace Upida.Validation
         /// </summary>
         /// <param name="validator">validator class</param>
         /// <param name="group">validaton group (you can use Upida.Validation.Groups enumeration)</param>
-        public FluentAttribute(Type validator, object group)
+        public ValidateWithAttribute(Type validator, object group)
         {
             this.validator = validator;
             this.group = group;
@@ -24,7 +24,7 @@ namespace Upida.Validation
         /// </summary>
         /// <param name="validatorType">Fully qualified name of the validator class</param>
         /// <param name="group">validaton group (you can use Upida.Validation.Groups enumeration)</param>
-        public FluentAttribute(string validatorType, object group)
+        public ValidateWithAttribute(string validatorType, object group)
         {
             this.validator = Type.GetType(validatorType);
             this.group = group;
@@ -43,11 +43,11 @@ namespace Upida.Validation
         public static ValidatorBase<T> BuildValidator<T>(object group)
             where T : Dtobase
         {
-            object[] fluents = typeof(T).GetCustomAttributes(typeof(FluentAttribute), false);
+            object[] fluents = typeof(T).GetCustomAttributes(typeof(ValidateWithAttribute), false);
             for (int i = 0; i < fluents.Length; i++)
             {
                 Type validatorType = null;
-                FluentAttribute fluent = (FluentAttribute)fluents[i];
+                ValidateWithAttribute fluent = (ValidateWithAttribute)fluents[i];
                 if (object.Equals(fluent.group, group))
                 {
                     validatorType = fluent.Validator;
