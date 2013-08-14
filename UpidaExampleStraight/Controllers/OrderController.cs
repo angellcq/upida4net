@@ -11,7 +11,7 @@ namespace UpidaExampleStraight.Controllers
     {
         private readonly OrderBusiness orderBusiness;
 
-        public OrderController(FormParser formParser, Validator validator, OrderBusiness orderBusiness)
+        public OrderController(IFormParser formParser, IValidator validator, OrderBusiness orderBusiness)
             : base(formParser, validator)
         {
             this.orderBusiness = orderBusiness;

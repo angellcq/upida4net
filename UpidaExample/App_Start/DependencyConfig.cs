@@ -27,9 +27,9 @@ namespace UpidaExample
 
             builder.Register((context) => new Configuration().Configure().BuildSessionFactory()).As<ISessionFactory>().SingleInstance();
             builder.RegisterType<TransactionFactory>().As<TransactionFactory>().SingleInstance();
-            builder.RegisterType<Mapper>().As<Mapper>().InstancePerDependency();
-            builder.RegisterType<JsonParser>().As<JsonParser>().InstancePerDependency();
-            builder.RegisterType<Validator>().As<Validator>().InstancePerDependency();
+            builder.RegisterType<Mapper>().As<IMapper>().InstancePerDependency();
+            builder.RegisterType<JsonParser>().As<IJsonParser>().InstancePerDependency();
+            builder.RegisterType<Validator>().As<IValidator>().InstancePerDependency();
 
             builder.RegisterType<OrderDao>().As<IOrderDao>().InstancePerDependency();
             builder.RegisterType<ClientDao>().As<IClientDao>().InstancePerDependency();

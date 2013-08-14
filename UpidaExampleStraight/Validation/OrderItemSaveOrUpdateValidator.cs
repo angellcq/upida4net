@@ -8,18 +8,18 @@ namespace UpidaExampleStraight.Validation
         public override void Validate()
         {
             this.Field("Id", this.Target.Id);
-            this.ValidNumberOrNull();
+            this.ValidFormatOrNotAssigned();
 
             this.Field("Count", this.Target.Count);
-            this.RequiredNumber();
+            this.Required();
             this.GreaterThan(0, Errors.GREATER_ZERO);
 
             this.Field("Price", this.Target.Price);
-            this.RequiredNumber();
+            this.Required();
             this.GreaterThan(0f, Errors.GREATER_ZERO);
 
             this.Field("ProductId", this.Target.ProductId);
-            this.RequiredNumber();
+            this.Required();
 
             this.MissingField("Order");
         }

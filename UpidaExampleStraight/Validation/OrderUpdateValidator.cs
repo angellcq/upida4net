@@ -8,7 +8,7 @@ namespace UpidaExampleStraight.Validation
         public override void Validate()
         {
             this.Field("Id", Target.Id);
-            this.RequiredNumber();
+            this.Required();
 
             this.MissingField("CreatedOn");
 
@@ -29,7 +29,7 @@ namespace UpidaExampleStraight.Validation
             this.Length(5, 5, Errors.LENGTH_WRONG);
 
             this.Field("Total", Target.Total);
-            this.RequiredNumber();
+            this.Required();
             this.GreaterThan(0f, Errors.GREATER_ZERO);
 
             this.MissingField("OrderItems");

@@ -11,7 +11,7 @@ namespace UpidaExample.Controllers.Api
     {
         private readonly ClientBusiness clientBusiness;
 
-        public ClientController(JsonParser jsonParser, Validator validator, ClientBusiness clientBusiness)
+        public ClientController(IJsonParser jsonParser, IValidator validator, ClientBusiness clientBusiness)
             : base(jsonParser, validator)
         {
             this.clientBusiness = clientBusiness;

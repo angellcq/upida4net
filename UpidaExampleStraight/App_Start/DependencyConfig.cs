@@ -25,9 +25,9 @@ namespace UpidaExampleStraight
 
             builder.Register((context) => new Configuration().Configure().BuildSessionFactory()).As<ISessionFactory>().SingleInstance();
             builder.RegisterType<TransactionFactory>().As<TransactionFactory>().SingleInstance();
-            builder.RegisterType<Mapper>().As<Mapper>().InstancePerDependency();
-            builder.RegisterType<FormParser>().As<FormParser>().InstancePerDependency();
-            builder.RegisterType<Validator>().As<Validator>().InstancePerDependency();
+            builder.RegisterType<Mapper>().As<IMapper>().InstancePerDependency();
+            builder.RegisterType<FormParser>().As<IFormParser>().InstancePerDependency();
+            builder.RegisterType<Validator>().As<IValidator>().InstancePerDependency();
 
             builder.RegisterType<OrderDao>().As<IOrderDao>().InstancePerDependency();
             builder.RegisterType<ClientDao>().As<IClientDao>().InstancePerDependency();

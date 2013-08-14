@@ -27,7 +27,7 @@ namespace UpidaExampleStraight.Validation
             this.Length(5, 5, Errors.LENGTH_WRONG);
 
             this.Field("Total", this.Target.Total);
-            this.RequiredNumber();
+            this.Required();
             this.GreaterThan(0f, Errors.GREATER_ZERO);
 
             this.Field("OrderItems", this.Target.OrderItems);

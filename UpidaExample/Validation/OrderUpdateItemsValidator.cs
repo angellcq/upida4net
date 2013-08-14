@@ -8,7 +8,7 @@ namespace UpidaExample.Validation
         public override void Validate()
         {
             this.Field("Id", Target.Id);
-            this.RequiredNumber();
+            this.Required();
 
             this.MissingField("CreatedOn");
             this.MissingField("ShipAddress");

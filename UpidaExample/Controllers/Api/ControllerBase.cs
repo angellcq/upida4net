@@ -6,10 +6,10 @@ namespace UpidaExample.Controllers.Api
 {
     public class ControllerBase : ApiController
     {
-        protected JsonParser jsonParser;
-        protected Validator validator;
+        protected IJsonParser jsonParser;
+        protected IValidator validator;
 
-        public ControllerBase(JsonParser jsonParser, Validator validator)
+        public ControllerBase(IJsonParser jsonParser, IValidator validator)
         {
             this.jsonParser = jsonParser;
             this.validator = validator;

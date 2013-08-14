@@ -6,10 +6,10 @@ namespace UpidaExampleStraight.Controllers
 {
     public class ControllerBase : Controller
     {
-        protected FormParser formParser;
-        protected Validator validator;
+        protected IFormParser formParser;
+        protected IValidator validator;
 
-        public ControllerBase(FormParser formParser, Validator validator)
+        public ControllerBase(IFormParser formParser, IValidator validator)
         {
             this.formParser = formParser;
             this.validator = validator;

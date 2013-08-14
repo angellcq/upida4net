@@ -7,7 +7,7 @@ namespace Upida.Validation
     public static class ValidatorExtentions
     {
         /// <summary>
-        /// Validates if field is assigned some value by parser
+        /// Validates if field is assigned some value by parser and calls Stop on failure
         /// </summary>
         /// <param name="msg">failure message</param>
         /// <returns></returns>
@@ -19,6 +19,7 @@ namespace Upida.Validation
             if (!validator.Target.IsFieldAssigned(validator.Name))
             {
                 validator.Fail(msg);
+                validator.Stop();
             }
         }
 
@@ -27,7 +28,7 @@ namespace Upida.Validation
         /// </summary>
         /// <param name="msg">failure message</param>
         /// <returns></returns>
-        public static void MustBeUnassigned<T>(this ValidatorBase<T> validator, string msg)
+        public static void NotAssigned<T>(this ValidatorBase<T> validator, string msg)
             where T : Dtobase
         {
             if (validator.Stopped) return;
@@ -39,7 +40,7 @@ namespace Upida.Validation
         }
 
         /// <summary>
-        /// Validates if field is correctly parsed
+        /// Validates if field is correctly parsed and calls Stop on failure
         /// </summary>
         /// <param name="msg">failure message</param>
         /// <returns></returns>
@@ -51,6 +52,7 @@ namespace Upida.Validation
             if (validator.Target.IsFieldWrong(validator.Name))
             {
                 validator.Fail(msg);
+                validator.Stop();
             }
         }
 
@@ -115,6 +117,22 @@ namespace Upida.Validation
             if (validator.Stopped) return;
 
             if (null == validator.Value)
+            {
+                validator.Fail(msg);
+            }
+        }
+
+        /// <summary>
+        /// Validates field value is not empty - (for string only)
+        /// </summary>
+        /// <param name="msg">failure message</param>
+        /// <returns></returns>
+        public static void NotEmpty<T>(this ValidatorBase<T> validator, string msg)
+            where T : Dtobase
+        {
+            if (validator.Stopped) return;
+
+            if (string.Equals(string.Empty, validator.Value))
             {
                 validator.Fail(msg);
             }

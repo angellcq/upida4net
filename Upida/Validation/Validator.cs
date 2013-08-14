@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace Upida.Validation
 {
-    public class Validator
+    public class Validator : IValidator
     {
         public void ValidateAndThrow<T>(T target, object group)
             where T : Dtobase

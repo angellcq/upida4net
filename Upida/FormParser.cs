@@ -4,7 +4,7 @@ using System.Collections.Specialized;
 
 namespace Upida
 {
-    public class FormParser
+    public class FormParser : IFormParser
     {
         /// <summary>
         /// Parses HTTP POST key-value pairs into domain object

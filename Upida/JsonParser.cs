@@ -4,7 +4,7 @@ using System.Collections;
 
 namespace Upida
 {
-    public class JsonParser
+    public class JsonParser : IJsonParser
     {
         // <summary>
         /// Parses JSON data into domain object

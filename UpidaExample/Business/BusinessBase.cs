@@ -6,9 +6,9 @@ namespace UpidaExample.Business
     public class BusinessBase
     {
         protected TransactionFactory transactionFactory;
-        protected Mapper mapper;
+        protected IMapper mapper;
 
-        public BusinessBase(TransactionFactory transactionFactory, Mapper mapper)
+        public BusinessBase(TransactionFactory transactionFactory, IMapper mapper)
         {
             this.transactionFactory = transactionFactory;
             this.mapper = mapper;

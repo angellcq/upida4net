@@ -10,7 +10,7 @@ namespace UpidaExampleStraight.Business
     {
         private IClientDao clientDao;
 
-        public ClientBusiness(TransactionFactory transactionFactory, Mapper mapper, IClientDao clientDao)
+        public ClientBusiness(TransactionFactory transactionFactory, IMapper mapper, IClientDao clientDao)
             : base(transactionFactory, mapper)
         {
             this.clientDao = clientDao;

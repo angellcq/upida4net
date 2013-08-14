@@ -11,7 +11,7 @@ namespace UpidaExampleStraight.Business
     {
         private IOrderDao orderDao;
 
-        public OrderBusiness(TransactionFactory transactionFactory, Mapper mapper, IOrderDao orderDao)
+        public OrderBusiness(TransactionFactory transactionFactory, IMapper mapper, IOrderDao orderDao)
             : base(transactionFactory, mapper)
         {
             this.orderDao = orderDao;

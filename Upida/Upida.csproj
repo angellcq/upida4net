@@ -47,6 +47,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FormParser.cs" />
+    <Compile Include="IFormParser.cs" />
+    <Compile Include="IJsonParser.cs" />
+    <Compile Include="IMapper.cs" />
     <Compile Include="JsonParser.cs" />
     <Compile Include="Levels.cs" />
     <Compile Include="Mapper.cs" />
@@ -63,6 +66,7 @@
     <Compile Include="Validation\Failure.cs" />
     <Compile Include="Validation\FluentAttribute.cs" />
     <Compile Include="Validation\Groups.cs" />
+    <Compile Include="Validation\IValidator.cs" />
     <Compile Include="Validation\IValidatorBase.cs" />
     <Compile Include="Validation\ValidationException.cs" />
     <Compile Include="Validation\Validator.cs" />

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Upida
 {
-    public class Mapper
+    public class Mapper : IMapper
     {
         private static Type SET_TYPE = typeof(ISet);
         private static Type LIST_TYPE = typeof(IList);
@@ -13,14 +13,28 @@ namespace Upida
         /// <summary>
         /// Recursively copies fields from incoming source object to persistent dest object.
         /// </summary>
+        /// <typeparam name="T">Must derive from Dtobase</typeparam>
         /// <param name="source">Incoming source object must be Dtobase derived</param>
         /// <param name="dest">Persistent dets object must be Dtobase derived</param>
-        public void MapTo(Dtobase source, Dtobase dest)
+        public void MapTo<T>(T source, T dest)
+            where T : Dtobase
+        {
+            this.MapTo(typeof(T), source, dest);
+        }
+
+        /// <summary>
+        /// Recursively copies fields from incoming source object to persistent dest object.
+        /// </summary>
+        /// <param name="type">Type of the source and dest object</param>
+        /// <param name="source">Incoming source object must be Dtobase derived</param>
+        /// <param name="dest">Persistent dets object must be Dtobase derived</param>
+        private void MapTo(Type type, Dtobase source, Dtobase dest)
         {
             if(null == source) { return; }
+
             try
             {
-                PropertyMeta[] properties = UpidaContext.Current().GetPropertyDefs(source.GetType());
+                PropertyMeta[] properties = UpidaContext.Current().GetPropertyDefs(type);
                 for(int i = 0; i < properties.Length; i++)
                 {
                     PropertyMeta property = properties[i];
@@ -64,7 +78,7 @@ namespace Upida
         /// <param name="sourceList">Incoming collection of domain objects</param>
         /// <param name="destSet">Persistent collection (ISet or IList)</param>
         /// <param name="parent"></param>
-        public void MapTo(IEnumerable sourceCollection, IEnumerable destCollection, Dtobase parent)
+        private void MapTo(IEnumerable sourceCollection, IEnumerable destCollection, Dtobase parent)
         {
             List<Dtobase> destItems = new List<Dtobase>();
             foreach (Dtobase item in destCollection)
@@ -150,7 +164,7 @@ namespace Upida
         /// <typeparam name="T">Must derive from Dtobase</typeparam>
         /// <param name="source">Incoming domain object</param>
         /// <param name="type">Type of the incoming domain object</param>
-        public void Map(Dtobase source, Type type)
+        private void Map(Dtobase source, Type type)
         {
             try
             {
