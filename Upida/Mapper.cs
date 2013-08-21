@@ -19,16 +19,22 @@ namespace Upida
         public void MapTo<T>(T source, T dest)
             where T : Dtobase
         {
-            this.MapTo(typeof(T), source, dest);
+            this.MapTo(source, dest, typeof(T));
         }
 
         /// <summary>
-        /// Recursively copies fields from incoming source object to persistent dest object.
+        /// Recursively copies fields from incoming collection of domain objects to the persistent collection
         /// </summary>
         /// <param name="type">Type of the source and dest object</param>
-        /// <param name="source">Incoming source object must be Dtobase derived</param>
-        /// <param name="dest">Persistent dets object must be Dtobase derived</param>
-        private void MapTo(Type type, Dtobase source, Dtobase dest)
+        /// <param name="sourceList">Incoming collection of domain objects</param>
+        /// <param name="destSet">Persistent collection (ISet or IList)</param>
+        public void MapToCollection<T>(IEnumerable<T> source, IEnumerable<T> dest)
+            where T : Dtobase
+        {
+            this.MapToCollection(source, dest, null);
+        }
+
+        private void MapTo(Dtobase source, Dtobase dest, Type type)
         {
             if(null == source) { return; }
 
@@ -62,7 +68,7 @@ namespace Upida
                     {
                         IEnumerable destList = (IEnumerable)destValue;
                         IEnumerable sourceList = (IEnumerable)sourceValue;
-                        this.MapTo(sourceList, destList, source);
+                        this.MapToCollection(sourceList, destList, source);
                     }
                 }
             }
@@ -72,13 +78,7 @@ namespace Upida
             }
         }
 
-        /// <summary>
-        /// Recursively copies fields from incoming collection of domain objects to the persistent collection
-        /// </summary>
-        /// <param name="sourceList">Incoming collection of domain objects</param>
-        /// <param name="destSet">Persistent collection (ISet or IList)</param>
-        /// <param name="parent"></param>
-        private void MapTo(IEnumerable sourceCollection, IEnumerable destCollection, Dtobase parent)
+        private void MapToCollection(IEnumerable sourceCollection, IEnumerable destCollection, Dtobase parent)
         {
             List<Dtobase> destItems = new List<Dtobase>();
             foreach (Dtobase item in destCollection)
@@ -101,7 +101,7 @@ namespace Upida
             }
             else
             {
-                throw new ApplicationException("Collection is neither IList nor ISet: " + destCollectionType.FullName);
+                throw new ApplicationException("Collection is neither IList nor iesi.ISet: " + destCollectionType.FullName);
             }
 
             foreach (Dtobase item in sourceCollection)
@@ -159,11 +159,19 @@ namespace Upida
         }
 
         /// <summary>
-        /// Recursively goes through fields of incoming domain object and assigns parents to nested objects
+        /// Recursively goes through fields of incoming domain object collection and assigns parents to nested objects
         /// </summary>
         /// <typeparam name="T">Must derive from Dtobase</typeparam>
-        /// <param name="source">Incoming domain object</param>
-        /// <param name="type">Type of the incoming domain object</param>
+        /// <param name="source">Incoming domain object collection</param>
+        public void MapCollection<T>(IEnumerable<T> source)
+            where T : Dtobase
+        {
+            foreach (T item in source)
+            {
+                this.Map<T>(item);
+            }
+        }
+
         private void Map(Dtobase source, Type type)
         {
             try
@@ -189,6 +197,7 @@ namespace Upida
                             IEnumerable sourceSet = (IEnumerable)sourceValue;
                             foreach(Object item in sourceSet)
                             {
+                                this.Map((Dtobase)item, property.NestedType);
                                 if(item is IChild)
                                 {
                                     (item as IChild).ConnectToParent(source);
