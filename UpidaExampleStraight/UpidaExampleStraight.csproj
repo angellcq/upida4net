@@ -175,9 +175,7 @@
     </Content>
     <Content Include="Views\Web.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="packages.config">
       <SubType>Designer</SubType>
@@ -190,6 +188,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\upida.sqlite" />
     <None Include="Domain\Mapping\nhibernate-mapping.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -201,6 +200,8 @@
     <Content Include="Views\Order\Edit.cshtml" />
     <Content Include="Views\Order\EditItems.cshtml" />
     <Content Include="Views\Order\Show.cshtml" />
+    <None Include="Properties\PublishProfiles\upidastraight - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\upidastraight - Web Deploy.pubxml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -218,7 +219,7 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerPort>56382</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:59858/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>

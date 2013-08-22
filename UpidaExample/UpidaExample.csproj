@@ -195,9 +195,7 @@
     </Content>
     <Content Include="Views\Web.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
@@ -211,6 +209,15 @@
     <None Include="Domain\Mapping\nhibernate-mapping.xsd">
       <SubType>Designer</SubType>
     </None>
+    <Content Include="App_Data\upida.sqlite" />
+    <None Include="Properties\PublishProfiles\upida - FTP %282%29.pubxml" />
+    <None Include="Properties\PublishProfiles\upida - FTP %283%29.pubxml" />
+    <None Include="Properties\PublishProfiles\upida - FTP %284%29.pubxml" />
+    <None Include="Properties\PublishProfiles\upida - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\upida - Web Deploy %282%29.pubxml" />
+    <None Include="Properties\PublishProfiles\upida - Web Deploy %283%29.pubxml" />
+    <None Include="Properties\PublishProfiles\upida - Web Deploy %284%29.pubxml" />
+    <None Include="Properties\PublishProfiles\upida - Web Deploy.pubxml" />
     <None Include="Views\Client\Create.cshtml" />
     <None Include="Views\Client\Index.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
@@ -238,7 +245,7 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerPort>56390</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:52368/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
