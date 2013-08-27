@@ -2,10 +2,12 @@
 {
     public enum Groups
     {
+        DEFAULT,
         SAVE,
         UPDATE,
-        SAVE_OR_UPDATE,
+        MERGE,
         ASSIGN,
+        AUTHORIZE,
 
         SAVE_A,
         SAVE_B,
@@ -15,12 +17,12 @@
         UPDATE_B,
         UPDATE_C,
 
-        SAVE_OR_UPDATE_A,
-        SAVE_OR_UPDATE_B,
-        SAVE_OR_UPDATE_C,
+        MERGE_A,
+        MERGE_B,
+        MERGE_C,
 
         ASSIGN_A,
         ASSIGN_B,
-        ASSIGN_C,
+        ASSIGN_C
     }
 }

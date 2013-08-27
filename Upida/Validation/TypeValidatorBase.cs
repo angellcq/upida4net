@@ -5,13 +5,13 @@ using System.Text.RegularExpressions;
 
 namespace Upida.Validation
 {
-    public abstract class ValidatorBase<T> : IValidatorBase
+    public abstract class TypeValidatorBase<T> : ITypeValidatorBase
         where T : Dtobase
     {
         private string path;
         private string name;
         private object value;
-        private IValidatorBase parent;
+        private ITypeValidatorBase parent;
         private T target;
 
         private bool validTarget;
@@ -76,7 +76,7 @@ namespace Upida.Validation
             return this.failures;
         }
 
-        public void SetTarget(T target, string path, IValidatorBase parent)
+        public void SetTarget(T target, string path, ITypeValidatorBase parent)
         {
             this.target = target;
             this.path = path;
@@ -86,7 +86,8 @@ namespace Upida.Validation
         }
 
         /// <summary>
-        /// Sets current validated field value and name
+        /// Sets current validated field value and name.
+        /// if value is not NULL, it automatically marks this field as assigned (even if it was not present in JSON)I
         /// </summary>
         /// <param name="name">name of the field</param>
         /// <param name="value">field value</param>
@@ -97,6 +98,10 @@ namespace Upida.Validation
             this.name = name;
             this.stopped = false;
             this.validField = true;
+            if (null != value)
+            {
+                this.target.AddAssignedField(name);
+            }
         }
 
         /// <summary>
@@ -135,12 +140,16 @@ namespace Upida.Validation
         {
             if (this.stopped) return;
 
-            ValidatorBase<R> nestedValidator = ValidateWithAttribute.BuildValidator<R>(group);
+            TypeValidatorBase<R> nestedValidator = UpidaContext.Current().BuildValidator<R>(group);
             if (null != nestedValidator)
             {
                 string fullPath = string.Concat(this.path, this.name, ".");
                 nestedValidator.SetTarget((this.value as R), fullPath, this);
                 nestedValidator.Validate();
+            }
+            else
+            {
+                throw new ApplicationException("TypeValidator not found. type:" + typeof(R).Name + ", group:" + group);
             }
         }
 
@@ -155,7 +164,7 @@ namespace Upida.Validation
         {
             if (this.stopped) return;
 
-            ValidatorBase<R> nestedValidator = ValidateWithAttribute.BuildValidator<R>(group);
+            TypeValidatorBase<R> nestedValidator = UpidaContext.Current().BuildValidator<R>(group);
             if (null != nestedValidator)
             {
                 int index = 0;
@@ -166,6 +175,10 @@ namespace Upida.Validation
                     nestedValidator.Validate();
                     index++;
                 }
+            }
+            else
+            {
+                throw new ApplicationException("TypeValidator not found. type:" + typeof(R).Name + ", group:" + group);
             }
         }
 

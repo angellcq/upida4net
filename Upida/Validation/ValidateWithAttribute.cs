@@ -39,24 +39,5 @@ namespace Upida.Validation
         {
             get { return this.group; }
         }
-
-        public static ValidatorBase<T> BuildValidator<T>(object group)
-            where T : Dtobase
-        {
-            object[] fluents = typeof(T).GetCustomAttributes(typeof(ValidateWithAttribute), false);
-            for (int i = 0; i < fluents.Length; i++)
-            {
-                Type validatorType = null;
-                ValidateWithAttribute fluent = (ValidateWithAttribute)fluents[i];
-                if (object.Equals(fluent.group, group))
-                {
-                    validatorType = fluent.Validator;
-                    ValidatorBase<T> nestedValidator = (ValidatorBase<T>)Activator.CreateInstance(validatorType);
-                    return nestedValidator;
-                }
-            }
-
-            return null;
-        }
     }
 }

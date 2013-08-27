@@ -11,7 +11,7 @@ namespace Upida.Validation
         public void ValidateAndThrow<T>(T target, object group)
             where T : Dtobase
         {
-            ValidatorBase<T> validator = ValidateWithAttribute.BuildValidator<T>(group);
+            TypeValidatorBase<T> validator = UpidaContext.Current().BuildValidator<T>(group);
             if (null != validator)
             {
                 validator.SetTarget(target, null, null);
@@ -22,13 +22,17 @@ namespace Upida.Validation
                     throw new ValidationException(validator.GetFailures());
                 }
             }
+            else
+            {
+                throw new ApplicationException("TypeValidator not found. type:" + typeof(T).Name + ", group:" + group);
+            }
         }
 
         public bool ValidateAndPublish<T>(T target, object group, ModelStateDictionary modelState)
             where T : Dtobase
         {
             HttpRequest request = HttpContext.Current.Request;
-            ValidatorBase<T> validator = ValidateWithAttribute.BuildValidator<T>(group);
+            TypeValidatorBase<T> validator = UpidaContext.Current().BuildValidator<T>(group);
             if (null != validator)
             {
                 validator.SetTarget(target, null, null);
@@ -51,6 +55,10 @@ namespace Upida.Validation
 
                     return false;
                 }
+            }
+            else
+            {
+                throw new ApplicationException("TypeValidator not found. type:" + typeof(T).Name + ", group:" + group);
             }
 
             return true;

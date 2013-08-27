@@ -11,6 +11,7 @@ using UpidaExampleStraight.Business;
 using UpidaExampleStraight.Business.Util;
 using UpidaExampleStraight.Dao;
 using UpidaExampleStraight.Dao.Support;
+using UpidaExampleStraight.Validation;
 
 namespace UpidaExampleStraight
 {
@@ -35,6 +36,13 @@ namespace UpidaExampleStraight
 
             builder.RegisterType<ClientBusiness>().As<ClientBusiness>().InstancePerDependency();
             builder.RegisterType<OrderBusiness>().As<OrderBusiness>().InstancePerDependency();
+
+            builder.RegisterType<ClientSaveValidator>().As<ClientSaveValidator>().InstancePerDependency();
+            builder.RegisterType<OrderSaveValidator>().As<OrderSaveValidator>().InstancePerDependency();
+            builder.RegisterType<OrderUpdateValidator>().As<OrderUpdateValidator>().InstancePerDependency();
+            builder.RegisterType<OrderUpdateItemsValidator>().As<OrderUpdateItemsValidator>().InstancePerDependency();
+            builder.RegisterType<OrderItemSaveValidator>().As<OrderItemSaveValidator>().InstancePerDependency();
+            builder.RegisterType<OrderItemMergeValidator>().As<OrderItemMergeValidator>().InstancePerDependency();
 
             var container = builder.Build();
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));

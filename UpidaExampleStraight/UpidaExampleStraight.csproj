@@ -121,6 +121,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\AutofacTypeValidatorFactory.cs" />
     <Compile Include="App_Start\DependencyConfig.cs" />
     <Compile Include="Business\BusinessBase.cs" />
     <Compile Include="Business\ClientBusiness.cs" />
@@ -152,7 +153,7 @@
     <Compile Include="Validation\ClientSaveValidator.cs" />
     <Compile Include="Validation\Errors.cs" />
     <Compile Include="Validation\MyExtendedValidatorExtentions.cs" />
-    <Compile Include="Validation\OrderItemSaveOrUpdateValidator.cs" />
+    <Compile Include="Validation\OrderItemMergeValidator.cs" />
     <Compile Include="Validation\OrderItemSaveValidator.cs" />
     <Compile Include="Validation\OrderSaveValidator.cs" />
     <Compile Include="Validation\OrderUpdateItemsValidator.cs" />

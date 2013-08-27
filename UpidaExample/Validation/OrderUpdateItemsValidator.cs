@@ -3,7 +3,7 @@ using UpidaExample.Domain;
 
 namespace UpidaExample.Validation
 {
-    public class OrderUpdateItemsValidator : ValidatorBase<Order>
+    public class OrderUpdateItemsValidator : TypeValidatorBase<Order>
     {
         public override void Validate()
         {
@@ -20,7 +20,7 @@ namespace UpidaExample.Validation
             this.Field("OrderItems", Target.OrderItems);
             this.Required();
             this.Size(1, 500, Errors.WRONG_COUNT);
-            this.NestedList<OrderItem>(Groups.SAVE_OR_UPDATE);
+            this.NestedList<OrderItem>(Groups.MERGE);
 
             this.MissingField("Client");
         }

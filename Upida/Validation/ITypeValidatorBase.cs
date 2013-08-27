@@ -2,7 +2,7 @@
 
 namespace Upida.Validation
 {
-    public interface IValidatorBase
+    public interface ITypeValidatorBase
     {
         void Fail(Failure failure);
         void Validate();

@@ -1,6 +1,7 @@
 ﻿using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Routing;
+using Upida;
 
 namespace UpidaExample
 {
@@ -8,6 +9,8 @@ namespace UpidaExample
     {
         protected void Application_Start()
         {
+            UpidaContext.Current().SetTypeValidatorFactory(new AutofacTypeValidatorFactory());
+
             AreaRegistration.RegisterAllAreas();
 
             WebApiConfig.Register(GlobalConfiguration.Configuration);

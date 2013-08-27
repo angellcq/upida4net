@@ -3,7 +3,7 @@ using UpidaExampleStraight.Domain;
 
 namespace UpidaExampleStraight.Validation
 {
-    public class OrderSaveValidator : ValidatorBase<Order>
+    public class OrderSaveValidator : TypeValidatorBase<Order>
     {
         public override void Validate()
         {

@@ -5,7 +5,7 @@ using UpidaExampleStraight.Validation;
 namespace UpidaExampleStraight.Domain
 {
     [ValidateWith(typeof(OrderItemSaveValidator), Groups.SAVE)]
-    [ValidateWith(typeof(OrderItemSaveOrUpdateValidator), Groups.SAVE_OR_UPDATE)]
+    [ValidateWith(typeof(OrderItemMergeValidator), Groups.MERGE)]
     public class OrderItem : Dtobase, IChild
     {
         [Dto(Levels.ID)]

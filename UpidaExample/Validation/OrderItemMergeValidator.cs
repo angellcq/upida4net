@@ -1,9 +1,9 @@
 ﻿using Upida.Validation;
-using UpidaExampleStraight.Domain;
+using UpidaExample.Domain;
 
-namespace UpidaExampleStraight.Validation
+namespace UpidaExample.Validation
 {
-    public class OrderItemSaveOrUpdateValidator : ValidatorBase<OrderItem>
+    public class OrderItemMergeValidator : TypeValidatorBase<OrderItem>
     {
         public override void Validate()
         {

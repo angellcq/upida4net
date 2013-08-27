@@ -64,14 +64,15 @@
     <Compile Include="UpidaContext.cs" />
     <Compile Include="Validation\FailResponse.cs" />
     <Compile Include="Validation\Failure.cs" />
+    <Compile Include="Validation\ITypeValidatorFactory.cs" />
     <Compile Include="Validation\ValidateWithAttribute.cs" />
     <Compile Include="Validation\Groups.cs" />
     <Compile Include="Validation\IValidator.cs" />
-    <Compile Include="Validation\IValidatorBase.cs" />
+    <Compile Include="Validation\ITypeValidatorBase.cs" />
     <Compile Include="Validation\ValidationException.cs" />
     <Compile Include="Validation\Validator.cs" />
-    <Compile Include="Validation\ValidatorBase.cs" />
-    <Compile Include="Validation\ValidatorExtentions.cs" />
+    <Compile Include="Validation\TypeValidatorBase.cs" />
+    <Compile Include="Validation\TypeValidatorExtentions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

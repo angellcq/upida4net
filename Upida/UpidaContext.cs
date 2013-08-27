@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
+using Upida.Validation;
 
 namespace Upida
 {
@@ -14,6 +15,7 @@ namespace Upida
         }
 
         private readonly IDictionary<Type, PropertyMeta[]> PROPERTY_DEF_MAP = new Dictionary<Type, PropertyMeta[]>();
+        private readonly IDictionary<string, Type> TYPEVALIDATOR_MAP = new Dictionary<string, Type>();
 
         private readonly Type STRING_TYPE = typeof(string);
         private readonly Type LONG_TYPE = typeof(long?);
@@ -42,6 +44,8 @@ namespace Upida
         private readonly Type FLOAT_PRIM = typeof(float);
         private readonly Type BOOLEAN_PRIM = typeof(bool);
         private readonly Type CHAR_PRIM = typeof(char);
+
+        private ITypeValidatorFactory typeValidatorFactory;
 
         public PropertyMeta[] GetPropertyDefs(Type type)
         {
@@ -150,6 +154,36 @@ namespace Upida
             Type[] typeArgs = { type };
             Type makeme = listAndSetType.MakeGenericType(typeArgs);
             return Activator.CreateInstance(makeme);
+        }
+
+        public TypeValidatorBase<T> BuildValidator<T>(object group)
+            where T : Dtobase
+        {
+            Type type = typeof(T);
+            string key = string.Concat(type.GetHashCode(), '-', group.GetHashCode());
+            Type validatorType;
+            if (true == TYPEVALIDATOR_MAP.TryGetValue(key, out validatorType))
+            {
+                return this.typeValidatorFactory.GetInstance(validatorType) as TypeValidatorBase<T>;
+            }
+
+            object[] fluents = typeof(T).GetCustomAttributes(typeof(ValidateWithAttribute), false);
+            for (int i = 0; i < fluents.Length; i++)
+            {
+                ValidateWithAttribute fluent = (ValidateWithAttribute)fluents[i];
+                if (object.Equals(fluent.Group, group))
+                {
+                    TYPEVALIDATOR_MAP[key] = fluent.Validator;
+                    return this.typeValidatorFactory.GetInstance(fluent.Validator) as TypeValidatorBase<T>;
+                }
+            }
+
+            return null;
+        }
+
+        public void SetTypeValidatorFactory(ITypeValidatorFactory typeValidatorFactory)
+        {
+            this.typeValidatorFactory = typeValidatorFactory;
         }
     }
 }
