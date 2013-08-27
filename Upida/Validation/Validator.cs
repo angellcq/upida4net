@@ -8,8 +8,28 @@ namespace Upida.Validation
 {
     public class Validator : IValidator
     {
-        public void ValidateAndThrow<T>(T target, object group)
-            where T : Dtobase
+        public IList<Failure> Validate<T>(T target, object group) where T : Dtobase
+        {
+           TypeValidatorBase<T> validator = UpidaContext.Current().BuildValidator<T>(group);
+            if (null != validator)
+            {
+                validator.SetTarget(target, null, null);
+                validator.Validate();
+
+                if (!validator.IsValid)
+                {
+                    return validator.GetFailures();
+                }
+
+                return null;
+            }
+            else
+            {
+                throw new ApplicationException("TypeValidator not found. type:" + typeof(T).Name + ", group:" + group);
+            }
+        }
+
+        public void AssertValid<T>(T target, object group) where T : Dtobase
         {
             TypeValidatorBase<T> validator = UpidaContext.Current().BuildValidator<T>(group);
             if (null != validator)
@@ -28,40 +48,24 @@ namespace Upida.Validation
             }
         }
 
-        public bool ValidateAndPublish<T>(T target, object group, ModelStateDictionary modelState)
-            where T : Dtobase
+        public void PublishFailures(IList<Failure> failureList, ModelStateDictionary modelState)
         {
-            HttpRequest request = HttpContext.Current.Request;
-            TypeValidatorBase<T> validator = UpidaContext.Current().BuildValidator<T>(group);
-            if (null != validator)
+            if (null != failureList)
             {
-                validator.SetTarget(target, null, null);
-                validator.Validate();
-
-                if (!validator.IsValid)
+                HttpRequest request = HttpContext.Current.Request;
+                foreach (Failure item in failureList)
                 {
-                    foreach (Failure item in validator.GetFailures())
+                    ModelState fieldModelState = modelState[item.Key];
+                    if (null == fieldModelState)
                     {
-                        ModelState fieldModelState = modelState[item.Key];
-                        if (null == fieldModelState)
-                        {
-                            fieldModelState = new ModelState();
-                            fieldModelState.Value = new ValueProviderResult(request[item.Key], request[item.Key], CultureInfo.InvariantCulture);
-                            modelState.Add(item.Key, fieldModelState);
-                        }
-
-                        fieldModelState.Errors.Add(new ModelError(item.Text));
+                        fieldModelState = new ModelState();
+                        fieldModelState.Value = new ValueProviderResult(request[item.Key], request[item.Key], CultureInfo.InvariantCulture);
+                        modelState.Add(item.Key, fieldModelState);
                     }
 
-                    return false;
+                    fieldModelState.Errors.Add(new ModelError(item.Text));
                 }
             }
-            else
-            {
-                throw new ApplicationException("TypeValidator not found. type:" + typeof(T).Name + ", group:" + group);
-            }
-
-            return true;
         }
     }
 }

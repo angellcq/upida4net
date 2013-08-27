@@ -39,17 +39,20 @@ namespace UpidaExampleStraight.Controllers
         public ActionResult Save(int clientId)
         {
             Order item = this.formParser.Parse<Order>(this.Request.Form);
-            bool success = this.validator.ValidateAndPublish(item, Groups.SAVE, this.ModelState);
-            if (!success)
+            try
             {
+                this.validator.AssertValid(item, Groups.SAVE);
+                this.orderBusiness.Save(item);
+                return this.RedirectToAction("index", new { clientId = clientId });
+            }
+            catch (ValidationException ex)
+            {
+                this.validator.PublishFailures(ex.GetFailures(), this.ModelState);
                 ViewResult view = View(item);
                 view.ViewBag.ClientId = clientId;
                 view.ViewBag.Products = this.GetProducts();
                 return view;
             }
-
-            this.orderBusiness.Save(item);
-            return this.RedirectToAction("index", new {clientId = clientId});
         }
 
         [HttpGet]
@@ -67,17 +70,20 @@ namespace UpidaExampleStraight.Controllers
         public ActionResult Update(int id, int clientId)
         {
             Order item = this.formParser.Parse<Order>(this.Request.Form);
-            bool success = this.validator.ValidateAndPublish(item, Groups.UPDATE, this.ModelState);
-            if (!success)
+            try
             {
+                this.validator.AssertValid(item, Groups.UPDATE);
+                this.orderBusiness.Update(item);
+                return this.RedirectToAction("index", new { clientId = clientId });
+            }
+            catch (ValidationException ex)
+            {
+                this.validator.PublishFailures(ex.GetFailures(), this.ModelState);
                 ViewResult view = View(item);
                 view.ViewBag.ClientId = clientId;
                 view.ViewBag.Products = this.GetProducts();
                 return view;
             }
-
-            this.orderBusiness.Update(item);
-            return this.RedirectToAction("index", new { clientId = clientId });
         }
 
         [HttpGet]
@@ -95,17 +101,20 @@ namespace UpidaExampleStraight.Controllers
         public ActionResult UpdateItems(int id, int clientId)
         {
             Order item = this.formParser.Parse<Order>(this.Request.Form);
-            bool success = this.validator.ValidateAndPublish(item, Groups.UPDATE_A, this.ModelState);
-            if (!success)
+            try
             {
+                this.validator.AssertValid(item, Groups.UPDATE_A);
+                this.orderBusiness.Update(item);
+                return this.RedirectToAction("index", new { clientId = clientId });
+            }
+            catch (ValidationException ex)
+            {
+                this.validator.PublishFailures(ex.GetFailures(), this.ModelState);
                 ViewResult view = View(item);
                 view.ViewBag.ClientId = clientId;
                 view.ViewBag.Products = this.GetProducts();
                 return view;
             }
-
-            this.orderBusiness.Update(item);
-            return this.RedirectToAction("index", new { clientId = clientId });
         }
 
         public ActionResult Show(int id)

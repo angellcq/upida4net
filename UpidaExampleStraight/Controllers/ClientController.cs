@@ -34,14 +34,17 @@ namespace UpidaExampleStraight.Controllers
         public ActionResult Save()
         {
             Client item = this.formParser.Parse<Client>(this.Request.Params);
-            bool success = this.validator.ValidateAndPublish(item, Groups.SAVE, this.ModelState);
-            if (!success)
+            try
             {
+                this.validator.AssertValid(item, Groups.SAVE);
+                this.clientBusiness.Save(item);
                 return View(item);
             }
-
-            this.clientBusiness.Save(item);
-            return this.RedirectToAction("index");
+            catch (ValidationException ex)
+            {
+                this.validator.PublishFailures(ex.GetFailures(), this.ModelState);
+                return this.RedirectToAction("index");
+            }
         }
     }
 }

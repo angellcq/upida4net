@@ -18,5 +18,10 @@ namespace Upida.Validation
             response.Failures = this.failures;
             return response;
         }
+
+        public IList<Failure> GetFailures()
+        {
+            return this.failures;
+        }
     }
 }
