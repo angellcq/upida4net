@@ -7,20 +7,17 @@ namespace UpidaExample.Validation
     {
         public override void Validate()
         {
-            this.MissingField("Id");
+            this.Missing("Id", this.Target.Id);
 
-            this.Field("Count", this.Target.Count);
-            this.Required();
+            this.Required("Count", this.Target.Count);
             this.GreaterThan(0, Errors.GREATER_ZERO);
 
-            this.Field("Price", this.Target.Price);
-            this.Required();
+            this.Required("Price", this.Target.Price);
             this.GreaterThan(0f, Errors.GREATER_ZERO);
 
-            this.Field("ProductId", this.Target.ProductId);
-            this.Required();
+            this.Required("ProductId", this.Target.ProductId);
 
-            this.MissingField("Order");
+            this.Missing("Order", this.Target.Id);
         }
     }
 }

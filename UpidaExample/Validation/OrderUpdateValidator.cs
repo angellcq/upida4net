@@ -7,33 +7,27 @@ namespace UpidaExample.Validation
     {
         public override void Validate()
         {
-            this.Field("Id", Target.Id);
-            this.Required();
+            this.Required("Id", Target.Id);
 
-            this.MissingField("CreatedOn");
+            this.Missing("CreatedOn", this.Target.CreatedOn);
 
-            this.Field("ShipAddress", Target.ShipAddress);
-            this.Required();
+            this.Required("ShipAddress", Target.ShipAddress);
             this.Length(5, 256, Errors.LENGTH_WRONG);
 
-            this.Field("ShipCity", Target.ShipCity);
-            this.Required();
+            this.Required("ShipCity", Target.ShipCity);
             this.Length(2, 256, Errors.LENGTH_WRONG);
 
-            this.Field("ShipCountry", Target.ShipCountry);
-            this.Required();
+            this.Required("ShipCountry", Target.ShipCountry);
             this.Length(2, 256, Errors.LENGTH_WRONG);
 
-            this.Field("ShipZip", Target.ShipZip);
-            this.Required();
+            this.Required("ShipZip", Target.ShipZip);
             this.Length(5, 5, Errors.LENGTH_WRONG);
 
-            this.Field("Total", Target.Total);
-            this.Required();
+            this.Required("Total", Target.Total);
             this.GreaterThan(0f, Errors.GREATER_ZERO);
 
-            this.MissingField("OrderItems");
-            this.MissingField("Client");
+            this.Missing("OrderItems", this.Target.OrderItems);
+            this.Missing("Client", this.Target.Client);
         }
     }
 }

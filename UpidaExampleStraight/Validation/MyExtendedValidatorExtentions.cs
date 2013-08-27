@@ -13,29 +13,28 @@ namespace UpidaExampleStraight.Validation
             validator.Regexpr(expr, msg);
         }
 
-        public static void Required<T>(this TypeValidatorBase<T> validator)
+        public static void Required<T>(this TypeValidatorBase<T> validator, string field, object value)
             where T : Dtobase
         {
+            validator.Field(field, value);
             validator.MustBeAssigned(Errors.CANNOT_BE_EMPTY);
             validator.ValidFormat(Errors.WRONG_FORMAT);
             validator.NotNull(Errors.CANNOT_BE_EMPTY);
             validator.Stop();
         }
 
-        public static void MissingField<T>(this TypeValidatorBase<T> validator, string field)
+        public static void Missing<T>(this TypeValidatorBase<T> validator, string field, object value)
             where T : Dtobase
         {
-            validator.Field(field);
+            validator.Field(field, value);
             validator.NotAssigned(Errors.MUST_BE_EMPTY);
         }
 
-        public static void ValidFormatOrNotAssigned<T>(this TypeValidatorBase<T> validator)
+        public static void ValidFormatOrNull<T>(this TypeValidatorBase<T> validator, string field, object value)
             where T : Dtobase
         {
-            if (validator.Target.IsFieldAssigned(validator.Name))
-            {
-                validator.ValidFormat(Errors.WRONG_FORMAT);
-            }
+            validator.Field(field, value);
+            validator.ValidFormat(Errors.WRONG_FORMAT);
         }
     }
 }

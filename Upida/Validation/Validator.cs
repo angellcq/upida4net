@@ -39,7 +39,7 @@ namespace Upida.Validation
 
                 if (!validator.IsValid)
                 {
-                    throw new ValidationException(validator.GetFailures());
+                    throw new ValidationException(validator.GetFailures(), typeof(T), group);
                 }
             }
             else

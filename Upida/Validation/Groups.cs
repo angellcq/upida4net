@@ -7,6 +7,7 @@
         UPDATE,
         MERGE,
         ASSIGN,
+        REFERENCE,
         AUTHORIZE,
 
         SAVE_A,
@@ -23,6 +24,10 @@
 
         ASSIGN_A,
         ASSIGN_B,
-        ASSIGN_C
+        ASSIGN_C,
+
+        REFERENCE_A,
+        REFERENCE_B,
+        REFERENCE_C
     }
 }
