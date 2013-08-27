@@ -121,7 +121,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Start\AutofacTypeValidatorFactory.cs" />
     <Compile Include="App_Start\DependencyConfig.cs" />
     <Compile Include="Business\BusinessBase.cs" />
     <Compile Include="Business\ClientBusiness.cs" />

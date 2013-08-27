@@ -2,6 +2,7 @@
 using System.Web.Mvc;
 using System.Web.Routing;
 using Upida;
+using Upida.Validation;
 
 namespace UpidaExample
 {
@@ -9,7 +10,7 @@ namespace UpidaExample
     {
         protected void Application_Start()
         {
-            UpidaContext.Current().SetTypeValidatorFactory(new AutofacTypeValidatorFactory());
+            UpidaContext.Current().SetTypeValidatorFactory(new AspMvcTypeValidatorFactory());
 
             AreaRegistration.RegisterAllAreas();
 

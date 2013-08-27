@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Web.Mvc;
-using Upida.Validation;
 
-namespace UpidaExample
+namespace Upida.Validation
 {
-    public class AutofacTypeValidatorFactory : ITypeValidatorFactory
+    public class AspMvcTypeValidatorFactory : ITypeValidatorFactory
     {
         public ITypeValidatorBase GetInstance(Type typeValidatorType)
         {
