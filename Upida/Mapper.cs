@@ -62,7 +62,14 @@ namespace Upida
                     }
                     else if(PropertyMeta.ClassType.Class == property.PropertyClassType)
                     {
-                        this.MapTo((Dtobase)sourceValue, (Dtobase)destValue);
+                        if (object.Equals(sourceValue, destValue))
+                        {
+                            this.MapTo((Dtobase)sourceValue, (Dtobase)destValue);
+                        }
+                        else
+                        {
+                            property.Write(dest, sourceValue);
+                        }
                     }
                     else if(PropertyMeta.ClassType.Collection == property.PropertyClassType)
                     {

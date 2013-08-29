@@ -56,19 +56,24 @@ $(function () {
 			return decodeURIComponent(results[1].replace(/\+/g, " "));
 	};
 
-	upida.utils.Lookup = function(id, name) {
+	upida.utils.Lookup = function(id, name, version) {
 		this.id = ko.observable(id);
 		this.name = ko.observable(name);
+		this.version = version;
 	};
 
-	upida.utils.getReff = function(id) {
-		return {Id: id};
+	upida.utils.getReff = function(id, version) {
+		if(!upida.utils.isEmpty(id)) {
+			return {Id: id, Version: version};
+		}
+
+		return null;
 	};
 
 	upida.utils.isEmpty = function (val) {
 		return undefined === val || null == val || "" === val;
 	};
-	
+
 	upida.utils.ajaxCallCount = 0;
 	upida.utils.ajaxCallback = function(callback) {
 		setTimeout(function () {
@@ -110,7 +115,7 @@ $(function () {
 	};
 
 	upida.vm = null;
-	upida.utils.bind = function (vm) {
+	upida.utils.bind = function(vm) {
 		upida.vm = vm;
 		upida.vm.errors = ko.observableDictionary();
 		ko.applyBindings(vm);
@@ -143,7 +148,7 @@ $(function () {
 				return;
 			}
 		});
-		
+
 		return foundItem;
 	};
 });
