@@ -14,9 +14,9 @@ $(function () {
 			data: ko.toJSON(input),
 			contentType: "application/json",
 			success: function (output, status, xhr) {
-				upida.utils.ajaxEnd();
 				upida.utils.clearErrors();
 				callback(output);
+				upida.utils.ajaxEnd();
 			},
 			error: function (xhr, sttaus, err) {
 				upida.utils.ajaxEnd();
@@ -32,9 +32,9 @@ $(function () {
 		    url: upida.utils.url("api/" + method),
 			type: "GET",
 			success: function (output, status, xhr) {
-				upida.utils.ajaxEnd();
 				upida.utils.clearErrors();
 				callback(output);
+				upida.utils.ajaxEnd();
 			},
 			error: function (xhr, sttaus, err) {
 				upida.utils.ajaxEnd();
@@ -78,7 +78,7 @@ $(function () {
 			else {
 				upida.utils.ajaxCallback(callback);
 			}
-		}, 300);
+		}, 100);
 	};
 
 	upida.utils.ajaxStart = function() {
@@ -89,9 +89,10 @@ $(function () {
 				backgroundColor: '#000',
 				'-webkit-border-radius': '10px',
 				'-moz-border-radius': '10px',
-				opacity: .4,
+				opacity: .3,
 				color: '#fff'
-			}});
+			},
+			ignoreIfBlocked: true });
 		}
 
 		upida.utils.ajaxCallCount++;
@@ -104,7 +105,7 @@ $(function () {
 				if(0 == upida.utils.ajaxCallCount) {
 					$.unblockUI();
 				}
-			}, 500);
+			}, 200);
 		}
 	};
 

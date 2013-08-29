@@ -178,7 +178,7 @@
     <Content Include="Resources\js\jquery.blockUI.js" />
     <Content Include="Resources\js\knockout-2.2.1.js" />
     <Content Include="Resources\js\observableDictionary.js" />
-    <Content Include="Resources\js\utils.js" />
+    <Content Include="Resources\js\upida.utils.js" />
     <Content Include="Resources\js\vm\Client\Create.js" />
     <Content Include="Resources\js\vm\Client\Index.js" />
     <Content Include="Resources\js\vm\Order\Create.js" />
