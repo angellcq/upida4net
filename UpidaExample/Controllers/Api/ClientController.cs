@@ -1,6 +1,4 @@
-﻿using Newtonsoft.Json.Linq;
-using System.Collections.Generic;
-using Upida;
+﻿using System.Collections.Generic;
 using Upida.Validation;
 using UpidaExample.Business;
 using UpidaExample.Domain;
@@ -11,8 +9,8 @@ namespace UpidaExample.Controllers.Api
     {
         private readonly ClientBusiness clientBusiness;
 
-        public ClientController(IJsonParser jsonParser, IValidator validator, ClientBusiness clientBusiness)
-            : base(jsonParser, validator)
+        public ClientController(IValidator validator, ClientBusiness clientBusiness)
+            : base(validator)
         {
             this.clientBusiness = clientBusiness;
         }
@@ -22,11 +20,10 @@ namespace UpidaExample.Controllers.Api
             return this.clientBusiness.GetAll();
         }
 
-        public void Save(JToken item)
+        public void Save(Client item)
         {
-            Client data = this.jsonParser.Parse<Client>(item);
-            this.validator.AssertValid(data, Groups.SAVE);
-            this.clientBusiness.Save(data);
+            this.validator.AssertValid(item, Groups.SAVE);
+            this.clientBusiness.Save(item);
         }
     }
 }

@@ -14,7 +14,8 @@ namespace UpidaExample
                 defaults: new { id = RouteParameter.Optional }
             );
 
-            GlobalConfiguration.Configuration.Formatters.JsonFormatter.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
+            GlobalConfiguration.Configuration.Formatters.Remove(GlobalConfiguration.Configuration.Formatters.JsonFormatter);
+            GlobalConfiguration.Configuration.Formatters.Add(new Upida.Aspmvc.UpidaJsonFormatter());
         }
     }
 }
