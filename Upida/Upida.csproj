@@ -51,7 +51,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Aspmvc\UpidaJsonFormatter.cs" />
+    <Compile Include="Aspnetmvc\UpidaJsonFormatter.cs" />
     <Compile Include="FormParser.cs" />
     <Compile Include="IFormParser.cs" />
     <Compile Include="IJsonParser.cs" />

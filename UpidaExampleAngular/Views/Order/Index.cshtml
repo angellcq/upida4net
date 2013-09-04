@@ -1,0 +1,47 @@
+@{
+	ViewBag.Title = "Orders";
+	ViewBag.ViewModel = "Order/Index.js";
+	ViewBag.Ctrl = "orderIndexController";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<a ng-href="{{clientsLink}}">CLIENTS</a>&nbsp;|
+<a ng-href="{{createLink}}">NEW ORDER</a>&nbsp;|
+<h2>Orders</h2>
+<hr />
+<br />
+<table border="1" style="width: 80%;">
+<thead>
+	<tr class="head">
+		<th rowspan="2">ID</th>
+		<th colspan="4">Shipping</th>
+		<th rowspan="2">CreatedOn</th>
+		<th rowspan="2">Total</th>
+		<th rowspan="2" colspan="2">ACTIONS</th>
+	</tr>
+	<tr class="head">
+		<th>Country</th>
+		<th>City</th>
+		<th>Zip</th>
+		<th>Address</th>
+	</tr>
+</thead>
+<tbody ng-repeat="row in orderRows">
+	<tr>
+		<td>
+			<a ng-href="{{row.viewLink}}" ng-bind="row.id"></a>
+		</td>
+		<td ng-bind="row.shipCountry"></td>
+		<td ng-bind="row.shipCity"></td>
+		<td ng-bind="row.shipZip"></td>
+		<td ng-bind="row.shipAddress"></td>
+		<td ng-bind="row.createdOn"></td>
+		<td ng-bind="row.total"></td>
+		<td>
+			<a ng-href="{{row.editLink}}">Edit</a>
+		</td>
+		<td>
+			<a ng-href="{{row.editItemsLink}}">Edit Items</a>
+		</td>
+	</tr>
+</tbody>
+</table>

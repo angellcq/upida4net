@@ -1,0 +1,49 @@
+@{
+	ViewBag.Title = "Edit Order (Shipping only)";
+	ViewBag.ViewModel = "Order/Edit.js";
+	ViewBag.Ctrl = "orderEditController";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<a ng-href="{{clientsLink}}">CLIENTS</a>&nbsp;|
+<a ng-href="{{indexLink}}">ORDERS</a>&nbsp;|
+<h2>Edit Order (Shipping only)</h2>
+<br />
+<table>
+	<tr>
+		<td>Ship to Country</td>
+		<td>
+			<input type="text" ng-model="shipCountry" />
+			<span class="error" errorkey="ShipCountry"></span>
+		</td>
+	</tr>
+	<tr>
+		<td>Ship to City</td>
+		<td>
+			<input type="text" ng-model="shipCity" />
+			<span class="error" errorkey="ShipCity"></span>
+		</td>
+	</tr>
+	<tr>
+		<td>Ship to Zip</td>
+		<td>
+			<input type="text" ng-model="shipZip" />
+			<span class="error" errorkey="ShipZip"></span>
+		</td>
+	</tr>
+	<tr>
+		<td>Ship to Address</td>
+		<td>
+			<input type="text" ng-model="shipAddress" />
+			<span class="error" errorkey="ShipAddress"></span>
+		</td>
+	</tr>
+	<tr>
+		<td>Total ($)</td>
+		<td>
+			<input type="text" ng-model="total" />
+			<span class="error" errorkey="Total"></span>
+		</td>
+	</tr>
+</table>
+<hr />
+<input type="button" ng-click="onSave()" value="Save" />

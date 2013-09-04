@@ -1,0 +1,30 @@
+@{
+	ViewBag.Title = "Clients";
+	ViewBag.ViewModel = "Client/Index.js";
+	ViewBag.Ctrl = "clientIndexController";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<a ng-href="{{createLink}}">NEW CLIENT</a>&nbsp;|
+<h2>Clients</h2>
+<hr />
+<table border="1" style="width: 50%;">
+<thead>
+	<tr class="head">
+		<th>ID</th>
+		<th>NAME</th>
+		<th colspan="2">ACTIONS</th>
+	</tr>
+</thead>
+<tbody ng-repeat="row in clientRows">
+	<tr>
+		<td ng-bind="row.id"></td>
+		<td ng-bind="row.name"></td>
+		<td>
+			<a ng-href="{{row.ordersLink}}">Orders</a>
+		</td>
+		<td>
+			<a ng-href="{{row.newOrderLink}}">New Order</a>
+		</td>
+	</tr>
+</tbody>
+</table>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="UpidaExampleKnockout" namespace="UpidaExampleKnockout.Domain">
+  <class name="Order" table="orders">
+    <id name="Id">
+      <generator class="native" />
+    </id>
+    <property name="ShipCountry" />
+    <property name="ShipCity" />
+    <property name="ShipZip" />
+    <property name="ShipAddress" />
+    <property name="CreatedOn" update="false" />
+    <property name="Total" />
+    <many-to-one name="Client" column="client_id" class="Client" />
+    <set name="OrderItems" table="orderitems" inverse="true" cascade="all,delete-orphan">
+      <key column="order_id" />
+      <one-to-many class="OrderItem" />
+    </set>
+  </class>
+</hibernate-mapping>

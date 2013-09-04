@@ -1,0 +1,21 @@
+@{
+	ViewBag.Title = "New Client";
+	ViewBag.ViewModel = "Client/Create.js";
+	ViewBag.Ctrl = "clientCreateController";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<a ng-href="{{indexLink}}">ALL CLIENTS</a>|
+<h2>New Client</h2>
+<hr />
+<br />
+<table>
+	<tr>
+		<td>Name</td>
+		<td>
+			<input type="text" ng-model="name" />
+			<span class="error" errorkey="Name"></span>
+		</td>
+	</tr>
+</table>
+<hr />
+<input type="button" ng-click="onSave()" value="Save" />

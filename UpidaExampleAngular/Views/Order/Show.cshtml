@@ -1,0 +1,77 @@
+@{
+	ViewBag.Title = "View Order";
+	ViewBag.ViewModel = "Order/Show.js";
+	ViewBag.Ctrl = "orderShowController";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<a ng-href="{{clientsLink}}">CLIENTS</a>&nbsp;|
+<a ng-href="{{indexLink}}">ORDERS</a>&nbsp;|
+<h2>View Order</h2>
+<hr />
+<br />
+<table>
+	<tr>
+		<td>
+			<a ng-href="{{editLink}}">Edit</a>
+		</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>Client</td>
+		<td>
+			<b ng-bind="client"></b>
+		</td>
+	</tr>
+	<tr>
+		<td>Ship to Country</td>
+		<td>
+			<b ng-bind="shipCountry"></b>
+		</td>
+	</tr>
+	<tr>
+		<td>Ship to City</td>
+		<td>
+			<b ng-bind="shipCity"></b>
+		</td>
+	</tr>
+	<tr>
+		<td>Ship to Zip</td>
+		<td>
+			<b ng-bind="shipZip"></b>
+		</td>
+	</tr>
+	<tr>
+		<td>Ship to Address</td>
+		<td>
+			<b ng-bind="shipAddress"></b>
+		</td>
+	</tr>
+	<tr>
+		<td>Total ($)</td>
+		<td>
+			<b ng-bind="total"></b>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2"><hr /></td>
+	</tr>
+	<tr>
+		<td>
+			<a ng-href="{{editItemsLink}}">Edit</a>
+		</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>Products:</td>
+		<td>
+			<div ng-repeat="row in orderItemRows">
+				Product:
+				<b ng-bind="row.product"></b>
+				&nbsp;&nbsp;Count:
+				<b ng-bind="row.count"></b>
+				&nbsp;&nbsp;Price:
+				<b ng-bind="row.price"></b>
+			</div>
+		</td>
+	</tr>
+</table>

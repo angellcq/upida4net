@@ -64,7 +64,7 @@ namespace Upida
                     {
                         if (object.Equals(sourceValue, destValue))
                         {
-                            this.MapTo((Dtobase)sourceValue, (Dtobase)destValue);
+                            this.MapTo((Dtobase)sourceValue, (Dtobase)destValue, sourceValue.GetType());
                         }
                         else
                         {
@@ -125,7 +125,7 @@ namespace Upida
 
                 if(null != matchedDestItem)
                 {
-                    this.MapTo(item, matchedDestItem);
+                    this.MapTo(item, matchedDestItem, item.GetType());
                     if (null != destSet)
                     {
                         destSet.Add(matchedDestItem);

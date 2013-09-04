@@ -1,0 +1,75 @@
+@{
+	ViewBag.Title = "New Order";
+	ViewBag.ViewModel = "Order/Create.js";
+	ViewBag.Ctrl = "orderCreateController";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<a ng-href="{{clientsLink}}">CLIENTS</a>&nbsp;|
+<a ng-href="{{indexLink}}">ORDERS</a>&nbsp;|
+<h2>New Order</h2>
+<hr />
+<br />
+<table>
+	<tr>
+		<td>Ship to Country</td>
+		<td>
+			<input type="text" ng-model="shipCountry" />
+			<span class="error" errorkey="ShipCountry"></span>
+		</td>
+	</tr>
+	<tr>
+		<td>Ship to City</td>
+		<td>
+			<input type="text" ng-model="shipCity" />
+			<span class="error" errorkey="ShipCity"></span>
+		</td>
+	</tr>
+	<tr>
+		<td>Ship to Zip</td>
+		<td>
+			<input type="text" ng-model="shipZip" />
+			<span class="error" errorkey="ShipZip"></span>
+		</td>
+	</tr>
+	<tr>
+		<td>Ship to Address</td>
+		<td>
+			<input type="text" ng-model="shipAddress" />
+			<span class="error" errorkey="ShipAddress"></span>
+		</td>
+	</tr>
+	<tr>
+		<td>Total ($)</td>
+		<td>
+			<input type="text" ng-model="total" />
+			<span class="error" errorkey="Total"></span>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2"><hr /></td>
+	</tr>
+	<tr>
+		<td>Products:</td>
+		<td>
+			<div ng-repeat="row in orderItemRows">
+				Product:
+				<select ng-model="row.product" ng-options="product.name for product in products">
+					<option value="">Select ...</option>
+				</select>
+				<span class="error" errorkey="{{'OrderItems['+ $index + '].ProductId'}}"></span>
+				&nbsp;&nbsp;Count:
+				<input ng-model="row.count" />
+				<span class="error" errorkey="{{'OrderItems['+ $index + '].Count'}}"></span>
+				&nbsp;&nbsp;Price:
+				<input ng-model="row.price" />
+				<span class="error" errorkey="{{'OrderItems['+ $index + '].Price'}}"></span>
+				&nbsp;&nbsp;
+				<input type="button" ng-click="removeProduct(row)" value="remove" />
+			</div>
+			<input type="button" ng-click="addProduct()" value="add" />
+			<span class="error" errorkey="OrderItems"></span>
+		</td>
+	</tr>
+</table>
+<hr />
+<input type="button" ng-click="onSave()" value="Save" />

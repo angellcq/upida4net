@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="UpidaExampleAngular" namespace="UpidaExampleAngular.Domain">
+  <class name="OrderItem">
+    <id name="Id">
+      <generator class="native" />
+    </id>
+    <property name="ProductId" />
+    <property name="Count" />
+    <property name="Price" />
+    <many-to-one name="Order" column="order_id" class="Order" />
+  </class>
+</hibernate-mapping>

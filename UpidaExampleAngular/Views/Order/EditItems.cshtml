@@ -1,0 +1,29 @@
+@{
+	ViewBag.Title = "Edit Order Items";
+	ViewBag.ViewModel = "Order/EditItems.js";
+	ViewBag.Ctrl = "orderEditItemsController";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<a ng-href="{{clientsLink}}">CLIENTS</a>&nbsp;|
+<a ng-href="{{indexLink}}">ORDERS</a>&nbsp;|
+<h2>Edit Order Items</h2>
+<br />
+<div ng-repeat="row in orderItemRows">
+	Product:
+	<select ng-model="row.product" ng-options="product.name for product in products">
+		<option value="">Select ...</option>
+	</select>
+	<span class="error" errorkey="{{'OrderItems['+ $index + '].ProductId'}}"></span>
+	&nbsp;&nbsp;Count:
+	<input ng-model="row.count" />
+	<span class="error" errorkey="{{'OrderItems['+ $index + '].Count'}}"></span>
+	&nbsp;&nbsp;Price:
+	<input ng-model="row.price" />
+	<span class="error" errorkey="{{'OrderItems['+ $index + '].Price'}}"></span>
+	&nbsp;&nbsp;
+	<input type="button" ng-click="removeProduct(row)" value="remove" />
+</div>
+<input type="button" ng-click="addProduct()" value="add" />
+<span class="error" errorkey="OrderItems"></span>
+<hr />
+<input type="button" ng-click="onSave()" value="Save" />
