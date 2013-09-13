@@ -196,15 +196,13 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\upida.sqlite" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\..\Source\Upida\Upida.csproj">
       <Project>{4b226445-4cbe-4815-a369-d27c258502f5}</Project>
       <Name>Upida</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\upida.sqlite" />
     <None Include="Domain\Mapping\nhibernate-mapping.xsd">
       <SubType>Designer</SubType>
     </None>
