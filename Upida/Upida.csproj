@@ -79,7 +79,7 @@
     <Compile Include="Validation\ValidationException.cs" />
     <Compile Include="Validation\Validator.cs" />
     <Compile Include="Validation\TypeValidatorBase.cs" />
-    <Compile Include="Validation\TypeValidatorExtentions.cs" />
+    <Compile Include="Validation\TypeConstraintValidatorBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

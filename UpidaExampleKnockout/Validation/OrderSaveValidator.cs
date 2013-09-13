@@ -3,7 +3,7 @@ using UpidaExampleKnockout.Domain;
 
 namespace UpidaExampleKnockout.Validation
 {
-    public class OrderSaveValidator : TypeValidatorBase<Order>
+    public class OrderSaveValidator : HandyValidator<Order>
     {
         public override void Validate()
         {

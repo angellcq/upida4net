@@ -3,7 +3,7 @@ using UpidaExampleAngular.Domain;
 
 namespace UpidaExampleAngular.Validation
 {
-    public class OrderUpdateValidator : TypeValidatorBase<Order>
+    public class OrderUpdateValidator : HandyValidator<Order>
     {
         public override void Validate()
         {

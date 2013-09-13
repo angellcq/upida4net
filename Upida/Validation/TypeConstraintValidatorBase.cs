@@ -4,22 +4,22 @@ using System.Text.RegularExpressions;
 
 namespace Upida.Validation
 {
-    public static class TypeValidatorExtentions
+    public abstract class TypeConstraintValidatorBase<T> : TypeValidatorBase<T>
+        where T : Dtobase
     {
         /// <summary>
         /// Validates if field is assigned some value by parser and calls Stop on failure
         /// </summary>
         /// <param name="msg">failure message</param>
         /// <returns></returns>
-        public static void MustBeAssigned<T>(this TypeValidatorBase<T> validator, string msg)
-            where T : Dtobase
+        public virtual void MustBeAssigned(string msg)
         {
-            if (validator.Stopped) return;
+            if (this.Stopped) return;
 
-            if (!validator.Target.IsFieldAssigned(validator.Name))
+            if (!this.Target.IsFieldAssigned(this.Name))
             {
-                validator.Fail(msg);
-                validator.Stop();
+                this.Fail(msg);
+                this.Stop();
             }
         }
 
@@ -28,14 +28,13 @@ namespace Upida.Validation
         /// </summary>
         /// <param name="msg">failure message</param>
         /// <returns></returns>
-        public static void NotAssigned<T>(this TypeValidatorBase<T> validator, string msg)
-            where T : Dtobase
+        public virtual void NotAssigned(string msg)
         {
-            if (validator.Stopped) return;
+            if (this.Stopped) return;
 
-            if (validator.Target.IsFieldAssigned(validator.Name))
+            if (this.Target.IsFieldAssigned(this.Name))
             {
-                validator.Fail(msg);
+                this.Fail(msg);
             }
         }
 
@@ -44,15 +43,14 @@ namespace Upida.Validation
         /// </summary>
         /// <param name="msg">failure message</param>
         /// <returns></returns>
-        public static void ValidFormat<T>(this TypeValidatorBase<T> validator, string msg)
-            where T : Dtobase
+        public virtual void ValidFormat(string msg)
         {
-            if (validator.Stopped) return;
+            if (this.Stopped) return;
 
-            if (validator.Target.IsFieldWrong(validator.Name))
+            if (this.Target.IsFieldWrong(this.Name))
             {
-                validator.Fail(msg);
-                validator.Stop();
+                this.Fail(msg);
+                this.Stop();
             }
         }
 
@@ -61,14 +59,13 @@ namespace Upida.Validation
         /// </summary>
         /// <param name="msg">failure message</param>
         /// <returns></returns>
-        public static void MustBeNull<T>(this TypeValidatorBase<T> validator, string msg)
-            where T : Dtobase
+        public virtual void MustBeNull(string msg)
         {
-            if (validator.Stopped) return;
+            if (this.Stopped) return;
 
-            if (null != validator.Value)
+            if (null != this.Value)
             {
-                validator.Fail(msg);
+                this.Fail(msg);
             }
         }
 
@@ -78,14 +75,13 @@ namespace Upida.Validation
         /// <param name="value">destination value</param>
         /// <param name="msg">failure message</param>
         /// <returns></returns>
-        public static void MustEqualTo<T>(this TypeValidatorBase<T> validator, object value, string msg)
-            where T : Dtobase
+        public virtual void MustEqualTo(object value, string msg)
         {
-            if (validator.Stopped) return;
+            if (this.Stopped) return;
 
-            if (!value.Equals(validator.Value))
+            if (!value.Equals(this.Value))
             {
-                validator.Fail(msg);
+                this.Fail(msg);
             }
         }
 
@@ -95,14 +91,13 @@ namespace Upida.Validation
         /// <param name="value">destination value</param>
         /// <param name="msg">failure message</param>
         /// <returns></returns>
-        public static void NotEqualTo<T>(this TypeValidatorBase<T> validator, object value, string msg)
-            where T : Dtobase
+        public virtual void NotEqualTo(object value, string msg)
         {
-            if (validator.Stopped) return;
+            if (this.Stopped) return;
 
-            if (value.Equals(validator.Value))
+            if (value.Equals(this.Value))
             {
-                validator.Fail(msg);
+                this.Fail(msg);
             }
         }
 
@@ -111,14 +106,13 @@ namespace Upida.Validation
         /// </summary>
         /// <param name="msg">failure message</param>
         /// <returns></returns>
-        public static void NotNull<T>(this TypeValidatorBase<T> validator, string msg)
-            where T : Dtobase
+        public virtual void NotNull(string msg)
         {
-            if (validator.Stopped) return;
+            if (this.Stopped) return;
 
-            if (null == validator.Value)
+            if (null == this.Value)
             {
-                validator.Fail(msg);
+                this.Fail(msg);
             }
         }
 
@@ -127,14 +121,13 @@ namespace Upida.Validation
         /// </summary>
         /// <param name="msg">failure message</param>
         /// <returns></returns>
-        public static void NotEmpty<T>(this TypeValidatorBase<T> validator, string msg)
-            where T : Dtobase
+        public virtual void NotEmpty(string msg)
         {
-            if (validator.Stopped) return;
+            if (this.Stopped) return;
 
-            if (string.Equals(string.Empty, validator.Value))
+            if (string.Equals(string.Empty, this.Value))
             {
-                validator.Fail(msg);
+                this.Fail(msg);
             }
         }
 
@@ -145,15 +138,14 @@ namespace Upida.Validation
         /// <param name="max"></param>
         /// <param name="msg">failure message</param>
         /// <returns></returns>
-        public static void Length<T>(this TypeValidatorBase<T> validator, int min, int max, string msg)
-            where T : Dtobase
+        public virtual void Length(int min, int max, string msg)
         {
-            if (validator.Stopped) return;
+            if (this.Stopped) return;
 
-            string val = (string)validator.Value;
+            string val = (string)this.Value;
             if (val.Length < min || val.Length > max)
             {
-                validator.Fail(msg);
+                this.Fail(msg);
             }
         }
 
@@ -163,14 +155,13 @@ namespace Upida.Validation
         /// <param name="m"></param>
         /// <param name="msg">failure message</param>
         /// <returns></returns>
-        public static void LessOrEqualTo<T>(this TypeValidatorBase<T> validator, object m, String msg)
-            where T : Dtobase
+        public virtual void LessOrEqualTo(object m, String msg)
         {
-            if (validator.Stopped) return;
+            if (this.Stopped) return;
 
-            if (((IComparable)validator.Value).CompareTo(m) > 0)
+            if (((IComparable)this.Value).CompareTo(m) > 0)
             {
-                validator.Fail(msg);
+                this.Fail(msg);
             }
         }
 
@@ -180,14 +171,13 @@ namespace Upida.Validation
         /// <param name="m"></param>
         /// <param name="msg">failure message</param>
         /// <returns></returns>
-        public static void LessThan<T>(this TypeValidatorBase<T> validator, object m, string msg)
-            where T : Dtobase
+        public virtual void LessThan(object m, string msg)
         {
-            if (validator.Stopped) return;
+            if (this.Stopped) return;
 
-            if (((IComparable)validator.Value).CompareTo(m) >= 0)
+            if (((IComparable)this.Value).CompareTo(m) >= 0)
             {
-                validator.Fail(msg);
+                this.Fail(msg);
             }
         }
 
@@ -197,14 +187,13 @@ namespace Upida.Validation
         /// <param name="m"></param>
         /// <param name="msg">failure message</param>
         /// <returns></returns>
-        public static void GreaterOrEqualTo<T>(this TypeValidatorBase<T> validator, object m, string msg)
-            where T : Dtobase
+        public virtual void GreaterOrEqualTo(object m, string msg)
         {
-            if (validator.Stopped) return;
+            if (this.Stopped) return;
 
-            if (((IComparable)validator.Value).CompareTo(m) < 0)
+            if (((IComparable)this.Value).CompareTo(m) < 0)
             {
-                validator.Fail(msg);
+                this.Fail(msg);
             }
         }
 
@@ -214,14 +203,13 @@ namespace Upida.Validation
         /// <param name="m"></param>
         /// <param name="msg">failure message</param>
         /// <returns></returns>
-        public static void GreaterThan<T>(this TypeValidatorBase<T> validator, object m, String msg)
-            where T : Dtobase
+        public virtual void GreaterThan(object m, String msg)
         {
-            if (validator.Stopped) return;
+            if (this.Stopped) return;
 
-            if (((IComparable)validator.Value).CompareTo(m) <= 0)
+            if (((IComparable)this.Value).CompareTo(m) <= 0)
             {
-                validator.Fail(msg);
+                this.Fail(msg);
             }
         }
 
@@ -232,15 +220,14 @@ namespace Upida.Validation
         /// <param name="max">max value</param>
         /// <param name="msg">failure message</param>
         /// <returns></returns>
-        public static void Size<T>(this TypeValidatorBase<T> validator, int min, int max, string msg)
-            where T : Dtobase
+        public virtual void Size(int min, int max, string msg)
         {
-            if (validator.Stopped) return;
+            if (this.Stopped) return;
 
-            ICollection collection = (ICollection)validator.Value;
+            ICollection collection = (ICollection)this.Value;
             if (collection.Count < min || collection.Count > max)
             {
-                validator.Fail(msg);
+                this.Fail(msg);
             }
         }
 
@@ -250,15 +237,14 @@ namespace Upida.Validation
         /// <param name="expr">regular expression</param>
         /// <param name="msg">failure message</param>
         /// <returns></returns>
-        public static void Regexpr<T>(this TypeValidatorBase<T> validator, string expr, string msg)
-            where T : Dtobase
+        public virtual void Regexp(string expr, string msg)
         {
-            if (validator.Stopped) return;
+            if (this.Stopped) return;
 
-            Match match = Regex.Match((string)validator.Value, expr, RegexOptions.IgnoreCase);
+            Match match = Regex.Match((string)this.Value, expr, RegexOptions.IgnoreCase);
             if (!match.Success)
             {
-                validator.Fail(msg);
+                this.Fail(msg);
             }
         }
     }
