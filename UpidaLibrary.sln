@@ -1,13 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Upida", "Upida\Upida.csproj", "{4B226445-4CBE-4815-A369-D27C258502F5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Upida", "Source\Upida\Upida.csproj", "{4B226445-4CBE-4815-A369-D27C258502F5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UpidaExampleKnockout", "UpidaExampleKnockout\UpidaExampleKnockout.csproj", "{77BB7116-68C7-4820-9334-F7D11D46D55B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UpidaExampleKnockout", "Examples\UpidaExampleKnockout\UpidaExampleKnockout.csproj", "{77BB7116-68C7-4820-9334-F7D11D46D55B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UpidaExampleStraight", "UpidaExampleStraight\UpidaExampleStraight.csproj", "{790EF11E-F7AB-4C97-8E0A-0EA062F1E33E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UpidaExampleStraight", "Examples\UpidaExampleStraight\UpidaExampleStraight.csproj", "{790EF11E-F7AB-4C97-8E0A-0EA062F1E33E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UpidaExampleAngular", "UpidaExampleAngular\UpidaExampleAngular.csproj", "{6B6B56A4-AF5A-412D-A38C-AA08D269DB0C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UpidaExampleAngular", "Examples\UpidaExampleAngular\UpidaExampleAngular.csproj", "{6B6B56A4-AF5A-412D-A38C-AA08D269DB0C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
