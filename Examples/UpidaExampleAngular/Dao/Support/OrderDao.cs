@@ -5,7 +5,7 @@ using UpidaExampleAngular.Domain;
 
 namespace UpidaExampleAngular.Dao.Support
 {
-    public class OrderDao : DaoBase<Order>, IOrderDao
+    public class OrderDao : Daobase<Order>, IOrderDao
     {
         public OrderDao(ISessionFactory sessionFactory)
             : base(sessionFactory)

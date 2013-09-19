@@ -3,7 +3,7 @@ using UpidaExampleKnockout.Domain;
 
 namespace UpidaExampleKnockout.Dao
 {
-    public interface IClientDao : IDaoBase<Client>
+    public interface IClientDao : IDaobase<Client>
     {
         IList<Client> GetAll();
     }

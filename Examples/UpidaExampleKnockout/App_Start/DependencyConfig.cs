@@ -9,7 +9,6 @@ using System.Web.Mvc;
 using Upida;
 using Upida.Validation;
 using UpidaExampleKnockout.Business;
-using UpidaExampleKnockout.Business.Util;
 using UpidaExampleKnockout.Dao;
 using UpidaExampleKnockout.Dao.Support;
 using UpidaExampleKnockout.Validation;
@@ -27,7 +26,6 @@ namespace UpidaExampleKnockout
             builder.RegisterFilterProvider();
 
             builder.Register((context) => new Configuration().Configure().BuildSessionFactory()).As<ISessionFactory>().SingleInstance();
-            builder.RegisterType<TransactionFactory>().As<TransactionFactory>().SingleInstance();
             builder.RegisterType<Mapper>().As<IMapper>().InstancePerDependency();
             builder.RegisterType<JsonParser>().As<IJsonParser>().InstancePerDependency();
             builder.RegisterType<Validator>().As<IValidator>().InstancePerDependency();

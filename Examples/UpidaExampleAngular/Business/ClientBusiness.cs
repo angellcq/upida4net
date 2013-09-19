@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
+using NHibernate;
 using Upida;
-using UpidaExampleAngular.Business.Util;
 using UpidaExampleAngular.Dao;
 using UpidaExampleAngular.Domain;
 
@@ -10,8 +10,8 @@ namespace UpidaExampleAngular.Business
     {
         private IClientDao clientDao;
 
-        public ClientBusiness(TransactionFactory transactionFactory, IMapper mapper, IClientDao clientDao)
-            : base(transactionFactory, mapper)
+        public ClientBusiness( IMapper mapper, IClientDao clientDao)
+            : base(mapper)
         {
             this.clientDao = clientDao;
         }
@@ -24,7 +24,7 @@ namespace UpidaExampleAngular.Business
 
         public void Save(Client item)
         {
-            using (Transaction tx = this.transactionFactory.Start())
+            using (ITransaction tx = this.clientDao.BeginTransaction())
             {
                 this.mapper.Map(item);
                 this.clientDao.Save(item);

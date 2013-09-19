@@ -3,7 +3,7 @@ using UpidaExampleAngular.Domain;
 
 namespace UpidaExampleAngular.Dao
 {
-    public interface IOrderDao : IDaoBase<Order>
+    public interface IOrderDao : IDaobase<Order>
     {
         IList<Order> GetByClient(int clientId);
         Order GetById(int id);

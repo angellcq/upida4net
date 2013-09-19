@@ -5,7 +5,7 @@ using UpidaExampleStraight.Domain;
 
 namespace UpidaExampleStraight.Dao.Support
 {
-    public class OrderDao : DaoBase<Order>, IOrderDao
+    public class OrderDao : Daobase<Order>, IOrderDao
     {
         public OrderDao(ISessionFactory sessionFactory)
             : base(sessionFactory)

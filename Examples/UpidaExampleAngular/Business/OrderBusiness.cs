@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using Upida;
-using UpidaExampleAngular.Business.Util;
 using UpidaExampleAngular.Dao;
 using UpidaExampleAngular.Domain;
 
@@ -11,8 +10,8 @@ namespace UpidaExampleAngular.Business
     {
         private IOrderDao orderDao;
 
-        public OrderBusiness(TransactionFactory transactionFactory, IMapper mapper, IOrderDao orderDao)
-            : base(transactionFactory, mapper)
+        public OrderBusiness(IMapper mapper, IOrderDao orderDao)
+            : base(mapper)
         {
             this.orderDao = orderDao;
         }
@@ -37,7 +36,7 @@ namespace UpidaExampleAngular.Business
 
         public void Save(Order item)
         {
-            using (var tx = this.transactionFactory.Start())
+            using (var tx = this.orderDao.BeginTransaction())
             {
                 this.mapper.Map(item);
                 item.CreatedOn = DateTime.Now;
@@ -48,7 +47,7 @@ namespace UpidaExampleAngular.Business
 
         public void Update(Order item)
         {
-            using (var tx = this.transactionFactory.Start())
+            using (var tx = this.orderDao.BeginTransaction())
             {
                 Order existing = this.orderDao.Load(item.Id);
                 this.mapper.MapTo(item, existing);

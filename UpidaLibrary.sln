@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UpidaExampleStraight", "Exa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UpidaExampleAngular", "Examples\UpidaExampleAngular\UpidaExampleAngular.csproj", "{6B6B56A4-AF5A-412D-A38C-AA08D269DB0C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyClients", "Examples\MyClients\MyClients.csproj", "{AF865872-4CCB-4C40-BCB1-2C164ECD8191}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +33,10 @@ Global
 		{6B6B56A4-AF5A-412D-A38C-AA08D269DB0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6B6B56A4-AF5A-412D-A38C-AA08D269DB0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6B6B56A4-AF5A-412D-A38C-AA08D269DB0C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AF865872-4CCB-4C40-BCB1-2C164ECD8191}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF865872-4CCB-4C40-BCB1-2C164ECD8191}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF865872-4CCB-4C40-BCB1-2C164ECD8191}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF865872-4CCB-4C40-BCB1-2C164ECD8191}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

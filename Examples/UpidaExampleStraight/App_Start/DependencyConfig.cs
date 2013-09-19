@@ -8,7 +8,6 @@ using System.Web.Mvc;
 using Upida;
 using Upida.Validation;
 using UpidaExampleStraight.Business;
-using UpidaExampleStraight.Business.Util;
 using UpidaExampleStraight.Dao;
 using UpidaExampleStraight.Dao.Support;
 using UpidaExampleStraight.Validation;
@@ -25,7 +24,6 @@ namespace UpidaExampleStraight
             builder.RegisterFilterProvider();
 
             builder.Register((context) => new Configuration().Configure().BuildSessionFactory()).As<ISessionFactory>().SingleInstance();
-            builder.RegisterType<TransactionFactory>().As<TransactionFactory>().SingleInstance();
             builder.RegisterType<Mapper>().As<IMapper>().InstancePerDependency();
             builder.RegisterType<FormParser>().As<IFormParser>().InstancePerDependency();
             builder.RegisterType<Validator>().As<IValidator>().InstancePerDependency();

@@ -1,8 +1,9 @@
 ﻿using System;
+using NHibernate;
 
 namespace UpidaExampleStraight.Dao
 {
-    public interface IDaoBase<T>
+    public interface IDaobase<T>
     {
         void Save(T entity);
         void Update(T entity);
@@ -10,5 +11,6 @@ namespace UpidaExampleStraight.Dao
         void Delete(T entity);
         T Get(object id);
         T Load(object id);
+        ITransaction BeginTransaction();
     }
 }

@@ -4,7 +4,7 @@ using UpidaExampleStraight.Domain;
 
 namespace UpidaExampleStraight.Dao.Support
 {
-    public class ClientDao : DaoBase<Client>, IClientDao
+    public class ClientDao : Daobase<Client>, IClientDao
     {
         public ClientDao(ISessionFactory sessionFactory)
             : base(sessionFactory)

@@ -4,12 +4,12 @@ using System;
 
 namespace UpidaExampleKnockout.Dao.Support
 {
-    public class DaoBase<T> : IDaoBase<T>
+    public class Daobase<T> : IDaobase<T>
         where T : class
     {
         private readonly ISessionFactory sessionFactory;
 
-        public DaoBase(ISessionFactory sessionFactory)
+        public Daobase(ISessionFactory sessionFactory)
         {
             this.sessionFactory = sessionFactory;
         }
@@ -61,6 +61,11 @@ namespace UpidaExampleKnockout.Dao.Support
         public T Load(object id)
         {
             return this.Session.Load<T>(id);
+        }
+
+        public ITransaction BeginTransaction()
+        {
+            return this.Session.BeginTransaction();
         }
     }
 }

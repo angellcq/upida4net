@@ -2,7 +2,7 @@
 
 namespace UpidaExampleStraight.Dao
 {
-    public interface IOrderItemDao : IDaoBase<OrderItem>
+    public interface IOrderItemDao : IDaobase<OrderItem>
     {
     }
 }
