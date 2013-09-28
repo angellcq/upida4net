@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using MyClients.Domain;
 using NHibernate;
+using NHibernate.Criterion;
 
 namespace MyClients.Dao.Support
 {
@@ -16,12 +17,18 @@ namespace MyClients.Dao.Support
 
         public IList<Client> GetAll()
         {
-            throw new NotImplementedException();
+            return this.Session
+                .CreateCriteria<Client>()
+                .List<Client>();
         }
 
         public Client GetById(int id)
         {
-            throw new NotImplementedException();
+            return this.Session
+                .CreateCriteria<Client>()
+                .Add(Restrictions.Eq("Id", id))
+                .SetFetchMode("Logins", FetchMode.Join)
+                .UniqueResult<Client>();
         }
     }
 }

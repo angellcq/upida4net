@@ -21,7 +21,7 @@ namespace MyClients.Validation
             this.Required("Logins", this.Target.Logins);
             this.Size(1, 5, Errors.NUMBER_OF_LOGINS);
             this.Stop();
-            this.NestedList<Login>(Groups.SAVE, null);
+            this.NestedList<Login>(Groups.MERGE, null);
         }
     }
 }

@@ -65,8 +65,7 @@ namespace Upida
                                 PropertyMeta.ClassType.CustomTypeCollection == propertyDef.PropertyClassType)
                         {
 
-                            if (propertyDef.Annotation.HasNested &&
-                                this.HasChildren(propertyPath + "[", keys))
+                            if (this.HasChildren(propertyPath + "[", keys))
                             {
                                 IList list = (IList)UpidaContext.Current().BuildList(propertyDef.NestedType);
                                 int index = 0, attempt = 0;

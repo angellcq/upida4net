@@ -6,6 +6,7 @@ using iesi = Iesi.Collections.Generic;
 namespace MyClients.Domain
 {
     [ValidateWith(typeof(ClientSaveValidator), Groups.SAVE)]
+    [ValidateWith(typeof(ClientUpdateValidator), Groups.UPDATE)]
     public class Client : Dtobase
     {
         [Dto(Levels.ID)]

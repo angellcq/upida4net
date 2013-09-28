@@ -1,0 +1,16 @@
+﻿<!DOCTYPE html>
+<html ng-app="app">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="robots" content="noindex, nofollow" />
+    <script type="text/javascript" src="/Resources/js/upida.utils.angular.js"></script>
+    <script type="text/javascript" src="/Resources/js/angular.js"></script>
+    <link href="/Resources/css/style.css" rel="stylesheet"/>
+    <script type="text/javascript" src="@string.Concat("/Resources/js/vm/", ViewBag.ViewModel)"></script>
+    <title>@ViewBag.Title</title>
+</head>
+<body ng-controller="@ViewBag.Ctrl" ng-init="init()">
+@RenderBody()
+</body>
+</html>

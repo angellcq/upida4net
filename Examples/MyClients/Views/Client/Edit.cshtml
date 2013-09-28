@@ -1,0 +1,73 @@
+@{
+	ViewBag.Title = "Edit Order (Shipping only)";
+	ViewBag.ViewModel = "Order/Edit.js";
+	ViewBag.Ctrl = "orderEditController";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<a ng-href="{{indexLink}}">ALL CLIENTS</a>|
+<h2>New Client</h2>
+<hr />
+<br />
+<table>
+	<tr>
+		<td>Name</td>
+		<td>
+			<input type="text" ng-model="name" />
+			<span class="error" errorkey="{{'Name'}}"></span>
+		</td>
+	</tr>
+	<tr>
+		<td>Last name</td>
+		<td>
+			<input type="text" ng-model="lastname" />
+			<span class="error" errorkey="{{'Lastname'}}"></span>
+		</td>
+	</tr>
+	<tr>
+		<td>Age</td>
+		<td>
+			<input type="text" ng-model="age" />
+			<span class="error" errorkey="{{'Age'}}"></span>
+		</td>
+	</tr>
+	<tr>
+		<td>Logins</td>
+		<td>
+			<table>
+				<thead>
+					<tr>
+						<th>Login</th>
+						<th>Password</th>
+						<th>Enabled</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="row in loginRows">
+						<td>
+							<input type="text" ng-model="row.name" />
+							<span class="error" errorkey="{{'Logins['+ $index + '].Name'}}"></span>
+						</td>
+						<td>
+							<input type="text" ng-model="row.password" />
+							<span class="error" errorkey="{{'Logins['+ $index + '].Password'}}"></span>
+						</td>
+						<td>
+							<input type="checkbox" ng-model="row.enabled" />
+							<span class="error" errorkey="{{'Logins['+ $index + '].Enabled'}}"></span>
+						</td>
+						<td>
+							<input type="button" ng-click="onRemoveLoginClick(row)" value="Delete" />
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<div style="padding-bottom: 0.5em;">
+				<input type="button" ng-click="onAddLoginClick()" value="Add" />
+				<span class="error" errorkey="{{'Logins'}}"></span>
+			</div>
+		</td>
+	</tr>
+</table>
+<hr />
+<input type="button" ng-click="onSave()" value="Save" />

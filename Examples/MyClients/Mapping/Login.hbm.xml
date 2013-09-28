@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="MyClients" namespace="MyClients.Domain">
+  <class name="Login">
+    <id name="Id">
+      <generator class="identity" />
+    </id>
+    <property name="Name" />
+    <property name="Password" />
+    <property name="Enabled" />
+    <many-to-one name="Client" column="client_id" class="Client" />
+  </class>
+</hibernate-mapping>

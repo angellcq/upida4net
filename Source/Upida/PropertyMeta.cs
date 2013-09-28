@@ -98,13 +98,15 @@ namespace Upida
             if(ClassType.None == this.propertyClassType)
             {
                 this.propertyClassType = ClassType.Value;
-                if (this.annotation.HasNested &&
-                    typeof(Dtobase).IsAssignableFrom(this.propertyClass))
+                if (typeof(string).IsAssignableFrom(this.propertyClass))
+                {
+                    this.propertyClassType = ClassType.Value;
+                }
+                else if (typeof(Dtobase).IsAssignableFrom(this.propertyClass))
                 {
                     this.propertyClassType = this.annotation.IsCustomType ? ClassType.CustomType : ClassType.Class;
                 }
-                else if (this.annotation.HasNested &&
-                    typeof(IEnumerable).IsAssignableFrom(this.propertyClass))
+                else if (typeof(IEnumerable).IsAssignableFrom(this.propertyClass))
                 {
                     this.propertyClassType = this.annotation.IsCustomType ? ClassType.CustomTypeCollection : ClassType.Collection;
                 }

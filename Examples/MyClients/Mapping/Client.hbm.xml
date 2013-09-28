@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="UpidaExampleAngular" namespace="UpidaExampleAngular.Domain">
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="MyClients" namespace="MyClients.Domain">
   <class name="Client">
     <id name="Id">
-      <generator class="native" />
+      <generator class="identity" />
     </id>
     <property name="Name" />
-    <set name="Orders" table="Orders">
+    <property name="Lastname" />
+    <property name="Age" />
+    <set name="Logins" table="logins" inverse="true" cascade="all,delete-orphan">
       <key column="client_id" />
-      <one-to-many class="Order" />
+      <one-to-many class="Login" />
     </set>
   </class>
 </hibernate-mapping>

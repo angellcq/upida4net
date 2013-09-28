@@ -44,10 +44,5 @@ namespace Upida
             get { return this.parser; }
             set { this.parser = value; }
         }
-
-        public bool HasNested
-        {
-            get { return byte.MaxValue != this.nested; }
-        }
     }
 }

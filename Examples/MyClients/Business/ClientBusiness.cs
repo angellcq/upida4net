@@ -3,17 +3,20 @@ using MyClients.Dao;
 using MyClients.Domain;
 using NHibernate;
 using Upida;
+using Upida.Validation;
 
 namespace MyClients.Business
 {
     public class ClientBusiness
     {
         private IMapper mapper;
+        private IValidator validator;
         private IClientDao clientDao;
 
-        public ClientBusiness(IMapper mapper, IClientDao clientDao)
+        public ClientBusiness(IMapper mapper, IValidator validator, IClientDao clientDao)
         {
             this.mapper = mapper;
+            this.validator = validator;
             this.clientDao = clientDao;
         }
 
@@ -31,6 +34,7 @@ namespace MyClients.Business
 
         public void Save(Client item)
         {
+            this.validator.AssertValid(item, Groups.SAVE);
             using (ITransaction tx = this.clientDao.BeginTransaction())
             {
                 this.mapper.Map(item);
@@ -41,6 +45,7 @@ namespace MyClients.Business
 
         public void Update(Client item)
         {
+            this.validator.AssertValid(item, Groups.UPDATE);
             using (ITransaction tx = this.clientDao.BeginTransaction())
             {
                 Client existing = this.clientDao.GetById(item.Id.Value);
