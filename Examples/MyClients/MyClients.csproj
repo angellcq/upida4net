@@ -156,7 +156,9 @@
     <Content Include="Resources\js\vm\Client\Create.js" />
     <Content Include="Resources\js\vm\Client\Edit.js" />
     <Content Include="Resources\js\vm\Client\Index.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>

@@ -1,7 +1,7 @@
 @{
-	ViewBag.Title = "Edit Order (Shipping only)";
-	ViewBag.ViewModel = "Order/Edit.js";
-	ViewBag.Ctrl = "orderEditController";
+	ViewBag.Title = "Edit Client";
+	ViewBag.ViewModel = "Client/Edit.js";
+	ViewBag.Ctrl = "clientEditController";
 	Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <a ng-href="{{indexLink}}">ALL CLIENTS</a>|
@@ -9,6 +9,12 @@
 <hr />
 <br />
 <table>
+	<tr>
+		<td>ID</td>
+		<td>
+			<span ng-bind="id"></span>
+		</td>
+	</tr>
 	<tr>
 		<td>Name</td>
 		<td>
@@ -44,6 +50,9 @@
 				</thead>
 				<tbody>
 					<tr ng-repeat="row in loginRows">
+						<td>
+							<span ng-bind="row.id"></span>
+						</td>
 						<td>
 							<input type="text" ng-model="row.name" />
 							<span class="error" errorkey="{{'Logins['+ $index + '].Name'}}"></span>

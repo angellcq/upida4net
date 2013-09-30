@@ -8,12 +8,12 @@ namespace MyClients.Domain
 {
     [ValidateWith(typeof(LoginSaveValidator), Groups.SAVE)]
     [ValidateWith(typeof(LoginMergeValidator), Groups.MERGE)]
-    public class Login : Dtobase
+    public class Login : Dtobase, IChild
     {
         [Dto(Levels.ID)]
         public virtual int? Id { get; set; }
 
-        [Dto(Levels.GRID)]
+        [Dto(Levels.LOOKUP)]
         public virtual string Name { get; set; }
 
         [Dto(Levels.GRID)]
@@ -29,6 +29,14 @@ namespace MyClients.Domain
         {
             if (!(obj is Login)) return false;
             return Util.AreSame(this.Id, (obj as Login).Id);
+        }
+
+        public virtual void ConnectToParent(object parent)
+        {
+            if (parent is Client)
+            {
+                this.Client = parent as Client;
+            }
         }
     }
 }

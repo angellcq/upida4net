@@ -26,11 +26,11 @@
 		<td ng-bind="row.age"></td>
 		<td>
 			<div ng-repeat="login in row.logins">
-				<span ng-bind="row.login"></span><br />
+				<span ng-bind="login"></span><br />
 			</div>
 		</td>
 		<td>
-			<a data-bind="attr: { 'href': editLink }">Edit</a>
+			<a ng-href="{{row.editLink}}">Edit</a>
 		</td>
 	</tr>
 </tbody>

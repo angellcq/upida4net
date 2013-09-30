@@ -21,7 +21,7 @@ namespace MyClients.Domain
         [Dto(Levels.GRID)]
         public virtual int? Age { get; set; }
 
-        [Dto(Levels.FULL, Nested = Levels.ID)]
+        [Dto(Levels.GRID, Nested = Levels.LOOKUP)]
         public virtual iesi.ISet<Login> Logins { get; set; }
 
         public override bool Equals(object obj)

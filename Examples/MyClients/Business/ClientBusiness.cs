@@ -23,7 +23,7 @@ namespace MyClients.Business
         public Client GetById(int id)
         {
             Client item = this.clientDao.GetById(id);
-            return this.mapper.Out(item, Levels.FULL);
+            return this.mapper.Out(item, Levels.DEEP);
         }
 
         public IList<Client> GetAll()
