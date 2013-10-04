@@ -20,7 +20,7 @@ namespace MyClients.Domain
         public virtual string Password { get; set; }
 
         [Dto(Levels.GRID)]
-        public virtual string Enabled { get; set; }
+        public virtual bool Enabled { get; set; }
 
         [Dto(Levels.NEVER)]
         public virtual Client Client { get; set; }
