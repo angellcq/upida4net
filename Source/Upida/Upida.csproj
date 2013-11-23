@@ -72,15 +72,15 @@
     <Compile Include="Validation\AspMvcTypeValidatorFactory.cs" />
     <Compile Include="Validation\FailResponse.cs" />
     <Compile Include="Validation\Failure.cs" />
-    <Compile Include="Validation\ITypeValidatorFactory.cs" />
+    <Compile Include="Validation\IValidatorFactory.cs" />
     <Compile Include="Validation\ValidateWithAttribute.cs" />
     <Compile Include="Validation\Groups.cs" />
-    <Compile Include="Validation\IValidator.cs" />
-    <Compile Include="Validation\ITypeValidatorBase.cs" />
+    <Compile Include="Validation\IValidationContext.cs" />
+    <Compile Include="Validation\IValidatorBase.cs" />
     <Compile Include="Validation\ValidationException.cs" />
-    <Compile Include="Validation\Validator.cs" />
-    <Compile Include="Validation\TypeValidatorBase.cs" />
-    <Compile Include="Validation\TypeConstraintValidatorBase.cs" />
+    <Compile Include="Validation\ValidationContext.cs" />
+    <Compile Include="Validation\ValidatorBase.cs" />
+    <Compile Include="Validation\ConstraintValidator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

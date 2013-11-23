@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Upida.Validation
 {
-    public interface ITypeValidatorBase
+    public interface IValidatorBase
     {
         bool IsValidField { get; }
         bool IsValid { get; }

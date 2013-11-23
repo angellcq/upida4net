@@ -167,8 +167,19 @@
     <EmbeddedResource Include="Domain\Mapping\OrderItem.hbm.xml" />
     <Content Include="Global.asax" />
     <Content Include="Resources\css\style.css" />
-    <Content Include="Resources\js\angular.js" />
-    <Content Include="Resources\js\upida.utils.angular.js" />
+    <Content Include="Resources\js\controllers\clientCreateController.js" />
+    <Content Include="Resources\js\controllers\clientListController.js" />
+    <Content Include="Resources\js\controllers\orderCreateController.js" />
+    <Content Include="Resources\js\controllers\orderEditController.js" />
+    <Content Include="Resources\js\controllers\orderItemsEditController.js" />
+    <Content Include="Resources\js\controllers\orderListController.js" />
+    <Content Include="Resources\js\controllers\orderViewController.js" />
+    <Content Include="Resources\js\filters\datetime.js" />
+    <Content Include="Resources\js\filters\idtext.js" />
+    <Content Include="Resources\js\app.js" />
+    <Content Include="Resources\js\vendor\angular-route.js" />
+    <Content Include="Resources\js\vendor\angular.js" />
+    <Content Include="Resources\js\vendor\upida.angular.js" />
     <Content Include="Resources\js\vm\Client\Create.js" />
     <Content Include="Resources\js\vm\Client\Index.js" />
     <Content Include="Resources\js\vm\Order\Create.js" />
@@ -200,15 +211,19 @@
       <SubType>Designer</SubType>
     </None>
     <Content Include="Views\Client\Create.cshtml" />
-    <Content Include="Views\Client\Index.cshtml" />
+    <Content Include="Views\Client\List.cshtml" />
     <Content Include="Views\Order\Create.cshtml" />
     <Content Include="Views\Order\Edit.cshtml" />
     <Content Include="Views\Order\EditItems.cshtml" />
-    <Content Include="Views\Order\Index.cshtml" />
+    <Content Include="Views\Order\List.cshtml" />
     <Content Include="Views\Order\Show.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
     <None Include="Properties\PublishProfiles\upidaangular - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\upidaangular - Web Deploy.pubxml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\Notfound.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\js\directives\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

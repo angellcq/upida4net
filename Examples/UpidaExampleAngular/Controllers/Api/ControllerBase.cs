@@ -5,9 +5,9 @@ namespace UpidaExampleAngular.Controllers.Api
 {
     public class ControllerBase : ApiController
     {
-        protected IValidator validator;
+        protected IValidationContext validator;
 
-        public ControllerBase(IValidator validator)
+        public ControllerBase(IValidationContext validator)
         {
             this.validator = validator;
         }

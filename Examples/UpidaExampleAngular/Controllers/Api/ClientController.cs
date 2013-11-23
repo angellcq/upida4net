@@ -9,7 +9,7 @@ namespace UpidaExampleAngular.Controllers.Api
     {
         private readonly ClientBusiness clientBusiness;
 
-        public ClientController(IValidator validator, ClientBusiness clientBusiness)
+        public ClientController(IValidationContext validator, ClientBusiness clientBusiness)
             : base(validator)
         {
             this.clientBusiness = clientBusiness;

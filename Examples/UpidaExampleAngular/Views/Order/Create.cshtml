@@ -1,48 +1,43 @@
-@{
-	ViewBag.Title = "New Order";
-	ViewBag.ViewModel = "Order/Create.js";
-	ViewBag.Ctrl = "orderCreateController";
-	Layout = "~/Views/Shared/_Layout.cshtml";
-}
-<a ng-href="{{clientsLink}}">CLIENTS</a>&nbsp;|
-<a ng-href="{{indexLink}}">ORDERS</a>&nbsp;|
+<a ng-href="#/client/list">CLIENTS</a>&nbsp;|
+<a ng-href="#/order/list/{{clientId}}">ORDERS</a>
 <h2>New Order</h2>
-<hr />
 <br />
+<span class="error" mainerror></span>
+<hr />
 <table>
 	<tr>
 		<td>Ship to Country</td>
 		<td>
 			<input type="text" ng-model="shipCountry" />
-			<span class="error" errorkey="ShipCountry"></span>
+			<span class="error" errorkey="shipCountry"></span>
 		</td>
 	</tr>
 	<tr>
 		<td>Ship to City</td>
 		<td>
 			<input type="text" ng-model="shipCity" />
-			<span class="error" errorkey="ShipCity"></span>
+			<span class="error" errorkey="shipCity"></span>
 		</td>
 	</tr>
 	<tr>
 		<td>Ship to Zip</td>
 		<td>
 			<input type="text" ng-model="shipZip" />
-			<span class="error" errorkey="ShipZip"></span>
+			<span class="error" errorkey="shipZip"></span>
 		</td>
 	</tr>
 	<tr>
 		<td>Ship to Address</td>
 		<td>
 			<input type="text" ng-model="shipAddress" />
-			<span class="error" errorkey="ShipAddress"></span>
+			<span class="error" errorkey="shipAddress"></span>
 		</td>
 	</tr>
 	<tr>
 		<td>Total ($)</td>
 		<td>
 			<input type="text" ng-model="total" />
-			<span class="error" errorkey="Total"></span>
+			<span class="error" errorkey="total"></span>
 		</td>
 	</tr>
 	<tr>
@@ -56,18 +51,18 @@
 				<select ng-model="row.product" ng-options="product.name for product in products">
 					<option value="">Select ...</option>
 				</select>
-				<span class="error" errorkey="{{'OrderItems['+ $index + '].ProductId'}}"></span>
+				<span class="error" errorkey="{{'orderItems['+ $index + '].productId'}}"></span>
 				&nbsp;&nbsp;Count:
 				<input ng-model="row.count" />
-				<span class="error" errorkey="{{'OrderItems['+ $index + '].Count'}}"></span>
+				<span class="error" errorkey="{{'orderItems['+ $index + '].count'}}"></span>
 				&nbsp;&nbsp;Price:
 				<input ng-model="row.price" />
-				<span class="error" errorkey="{{'OrderItems['+ $index + '].Price'}}"></span>
+				<span class="error" errorkey="{{'orderItems['+ $index + '].price'}}"></span>
 				&nbsp;&nbsp;
 				<input type="button" ng-click="removeProduct(row)" value="remove" />
 			</div>
 			<input type="button" ng-click="addProduct()" value="add" />
-			<span class="error" errorkey="OrderItems"></span>
+			<span class="error" errorkey="orderItems"></span>
 		</td>
 	</tr>
 </table>

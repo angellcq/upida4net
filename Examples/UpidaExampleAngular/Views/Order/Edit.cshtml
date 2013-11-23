@@ -1,47 +1,43 @@
-@{
-	ViewBag.Title = "Edit Order (Shipping only)";
-	ViewBag.ViewModel = "Order/Edit.js";
-	ViewBag.Ctrl = "orderEditController";
-	Layout = "~/Views/Shared/_Layout.cshtml";
-}
-<a ng-href="{{clientsLink}}">CLIENTS</a>&nbsp;|
-<a ng-href="{{indexLink}}">ORDERS</a>&nbsp;|
+<a ng-href="#/client/list">CLIENTS</a>&nbsp;|
+<a ng-href="#/order/list/{{clientId}}">ORDERS</a>
 <h2>Edit Order (Shipping only)</h2>
+<br />
+<span class="error" mainerror></span>
 <br />
 <table>
 	<tr>
 		<td>Ship to Country</td>
 		<td>
 			<input type="text" ng-model="shipCountry" />
-			<span class="error" errorkey="ShipCountry"></span>
+			<span class="error" errorkey="shipCountry"></span>
 		</td>
 	</tr>
 	<tr>
 		<td>Ship to City</td>
 		<td>
 			<input type="text" ng-model="shipCity" />
-			<span class="error" errorkey="ShipCity"></span>
+			<span class="error" errorkey="shipCity"></span>
 		</td>
 	</tr>
 	<tr>
 		<td>Ship to Zip</td>
 		<td>
 			<input type="text" ng-model="shipZip" />
-			<span class="error" errorkey="ShipZip"></span>
+			<span class="error" errorkey="shipZip"></span>
 		</td>
 	</tr>
 	<tr>
 		<td>Ship to Address</td>
 		<td>
 			<input type="text" ng-model="shipAddress" />
-			<span class="error" errorkey="ShipAddress"></span>
+			<span class="error" errorkey="shipAddress"></span>
 		</td>
 	</tr>
 	<tr>
 		<td>Total ($)</td>
 		<td>
 			<input type="text" ng-model="total" />
-			<span class="error" errorkey="Total"></span>
+			<span class="error" errorkey="total"></span>
 		</td>
 	</tr>
 </table>

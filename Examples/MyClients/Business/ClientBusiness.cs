@@ -10,10 +10,10 @@ namespace MyClients.Business
     public class ClientBusiness
     {
         private IMapper mapper;
-        private IValidator validator;
+        private IValidationContext validator;
         private IClientDao clientDao;
 
-        public ClientBusiness(IMapper mapper, IValidator validator, IClientDao clientDao)
+        public ClientBusiness(IMapper mapper, IValidationContext validator, IClientDao clientDao)
         {
             this.mapper = mapper;
             this.validator = validator;

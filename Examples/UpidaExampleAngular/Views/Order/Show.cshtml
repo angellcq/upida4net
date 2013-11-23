@@ -1,14 +1,9 @@
-@{
-	ViewBag.Title = "View Order";
-	ViewBag.ViewModel = "Order/Show.js";
-	ViewBag.Ctrl = "orderShowController";
-	Layout = "~/Views/Shared/_Layout.cshtml";
-}
-<a ng-href="{{clientsLink}}">CLIENTS</a>&nbsp;|
-<a ng-href="{{indexLink}}">ORDERS</a>&nbsp;|
+<a ng-href="#/client/list">CLIENTS</a>&nbsp;|
+<a ng-href="#/order/list/{{clientId}}">ORDERS</a>
 <h2>View Order</h2>
-<hr />
 <br />
+<span class="error" mainerror></span>
+<hr />
 <table>
 	<tr>
 		<td>
