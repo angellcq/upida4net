@@ -4,9 +4,19 @@ using System.Text.RegularExpressions;
 
 namespace Upida.Validation
 {
-	public abstract class TypeConstraintValidatorBase<T> : ValidatorBase<T>
+	public abstract class ConstraintValidator<T> : ValidatorBase<T>
 		where T : Dtobase
 	{
+
+		/// <summary>
+		/// Checks if field value is assigned
+		/// </summary>
+		/// <returns></returns>
+		public virtual bool IsAssigned()
+		{
+			return this.Target.IsFieldAssigned(this.Name);
+		}
+
 		/// <summary>
 		/// Validates if field is assigned some value by parser and calls Stop on failure
 		/// </summary>
@@ -16,7 +26,7 @@ namespace Upida.Validation
 		{
 			if (this.Stopped) return;
 
-			if (!this.Target.IsFieldAssigned(this.Name))
+			if (!this.IsAssigned())
 			{
 				this.Fail(msg);
 				this.Stop();
@@ -28,14 +38,23 @@ namespace Upida.Validation
 		/// </summary>
 		/// <param name="msg">failure message</param>
 		/// <returns></returns>
-		public virtual void NotAssigned(string msg)
+		public virtual void MustBeNotAssigned(string msg)
 		{
 			if (this.Stopped) return;
 
-			if (this.Target.IsFieldAssigned(this.Name))
+			if (this.IsAssigned())
 			{
 				this.Fail(msg);
 			}
+		}
+
+		/// <summary>
+		/// Checks if field value was correctly parsed
+		/// </summary>
+		/// <returns></returns>
+		public virtual bool IsValidFormat()
+		{
+			return !this.Target.IsFieldWrong(this.Name);
 		}
 
 		/// <summary>
@@ -43,15 +62,24 @@ namespace Upida.Validation
 		/// </summary>
 		/// <param name="msg">failure message</param>
 		/// <returns></returns>
-		public virtual void ValidFormat(string msg)
+		public virtual void MustBeValidFormat(string msg)
 		{
 			if (this.Stopped) return;
 
-			if (this.Target.IsFieldWrong(this.Name))
+			if (!this.IsValidFormat())
 			{
 				this.Fail(msg);
 				this.Stop();
 			}
+		}
+
+		/// <summary>
+		/// Checks if field value is NULL
+		/// </summary>
+		/// <returns></returns>
+		public virtual bool IsNull()
+		{
+			return null == this.Value;
 		}
 
 		/// <summary>
@@ -63,10 +91,35 @@ namespace Upida.Validation
 		{
 			if (this.Stopped) return;
 
-			if (null != this.Value)
+			if (!this.IsNull())
 			{
 				this.Fail(msg);
 			}
+		}
+
+		/// <summary>
+		/// Validates if field value is not null
+		/// </summary>
+		/// <param name="msg">failure message</param>
+		/// <returns></returns>
+		public virtual void MustBeNotNull(string msg)
+		{
+			if (this.Stopped) return;
+
+			if (this.IsNull())
+			{
+				this.Fail(msg);
+				this.Stop();
+			}
+		}
+
+		/// <summary>
+		/// Checks if field value is equal to something
+		/// </summary>
+		/// <returns></returns>
+		public virtual bool IsEqualTo(object value)
+		{
+			return object.Equals(value, this.Value);
 		}
 
 		/// <summary>
@@ -79,7 +132,7 @@ namespace Upida.Validation
 		{
 			if (this.Stopped) return;
 
-			if (!value.Equals(this.Value))
+			if (!this.IsEqualTo(value))
 			{
 				this.Fail(msg);
 			}
@@ -91,29 +144,74 @@ namespace Upida.Validation
 		/// <param name="value">destination value</param>
 		/// <param name="msg">failure message</param>
 		/// <returns></returns>
-		public virtual void NotEqualTo(object value, string msg)
+		public virtual void MustNotEqualTo(object value, string msg)
 		{
 			if (this.Stopped) return;
 
-			if (value.Equals(this.Value))
+			if (this.IsEqualTo(value))
 			{
 				this.Fail(msg);
 			}
 		}
 
 		/// <summary>
-		/// Validates field value is not null
+		/// Checks if field value is equal to one of values
 		/// </summary>
+		/// <returns></returns>
+		public virtual bool IsEqualToOneOf(object[] values)
+		{
+			bool success = false;
+			for (int i = 0; i < values.Length; i++)
+			{
+				if (object.Equals(values[i], this.Value))
+				{
+					success = true;
+					break;
+				}
+			}
+
+			return success;
+		}
+
+		/// <summary>
+		/// Validates if field value is equal to destination value
+		/// </summary>
+		/// <param name="value">destination value</param>
 		/// <param name="msg">failure message</param>
 		/// <returns></returns>
-		public virtual void NotNull(string msg)
+		public virtual void MustEqualToOneOf(object[] values, string msg)
 		{
 			if (this.Stopped) return;
 
-			if (null == this.Value)
+			if (!this.IsEqualToOneOf(values))
 			{
 				this.Fail(msg);
 			}
+		}
+
+		/// <summary>
+		/// Validates field value not equal to destination value
+		/// </summary>
+		/// <param name="value">destination value</param>
+		/// <param name="msg">failure message</param>
+		/// <returns></returns>
+		public virtual void MustNotEqualToAnyOf(object[] values, string msg)
+		{
+			if (this.Stopped) return;
+
+			if (!this.IsEqualToOneOf(values))
+			{
+				this.Fail(msg);
+			}
+		}
+
+		/// <summary>
+		/// Checks if field value is empty string
+		/// </summary>
+		/// <returns></returns>
+		public virtual bool IsEmptyString()
+		{
+			return string.Equals(string.Empty, this.Value);
 		}
 
 		/// <summary>
@@ -121,14 +219,24 @@ namespace Upida.Validation
 		/// </summary>
 		/// <param name="msg">failure message</param>
 		/// <returns></returns>
-		public virtual void NotEmpty(string msg)
+		public virtual void MustBeNotEmpty(string msg)
 		{
 			if (this.Stopped) return;
 
-			if (string.Equals(string.Empty, this.Value))
+			if (this.IsEmptyString())
 			{
 				this.Fail(msg);
 			}
+		}
+
+		/// <summary>
+		/// Checks if field value length is between min and max values
+		/// </summary>
+		/// <returns></returns>
+		public virtual bool IsLengthBetween(int min, int max)
+		{
+			string val = (string)this.Value;
+			return val.Length >= min && val.Length <= max;
 		}
 
 		/// <summary>
@@ -138,15 +246,23 @@ namespace Upida.Validation
 		/// <param name="max"></param>
 		/// <param name="msg">failure message</param>
 		/// <returns></returns>
-		public virtual void Length(int min, int max, string msg)
+		public virtual void MustHaveLengthBetween(int min, int max, string msg)
 		{
 			if (this.Stopped) return;
 
-			string val = (string)this.Value;
-			if (val.Length < min || val.Length > max)
+			if (!this.IsLengthBetween(min, max))
 			{
 				this.Fail(msg);
 			}
+		}
+
+		/// <summary>
+		/// Checks if field value is less than or equal to 'm'
+		/// </summary>
+		/// <returns></returns>
+		public virtual bool IsLessOrEqualTo(object m)
+		{
+			return ((IComparable)this.Value).CompareTo(m) <= 0;
 		}
 
 		/// <summary>
@@ -155,14 +271,23 @@ namespace Upida.Validation
 		/// <param name="m"></param>
 		/// <param name="msg">failure message</param>
 		/// <returns></returns>
-		public virtual void LessOrEqualTo(object m, String msg)
+		public virtual void MustBeLessOrEqualTo(object m, string msg)
 		{
 			if (this.Stopped) return;
 
-			if (((IComparable)this.Value).CompareTo(m) > 0)
+			if (!this.IsLessOrEqualTo(m))
 			{
 				this.Fail(msg);
 			}
+		}
+
+		/// <summary>
+		/// Checks if field value is less than 'm'
+		/// </summary>
+		/// <returns></returns>
+		public virtual bool IsLessThan(object m)
+		{
+			return ((IComparable)this.Value).CompareTo(m) < 0;
 		}
 
 		/// <summary>
@@ -171,14 +296,23 @@ namespace Upida.Validation
 		/// <param name="m"></param>
 		/// <param name="msg">failure message</param>
 		/// <returns></returns>
-		public virtual void LessThan(object m, string msg)
+		public virtual void MustBeLessThan(object m, string msg)
 		{
 			if (this.Stopped) return;
 
-			if (((IComparable)this.Value).CompareTo(m) >= 0)
+			if (!this.IsLessThan(m))
 			{
 				this.Fail(msg);
 			}
+		}
+
+		/// <summary>
+		/// Checks if field value is greater than or equal to 'm'
+		/// </summary>
+		/// <returns></returns>
+		public virtual bool IsGreaterOrEqualTo(object m)
+		{
+			return ((IComparable)this.Value).CompareTo(m) >= 0;
 		}
 
 		/// <summary>
@@ -187,14 +321,23 @@ namespace Upida.Validation
 		/// <param name="m"></param>
 		/// <param name="msg">failure message</param>
 		/// <returns></returns>
-		public virtual void GreaterOrEqualTo(object m, string msg)
+		public virtual void MustBeGreaterOrEqualTo(object m, string msg)
 		{
 			if (this.Stopped) return;
 
-			if (((IComparable)this.Value).CompareTo(m) < 0)
+			if (!this.IsGreaterOrEqualTo(m))
 			{
 				this.Fail(msg);
 			}
+		}
+
+		/// <summary>
+		/// Checks if field value is greater than 'm'
+		/// </summary>
+		/// <returns></returns>
+		public virtual bool IsGreaterThan(object m)
+		{
+			return ((IComparable)this.Value).CompareTo(m) > 0;
 		}
 
 		/// <summary>
@@ -203,14 +346,24 @@ namespace Upida.Validation
 		/// <param name="m"></param>
 		/// <param name="msg">failure message</param>
 		/// <returns></returns>
-		public virtual void GreaterThan(object m, String msg)
+		public virtual void MustBeGreaterThan(object m, String msg)
 		{
 			if (this.Stopped) return;
 
-			if (((IComparable)this.Value).CompareTo(m) <= 0)
+			if (!this.IsGreaterThan(m))
 			{
 				this.Fail(msg);
 			}
+		}
+
+		/// <summary>
+		/// Checks if field value collection size is between min and max values inclusively (field must be a collection)
+		/// </summary>
+		/// <returns></returns>
+		public virtual bool IsSizeBetween(int min, int max)
+		{
+			ICollection collection = (ICollection)this.Value;
+			return collection.Count >= min && collection.Count <= max;
 		}
 
 		/// <summary>
@@ -220,15 +373,24 @@ namespace Upida.Validation
 		/// <param name="max">max value</param>
 		/// <param name="msg">failure message</param>
 		/// <returns></returns>
-		public virtual void Size(int min, int max, string msg)
+		public virtual void MustHaveSizeBetween(int min, int max, string msg)
 		{
 			if (this.Stopped) return;
 
-			ICollection collection = (ICollection)this.Value;
-			if (collection.Count < min || collection.Count > max)
+			if (!this.IsSizeBetween(min, max))
 			{
 				this.Fail(msg);
 			}
+		}
+
+		/// <summary>
+		/// Checks if field value qualifies to regular expression
+		/// </summary>
+		/// <returns></returns>
+		public virtual bool IsRegexpr(string expr)
+		{
+			Match match = Regex.Match((string)this.Value, expr, RegexOptions.IgnoreCase);
+			return match.Success;
 		}
 
 		/// <summary>
@@ -237,12 +399,11 @@ namespace Upida.Validation
 		/// <param name="expr">regular expression</param>
 		/// <param name="msg">failure message</param>
 		/// <returns></returns>
-		public virtual void Regexp(string expr, string msg)
+		public virtual void MustRegexpr(string expr, string msg)
 		{
 			if (this.Stopped) return;
 
-			Match match = Regex.Match((string)this.Value, expr, RegexOptions.IgnoreCase);
-			if (!match.Success)
+			if (!this.IsRegexpr(expr))
 			{
 				this.Fail(msg);
 			}

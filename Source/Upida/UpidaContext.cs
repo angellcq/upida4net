@@ -164,7 +164,7 @@ namespace Upida
 			Type validatorType;
 			if (true == TYPEVALIDATOR_MAP.TryGetValue(key, out validatorType))
 			{
-				return this.typeValidatorFactory.GetInstance(validatorType) as ValidatorBase<T>;
+				return this.validatorFactory.GetInstance(validatorType) as ValidatorBase<T>;
 			}
 
 			object[] fluents = typeof(T).GetCustomAttributes(typeof(ValidateWithAttribute), false);
@@ -174,7 +174,7 @@ namespace Upida
 				if (object.Equals(fluent.Group, group))
 				{
 					TYPEVALIDATOR_MAP[key] = fluent.Validator;
-					return this.typeValidatorFactory.GetInstance(fluent.Validator) as ValidatorBase<T>;
+					return this.validatorFactory.GetInstance(fluent.Validator) as ValidatorBase<T>;
 				}
 			}
 

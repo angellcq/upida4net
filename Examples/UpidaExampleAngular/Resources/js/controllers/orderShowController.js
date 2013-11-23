@@ -1,5 +1,5 @@
 angularExample.app.controller(
-		"orderViewController",
+		"orderShowController",
 		["$scope", "$routeParams", "upidaService", function ($scope, $routeParams, upidaService) {
 
 	$scope.id = $routeParams.id;

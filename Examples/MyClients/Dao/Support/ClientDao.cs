@@ -8,27 +8,27 @@ using NHibernate.Criterion;
 
 namespace MyClients.Dao.Support
 {
-    public class ClientDao : Daobase<Client>, IClientDao
-    {
-        public ClientDao(ISessionFactory sessionFactory)
-            : base(sessionFactory)
-        {
-        }
+	public class ClientDao : Daobase<Client>, IClientDao
+	{
+		public ClientDao(ISessionFactory sessionFactory)
+			: base(sessionFactory)
+		{
+		}
 
-        public IList<Client> GetAll()
-        {
-            return this.Session
-                .CreateCriteria<Client>()
-                .List<Client>();
-        }
+		public IList<Client> GetAll()
+		{
+			return this.Session
+				.CreateCriteria<Client>()
+				.List<Client>();
+		}
 
-        public Client GetById(int id)
-        {
-            return this.Session
-                .CreateCriteria<Client>()
-                .Add(Restrictions.Eq("Id", id))
-                .SetFetchMode("Logins", FetchMode.Join)
-                .UniqueResult<Client>();
-        }
-    }
+		public Client GetById(int id)
+		{
+			return this.Session
+				.CreateCriteria<Client>()
+				.Add(Restrictions.Eq("Id", id))
+				.SetFetchMode("Logins", FetchMode.Join)
+				.UniqueResult<Client>();
+		}
+	}
 }

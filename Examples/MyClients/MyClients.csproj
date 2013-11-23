@@ -151,11 +151,15 @@
     <EmbeddedResource Include="Mapping\Client.hbm.xml" />
     <EmbeddedResource Include="Mapping\Login.hbm.xml" />
     <Content Include="Resources\css\style.css" />
-    <Content Include="Resources\js\angular.js" />
-    <Content Include="Resources\js\upida.utils.angular.js" />
-    <Content Include="Resources\js\vm\Client\Create.js" />
-    <Content Include="Resources\js\vm\Client\Edit.js" />
-    <Content Include="Resources\js\vm\Client\Index.js" />
+    <Content Include="Resources\js\app.js" />
+    <Content Include="Resources\js\controllers\clientCreateController.js" />
+    <Content Include="Resources\js\controllers\clientEditController.js" />
+    <Content Include="Resources\js\controllers\clientListController.js" />
+    <Content Include="Resources\js\filters\datetime.js" />
+    <Content Include="Resources\js\filters\idtext.js" />
+    <Content Include="Resources\js\vendor\angular-route.js" />
+    <Content Include="Resources\js\vendor\angular.js" />
+    <Content Include="Resources\js\vendor\upida.angular.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -167,7 +171,9 @@
     </Content>
     <Content Include="Views\Web.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Resources\js\directives\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
@@ -175,13 +181,10 @@
     <Content Include="App_Data\upida.sqlite" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Shared\_Layout.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\Client\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Client\Index.cshtml" />
+    <Content Include="Views\Client\List.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Client\Edit.cshtml" />
@@ -195,6 +198,8 @@
   <ItemGroup>
     <None Include="Properties\PublishProfiles\myclients - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\myclients - Web Deploy.pubxml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\Notfound.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -3,15 +3,16 @@ using UpidaExampleAngular.Domain;
 
 namespace UpidaExampleAngular.Validation
 {
-    public class ClientSaveValidator : HandyValidator<Client>
-    {
-        public override void Validate(object state)
-        {
-            this.Missing("Id", this.Target.Id);
+	public class ClientSaveValidator : HandyValidator<Client>
+	{
+		public override void Validate(object state)
+		{
+			this.MissingField("id", this.Target.Id);
 
-            this.Required("Name", Target.Name);
-            this.Length(1, 256, Errors.LENGTH_WRONG);
-            this.Email(Errors.NOT_EMAIL);
-        }
-    }
+			this.Field("name", Target.Name);
+			this.Required();
+			this.MustHaveLengthBetween(2, 50, Errors.LENGTH_2_AND_50);
+			this.MustBeEmail(Errors.NOT_EMAIL);
+		}
+	}
 }

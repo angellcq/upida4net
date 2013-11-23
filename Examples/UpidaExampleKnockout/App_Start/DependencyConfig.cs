@@ -15,37 +15,37 @@ using UpidaExampleKnockout.Validation;
 
 namespace UpidaExampleKnockout
 {
-    public class DependencyConfig
-    {
-        public static void RegisterDependencies(HttpConfiguration config)
-        {
-            var builder = new ContainerBuilder();
+	public class DependencyConfig
+	{
+		public static void RegisterDependencies(HttpConfiguration config)
+		{
+			var builder = new ContainerBuilder();
 
-            builder.RegisterControllers(Assembly.GetExecutingAssembly());
-            builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
-            builder.RegisterFilterProvider();
+			builder.RegisterControllers(Assembly.GetExecutingAssembly());
+			builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
+			builder.RegisterFilterProvider();
 
-            builder.Register((context) => new Configuration().Configure().BuildSessionFactory()).As<ISessionFactory>().SingleInstance();
-            builder.RegisterType<Mapper>().As<IMapper>().InstancePerDependency();
-            builder.RegisterType<JsonParser>().As<IJsonParser>().InstancePerDependency();
-            builder.RegisterType<ValidationContext>().As<IValidationContext>().InstancePerDependency();
+			builder.Register((context) => new Configuration().Configure().BuildSessionFactory()).As<ISessionFactory>().SingleInstance();
+			builder.RegisterType<Mapper>().As<IMapper>().InstancePerDependency();
+			builder.RegisterType<JsonParser>().As<IJsonParser>().InstancePerDependency();
+			builder.RegisterType<ValidationContext>().As<IValidationContext>().InstancePerDependency();
 
-            builder.RegisterType<OrderDao>().As<IOrderDao>().InstancePerDependency();
-            builder.RegisterType<ClientDao>().As<IClientDao>().InstancePerDependency();
+			builder.RegisterType<OrderDao>().As<IOrderDao>().InstancePerDependency();
+			builder.RegisterType<ClientDao>().As<IClientDao>().InstancePerDependency();
 
-            builder.RegisterType<ClientBusiness>().As<ClientBusiness>().InstancePerDependency();
-            builder.RegisterType<OrderBusiness>().As<OrderBusiness>().InstancePerDependency();
+			builder.RegisterType<ClientBusiness>().As<ClientBusiness>().InstancePerDependency();
+			builder.RegisterType<OrderBusiness>().As<OrderBusiness>().InstancePerDependency();
 
-            builder.RegisterType<ClientSaveValidator>().As<ClientSaveValidator>().InstancePerDependency();
-            builder.RegisterType<OrderSaveValidator>().As<OrderSaveValidator>().InstancePerDependency();
-            builder.RegisterType<OrderUpdateValidator>().As<OrderUpdateValidator>().InstancePerDependency();
-            builder.RegisterType<OrderUpdateItemsValidator>().As<OrderUpdateItemsValidator>().InstancePerDependency();
-            builder.RegisterType<OrderItemSaveValidator>().As<OrderItemSaveValidator>().InstancePerDependency();
-            builder.RegisterType<OrderItemMergeValidator>().As<OrderItemMergeValidator>().InstancePerDependency();
+			builder.RegisterType<ClientSaveValidator>().As<ClientSaveValidator>().InstancePerDependency();
+			builder.RegisterType<OrderSaveValidator>().As<OrderSaveValidator>().InstancePerDependency();
+			builder.RegisterType<OrderUpdateValidator>().As<OrderUpdateValidator>().InstancePerDependency();
+			builder.RegisterType<OrderUpdateItemsValidator>().As<OrderUpdateItemsValidator>().InstancePerDependency();
+			builder.RegisterType<OrderItemSaveValidator>().As<OrderItemSaveValidator>().InstancePerDependency();
+			builder.RegisterType<OrderItemMergeValidator>().As<OrderItemMergeValidator>().InstancePerDependency();
 
-            var container = builder.Build();
-            DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
-            GlobalConfiguration.Configuration.DependencyResolver = new AutofacWebApiDependencyResolver(container);
-        }
-    }
+			var container = builder.Build();
+			DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
+			GlobalConfiguration.Configuration.DependencyResolver = new AutofacWebApiDependencyResolver(container);
+		}
+	}
 }

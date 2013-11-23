@@ -149,6 +149,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Validation\ClientReferenceValidator.cs" />
     <Compile Include="Validation\ClientSaveValidator.cs" />
     <Compile Include="Validation\Errors.cs" />
     <Compile Include="Validation\HandyValidator.cs" />
@@ -173,20 +174,13 @@
     <Content Include="Resources\js\controllers\orderEditController.js" />
     <Content Include="Resources\js\controllers\orderItemsEditController.js" />
     <Content Include="Resources\js\controllers\orderListController.js" />
-    <Content Include="Resources\js\controllers\orderViewController.js" />
+    <Content Include="Resources\js\controllers\orderShowController.js" />
     <Content Include="Resources\js\filters\datetime.js" />
     <Content Include="Resources\js\filters\idtext.js" />
     <Content Include="Resources\js\app.js" />
     <Content Include="Resources\js\vendor\angular-route.js" />
     <Content Include="Resources\js\vendor\angular.js" />
     <Content Include="Resources\js\vendor\upida.angular.js" />
-    <Content Include="Resources\js\vm\Client\Create.js" />
-    <Content Include="Resources\js\vm\Client\Index.js" />
-    <Content Include="Resources\js\vm\Order\Create.js" />
-    <Content Include="Resources\js\vm\Order\Edit.js" />
-    <Content Include="Resources\js\vm\Order\EditItems.js" />
-    <Content Include="Resources\js\vm\Order\Index.js" />
-    <Content Include="Resources\js\vm\Order\Show.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

@@ -3,32 +3,40 @@ using UpidaExampleAngular.Domain;
 
 namespace UpidaExampleAngular.Validation
 {
-    public class OrderSaveValidator : HandyValidator<Order>
-    {
-        public override void Validate(object state)
-        {
-            this.Missing("Id", this.Target.Id);
+	public class OrderSaveValidator : HandyValidator<Order>
+	{
+		public override void Validate(object state)
+		{
+			this.MissingField("Id", this.Target.Id);
 
-            this.Required("ShipAddress", this.Target.ShipAddress);
-            this.Length(5, 256, Errors.LENGTH_WRONG);
+			this.Field("shipAddress", this.Target.ShipAddress);
+			this.Required();
+			this.MustHaveLengthBetween(2, 50, Errors.LENGTH_2_AND_50);
 
-            this.Required("ShipCity", this.Target.ShipCity);
-            this.Length(2, 256, Errors.LENGTH_WRONG);
+			this.Field("shipCity", this.Target.ShipCity);
+			this.Required();
+			this.MustHaveLengthBetween(2, 50, Errors.LENGTH_2_AND_50);
 
-            this.Required("ShipCountry", this.Target.ShipCountry);
-            this.Length(2, 256, Errors.LENGTH_WRONG);
+			this.Field("shipCountry", this.Target.ShipCountry);
+			this.Required();
+			this.MustHaveLengthBetween(2, 50, Errors.LENGTH_2_AND_50);
 
-            this.Required("ShipZip", this.Target.ShipZip);
-            this.Length(5, 5, Errors.LENGTH_WRONG);
+			this.Field("shipZip", this.Target.ShipZip);
+			this.Required();
+			this.MustHaveLengthBetween(5, 5, Errors.LENGTH_ZIP);
 
-            this.Required("Total", this.Target.Total);
-            this.GreaterThan(0f, Errors.GREATER_ZERO);
+			this.Field("total", this.Target.Total);
+			this.Required(Errors.NOT_VALID_NUMBER);
+			this.MustBeGreaterThan(0f, Errors.GREATER_ZERO);
 
-            this.Required("OrderItems", this.Target.OrderItems);
-            this.Size(1, 500, Errors.WRONG_COUNT);
-            this.NestedList<OrderItem>(Groups.SAVE, null);
+			this.Field("orderItems", this.Target.OrderItems);
+			this.Required();
+			this.MustHaveSizeBetween(1, 500, Errors.WRONG_COUNT);
+			this.NestedList<OrderItem>(Groups.SAVE, null);
 
-            this.Required("Client", this.Target.Client);
-        }
-    }
+			this.Field("client", this.Target.Client);
+			this.Required();
+			this.Nested<Client>(Groups.REFERENCE, null);
+		}
+	}
 }

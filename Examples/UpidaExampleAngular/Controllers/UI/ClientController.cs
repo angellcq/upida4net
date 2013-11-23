@@ -2,16 +2,16 @@
 
 namespace UpidaExampleAngular.Controllers.UI
 {
-    public class ClientController : Controller
-    {
-        public ActionResult index()
-        {
-            return View();
-        }
+	public class ClientController : Controller
+	{
+		public ActionResult List()
+		{
+			return this.View();
+		}
 
-        public ActionResult create()
-        {
-            return View();
-        }
-    }
+		public ActionResult Create()
+		{
+			return this.View();
+		}
+	}
 }

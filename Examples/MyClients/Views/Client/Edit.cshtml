@@ -1,10 +1,4 @@
-@{
-	ViewBag.Title = "Edit Client";
-	ViewBag.ViewModel = "Client/Edit.js";
-	ViewBag.Ctrl = "clientEditController";
-	Layout = "~/Views/Shared/_Layout.cshtml";
-}
-<a ng-href="{{indexLink}}">ALL CLIENTS</a>|
+<a href="#/client/list">ALL CLIENTS</a>|
 <h2>New Client</h2>
 <hr />
 <br />
@@ -19,21 +13,21 @@
 		<td>Name</td>
 		<td>
 			<input type="text" ng-model="name" />
-			<span class="error" errorkey="{{'Name'}}"></span>
+			<span class="error" errorkey="name"></span>
 		</td>
 	</tr>
 	<tr>
 		<td>Last name</td>
 		<td>
 			<input type="text" ng-model="lastname" />
-			<span class="error" errorkey="{{'Lastname'}}"></span>
+			<span class="error" errorkey="lastname"></span>
 		</td>
 	</tr>
 	<tr>
 		<td>Age</td>
 		<td>
 			<input type="text" ng-model="age" />
-			<span class="error" errorkey="{{'Age'}}"></span>
+			<span class="error" errorkey="age"></span>
 		</td>
 	</tr>
 	<tr>
@@ -56,15 +50,15 @@
 						</td>
 						<td>
 							<input type="text" ng-model="row.name" />
-							<span class="error" errorkey="{{'Logins['+ $index + '].Name'}}"></span>
+							<span class="error" errorkey="{{'logins['+ $index + '].name'}}"></span>
 						</td>
 						<td>
 							<input type="text" ng-model="row.password" />
-							<span class="error" errorkey="{{'Logins['+ $index + '].Password'}}"></span>
+							<span class="error" errorkey="{{'logins['+ $index + '].password'}}"></span>
 						</td>
 						<td>
 							<input type="checkbox" ng-model="row.enabled" />
-							<span class="error" errorkey="{{'Logins['+ $index + '].Enabled'}}"></span>
+							<span class="error" errorkey="{{'logins['+ $index + '].enabled'}}"></span>
 						</td>
 						<td>
 							<input type="button" ng-click="onRemoveLoginClick(row)" value="Delete" />
@@ -74,7 +68,7 @@
 			</table>
 			<div style="padding-bottom: 0.5em;">
 				<input type="button" ng-click="onAddLoginClick()" value="Add" />
-				<span class="error" errorkey="{{'Logins'}}"></span>
+				<span class="error" errorkey="logins"></span>
 			</div>
 		</td>
 	</tr>

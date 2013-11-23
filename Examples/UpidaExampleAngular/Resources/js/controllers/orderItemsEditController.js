@@ -37,7 +37,7 @@ angularExample.app.controller(
 			item.orderItems.push(orderItem);
 		});
 		upidaService.post("order/updateitems", item, $scope, function() {
-			$location.path("order/view/" + $scope.id);
+			$location.path("order/show/" + $scope.id);
 		});
 	};
 

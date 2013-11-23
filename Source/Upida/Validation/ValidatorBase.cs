@@ -134,7 +134,7 @@ namespace Upida.Validation
 		/// <typeparam name="R">Type of the validated object</typeparam>
 		/// <param name="group">validation group</param>
 		/// <returns></returns>
-		public void Nested<R>(int group, object state)
+		public void Nested<R>(object group, object state)
 			where R : Dtobase
 		{
 			if (this.stopped) return;

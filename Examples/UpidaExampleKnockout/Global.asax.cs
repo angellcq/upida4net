@@ -2,6 +2,7 @@
 using System.Web.Mvc;
 using System.Web.Routing;
 using Upida;
+using Upida.Aspnetmvc;
 using Upida.Validation;
 
 namespace UpidaExampleKnockout
@@ -10,7 +11,7 @@ namespace UpidaExampleKnockout
     {
         protected void Application_Start()
         {
-            UpidaContext.Current().SetTypeValidatorFactory(new AspMvcTypeValidatorFactory());
+            UpidaContext.Current().SetValidatorFactory(new AspMvcValidatorFactory());
             AreaRegistration.RegisterAllAreas();
 
             WebApiConfig.Register(GlobalConfiguration.Configuration);

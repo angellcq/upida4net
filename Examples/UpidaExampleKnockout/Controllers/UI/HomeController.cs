@@ -2,11 +2,11 @@
 
 namespace UpidaExampleKnockout.Controllers.UI
 {
-    public class HomeController : Controller
-    {
-        public ActionResult index()
-        {
-            return this.RedirectToAction("index", "client");
-        }
-    }
+	public class HomeController : Controller
+	{
+		public ActionResult index()
+		{
+			return this.RedirectToAction("index", "client");
+		}
+	}
 }

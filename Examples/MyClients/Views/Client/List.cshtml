@@ -1,10 +1,4 @@
-@{
-	ViewBag.Title = "Clients";
-	ViewBag.ViewModel = "Client/Index.js";
-	ViewBag.Ctrl = "clientIndexController";
-	Layout = "~/Views/Shared/_Layout.cshtml";
-}
-<a ng-href="{{createLink}}">NEW CLIENT</a>&nbsp;|
+<a ng-href="#/client/create">NEW CLIENT</a>&nbsp;|
 <h2>Clients</h2>
 <hr />
 <table border="1" style="width: 50%;">
@@ -30,7 +24,7 @@
 			</div>
 		</td>
 		<td>
-			<a ng-href="{{row.editLink}}">Edit</a>
+			<a ng-href="#/client/edit/{{row.id}}">Edit</a>
 		</td>
 	</tr>
 </tbody>

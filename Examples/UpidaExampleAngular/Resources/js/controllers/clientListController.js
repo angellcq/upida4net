@@ -11,8 +11,8 @@ angularExample.app.controller(
 	$scope.loadClients = function() {
 		upidaService.get("client/getall", $scope, function (items) {
 			angular.forEach(items, function (p, i) {
-				var row = new $scope.ClientRow(p.Id);
-				row.name = p.Name;
+				var row = new $scope.ClientRow(p.id);
+				row.name = p.name;
 				$scope.clientRows.push(row);
 			});
 		});

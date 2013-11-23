@@ -31,16 +31,16 @@ angularExample.app.config(function ($routeProvider) {
 			templateUrl: "order/edititems",
 			controller: "orderItemsEditController"
 		})
-		.when("/order/view/:id", {
-			templateUrl: "order/view",
-			controller: "orderViewController"
+		.when("/order/show/:id", {
+			templateUrl: "order/show",
+			controller: "orderShowController"
 		})
 		.otherwise({
 			templateUrl: "home/notfound"
 		});
 });
 
-upida.baseUrl = "/org.upida.example.angular/";
+upida.baseUrl = "/api/";
 upida.errorKeyDirectiveFactory(angularExample.app);
 upida.mainErrorDirectiveFactory(angularExample.app);
 angularExample.app.factory("upidaService", ["$http", upida.serviceFactory]);

@@ -3,9 +3,9 @@ using MyClients.Domain;
 
 namespace MyClients.Dao
 {
-    public interface IClientDao : IDaobase<Client>
-    {
-        IList<Client> GetAll();
-        Client GetById(int id);
-    }
+	public interface IClientDao : IDaobase<Client>
+	{
+		IList<Client> GetAll();
+		Client GetById(int id);
+	}
 }

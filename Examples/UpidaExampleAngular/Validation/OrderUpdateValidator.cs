@@ -3,31 +3,37 @@ using UpidaExampleAngular.Domain;
 
 namespace UpidaExampleAngular.Validation
 {
-    public class OrderUpdateValidator : HandyValidator<Order>
-    {
-        public override void Validate(object state)
-        {
-            this.Required("Id", Target.Id);
+	public class OrderUpdateValidator : HandyValidator<Order>
+	{
+		public override void Validate(object state)
+		{
+			this.Field("id", Target.Id);
+			this.Required(Errors.NOT_VALID_NUMBER);
 
-            this.Missing("CreatedOn", this.Target.CreatedOn);
+			this.MissingField("createdOn", this.Target.CreatedOn);
 
-            this.Required("ShipAddress", Target.ShipAddress);
-            this.Length(5, 256, Errors.LENGTH_WRONG);
+			this.Field("shipAddress", Target.ShipAddress);
+			this.Required();
+			this.MustHaveLengthBetween(2, 50, Errors.LENGTH_2_AND_50);
 
-            this.Required("ShipCity", Target.ShipCity);
-            this.Length(2, 256, Errors.LENGTH_WRONG);
+			this.Field("shipCity", Target.ShipCity);
+			this.Required();
+			this.MustHaveLengthBetween(2, 50, Errors.LENGTH_2_AND_50);
 
-            this.Required("ShipCountry", Target.ShipCountry);
-            this.Length(2, 256, Errors.LENGTH_WRONG);
+			this.Field("shipCountry", Target.ShipCountry);
+			this.Required();
+			this.MustHaveLengthBetween(2, 50, Errors.LENGTH_2_AND_50);
 
-            this.Required("ShipZip", Target.ShipZip);
-            this.Length(5, 5, Errors.LENGTH_WRONG);
+			this.Field("shipZip", Target.ShipZip);
+			this.Required();
+			this.MustHaveLengthBetween(5, 5, Errors.LENGTH_ZIP);
 
-            this.Required("Total", Target.Total);
-            this.GreaterThan(0f, Errors.GREATER_ZERO);
+			this.Field("total", Target.Total);
+			this.Required(Errors.NOT_VALID_NUMBER);
+			this.MustBeGreaterThan(0f, Errors.GREATER_ZERO);
 
-            this.Missing("OrderItems", this.Target.OrderItems);
-            this.Missing("Client", this.Target.Client);
-        }
-    }
+			this.MissingField("orderItems", this.Target.OrderItems);
+			this.MissingField("client", this.Target.Client);
+		}
+	}
 }

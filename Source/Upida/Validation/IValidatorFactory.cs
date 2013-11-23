@@ -2,8 +2,8 @@
 
 namespace Upida.Validation
 {
-    public interface IValidatorFactory
-    {
-        IValidatorBase GetInstance(Type typeValidatorType);
-    }
+	public interface IValidatorFactory
+	{
+		IValidatorBase GetInstance(Type typeValidatorType);
+	}
 }

@@ -20,7 +20,7 @@ angularExample.app.controller(
 		item.total = $scope.total;
 
 		upidaService.post("order/update", item, $scope, function() {
-			$location.path("order/view/" + $scope.id);
+			$location.path("order/show/" + $scope.id);
 		});
 	};
 

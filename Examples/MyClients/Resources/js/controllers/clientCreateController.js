@@ -1,11 +1,11 @@
-var app = angular.module("app", []);
-upida.utils.errorkeyDirective(app);
-app.controller('clientCreateController', ['$scope', '$http', function ($scope, $http) {
+﻿myclients.app.controller(
+	"clientCreateController",
+	["$scope", "$location", "upidaService", function ($scope, $location, upidaService) {
+
 	$scope.name = null;
 	$scope.lastname = null;
 	$scope.age = null;
 	$scope.loginRows = new Array();
-	$scope.indexLink = upida.utils.url("client/index");
 
 	$scope.LoginRow = function () {
 		this.name = null;
@@ -25,24 +25,23 @@ app.controller('clientCreateController', ['$scope', '$http', function ($scope, $
 
 	$scope.onSave = function () {
 		var data = {};
-		data.Name = $scope.name;
-		data.Lastname = $scope.lastname;
-		data.Age = $scope.age;
-		data.Logins = new Array();
+		data.name = $scope.name;
+		data.lastname = $scope.lastname;
+		data.age = $scope.age;
+		data.logins = new Array();
 		angular.forEach($scope.loginRows, function (p, i) {
 			var item = {};
-			item.Name = p.name;
-			item.Password = p.password;
-			item.Enabled = p.enabled;
-			data.Logins.push(item);
+			item.name = p.name;
+			item.password = p.password;
+			item.enabled = p.enabled;
+			data.logins.push(item);
 		});
-		upida.utils.post("client/save", data, function () {
-			upida.utils.navigate("client/index");
+		upidaService.post("client/save", data, $scope, function () {
+			$location.path("client/list");
 		});
 	};
 
-	$scope.init = function () {
-		upida.utils.bind($scope, $http);
+	$scope.$on('$routeChangeSuccess', function () {
 		$scope.onAddLoginClick();
-	};
+	});
 }]);

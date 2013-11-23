@@ -13,6 +13,7 @@ namespace Upida.Validation
 
 		public FailResponse()
 		{
+			this.main = string.Empty;
 			this.failures = new List<Failure>();
 		}
 

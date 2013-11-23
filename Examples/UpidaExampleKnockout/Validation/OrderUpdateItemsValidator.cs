@@ -3,24 +3,26 @@ using UpidaExampleKnockout.Domain;
 
 namespace UpidaExampleKnockout.Validation
 {
-    public class OrderUpdateItemsValidator : HandyValidator<Order>
-    {
-        public override void Validate(object state)
-        {
-            this.Required("Id", this.Target.Id);
+	public class OrderUpdateItemsValidator : HandyValidator<Order>
+	{
+		public override void Validate(object state)
+		{
+			this.Field("Id", this.Target.Id);
+			this.Required(Errors.NOT_VALID_NUMBER);
 
-            this.Missing("CreatedOn", this.Target.CreatedOn);
-            this.Missing("ShipAddress", this.Target.ShipAddress);
-            this.Missing("ShipCity", this.Target.ShipCity);
-            this.Missing("ShipCountry", this.Target.ShipCountry);
-            this.Missing("ShipZip", this.Target.ShipZip);
-            this.Missing("Total", this.Target.Total);
+			this.MissingField("CreatedOn", this.Target.CreatedOn);
+			this.MissingField("ShipAddress", this.Target.ShipAddress);
+			this.MissingField("ShipCity", this.Target.ShipCity);
+			this.MissingField("ShipCountry", this.Target.ShipCountry);
+			this.MissingField("ShipZip", this.Target.ShipZip);
+			this.MissingField("Total", this.Target.Total);
 
-            this.Required("OrderItems", this.Target.OrderItems);
-            this.Size(1, 500, Errors.WRONG_COUNT);
-            this.NestedList<OrderItem>(Groups.MERGE, null);
+			this.Field("OrderItems", this.Target.OrderItems);
+			this.Required();
+			this.MustHaveSizeBetween(1, 500, Errors.WRONG_COUNT);
+			this.NestedList<OrderItem>(Groups.MERGE, null);
 
-            this.Missing("Client", this.Target.Client);
-        }
-    }
+			this.MissingField("Client", this.Target.Client);
+		}
+	}
 }

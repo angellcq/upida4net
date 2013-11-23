@@ -5,7 +5,7 @@ angularExample.app.controller(
 
 	$scope.onSave = function () {
 		var item = {};
-		item.Name = $scope.name;
+		item.name = $scope.name;
 		upidaService.post("client/save", item, $scope, function() {
 			$location.path("client/list");
 		});
