@@ -199,7 +199,7 @@ namespace Upida.Validation
 		{
 			if (this.Stopped) return;
 
-			if (!this.IsEqualToOneOf(values))
+			if (this.IsEqualToOneOf(values))
 			{
 				this.Fail(msg);
 			}
