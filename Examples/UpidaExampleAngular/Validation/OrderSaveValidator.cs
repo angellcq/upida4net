@@ -7,7 +7,7 @@ namespace UpidaExampleAngular.Validation
 	{
 		public override void Validate(object state)
 		{
-			this.MissingField("Id", this.Target.Id);
+			this.MissingField("id", this.Target.Id);
 
 			this.Field("shipAddress", this.Target.ShipAddress);
 			this.Required();
