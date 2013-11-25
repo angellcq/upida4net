@@ -155,7 +155,6 @@
     <Content Include="Resources\js\controllers\clientCreateController.js" />
     <Content Include="Resources\js\controllers\clientEditController.js" />
     <Content Include="Resources\js\controllers\clientListController.js" />
-    <Content Include="Resources\js\filters\datetime.js" />
     <Content Include="Resources\js\filters\idtext.js" />
     <Content Include="Resources\js\vendor\angular-route.js" />
     <Content Include="Resources\js\vendor\angular.js" />
@@ -171,9 +170,7 @@
     </Content>
     <Content Include="Views\Web.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Resources\js\directives\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>

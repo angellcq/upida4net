@@ -7,24 +7,24 @@ namespace UpidaExampleKnockout.Validation
 	{
 		public override void Validate(object state)
 		{
-			this.Field("Id", this.Target.Id);
+			this.Field("id", this.Target.Id);
 			if (this.IsAssigned() && !this.IsNull())
 			{
 				this.Required(Errors.NOT_VALID_NUMBER);
 			}
 
-			this.Field("Count", this.Target.Count);
+			this.Field("count", this.Target.Count);
 			this.Required(Errors.NOT_VALID_NUMBER);
 			this.MustBeGreaterThan(0, Errors.GREATER_ZERO);
 
-			this.Field("Price", this.Target.Price);
+			this.Field("price", this.Target.Price);
 			this.Required(Errors.NOT_VALID_MONEY);
 			this.MustBeGreaterThan(0f, Errors.GREATER_ZERO);
 
-			this.Field("ProductId", this.Target.ProductId);
+			this.Field("productId", this.Target.ProductId);
 			this.Required(Errors.NOT_VALID_NUMBER);
 
-			this.MissingField("Order", this.Target.Order);
+			this.MissingField("order", this.Target.Order);
 		}
 	}
 }

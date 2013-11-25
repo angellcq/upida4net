@@ -32,22 +32,22 @@ $(function () {
 
 	upida.vm.onSave = function () {
 		var item = {};
-		item.Client = upida.utils.getReff(upida.vm.clientId);
-		item.ShipCountry = upida.vm.shipCountry();
-		item.ShipCity = upida.vm.shipCity();
-		item.ShipZip = upida.vm.shipZip();
-		item.ShipAddress = upida.vm.shipAddress();
-		item.Total = upida.vm.total();
-		item.OrderItems = new Array();
+		item.client = upida.utils.getReff(upida.vm.clientId);
+		item.shipCountry = upida.vm.shipCountry();
+		item.shipCity = upida.vm.shipCity();
+		item.shipZip = upida.vm.shipZip();
+		item.shipAddress = upida.vm.shipAddress();
+		item.total = upida.vm.total();
+		item.orderItems = new Array();
 		$.each(upida.vm.orderItemRows(), function (i, p) {
 			var orderItem = {};
-			orderItem.ProductId = p.productId();
-			orderItem.Count = p.count();
-			orderItem.Price = p.price();
-			item.OrderItems.push(orderItem);
+			orderItem.productId = p.productId();
+			orderItem.count = p.count();
+			orderItem.price = p.price();
+			item.orderItems.push(orderItem);
 		});
 		upida.utils.post("order/save", item, function() {
-			window.location.replace(upida.utils.url("order/index?clientId=") + upida.vm.clientId);
+			upida.utils.navigate("order/index?clientId=" + upida.vm.clientId);
 		});
 	};
 

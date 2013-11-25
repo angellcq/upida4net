@@ -41,7 +41,7 @@
 		});
 	};
 
-	$scope.$on('$routeChangeSuccess', function () {
+	$scope.$on("$routeChangeSuccess", function () {
 		$scope.onAddLoginClick();
 	});
 }]);

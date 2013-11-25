@@ -21,8 +21,8 @@ $(function () {
 		upida.utils.get("client/getall", function (items) {
 			$.each(items, function (i, p) {
 				var row = new upida.vm.ClientRow();
-				row.id(p.Id);
-				row.name(p.Name);
+				row.id(p.id);
+				row.name(p.name);
 				upida.vm.clientRows.push(row);
 			});
 		});

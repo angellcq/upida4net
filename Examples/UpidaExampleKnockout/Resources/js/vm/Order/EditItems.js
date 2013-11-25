@@ -28,31 +28,31 @@ $(function () {
 
 	upida.vm.onSave = function () {
 		var item = {};
-		item.Id = upida.vm.id;
-		item.OrderItems = new Array();
+		item.id = upida.vm.id;
+		item.orderItems = new Array();
 		$.each(upida.vm.orderItemRows(), function (i, p) {
 			var orderItem = {};
-			orderItem.Id = p.id;
-			orderItem.ProductId = p.productId();
-			orderItem.Count = p.count();
-			orderItem.Price = p.price();
-			item.OrderItems.push(orderItem);
+			orderItem.id = p.id;
+			orderItem.productId = p.productId();
+			orderItem.count = p.count();
+			orderItem.price = p.price();
+			item.orderItems.push(orderItem);
 		});
 		upida.utils.post("order/updateitems", item, function() {
-		    window.location.replace(upida.utils.url("order/show?id=") + upida.vm.id);
+			upida.utils.navigate("order/show?id=" + upida.vm.id);
 		});
 	};
 
 	upida.vm.loadOrder = function () {
 		upida.utils.get("order/getfull?id=" + upida.vm.id, function(item) {
-		    upida.vm.clientId = item.Client.Id;
-			upida.vm.indexLink(upida.utils.url("order/index?clientId=") + item.Client.Id);
-			$.each(item.OrderItems, function (i, p) {
+			upida.vm.clientId = item.client.id;
+			upida.vm.indexLink(upida.utils.url("order/index?clientId=") + item.client.id);
+			$.each(item.orderItems, function (i, p) {
 				var row = new upida.vm.OrderItemRow();
-				row.id = p.Id;
-				row.count(p.Count);
-				row.price(p.Price);
-				row.productId(p.ProductId);
+				row.id = p.id;
+				row.count(p.count);
+				row.price(p.price);
+				row.productId(p.productId);
 				upida.vm.orderItemRows.push(row);
 			});
 		});

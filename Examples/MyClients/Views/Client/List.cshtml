@@ -1,5 +1,6 @@
-<a ng-href="#/client/create">NEW CLIENT</a>&nbsp;|
+<a href="#/client/create">NEW CLIENT</a>&nbsp;|
 <h2>Clients</h2>
+<span class="error" mainerror></span>
 <hr />
 <table border="1" style="width: 50%;">
 <thead>
@@ -14,7 +15,7 @@
 </thead>
 <tbody>
 	<tr ng-repeat="row in clientRows">
-		<td ng-bind="row.id"></td>
+		<td ng-bind="row.id|idtext"></td>
 		<td ng-bind="row.name"></td>
 		<td ng-bind="row.lastname"></td>
 		<td ng-bind="row.age"></td>

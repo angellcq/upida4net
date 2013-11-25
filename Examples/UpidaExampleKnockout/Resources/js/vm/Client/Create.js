@@ -8,7 +8,7 @@ $(function () {
 
 	upida.vm.onSave = function () {
 		var item = {};
-		item.Name = upida.vm.name();
+		item.name = upida.vm.name();
 		upida.utils.post("client/save", item, function() {
 			window.location.replace(upida.utils.url("client/index"));
 		});

@@ -6,6 +6,7 @@ using iesi = Iesi.Collections.Generic;
 namespace UpidaExampleKnockout.Domain
 {
 	[ValidateWith(typeof(ClientSaveValidator), Groups.SAVE)]
+	[ValidateWith(typeof(ClientReferenceValidator), Groups.REFERENCE)]
 	public class Client : Dtobase
 	{
 		[Dto(Levels.ID)]

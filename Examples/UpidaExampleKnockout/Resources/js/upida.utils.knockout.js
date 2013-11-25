@@ -126,13 +126,13 @@ upida.utils.bind = function(vm) {
 
 upida.utils.showErrors = function(fail) {
 	upida.vm.errors.removeAll();
-	$.each(fail.Failures, function (i, p) {
-		var current = upida.vm.errors.get(p.Key);
+	$.each(fail.failures, function (i, p) {
+		var current = upida.vm.errors.get(p.key);
 		if(current()) {
-			current(current() + "<br />" + p.Text);
+			current(current() + "<br />" + p.text);
 		}
 		else {
-			upida.vm.errors.push(p.Key, p.Text);
+			upida.vm.errors.push(p.key, p.text);
 		}
 	});
 };

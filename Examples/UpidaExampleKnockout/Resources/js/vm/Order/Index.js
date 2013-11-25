@@ -32,13 +32,13 @@ $(function () {
 		upida.utils.get("order/getbyclient?clientId=" + upida.vm.clientId, function (items) {
 			$.each(items, function (i, p) {
 				var row = new upida.vm.OrderRow();
-				row.id(p.Id);
-				row.createdOn(p.CreatedOn);
-				row.shipCountry(p.ShipCountry);
-				row.shipCity(p.ShipCity);
-				row.shipZip(p.ShipZip);
-				row.shipAddress(p.ShipAddress);
-				row.total(p.Total);
+				row.id(p.id);
+				row.createdOn(p.createdOn);
+				row.shipCountry(p.shipCountry);
+				row.shipCity(p.shipCity);
+				row.shipZip(p.shipZip);
+				row.shipAddress(p.shipAddress);
+				row.total(p.total);
 				upida.vm.orderRows.push(row);
 			});
 		});

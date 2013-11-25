@@ -26,12 +26,11 @@ namespace MyClients
 			builder.RegisterFilterProvider();
 
 			builder.Register((context) => new Configuration().Configure().BuildSessionFactory()).As<ISessionFactory>().SingleInstance();
-			builder.RegisterType<Mapper>().As<IMapper>().InstancePerDependency();
-			builder.RegisterType<JsonParser>().As<IJsonParser>().InstancePerDependency();
-			builder.RegisterType<ValidationContext>().As<IValidationContext>().InstancePerDependency();
+			builder.RegisterType<Mapper>().As<IMapper>().SingleInstance();
+			builder.RegisterType<ValidationContext>().As<IValidationContext>().SingleInstance();
 
-			builder.RegisterType<ClientDao>().As<IClientDao>().InstancePerDependency();
-			builder.RegisterType<ClientBusiness>().As<ClientBusiness>().InstancePerDependency();
+			builder.RegisterType<ClientDao>().As<IClientDao>().SingleInstance();
+			builder.RegisterType<ClientBusiness>().As<ClientBusiness>().SingleInstance();
 
 			builder.RegisterType<ClientSaveValidator>().As<ClientSaveValidator>().InstancePerDependency();
 			builder.RegisterType<ClientUpdateValidator>().As<ClientUpdateValidator>().InstancePerDependency();

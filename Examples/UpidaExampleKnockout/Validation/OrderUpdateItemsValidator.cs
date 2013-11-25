@@ -7,22 +7,22 @@ namespace UpidaExampleKnockout.Validation
 	{
 		public override void Validate(object state)
 		{
-			this.Field("Id", this.Target.Id);
+			this.Field("id", this.Target.Id);
 			this.Required(Errors.NOT_VALID_NUMBER);
 
-			this.MissingField("CreatedOn", this.Target.CreatedOn);
-			this.MissingField("ShipAddress", this.Target.ShipAddress);
-			this.MissingField("ShipCity", this.Target.ShipCity);
-			this.MissingField("ShipCountry", this.Target.ShipCountry);
-			this.MissingField("ShipZip", this.Target.ShipZip);
-			this.MissingField("Total", this.Target.Total);
+			this.MissingField("createdOn", this.Target.CreatedOn);
+			this.MissingField("shipAddress", this.Target.ShipAddress);
+			this.MissingField("shipCity", this.Target.ShipCity);
+			this.MissingField("shipCountry", this.Target.ShipCountry);
+			this.MissingField("shipZip", this.Target.ShipZip);
+			this.MissingField("total", this.Target.Total);
 
-			this.Field("OrderItems", this.Target.OrderItems);
+			this.Field("orderItems", this.Target.OrderItems);
 			this.Required();
 			this.MustHaveSizeBetween(1, 500, Errors.WRONG_COUNT);
 			this.NestedList<OrderItem>(Groups.MERGE, null);
 
-			this.MissingField("Client", this.Target.Client);
+			this.MissingField("client", this.Target.Client);
 		}
 	}
 }

@@ -7,33 +7,33 @@ namespace UpidaExampleKnockout.Validation
 	{
 		public override void Validate(object state)
 		{
-			this.Field("Id", Target.Id);
+			this.Field("id", Target.Id);
 			this.Required(Errors.NOT_VALID_NUMBER);
 
-			this.MissingField("CreatedOn", this.Target.CreatedOn);
+			this.MissingField("createdOn", this.Target.CreatedOn);
 
-			this.Field("ShipAddress", Target.ShipAddress);
+			this.Field("shipAddress", Target.ShipAddress);
 			this.Required();
 			this.MustHaveLengthBetween(5, 256, Errors.LENGTH_WRONG);
 
-			this.Field("ShipCity", Target.ShipCity);
+			this.Field("shipCity", Target.ShipCity);
 			this.Required();
 			this.MustHaveLengthBetween(2, 256, Errors.LENGTH_WRONG);
 
-			this.Field("ShipCountry", Target.ShipCountry);
+			this.Field("shipCountry", Target.ShipCountry);
 			this.Required();
 			this.MustHaveLengthBetween(2, 256, Errors.LENGTH_WRONG);
 
-			this.Field("ShipZip", Target.ShipZip);
+			this.Field("shipZip", Target.ShipZip);
 			this.Required();
 			this.MustHaveLengthBetween(5, 5, Errors.LENGTH_WRONG);
 
-			this.Field("Total", Target.Total);
+			this.Field("total", Target.Total);
 			this.Required(Errors.NOT_VALID_NUMBER);
 			this.MustBeGreaterThan(0f, Errors.GREATER_ZERO);
 
-			this.MissingField("OrderItems", this.Target.OrderItems);
-			this.MissingField("Client", this.Target.Client);
+			this.MissingField("orderItems", this.Target.OrderItems);
+			this.MissingField("client", this.Target.Client);
 		}
 	}
 }

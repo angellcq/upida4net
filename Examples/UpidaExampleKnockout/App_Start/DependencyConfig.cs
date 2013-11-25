@@ -26,17 +26,17 @@ namespace UpidaExampleKnockout
 			builder.RegisterFilterProvider();
 
 			builder.Register((context) => new Configuration().Configure().BuildSessionFactory()).As<ISessionFactory>().SingleInstance();
-			builder.RegisterType<Mapper>().As<IMapper>().InstancePerDependency();
-			builder.RegisterType<JsonParser>().As<IJsonParser>().InstancePerDependency();
-			builder.RegisterType<ValidationContext>().As<IValidationContext>().InstancePerDependency();
+			builder.RegisterType<Mapper>().As<IMapper>().SingleInstance();
+			builder.RegisterType<ValidationContext>().As<IValidationContext>().SingleInstance();
 
-			builder.RegisterType<OrderDao>().As<IOrderDao>().InstancePerDependency();
-			builder.RegisterType<ClientDao>().As<IClientDao>().InstancePerDependency();
+			builder.RegisterType<OrderDao>().As<IOrderDao>().SingleInstance();
+			builder.RegisterType<ClientDao>().As<IClientDao>().SingleInstance();
 
-			builder.RegisterType<ClientBusiness>().As<ClientBusiness>().InstancePerDependency();
-			builder.RegisterType<OrderBusiness>().As<OrderBusiness>().InstancePerDependency();
+			builder.RegisterType<ClientBusiness>().As<ClientBusiness>().SingleInstance();
+			builder.RegisterType<OrderBusiness>().As<OrderBusiness>().SingleInstance();
 
 			builder.RegisterType<ClientSaveValidator>().As<ClientSaveValidator>().InstancePerDependency();
+			builder.RegisterType<ClientReferenceValidator>().As<ClientReferenceValidator>().InstancePerDependency();
 			builder.RegisterType<OrderSaveValidator>().As<OrderSaveValidator>().InstancePerDependency();
 			builder.RegisterType<OrderUpdateValidator>().As<OrderUpdateValidator>().InstancePerDependency();
 			builder.RegisterType<OrderUpdateItemsValidator>().As<OrderUpdateItemsValidator>().InstancePerDependency();

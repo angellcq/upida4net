@@ -28,18 +28,18 @@ $(function () {
 
 	upida.vm.loadOrder = function () {
 		upida.utils.get("order/getfull?id=" + upida.vm.id, function(item) {
-			upida.vm.shipCountry(item.ShipCountry);
-			upida.vm.shipCity(item.ShipCity);
-			upida.vm.shipZip(item.ShipZip);
-			upida.vm.shipAddress(item.ShipAddress);
-			upida.vm.total(item.Total);
-			upida.vm.client(item.Client.Name);
-			upida.vm.indexLink(upida.utils.url("order/index?clientId=") + item.Client.Id);
-			$.each(item.OrderItems, function (i, p) {
+			upida.vm.shipCountry(item.shipCountry);
+			upida.vm.shipCity(item.shipCity);
+			upida.vm.shipZip(item.shipZip);
+			upida.vm.shipAddress(item.shipAddress);
+			upida.vm.total(item.total);
+			upida.vm.client(item.client.name);
+			upida.vm.indexLink(upida.utils.url("order/index?clientId=") + item.client.id);
+			$.each(item.orderItems, function (i, p) {
 				var row = new upida.vm.OrderItemRow();
-				row.count(p.Count);
-				row.price(p.Price);
-				var product = upida.utils.find(upida.vm.products, function(m) { return p.ProductId == m.id; });
+				row.count(p.count);
+				row.price(p.price);
+				var product = upida.utils.find(upida.vm.products, function(m) { return p.productId == m.id; });
 				row.product(product.name);
 				upida.vm.orderItemRows.push(row);
 			});
