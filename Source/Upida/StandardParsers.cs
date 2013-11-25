@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 
 namespace Upida
 {
@@ -96,7 +97,7 @@ namespace Upida
 		{
 			public object ParseTextValue(Type type, string text)
 			{
-				return double.Parse(text);
+				return double.Parse(text, CultureInfo.InvariantCulture);
 			}
 		}
 
@@ -104,7 +105,7 @@ namespace Upida
 		{
 			public object ParseTextValue(Type type, string text)
 			{
-				return float.Parse(text);
+				return float.Parse(text, CultureInfo.InvariantCulture);
 			}
 		}
 

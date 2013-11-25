@@ -1,27 +1,28 @@
 @{
-    ViewBag.Title = "Edit Order Items";
-    ViewBag.ViewModel = "Order/EditItems.js";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+	ViewBag.Title = "Edit Order Items";
+	ViewBag.ViewModel = "orderItemsEditViewmodel.js";
+	Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <a data-bind="attr: {'href': clientsLink}">CLIENTS</a>&nbsp;|
 <a data-bind="attr: {'href': indexLink}">ORDERS</a>&nbsp;|
 <h2>Edit Order Items</h2>
+<span class="error" data-bind="html: $$mainerror"></span>
 <br />
 <!-- ko foreach: orderItemRows -->
 Product:
 <select data-bind="options: $root.products, value: productId, optionsText: 'name', optionsValue: 'id', optionsCaption: 'Select...'"></select>
-<span class="error" data-bind="html: $root.errors.get('orderItems['+ $index() + '].productId')"></span>
+<span class="error" data-bind="html: $root.$$errors.get('orderItems[' + $index() + '].productId')"></span>
 &nbsp;&nbsp;Count:
 <input data-bind="value: count" />
-<span class="error" data-bind="html: $root.errors.get('orderItems['+ $index() + '].count')"></span>
+<span class="error" data-bind="html: $root.$$errors.get('orderItems[' + $index() + '].count')"></span>
 &nbsp;&nbsp;Price:
 <input data-bind="value: price" />
-<span class="error" data-bind="html: $root.errors.get('orderItems['+ $index() + '].price')"></span>
+<span class="error" data-bind="html: $root.$$errors.get('orderItems[' + $index() + '].price')"></span>
 &nbsp;&nbsp;
 <input type="button" data-bind="click: $root.removeProduct" value="remove" />
 <br />
 <!-- /ko -->
 <input type="button" data-bind="click: addProduct" value="add" />
-<span class="error" data-bind="html: errors.get('orderItems')"></span>
+<span class="error" data-bind="html: $$errors.get('orderItems')"></span>
 <hr />
 <input type="button" data-bind="click: onSave" value="Save" />

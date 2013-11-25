@@ -1,13 +1,13 @@
 @{
-    ViewBag.Title = "Orders";
-    ViewBag.ViewModel = "Order/Index.js";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+	ViewBag.Title = "Orders";
+	ViewBag.ViewModel = "orderListViewmodel.js";
+	Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <a data-bind="attr: {'href': clientsLink}">CLIENTS</a>&nbsp;|
 <a data-bind="attr: {'href': createLink}">NEW ORDER</a>&nbsp;|
 <h2>Orders</h2>
+<span class="error" data-bind="html: $$mainerror"></span>
 <hr />
-<br />
 <table border="1" style="width: 80%;">
 <thead>
 	<tr class="head">

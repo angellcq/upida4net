@@ -4,12 +4,12 @@ namespace UpidaExampleKnockout.Controllers.UI
 {
 	public class ClientController : Controller
 	{
-		public ActionResult index()
+		public ActionResult List()
 		{
 			return View();
 		}
 
-		public ActionResult create()
+		public ActionResult Create()
 		{
 			return View();
 		}

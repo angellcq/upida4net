@@ -11,19 +11,19 @@ namespace UpidaExampleKnockout.Validation
 
 			this.Field("shipAddress", this.Target.ShipAddress);
 			this.Required();
-			this.MustHaveLengthBetween(5, 256, Errors.LENGTH_WRONG);
+			this.MustHaveLengthBetween(5, 50, Errors.LENGTH_5_AND_50);
 
 			this.Field("shipCity", this.Target.ShipCity);
 			this.Required();
-			this.MustHaveLengthBetween(2, 256, Errors.LENGTH_WRONG);
+			this.MustHaveLengthBetween(2, 50, Errors.LENGTH_2_AND_50);
 
 			this.Field("shipCountry", this.Target.ShipCountry);
 			this.Required();
-			this.MustHaveLengthBetween(2, 256, Errors.LENGTH_WRONG);
+			this.MustHaveLengthBetween(2, 50, Errors.LENGTH_2_AND_50);
 
 			this.Field("shipZip", this.Target.ShipZip);
 			this.Required();
-			this.MustHaveLengthBetween(5, 5, Errors.LENGTH_WRONG);
+			this.MustHaveLengthBetween(5, 5, Errors.LENGTH_ZIP);
 
 			this.Field("total", this.Target.Total);
 			this.Required(Errors.NOT_VALID_NUMBER);

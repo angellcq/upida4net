@@ -11,7 +11,7 @@ namespace UpidaExampleAngular.Validation
 
 			this.Field("shipAddress", this.Target.ShipAddress);
 			this.Required();
-			this.MustHaveLengthBetween(2, 50, Errors.LENGTH_2_AND_50);
+			this.MustHaveLengthBetween(5, 50, Errors.LENGTH_5_AND_50);
 
 			this.Field("shipCity", this.Target.ShipCity);
 			this.Required();

@@ -1,0 +1,40 @@
+$(function () {
+	vm = {
+		clientId: upida.query("clientId"),
+		orderRows: ko.observableArray([]),
+		clientsLink: upida.url("client/list"),
+		createLink: null
+	};
+
+	vm.createLink = upida.url("order/create?clientId=") + vm.clientId;
+	vm.OrderRow = function (id) {
+		this.id = ko.observable(id);
+		this.createdOn = ko.observable();
+		this.shipCountry = ko.observable();
+		this.shipCity = ko.observable();
+		this.shipZip = ko.observable();
+		this.shipAddress = ko.observable();
+		this.total = ko.observable();
+		this.viewLink = upida.url("order/show?id=") + id;
+		this.editLink = upida.url("order/edit?id=") + id;
+		this.editItemsLink = upida.url("order/edititems?id=") + id;
+	};
+
+	vm.loadOrders = function() {
+		upida.get("order/getbyclient?clientId=" + vm.clientId, function (items) {
+			$.each(items, function (i, p) {
+				var row = new vm.OrderRow(p.id);
+				row.createdOn(p.createdOn);
+				row.shipCountry(p.shipCountry);
+				row.shipCity(p.shipCity);
+				row.shipZip(p.shipZip);
+				row.shipAddress(p.shipAddress);
+				row.total(p.total);
+				vm.orderRows.push(row);
+			});
+		});
+	};
+
+	upida.bind(vm);
+	vm.loadOrders();
+});

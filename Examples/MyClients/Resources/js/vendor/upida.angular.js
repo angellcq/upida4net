@@ -1,5 +1,6 @@
 var upida = upida || {};
 upida.baseUrl = "/";
+
 upida.serviceFactory = function($http) {
 	var service = { onBeforeAjax: null, onAfterAjax: null };
 	service.$http = $http;

@@ -165,19 +165,20 @@
     <EmbeddedResource Include="Domain\Mapping\OrderItem.hbm.xml" />
     <Content Include="Global.asax" />
     <Content Include="Resources\css\style.css" />
+    <Content Include="Resources\js\app.js" />
     <Content Include="Resources\js\handlers.js" />
-    <Content Include="Resources\js\jquery-1.9.1.js" />
-    <Content Include="Resources\js\jquery.blockUI.js" />
-    <Content Include="Resources\js\knockout-2.2.1.js" />
-    <Content Include="Resources\js\observableDictionary.js" />
-    <Content Include="Resources\js\upida.utils.knockout.js" />
-    <Content Include="Resources\js\vm\Client\Create.js" />
-    <Content Include="Resources\js\vm\Client\Index.js" />
-    <Content Include="Resources\js\vm\Order\Create.js" />
-    <Content Include="Resources\js\vm\Order\Edit.js" />
-    <Content Include="Resources\js\vm\Order\EditItems.js" />
-    <Content Include="Resources\js\vm\Order\Index.js" />
-    <Content Include="Resources\js\vm\Order\Show.js" />
+    <Content Include="Resources\js\vendor\jquery-1.9.1.js" />
+    <Content Include="Resources\js\vendor\jquery.blockUI.js" />
+    <Content Include="Resources\js\vendor\knockout-2.2.1.js" />
+    <Content Include="Resources\js\vendor\observableDictionary.js" />
+    <Content Include="Resources\js\vendor\upida.knockout.js" />
+    <Content Include="Resources\js\vm\clientCreateViewmodel.js" />
+    <Content Include="Resources\js\vm\clientListViewmodel.js" />
+    <Content Include="Resources\js\vm\orderCreateViewmodel.js" />
+    <Content Include="Resources\js\vm\orderEditViewmodel.js" />
+    <Content Include="Resources\js\vm\orderItemsEditViewmodel.js" />
+    <Content Include="Resources\js\vm\orderListViewmodel.js" />
+    <Content Include="Resources\js\vm\orderShowViewmodel.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -212,14 +213,14 @@
     <None Include="Properties\PublishProfiles\upidaknockout - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\upidaknockout - Web Deploy.pubxml" />
     <None Include="Views\Client\Create.cshtml" />
-    <None Include="Views\Client\Index.cshtml" />
+    <None Include="Views\Client\List.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Views\Order\Create.cshtml" />
     <None Include="Views\Order\Edit.cshtml" />
     <None Include="Views\Order\EditItems.cshtml" />
-    <None Include="Views\Order\Index.cshtml" />
+    <None Include="Views\Order\List.cshtml" />
     <None Include="Views\Order\Show.cshtml" />
   </ItemGroup>
   <PropertyGroup>

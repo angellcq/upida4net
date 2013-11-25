@@ -4,7 +4,7 @@ namespace UpidaExampleKnockout.Controllers.UI
 {
 	public class OrderController : Controller
 	{
-		public ActionResult Index()
+		public ActionResult List()
 		{
 			return View();
 		}

@@ -11,7 +11,7 @@ namespace UpidaExampleKnockout.Validation
 
 			this.Field("name", Target.Name);
 			this.Required();
-			this.MustHaveLengthBetween(1, 256, Errors.LENGTH_WRONG);
+			this.MustHaveLengthBetween(2, 50, Errors.LENGTH_2_AND_50);
 			this.MustBeEmail(Errors.NOT_EMAIL);
 		}
 	}
