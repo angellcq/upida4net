@@ -15,7 +15,7 @@ upida.navigate = function(link) {
 upida.post = function(method, input, callback) {
 	upida.ajaxStart();
 	$.ajax({
-		url: upida.url("api/" + method),
+		url: upida.url(method),
 		type: "POST",
 		data: ko.toJSON(input),
 		contentType: "application/json",
@@ -35,7 +35,7 @@ upida.post = function(method, input, callback) {
 upida.get = function(method, callback) {
 	upida.ajaxStart();
 	$.ajax({
-		url: upida.url("api/" + method),
+		url: upida.url(method),
 		type: "GET",
 		success: function (output, status, xhr) {
 			upida.clearErrors();

@@ -24,7 +24,7 @@ namespace MyClients.Validation
 
 			this.Field("logins", this.Target.Logins);
 			this.Required();
-			this.MustHaveSizeBetween(1, 5, Errors.NUMBER_OF_LOGINS);
+			this.MustHaveCountBetween(1, 5, Errors.NUMBER_OF_LOGINS);
 			this.Stop();
 			this.NestedList<Login>(Groups.MERGE, null);
 		}

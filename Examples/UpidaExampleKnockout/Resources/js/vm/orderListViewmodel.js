@@ -21,7 +21,7 @@ $(function () {
 	};
 
 	vm.loadOrders = function() {
-		upida.get("order/getbyclient?clientId=" + vm.clientId, function (items) {
+		upida.get("api/order/getbyclient?clientId=" + vm.clientId, function (items) {
 			$.each(items, function (i, p) {
 				var row = new vm.OrderRow(p.id);
 				row.createdOn(p.createdOn);

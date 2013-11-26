@@ -21,13 +21,13 @@ $(function () {
 		item.shipAddress = vm.shipAddress();
 		item.total = vm.total();
 
-		upida.post("order/update", item, function() {
+		upida.post("api/order/update", item, function () {
 			upida.navigate("order/show?id=" + upida.vm.id);
 		});
 	};
 
 	vm.loadOrder = function () {
-		upida.get("order/get?id=" + vm.id, function(item) {
+		upida.get("api/order/get?id=" + vm.id, function (item) {
 			vm.shipCountry(item.shipCountry);
 			vm.shipCity(item.shipCity);
 			vm.shipZip(item.shipZip);

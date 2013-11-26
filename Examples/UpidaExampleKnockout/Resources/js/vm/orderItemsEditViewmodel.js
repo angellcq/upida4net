@@ -36,13 +36,13 @@ $(function () {
 			orderItem.price = p.price();
 			item.orderItems.push(orderItem);
 		});
-		upida.post("order/updateitems", item, function() {
+		upida.post("api/order/updateitems", item, function () {
 			upida.navigate("order/show?id=" + vm.id);
 		});
 	};
 
 	vm.loadOrder = function () {
-		upida.get("order/getfull?id=" + upida.vm.id, function(item) {
+		upida.get("api/order/getfull?id=" + upida.vm.id, function (item) {
 			vm.clientId = item.client.id;
 			vm.indexLink(upida.url("order/list?clientId=") + item.client.id);
 			$.each(item.orderItems, function (i, p) {

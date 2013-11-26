@@ -219,7 +219,7 @@ namespace Upida.Validation
 		/// </summary>
 		/// <param name="msg">failure message</param>
 		/// <returns></returns>
-		public virtual void MustBeNotEmpty(string msg)
+		public virtual void MustBeNotEmptyString(string msg)
 		{
 			if (this.Stopped) return;
 
@@ -360,7 +360,7 @@ namespace Upida.Validation
 		/// Checks if field value collection size is between min and max values inclusively (field must be a collection)
 		/// </summary>
 		/// <returns></returns>
-		public virtual bool IsSizeBetween(int min, int max)
+		public virtual bool IsCountBetween(int min, int max)
 		{
 			ICollection collection = (ICollection)this.Value;
 			return collection.Count >= min && collection.Count <= max;
@@ -373,11 +373,11 @@ namespace Upida.Validation
 		/// <param name="max">max value</param>
 		/// <param name="msg">failure message</param>
 		/// <returns></returns>
-		public virtual void MustHaveSizeBetween(int min, int max, string msg)
+		public virtual void MustHaveCountBetween(int min, int max, string msg)
 		{
 			if (this.Stopped) return;
 
-			if (!this.IsSizeBetween(min, max))
+			if (!this.IsCountBetween(min, max))
 			{
 				this.Fail(msg);
 			}

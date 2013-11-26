@@ -7,7 +7,7 @@ $(function () {
 	vm.onSave = function () {
 		var item = {};
 		item.name = vm.name();
-		upida.post("client/save", item, function() {
+		upida.post("api/client/save", item, function () {
 			upida.navigate("client/list");
 		});
 	};

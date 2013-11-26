@@ -31,7 +31,7 @@ namespace UpidaExampleKnockout.Validation
 
 			this.Field("orderItems", this.Target.OrderItems);
 			this.Required();
-			this.MustHaveSizeBetween(1, 500, Errors.WRONG_COUNT);
+			this.MustHaveCountBetween(1, 500, Errors.WRONG_COUNT);
 			this.NestedList<OrderItem>(Groups.SAVE, null);
 
 			this.Field("client", this.Target.Client);

@@ -44,7 +44,7 @@ $(function () {
 			orderItem.price = p.price();
 			item.orderItems.push(orderItem);
 		});
-		upida.post("order/save", item, function() {
+		upida.post("api/order/save", item, function () {
 			upida.navigate("order/list?clientId=" + vm.clientId);
 		});
 	};

@@ -19,7 +19,7 @@ namespace UpidaExampleAngular.Validation
 
 			this.Field("orderItems", this.Target.OrderItems);
 			this.Required();
-			this.MustHaveSizeBetween(1, 500, Errors.WRONG_COUNT);
+			this.MustHaveCountBetween(1, 500, Errors.WRONG_COUNT);
 			this.NestedList<OrderItem>(Groups.MERGE, null);
 
 			this.MissingField("client", this.Target.Client);

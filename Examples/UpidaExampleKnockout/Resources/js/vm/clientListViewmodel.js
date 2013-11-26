@@ -12,7 +12,7 @@ $(function () {
 	};
 
 	vm.loadClients = function() {
-		upida.get("client/getall", function (items) {
+		upida.get("api/client/getall", function (items) {
 			$.each(items, function (i, p) {
 				var row = new vm.ClientRow(p.id);
 				row.name(p.name);

@@ -25,7 +25,7 @@ $(function () {
 	};
 
 	vm.loadOrder = function () {
-		upida.get("order/getfull?id=" + vm.id, function(item) {
+		upida.get("api/order/getfull?id=" + vm.id, function (item) {
 			vm.shipCountry(item.shipCountry);
 			vm.shipCity(item.shipCity);
 			vm.shipZip(item.shipZip);
