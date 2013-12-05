@@ -20,7 +20,7 @@ myclients.app.controller(
 				row.lastname = p.lastname;
 				row.age = p.age;
 				angular.forEach(p.logins, function (q, j) {
-					row.logins.push(q.name);
+					row.logins.push({ id: q.id, name: q.name });
 				});
 				$scope.clientRows.push(row);
 			});
