@@ -108,6 +108,7 @@ upida.serviceFactory = function($http) {
 	service.clearErrors = function($scope) {
 		if(!$scope) return;
 		$scope.$$errors = new Array();
+		$scope.$$errors.main = "";
 	};
 
 	service.find = function (obsArray, isItemFunc) {
