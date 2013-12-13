@@ -1,12 +1,12 @@
-var upida = upida || {};
-upida.baseUrl = "/";
-
-upida.serviceFactory = function($http) {
+var $upida = $upida || {};
+$upida.baseUrl = "/";
+$upida.module = angular.module("upidamodule", []);
+$upida.module.factory("upida", ["$http", "$q", function($http, $q) {
 	var service = { onBeforeAjax: null, onAfterAjax: null };
 	service.$http = $http;
 
 	service.url = function(link) {
-		return upida.baseUrl + link;
+		return $upida.baseUrl + link;
 	};
 
 	service.navigate = function(link) {
@@ -23,58 +23,64 @@ upida.serviceFactory = function($http) {
 		return undefined === val || null == val || "" === val;
 	};
 
-	service.post = function(method, input, $scope, callback) {
+	service.getDirectPromise = function(data) {
+		var deferred = $q.defer();
+		deferred.resolve(data);
+		return deferred.promise;
+	};
+
+	service.post = function(method, input, $scope) {
 		service.ajaxStart();
-		service.$http({
+		var deferred = $q.defer();
+		return service.$http({
 			method: 'POST',
 			url: service.url(method),
 			data: input
 		})
 		.success(function(data, status, headers, config) {
 			service.clearErrors($scope);
-			callback(data);
+			deferred.resolve(data);
 			service.ajaxEnd();
 		})
 		.error(function(data, status, headers, config) {
+			deferred.reject();
 			service.ajaxEnd();
 			service.showErrors($scope, data);
 		});
+		return deferred.promise;
 	};
 
-	service.get = function(method, $scope, callback) {
+	service.get = function(method, $scope) {
 		service.ajaxStart();
+		var deferred = $q.defer();
 		service.$http({
 			method: 'GET',
 			url: service.url(method)
 		})
 		.success(function(data, status, headers, config) {
 			service.clearErrors($scope);
-			callback(data);
+			deferred.resolve(data);
 			service.ajaxEnd();
 		})
 		.error(function(data, status, headers, config) {
+			deferred.reject();
 			service.ajaxEnd();
 			service.showErrors($scope, data);
 		});
+		return deferred.promise;
+	};
+
+	service.all = function(promises) {
+		return $q.all(promises);
 	};
 
 	service.ajaxCallCount = 0;
-	service.ajaxCallback = function(callback) {
-		setTimeout(function () {
-			if (0 == service.ajaxCallCount) {
-				callback();
-			}
-			else {
-				service.ajaxCallback(callback);
-			}
-		}, 100);
-	};
 
 	service.ajaxStart = function() {
 		if(0 == service.ajaxCallCount) {
 			if(service.onBeforeAjax) service.onBeforeAjax();
 		}
-	
+
 		service.ajaxCallCount++;
 	};
 
@@ -124,40 +130,36 @@ upida.serviceFactory = function($http) {
 	};
 
 	return service;
-};
+}]);
 
-upida.mainErrorDirectiveFactory = function(app) {
-	app.directive("mainerror", function () {
-		return {
-			restrict: 'A',
-			link: function(scope, element, attrs) {
-				scope.$watch('$$errors', function(errors, oldVal) {
-					if(!errors) return;
-					element.text(errors.main);
-				});
-			}
-		};
-	});
-};
+$upida.module.directive("mainerror", function () {
+	return {
+		restrict: 'A',
+		link: function (scope, element, attrs) {
+			scope.$watch('$$errors', function (errors, oldVal) {
+				if (!errors) return;
+				element.text(errors.main);
+			});
+		}
+	};
+});
 
-upida.errorKeyDirectiveFactory = function(app) {
-	app.directive("errorkey", function () {
-		return {
-			restrict: 'A',
-			link: function(scope, element, attrs) {
-				scope.$watch('$$errors', function (errors, oldVal) {
-					element.text("");
-					if(!errors) return;
-					var key = attrs.errorkey;
-					if(errors) {
-						angular.forEach(errors, function (p, i) {
-							if(key == p.key) {
-								element.html(p.text);
-							}
-						});
-					}
-				});
-			}
-		};
-	});
-};
+$upida.module.directive("errorkey", function () {
+	return {
+		restrict: 'A',
+		link: function (scope, element, attrs) {
+			scope.$watch('$$errors', function (errors, oldVal) {
+				element.text("");
+				if (!errors) return;
+				var key = attrs.errorkey;
+				if (errors) {
+					angular.forEach(errors, function (p, i) {
+						if (key == p.key) {
+							element.html(p.text);
+						}
+					});
+				}
+			});
+		}
+	};
+});

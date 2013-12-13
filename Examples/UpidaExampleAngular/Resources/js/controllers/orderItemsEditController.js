@@ -1,6 +1,6 @@
 angularExample.app.controller(
 		'orderItemsEditController',
-		["$scope", "$location", "$routeParams", "upidaService", function ($scope, $location, $routeParams, upidaService) {
+		["$scope", "$location", "$routeParams", "upida", function ($scope, $location, $routeParams, upida) {
 
 	$scope.id = $routeParams.id;
 	$scope.clientId = null;
@@ -36,20 +36,22 @@ angularExample.app.controller(
 			orderItem.price = p.price;
 			item.orderItems.push(orderItem);
 		});
-		upidaService.post("order/updateitems", item, $scope, function() {
+		upida.post("order/updateitems", item, $scope)
+		.then(function () {
 			$location.path("order/show/" + $scope.id);
 		});
 	};
 
 	$scope.loadOrder = function () {
-		upidaService.get("order/getfull?id=" + $scope.id, $scope, function(item) {
+		upida.get("order/getfull?id=" + $scope.id, $scope)
+		.then(function (item) {
 			$scope.clientId = item.client.id;
 			angular.forEach(item.orderItems, function (p, i) {
 				var row = new $scope.OrderItemRow();
 				row.id = p.id;
 				row.count = p.count;
 				row.price = p.price;
-				row.product = upidaService.find($scope.products, function(m) { return p.productId == m.id; });
+				row.product = upida.find($scope.products, function (m) { return p.productId == m.id; });
 				$scope.orderItemRows.push(row);
 			});
 		});

@@ -1,6 +1,6 @@
 angularExample.app.controller(
 		"orderListController",
-		["$scope", "$routeParams", "upidaService", function ($scope, $routeParams, upidaService) {
+		["$scope", "$routeParams", "upida", function ($scope, $routeParams, upida) {
 
 	$scope.clientId = $routeParams.clientId;
 	$scope.orderRows = new Array();
@@ -16,7 +16,8 @@ angularExample.app.controller(
 	};
 
 	$scope.loadOrders = function() {
-		upidaService.get("order/getbyclient?clientId=" + $scope.clientId, $scope, function (items) {
+		upida.get("order/getbyclient?clientId=" + $scope.clientId, $scope)
+		.then(function (items) {
 			angular.forEach(items, function (p, i) {
 				var row = new $scope.OrderRow(p.id);
 				row.createdOn = p.createdOn;

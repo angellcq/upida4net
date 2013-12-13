@@ -1,6 +1,5 @@
 myclients.app.controller(
-	"clientListController", ["$scope", "upidaService",
-	function ($scope, upidaService) {
+	"clientListController", ["$scope", "upida", function ($scope, upida) {
 
 	$scope.clientRows = new Array();
 
@@ -13,7 +12,8 @@ myclients.app.controller(
 	};
 
 	$scope.loadClients = function() {
-		upidaService.get("client/getall", $scope, function (items) {
+		upida.get("client/getall", $scope)
+		.then(function (items) {
 			angular.forEach(items, function (p, i) {
 				var row = new $scope.ClientRow(p.id);
 				row.name = p.name;

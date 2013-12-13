@@ -1,12 +1,13 @@
 angularExample.app.controller(
 		"clientCreateController",
-		["$scope", "$location", "upidaService", function($scope, $location, upidaService) {
+		["$scope", "$location", "upida", function ($scope, $location, upida) {
 	$scope.name = null;
 
 	$scope.onSave = function () {
 		var item = {};
 		item.name = $scope.name;
-		upidaService.post("client/save", item, $scope, function() {
+		upida.post("client/save", item, $scope)
+		.then(function () {
 			$location.path("client/list");
 		});
 	};

@@ -1,5 +1,5 @@
 ﻿var angularExample = angularExample || {};
-angularExample.app = angular.module("angularExample", ["ngRoute"]);
+angularExample.app = angular.module("angularExample", ["ngRoute", "upidamodule"]);
 
 angularExample.app.config(function ($routeProvider) {
 	$routeProvider
@@ -40,7 +40,4 @@ angularExample.app.config(function ($routeProvider) {
 		});
 });
 
-upida.baseUrl = "/api/";
-upida.errorKeyDirectiveFactory(angularExample.app);
-upida.mainErrorDirectiveFactory(angularExample.app);
-angularExample.app.factory("upidaService", ["$http", upida.serviceFactory]);
+$upida.baseUrl = "/api/";

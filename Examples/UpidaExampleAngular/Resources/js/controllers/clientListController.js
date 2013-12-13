@@ -1,15 +1,17 @@
 angularExample.app.controller(
 		"clientListController",
-		["$scope", "$routeParams", "upidaService", function($scope, $routeParams, upidaService) {
+		["$scope", "$routeParams", "upida", function ($scope, $routeParams, upida) {
 
-	$scope.clientRows = new Array();
+	$scope.clientRows = null;
 	$scope.ClientRow = function (id) {
 		this.id = id;
 		this.name = null;
 	};
 
 	$scope.loadClients = function() {
-		upidaService.get("client/getall", $scope, function (items) {
+		upida.get("client/getall", $scope)
+		.then(function (items) {
+			$scope.clientRows = new Array();
 			angular.forEach(items, function (p, i) {
 				var row = new $scope.ClientRow(p.id);
 				row.name = p.name;

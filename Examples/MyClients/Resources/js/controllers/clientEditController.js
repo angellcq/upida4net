@@ -1,6 +1,6 @@
 myclients.app.controller(
 	"clientEditController",
-	["$scope", "$location", "$routeParams", "upidaService", function ($scope, $location, $routeParams, upidaService) {
+	["$scope", "$location", "$routeParams", "upida", function ($scope, $location, $routeParams, upida) {
 
 	$scope.id = $routeParams.id;
 	$scope.name = null;
@@ -39,13 +39,15 @@ myclients.app.controller(
 			item.enabled = p.enabled;
 			data.logins.push(item);
 		});
-		upidaService.post("client/update", data, $scope, function () {
+		upida.post("client/update", data, $scope)
+		.then(function () {
 			$location.path("client/list");
 		});
 	};
 
 	$scope.loadClient = function () {
-		upidaService.get("client/getbyid?id=" + $scope.id, $scope, function (item) {
+		upida.get("client/getbyid?id=" + $scope.id, $scope)
+		.then(function (item) {
 			$scope.name = item.name;
 			$scope.lastname = item.lastname;
 			$scope.age = item.age;

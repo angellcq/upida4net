@@ -1,6 +1,6 @@
 ﻿myclients.app.controller(
 	"clientCreateController",
-	["$scope", "$location", "upidaService", function ($scope, $location, upidaService) {
+	["$scope", "$location", "upida", function ($scope, $location, upida) {
 
 	$scope.name = null;
 	$scope.lastname = null;
@@ -36,7 +36,8 @@
 			item.enabled = p.enabled;
 			data.logins.push(item);
 		});
-		upidaService.post("client/save", data, $scope, function () {
+		upida.post("client/save", data, $scope)
+		.then(function () {
 			$location.path("client/list");
 		});
 	};

@@ -1,6 +1,6 @@
 angularExample.app.controller(
 		"orderCreateController",
-		["$scope", "$location", "$routeParams", "upidaService", function($scope, $location, $routeParams, upidaService) {
+		["$scope", "$location", "$routeParams", "upida", function ($scope, $location, $routeParams, upida) {
 
 	$scope.clientId = $routeParams.clientId;
 	$scope.shipCountry = null;
@@ -29,7 +29,7 @@ angularExample.app.controller(
 
 	$scope.onSave = function () {
 		var item = {};
-		item.client = upidaService.getReff($scope.clientId);
+		item.client = upida.getReff($scope.clientId);
 		item.shipCountry = $scope.shipCountry;
 		item.shipCity = $scope.shipCity;
 		item.shipZip = $scope.shipZip;
@@ -43,7 +43,8 @@ angularExample.app.controller(
 			orderItem.price = p.price;
 			item.orderItems.push(orderItem);
 		});
-		upidaService.post("order/save", item, $scope, function() {
+		upida.post("order/save", item, $scope)
+		.then(function () {
 			$location.path("order/list/" + $scope.clientId);
 		});
 	};

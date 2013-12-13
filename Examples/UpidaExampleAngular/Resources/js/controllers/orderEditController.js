@@ -1,6 +1,6 @@
 angularExample.app.controller(
 		"orderEditController",
-		["$scope", "$location", "$routeParams", "upidaService", function ($scope, $location, $routeParams, upidaService) {
+		["$scope", "$location", "$routeParams", "upida", function ($scope, $location, $routeParams, upida) {
 
 	$scope.id = $routeParams.id;
 	$scope.clientId = null;
@@ -19,13 +19,15 @@ angularExample.app.controller(
 		item.shipAddress = $scope.shipAddress;
 		item.total = $scope.total;
 
-		upidaService.post("order/update", item, $scope, function() {
+		upida.post("order/update", item, $scope)
+		.then(function () {
 			$location.path("order/show/" + $scope.id);
 		});
 	};
 
 	$scope.loadOrder = function () {
-		upidaService.get("order/get?id=" + $scope.id, $scope, function(item) {
+		upida.get("order/get?id=" + $scope.id, $scope)
+		.then(function (item) {
 			$scope.shipCountry = item.shipCountry;
 			$scope.shipCity = item.shipCity;
 			$scope.shipZip = item.shipZip;

@@ -20,6 +20,7 @@ namespace MyClients.Validation
 
 			this.Field("age", this.Target.Age);
 			this.Required(Errors.NOT_VALID_NUMBER);
+			this.MustBeGreaterThan(0, Errors.GREATER_ZERO);
 
 			this.Field("logins", this.Target.Logins);
 			this.Required();
