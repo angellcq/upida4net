@@ -8,7 +8,7 @@ $(function () {
 		total: ko.observable(null),
 		orderItemRows: ko.observableArray([]),
 		products: [{id:1, name:'product A'}, {id:2, name:'product B'}, {id:3, name:'product C'}, {id:4, name:'product D'}, {id:5, name:'product E'}],
-		clientsLink: $upida.url("client/index"),
+		clientsLink: $upida.url("client/list"),
 		indexLink: null
 	};
 
