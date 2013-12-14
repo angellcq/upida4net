@@ -1,12 +1,12 @@
 $(function () {
 	vm = {
-		clientId: upida.query("clientId"),
+		clientId: $upida.query("clientId"),
 		orderRows: ko.observableArray([]),
-		clientsLink: upida.url("client/list"),
+		clientsLink: $upida.url("client/list"),
 		createLink: null
 	};
 
-	vm.createLink = upida.url("order/create?clientId=") + vm.clientId;
+	vm.createLink = $upida.url("order/create?clientId=") + vm.clientId;
 	vm.OrderRow = function (id) {
 		this.id = ko.observable(id);
 		this.createdOn = ko.observable();
@@ -15,13 +15,14 @@ $(function () {
 		this.shipZip = ko.observable();
 		this.shipAddress = ko.observable();
 		this.total = ko.observable();
-		this.viewLink = upida.url("order/show?id=") + id;
-		this.editLink = upida.url("order/edit?id=") + id;
-		this.editItemsLink = upida.url("order/edititems?id=") + id;
+		this.viewLink = $upida.url("order/show?id=") + id;
+		this.editLink = $upida.url("order/edit?id=") + id;
+		this.editItemsLink = $upida.url("order/edititems?id=") + id;
 	};
 
 	vm.loadOrders = function() {
-		upida.get("api/order/getbyclient?clientId=" + vm.clientId, function (items) {
+		$upida.get("api/order/getbyclient?clientId=" + vm.clientId)
+		.then(function (items) {
 			$.each(items, function (i, p) {
 				var row = new vm.OrderRow(p.id);
 				row.createdOn(p.createdOn);
@@ -35,6 +36,6 @@ $(function () {
 		});
 	};
 
-	upida.bind(vm);
+	$upida.bind(vm);
 	vm.loadOrders();
 });

@@ -18,7 +18,7 @@ $(function () {
 		update: function (element, valueAccessor, allBindingsAccessor) {
 			var ticks = ko.utils.unwrapObservable(valueAccessor());
 			if(ticks) {
-				element.innerHTML = upida.formatDate(ticks);
+				element.innerHTML = $upida.formatDate(ticks);
 			}
 		},
 
@@ -43,7 +43,7 @@ $(function () {
 		}
 	};
 
-	upida.formatDate = function(ticks) {
+	$upida.formatDate = function(ticks) {
 		var date = new Date(ticks);
 		var day = date.getDate();
 		var hour = date.getHours();

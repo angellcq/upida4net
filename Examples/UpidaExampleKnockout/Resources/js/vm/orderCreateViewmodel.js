@@ -1,6 +1,6 @@
 $(function () {
 	vm = {
-		clientId: upida.query("clientId"),
+		clientId: $upida.query("clientId"),
 		shipCountry: ko.observable(null),
 		shipCity: ko.observable(null),
 		shipZip: ko.observable(null),
@@ -8,11 +8,11 @@ $(function () {
 		total: ko.observable(null),
 		orderItemRows: ko.observableArray([]),
 		products: [{id:1, name:'product A'}, {id:2, name:'product B'}, {id:3, name:'product C'}, {id:4, name:'product D'}, {id:5, name:'product E'}],
-		clientsLink: upida.url("client/index"),
+		clientsLink: $upida.url("client/index"),
 		indexLink: null
 	};
 
-	vm.indexLink = upida.url("order/list?clientId=") + vm.clientId;
+	vm.indexLink = $upida.url("order/list?clientId=") + vm.clientId;
 	vm.OrderItemRow = function () {
 		this.productId = ko.observable(null);
 		this.count = ko.observable(1);
@@ -30,7 +30,7 @@ $(function () {
 
 	vm.onSave = function () {
 		var item = {};
-		item.client = upida.getReff(vm.clientId);
+		item.client = $upida.getReff(vm.clientId);
 		item.shipCountry = vm.shipCountry();
 		item.shipCity = vm.shipCity();
 		item.shipZip = vm.shipZip();
@@ -44,11 +44,12 @@ $(function () {
 			orderItem.price = p.price();
 			item.orderItems.push(orderItem);
 		});
-		upida.post("api/order/save", item, function () {
-			upida.navigate("order/list?clientId=" + vm.clientId);
+		$upida.post("api/order/save", item)
+		.then(function () {
+			$upida.navigate("order/list?clientId=" + vm.clientId);
 		});
 	};
 
-	upida.bind(vm);
+	$upida.bind(vm);
 	vm.addProduct();
 });

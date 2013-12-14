@@ -1,6 +1,6 @@
-﻿upida.baseUrl = "/";
+﻿$upida.baseUrl = "/";
 
-upida.onBeforeAjax = function () {
+$upida.onBeforeAjax = function () {
 	$.blockUI({
 		css: {
 			border: 'none',
@@ -15,6 +15,6 @@ upida.onBeforeAjax = function () {
 	});
 };
 
-upida.onAfterAjax = function () {
+$upida.onAfterAjax = function () {
 	$.unblockUI();
 };
