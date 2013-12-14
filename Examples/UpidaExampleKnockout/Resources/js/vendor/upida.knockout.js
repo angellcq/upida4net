@@ -12,6 +12,12 @@ $upida.navigate = function(link) {
 	window.location.replace($upida.url(link));
 };
 
+$upida.getDirectPromise = function(data) {
+	var deferred = $.Deferred();
+	deferred.resolve(data);
+	return deferred.promise();
+};
+
 $upida.post = function(method, input) {
 	$upida.ajaxStart();
 	var deferred = $.Deferred();
