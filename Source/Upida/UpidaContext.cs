@@ -8,6 +8,7 @@ namespace Upida
 	public class UpidaContext
 	{
 		private static readonly UpidaContext CURRENT = new UpidaContext();
+		private PropertyMetaFactory propertyMetaFactory = new PropertyMetaFactory();
 
 		public static UpidaContext Current()
 		{
@@ -60,30 +61,35 @@ namespace Upida
 			defs = new PropertyMeta[properties.Length];
 			for (int i = 0; i < properties.Length; i++)
 			{
-				defs[i] = new PropertyMeta(properties[i]);
+				defs[i] = this.propertyMetaFactory.Create(properties[i]);
 			}
 
 			PROPERTY_DEF_MAP.Add(type, defs);
 			return defs;
 		}
 
-		public IParser BuildParser(PropertyMeta propertyDef)
+		public IParser BuildParser(string name, Type propertyClass, PropertyMeta.ClassType propertyClassType, DtoAttribute annotation)
 		{
+			if (PropertyMeta.ClassType.Value != propertyClassType)
+			{
+				return null;
+			}
+
 			IParser parser = null;
 			try
 			{
-				if (null != propertyDef.Annotation.Parser)
+				if (null != annotation.Parser)
 				{
-					parser = (IParser)Activator.CreateInstance(propertyDef.Annotation.Parser);
+					parser = (IParser)Activator.CreateInstance(annotation.Parser);
 					return parser;
 				}
 			}
 			catch (Exception ex)
 			{
-				throw new ApplicationException("Unable to instantiate parser for - property:" + propertyDef.Name + " of type:" + propertyDef.PropertyClass.Name, ex);
+				throw new ApplicationException("Unable to instantiate parser for - property:" + name + " of type:" + propertyClass.Name, ex);
 			}
 
-			Type type = propertyDef.PropertyClass;
+			Type type = propertyClass;
 			if (this.STRING_TYPE == type)
 			{
 				parser = StandardParsers.STRING_PARSER;
@@ -142,7 +148,7 @@ namespace Upida
 			}
 			else
 			{
-				throw new ApplicationException("Unable to find parser for property: " + propertyDef.Name + ", of type: " + type.FullName + ". You must setup custom parser for this property in the Dto attribute.");
+				throw new ApplicationException("Unable to find parser for property: " + name + ", of type: " + type.FullName + ". You must setup custom parser for this property in the Dto attribute.");
 			}
 
 			return parser;

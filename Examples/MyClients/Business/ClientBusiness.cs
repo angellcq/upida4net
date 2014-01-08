@@ -20,19 +20,19 @@ namespace MyClients.Business
 			this.clientDao = clientDao;
 		}
 
-		public Client GetById(int id)
+		public virtual Client GetById(int id)
 		{
 			Client item = this.clientDao.GetById(id);
 			return this.mapper.Filter(item, Levels.DEEP);
 		}
 
-		public IList<Client> GetAll()
+		public virtual IList<Client> GetAll()
 		{
 			IList<Client> items = this.clientDao.GetAll();
 			return this.mapper.FilterList(items, Levels.GRID);
 		}
 
-		public void Save(Client item)
+		public virtual void Save(Client item)
 		{
 			this.validator.AssertValid(item, Groups.SAVE);
 			using (ITransaction tx = this.clientDao.BeginTransaction())
@@ -43,7 +43,7 @@ namespace MyClients.Business
 			}
 		}
 
-		public void Update(Client item)
+		public virtual void Update(Client item)
 		{
 			this.validator.AssertValid(item, Groups.UPDATE);
 			using (ITransaction tx = this.clientDao.BeginTransaction())

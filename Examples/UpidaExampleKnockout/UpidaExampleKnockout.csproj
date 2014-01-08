@@ -141,6 +141,7 @@
     <Compile Include="Dao\Support\ClientDao.cs" />
     <Compile Include="Dao\Support\Daobase.cs" />
     <Compile Include="Dao\Support\OrderDao.cs" />
+    <Compile Include="Dao\Support\SessionFactoryExtension.cs" />
     <Compile Include="Domain\Client.cs" />
     <Compile Include="Domain\Order.cs" />
     <Compile Include="Domain\OrderItem.cs" />

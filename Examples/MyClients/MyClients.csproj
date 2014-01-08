@@ -134,6 +134,7 @@
     <Compile Include="Dao\IDaobase.cs" />
     <Compile Include="Dao\Support\ClientDao.cs" />
     <Compile Include="Dao\Support\Daobase.cs" />
+    <Compile Include="Dao\Support\SessionFactoryExt.cs" />
     <Compile Include="Domain\Client.cs" />
     <Compile Include="Domain\Login.cs" />
     <Compile Include="Domain\Util.cs" />
@@ -175,7 +176,12 @@
     </Content>
     <Content Include="Views\Web.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\..\Source\Upida\Upida.csproj">
+      <Project>{4b226445-4cbe-4815-a369-d27c258502f5}</Project>
+      <Name>Upida</Name>
+    </ProjectReference>
+  </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
@@ -192,13 +198,9 @@
     <Content Include="Views\Client\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Source\Upida\Upida.csproj">
-      <Project>{4b226445-4cbe-4815-a369-d27c258502f5}</Project>
-      <Name>Upida</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
+    <None Include="Properties\PublishProfiles\myclients - FTP %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\myclients - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\myclients - Web Deploy %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\myclients - Web Deploy.pubxml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Notfound.cshtml" />

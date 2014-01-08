@@ -7,9 +7,9 @@ namespace MyClients.Dao.Support
 	public class Daobase<T> : IDaobase<T>
 		where T : class
 	{
-		private readonly ISessionFactory sessionFactory;
+		private readonly SessionFactoryExt sessionFactory;
 
-		public Daobase(ISessionFactory sessionFactory)
+		public Daobase(SessionFactoryExt sessionFactory)
 		{
 			this.sessionFactory = sessionFactory;
 		}
@@ -18,18 +18,7 @@ namespace MyClients.Dao.Support
 		{
 			get
 			{
-				ISession session;
-				if (CurrentSessionContext.HasBind(this.sessionFactory))
-				{
-					session = this.sessionFactory.GetCurrentSession();
-				}
-				else
-				{
-					session = this.sessionFactory.OpenSession();
-					CurrentSessionContext.Bind(session);
-				}
-
-				return session;
+				return this.sessionFactory.GetCurrentSession();
 			}
 		}
 

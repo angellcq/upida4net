@@ -18,18 +18,7 @@ namespace UpidaExampleAngular.Dao.Support
 		{
 			get
 			{
-				ISession session;
-				if (CurrentSessionContext.HasBind(this.sessionFactory))
-				{
-					session = this.sessionFactory.GetCurrentSession();
-				}
-				else
-				{
-					session = this.sessionFactory.OpenSession();
-					CurrentSessionContext.Bind(session);
-				}
-
-				return session;
+				return this.sessionFactory.GetCurrent();
 			}
 		}
 

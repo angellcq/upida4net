@@ -9,6 +9,7 @@ namespace Upida
 		private byte nested;
 		private Type parser;
 		private bool isCustomType;
+		private bool dynamic;
 
 		public DtoAttribute()
 			: this(byte.MaxValue)
@@ -43,6 +44,12 @@ namespace Upida
 		{
 			get { return this.parser; }
 			set { this.parser = value; }
+		}
+
+		public bool Dynamic
+		{
+			get { return this.dynamic; }
+			set { this.dynamic = value; }
 		}
 	}
 }

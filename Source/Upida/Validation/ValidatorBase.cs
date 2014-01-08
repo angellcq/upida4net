@@ -21,7 +21,7 @@ namespace Upida.Validation
 		/// <summary>
 		/// True if current field is valid so far
 		/// </summary>
-		public bool IsValidField
+		public virtual bool IsValidField
 		{
 			get { return this.validField; }
 		}
@@ -29,7 +29,7 @@ namespace Upida.Validation
 		/// <summary>
 		/// True is the target object is valid so far
 		/// </summary>
-		public bool IsValid
+		public virtual bool IsValid
 		{
 			get { return this.validTarget; }
 		}
@@ -37,7 +37,7 @@ namespace Upida.Validation
 		/// <summary>
 		/// True if validation is stopped for the current field. You can stop validation for current field only if Stop() method is called and the field is invalid
 		/// </summary>
-		public bool Stopped
+		public virtual bool Stopped
 		{
 			get { return this.stopped; }
 		}
@@ -45,7 +45,7 @@ namespace Upida.Validation
 		/// <summary>
 		/// Represents target object
 		/// </summary>
-		public T Target
+		public virtual T Target
 		{
 			get { return this.target; }
 		}
@@ -53,7 +53,7 @@ namespace Upida.Validation
 		/// <summary>
 		/// Represents value of the current field
 		/// </summary>
-		public object Value
+		public virtual object Value
 		{
 			get { return this.value; }
 		}
@@ -61,7 +61,7 @@ namespace Upida.Validation
 		/// <summary>
 		/// Represents name of the current field
 		/// </summary>
-		public string Name
+		public virtual string Name
 		{
 			get { return this.name; }
 		}
@@ -70,12 +70,12 @@ namespace Upida.Validation
 		/// Returns list of failures for the target object
 		/// </summary>
 		/// <returns></returns>
-		public IList<Failure> GetFailures()
+		public virtual IList<Failure> GetFailures()
 		{
 			return this.failures;
 		}
 
-		public void SetTarget(T target, string path, IValidatorBase parent)
+		public virtual void SetTarget(T target, string path, IValidatorBase parent)
 		{
 			this.target = target;
 			this.path = path;
@@ -91,7 +91,7 @@ namespace Upida.Validation
 		/// <param name="name">name of the field</param>
 		/// <param name="value">field value</param>
 		/// <returns></returns>
-		public void Field(string name, object value)
+		public virtual void Field(string name, object value)
 		{
 			this.value = value;
 			this.name = name;
@@ -108,7 +108,7 @@ namespace Upida.Validation
 		/// </summary>
 		/// <param name="name">name of the field</param>
 		/// <returns></returns>
-		public void Field(string name)
+		public virtual void Field(string name)
 		{
 			this.value = null;
 			this.name = name;
@@ -120,7 +120,7 @@ namespace Upida.Validation
 		/// Disables validation for the current field if it is allready failed
 		/// </summary>
 		/// <returns></returns>
-		public void Stop()
+		public virtual void Stop()
 		{
 			if (!this.validField)
 			{
@@ -134,7 +134,7 @@ namespace Upida.Validation
 		/// <typeparam name="R">Type of the validated object</typeparam>
 		/// <param name="group">validation group</param>
 		/// <returns></returns>
-		public void Nested<R>(object group, object state)
+		public virtual void Nested<R>(object group, object state)
 			where R : Dtobase
 		{
 			if (this.stopped) return;
@@ -158,7 +158,7 @@ namespace Upida.Validation
 		/// <typeparam name="R">Type of the validated object</typeparam>
 		/// <param name="group">validation group</param>
 		/// <returns></returns>
-		public void NestedList<R>(object group, object state)
+		public virtual void NestedList<R>(object group, object state)
 			where R : Dtobase
 		{
 			if (this.stopped) return;
@@ -186,7 +186,7 @@ namespace Upida.Validation
 		/// Current property is determined by the last call of the Field() method.
 		/// </summary>
 		/// <param name="msg">failure message</param>
-		public void Fail(string msg)
+		public virtual void Fail(string msg)
 		{
 			this.Fail(new Failure(string.Concat(this.path, this.name), msg));
 			this.validField = false;
@@ -196,7 +196,7 @@ namespace Upida.Validation
 		/// Registers a failure (failure includes failure message and property path)
 		/// </summary>
 		/// <param name="failure">failure</param>
-		public void Fail(Failure failure)
+		public virtual void Fail(Failure failure)
 		{
 			if (this.stopped) return;
 

@@ -8,25 +8,25 @@ namespace MyClients.Validation
 	{
 		public override void Validate(object state)
 		{
-			this.MissingField("id", this.Target.Id);
+			self.MissingField("id", this.Target.Id);
 
-			this.Field("name", this.Target.Name);
-			this.Required();
-			this.MustHaveLengthBetween(3, 20, Errors.LENGTH_3_20);
+			self.Field("name", this.Target.Name);
+			self.Required();
+			self.MustHaveLengthBetween(3, 20, Errors.LENGTH_3_20);
 
-			this.Field("lastname", this.Target.Lastname);
-			this.Required();
-			this.MustHaveLengthBetween(3, 20, Errors.LENGTH_3_20);
+			self.Field("lastname", this.Target.Lastname);
+			self.Required();
+			self.MustHaveLengthBetween(3, 20, Errors.LENGTH_3_20);
 
-			this.Field("age", this.Target.Age);
-			this.Required(Errors.NOT_VALID_NUMBER);
-			this.MustBeGreaterThan(0, Errors.GREATER_ZERO);
+			self.Field("age", this.Target.Age);
+			self.Required(Errors.MUST_BE_NUMBER);
+			self.MustBeGreaterThan(0, Errors.GREATER_ZERO);
 
-			this.Field("logins", this.Target.Logins);
-			this.Required();
-			this.MustHaveCountBetween(1, 5, Errors.NUMBER_OF_LOGINS);
-			this.Stop();
-			this.NestedList<Login>(Groups.SAVE, null);
+			self.Field("logins", this.Target.Logins);
+			self.Required();
+			self.MustHaveCountBetween(1, 5, Errors.NUMBER_OF_LOGINS);
+			self.Stop();
+			self.NestedList<Login>(Groups.SAVE, null);
 		}
 	}
 }

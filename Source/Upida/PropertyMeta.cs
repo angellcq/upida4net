@@ -10,57 +10,13 @@ namespace Upida
 
 		private PropertyInfo descriptor;
 		private string name;
-		private DtoAttribute annotation;
 		private Type propertyClass;
-		private ClassType propertyClassType = ClassType.None;
-		private IParser parser;
-		private Type nestedType;
 
 		public PropertyMeta(PropertyInfo descriptor)
 		{
 			this.descriptor = descriptor;
-			this.name = descriptor.Name;
-			this.name = string.Concat(Char.ToLower(this.name[0]), this.name.Substring(1));
-			this.annotation = this.descriptor.GetCustomAttribute<DtoAttribute>();
-			this.propertyClass = this.descriptor.PropertyType;
-			if (null != this.annotation)
-			{
-				this.propertyClassType = this.BuildPropertyClassType();
-				if (this.propertyClassType == ClassType.Value)
-				{
-					this.parser = UpidaContext.Current().BuildParser(this);
-				}
-			}
-		}
-
-		public bool isAssigned(Dtobase target)
-		{
-			return target.IsFieldAssigned(this.name);
-		}
-
-		public bool IsValid
-		{
-			get { return null != this.annotation; }
-		}
-
-		public Type PropertyClass
-		{
-			get { return this.propertyClass; }
-		}
-
-		public ClassType PropertyClassType
-		{
-			get { return this.propertyClassType; }
-		}
-
-		public DtoAttribute Annotation
-		{
-			get { return this.annotation; }
-		}
-
-		public IParser Parser
-		{
-			get { return this.parser; }
+			this.name = string.Concat(Char.ToLower(descriptor.Name[0]), descriptor.Name.Substring(1));
+			this.propertyClass = descriptor.PropertyType;
 		}
 
 		public string Name
@@ -68,22 +24,28 @@ namespace Upida
 			get { return this.name; }
 		}
 
-		public Type NestedType
+		public Type PropertyClass
 		{
-			get
-			{
-				if (null == this.nestedType)
-				{
-					this.nestedType = this.PropertyClass.GetGenericArguments()[0];
-				}
-
-				return this.nestedType;
-			}
+			get { return this.propertyClass; }
 		}
+
+		public ClassType PropertyClassType { get; set; }
+		public IParser Parser { get; set; }
+		public Type NestedGenericClass { get; set; }
+		public byte DtoLevel { get; set; }
+		public byte DtoNestedLevel { get; set; }
+		public bool DtoCustomType { get; set; }
+		public bool DtoDynamic { get; set; }
+		public bool Valid { get; set; }
 
 		public bool HasLevel(byte level)
 		{
-			return level >= this.annotation.Value;
+			return this.DtoLevel <= level;
+		}
+
+		public bool isAssigned(Dtobase target)
+		{
+			return target.IsFieldAssigned(this.name);
 		}
 
 		public void Write(Dtobase target, object value)
@@ -94,28 +56,6 @@ namespace Upida
 		public object Read(Dtobase target)
 		{
 			return this.descriptor.GetValue(target);
-		}
-
-		private ClassType BuildPropertyClassType()
-		{
-			if (ClassType.None == this.propertyClassType)
-			{
-				this.propertyClassType = ClassType.Value;
-				if (typeof(string).IsAssignableFrom(this.propertyClass))
-				{
-					this.propertyClassType = ClassType.Value;
-				}
-				else if (typeof(Dtobase).IsAssignableFrom(this.propertyClass))
-				{
-					this.propertyClassType = this.annotation.IsCustomType ? ClassType.CustomType : ClassType.Class;
-				}
-				else if (typeof(IEnumerable).IsAssignableFrom(this.propertyClass))
-				{
-					this.propertyClassType = this.annotation.IsCustomType ? ClassType.CustomTypeCollection : ClassType.Collection;
-				}
-			}
-
-			return this.propertyClassType;
 		}
 	}
 }

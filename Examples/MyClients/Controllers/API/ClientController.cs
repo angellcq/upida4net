@@ -19,7 +19,7 @@ namespace MyClients.Controllers.API
 			return this.clientBusiness.GetById(id);
 		}
 
-		public IList<Client> getAll()
+		public IList<Client> GetAll()
 		{
 			return this.clientBusiness.GetAll();
 		}

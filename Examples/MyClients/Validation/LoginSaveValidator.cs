@@ -7,20 +7,20 @@ namespace MyClients.Validation
 	{
 		public override void Validate(object state)
 		{
-			this.MissingField("id", this.Target.Id);
+			self.MissingField("id", this.Target.Id);
 
-			this.Field("name", this.Target.Name);
-			this.Required();
-			this.MustHaveLengthBetween(3, 20, Errors.LENGTH_3_20);
+			self.Field("name", this.Target.Name);
+			self.Required();
+			self.MustHaveLengthBetween(3, 20, Errors.LENGTH_3_20);
 
-			this.Field("password", this.Target.Password);
-			this.Required();
-			this.MustHaveLengthBetween(3, 20, Errors.LENGTH_3_20);
+			self.Field("password", this.Target.Password);
+			self.Required();
+			self.MustHaveLengthBetween(3, 20, Errors.LENGTH_3_20);
 
-			this.Field("enabled", this.Target.Enabled);
-			this.Required(Errors.NOT_VALID_BOOL);
+			self.Field("enabled", this.Target.Enabled);
+			self.Required(Errors.NOT_VALID_BOOL);
 
-			this.MissingField("client", this.Target.Client);
+			self.MissingField("client", this.Target.Client);
 		}
 	}
 }

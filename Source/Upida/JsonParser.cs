@@ -32,7 +32,7 @@ namespace Upida
 				for (int i = 0; i < properties.Length; i++)
 				{
 					PropertyMeta propertyDef = properties[i];
-					if (!propertyDef.IsValid)
+					if (!propertyDef.Valid)
 					{
 						continue;
 					}
@@ -56,10 +56,10 @@ namespace Upida
 							else if (PropertyMeta.ClassType.Collection == propertyDef.PropertyClassType ||
 								PropertyMeta.ClassType.CustomTypeCollection == propertyDef.PropertyClassType)
 							{
-								IList list = (IList)UpidaContext.Current().BuildList(propertyDef.NestedType);
+								IList list = (IList)UpidaContext.Current().BuildList(propertyDef.NestedGenericClass);
 								foreach (JToken item in propertyValue)
 								{
-									list.Add(this.Parse(item, propertyDef.NestedType));
+									list.Add(this.Parse(item, propertyDef.NestedGenericClass));
 								}
 
 								propertyDef.Write(dto, list);

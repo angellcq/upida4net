@@ -44,7 +44,7 @@ namespace Upida
 				for (int i = 0; i < properties.Length; i++)
 				{
 					PropertyMeta property = properties[i];
-					if (!property.IsValid || !property.isAssigned(source))
+					if (!property.Valid || !property.isAssigned(source))
 					{
 						continue;
 					}
@@ -187,7 +187,7 @@ namespace Upida
 				for (int i = 0; i < properties.Length; i++)
 				{
 					PropertyMeta property = properties[i];
-					if (!property.IsValid)
+					if (!property.Valid)
 					{
 						continue;
 					}
@@ -204,7 +204,7 @@ namespace Upida
 							IEnumerable sourceSet = (IEnumerable)sourceValue;
 							foreach (Object item in sourceSet)
 							{
-								this.Map((Dtobase)item, property.NestedType);
+								this.Map((Dtobase)item, property.NestedGenericClass);
 								if (item is IChild)
 								{
 									(item as IChild).ConnectToParent(source);
@@ -273,7 +273,7 @@ namespace Upida
 				for (int i = 0; i < properties.Length; i++)
 				{
 					PropertyMeta property = properties[i];
-					if (!property.IsValid || !property.HasLevel(level))
+					if (!property.Valid || !property.HasLevel(level))
 					{
 						continue;
 					}
@@ -287,10 +287,10 @@ namespace Upida
 					}
 					else if (PropertyMeta.ClassType.Class == property.PropertyClassType)
 					{
-						byte nestedLevel = property.Annotation.Nested;
-						if (level != property.Annotation.Value)
+						byte nestedLevel = property.DtoNestedLevel;
+						if (level != property.DtoLevel)
 						{
-							nestedLevel = (byte)(nestedLevel + level - property.Annotation.Value);
+							nestedLevel = (byte)(nestedLevel + level - property.DtoLevel);
 						}
 
 						property.Write(dto,
@@ -299,14 +299,14 @@ namespace Upida
 					}
 					else if (PropertyMeta.ClassType.Collection == property.PropertyClassType)
 					{
-						byte nestedLevel = property.Annotation.Nested;
-						if (level != property.Annotation.Value)
+						byte nestedLevel = property.DtoNestedLevel;
+						if (level != property.DtoLevel)
 						{
-							nestedLevel = (byte)(nestedLevel + level - property.Annotation.Value);
+							nestedLevel = (byte)(nestedLevel + level - property.DtoLevel);
 						}
 
 						property.Write(dto,
-							this.FilterList((IEnumerable)value, property.NestedType, nestedLevel));
+							this.FilterList((IEnumerable)value, property.NestedGenericClass, nestedLevel));
 					}
 				}
 

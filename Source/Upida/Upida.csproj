@@ -58,6 +58,7 @@
     <Compile Include="JsonParser.cs" />
     <Compile Include="Levels.cs" />
     <Compile Include="Mapper.cs" />
+    <Compile Include="PropertyMetaFactory.cs" />
     <Compile Include="StandardParsers.cs" />
     <Compile Include="DtoAttribute.cs" />
     <Compile Include="Dtobase.cs" />

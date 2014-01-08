@@ -1,34 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
 using MyClients.Domain;
 using NHibernate;
-using NHibernate.Criterion;
+using NHibernate.Transform;
 
 namespace MyClients.Dao.Support
 {
 	public class ClientDao : Daobase<Client>, IClientDao
 	{
-		public ClientDao(ISessionFactory sessionFactory)
+		public ClientDao(SessionFactoryExt sessionFactory)
 			: base(sessionFactory)
 		{
-		}
-
-		public IList<Client> GetAll()
-		{
-			return this.Session
-				.CreateCriteria<Client>()
-				.List<Client>();
 		}
 
 		public Client GetById(int id)
 		{
 			return this.Session
-				.CreateCriteria<Client>()
-				.Add(Restrictions.Eq("Id", id))
-				.SetFetchMode("Logins", FetchMode.Join)
+				.CreateQuery("from Client client left outer join fetch client.Logins where client.Id = :id")
+				.SetParameter<int>("id", id)
+				.SetResultTransformer(Transformers.DistinctRootEntity)
 				.UniqueResult<Client>();
+		}
+
+		public IList<Client> GetAll()
+		{
+			return this.Session
+				.CreateQuery("from Client client left outer join fetch client.Logins")
+				.SetResultTransformer(Transformers.DistinctRootEntity)
+				.List<Client>();
 		}
 	}
 }
