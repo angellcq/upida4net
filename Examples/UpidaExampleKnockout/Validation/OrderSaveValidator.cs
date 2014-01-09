@@ -26,7 +26,7 @@ namespace UpidaExampleKnockout.Validation
 			this.MustHaveLengthBetween(5, 5, Errors.LENGTH_ZIP);
 
 			this.Field("total", this.Target.Total);
-			this.Required(Errors.NOT_VALID_NUMBER);
+			this.Required(Errors.MUST_BE_NUMBER);
 			this.MustBeGreaterThan(0f, Errors.GREATER_ZERO);
 
 			this.Field("orderItems", this.Target.OrderItems);

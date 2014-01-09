@@ -7,33 +7,33 @@ namespace UpidaExampleAngular.Validation
 	{
 		public override void Validate(object state)
 		{
-			this.Field("id", Target.Id);
-			this.Required(Errors.NOT_VALID_NUMBER);
+			self.Field("id", this.Target.Id);
+			self.Required(Errors.MUST_BE_NUMBER);
 
-			this.MissingField("createdOn", this.Target.CreatedOn);
+			self.MissingField("createdOn", this.Target.CreatedOn);
 
-			this.Field("shipAddress", Target.ShipAddress);
-			this.Required();
-			this.MustHaveLengthBetween(5, 50, Errors.LENGTH_5_AND_50);
+			self.Field("shipAddress", this.Target.ShipAddress);
+			self.Required();
+			self.MustHaveLengthBetween(5, 50, Errors.LENGTH_5_AND_50);
 
-			this.Field("shipCity", Target.ShipCity);
-			this.Required();
-			this.MustHaveLengthBetween(2, 50, Errors.LENGTH_2_AND_50);
+			self.Field("shipCity", this.Target.ShipCity);
+			self.Required();
+			self.MustHaveLengthBetween(2, 50, Errors.LENGTH_2_AND_50);
 
-			this.Field("shipCountry", Target.ShipCountry);
-			this.Required();
-			this.MustHaveLengthBetween(2, 50, Errors.LENGTH_2_AND_50);
+			self.Field("shipCountry", this.Target.ShipCountry);
+			self.Required();
+			self.MustHaveLengthBetween(2, 50, Errors.LENGTH_2_AND_50);
 
-			this.Field("shipZip", Target.ShipZip);
-			this.Required();
-			this.MustHaveLengthBetween(5, 5, Errors.LENGTH_ZIP);
+			self.Field("shipZip", this.Target.ShipZip);
+			self.Required();
+			self.MustHaveLengthBetween(5, 5, Errors.LENGTH_ZIP);
 
-			this.Field("total", Target.Total);
-			this.Required(Errors.NOT_VALID_NUMBER);
-			this.MustBeGreaterThan(0f, Errors.GREATER_ZERO);
+			self.Field("total", this.Target.Total);
+			self.Required(Errors.MUST_BE_NUMBER);
+			self.MustBeGreaterThan(0f, Errors.GREATER_ZERO);
 
-			this.MissingField("orderItems", this.Target.OrderItems);
-			this.MissingField("client", this.Target.Client);
+			self.MissingField("orderItems", this.Target.OrderItems);
+			self.MissingField("client", this.Target.Client);
 		}
 	}
 }

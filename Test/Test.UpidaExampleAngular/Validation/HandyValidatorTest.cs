@@ -1,11 +1,9 @@
-﻿using System;
-using MyClients.Validation;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using Rhino.Mocks;
 using Upida;
-using Upida.Validation;
+using UpidaExampleAngular.Validation;
 
-namespace Test.MyClients.Validation
+namespace Test.UpidaExampleAngular.Validation
 {
 	[TestFixture]
 	public class HandyValidatorTest
@@ -103,7 +101,7 @@ namespace Test.MyClients.Validation
 			this.mocked.Expect((m) => m.Required(Errors.MUST_BE_NUMBER));
 
 			this.mocks.ReplayAll();
-			this.target.RequiredIfAssigned();
+			this.target.RequiredIfAssigned(Errors.MUST_BE_NUMBER);
 			this.mocks.VerifyAll();
 		}
 
@@ -114,7 +112,7 @@ namespace Test.MyClients.Validation
 			this.mocked.Expect((m) => m.Required(Errors.MUST_BE_NUMBER)).Repeat.Never();
 
 			this.mocks.ReplayAll();
-			this.target.RequiredIfAssigned();
+			this.target.RequiredIfAssigned(Errors.MUST_BE_NUMBER);
 			this.mocks.VerifyAll();
 		}
 	}

@@ -3,32 +3,61 @@ using Upida.Validation;
 
 namespace UpidaExampleAngular.Validation
 {
-	public abstract class HandyValidator<T> : ConstraintValidator<T>
+	public class HandyValidator<T> : ConstraintValidator<T>
 		where T : Dtobase
 	{
-		public void MustBeEmail(string msg)
+		protected HandyValidator<T> self;
+
+		public HandyValidator()
 		{
-			const string expr = @"\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b";
-			this.MustRegexpr(expr, msg);
+			this.self = this;
+		}
+
+		public void SetSelf(HandyValidator<T> self)
+		{
+			this.self = self;
+		}
+
+		public virtual bool isAssignedAndNotNull()
+		{
+			return self.IsAssigned() && !self.IsNull();
 		}
 
 		public virtual void Required()
 		{
-			this.MustBeAssigned(Errors.REQUIRED);
-			this.MustBeNotNull(Errors.REQUIRED);
+			self.MustBeAssigned(Errors.REQUIRED);
+			self.MustBeNotNull(Errors.REQUIRED);
 		}
 
 		public virtual void Required(string wrongFormatMessage)
 		{
-			this.MustBeAssigned(Errors.REQUIRED);
-			this.MustBeValidFormat(wrongFormatMessage);
-			this.MustBeNotNull(Errors.REQUIRED);
+			self.MustBeAssigned(Errors.REQUIRED);
+			self.MustBeValidFormat(wrongFormatMessage);
+			self.MustBeNotNull(Errors.REQUIRED);
+		}
+
+		public virtual void RequiredIfAssigned(string msg)
+		{
+			if (self.isAssignedAndNotNull())
+			{
+				self.Required(msg);
+			}
+		}
+
+		public void MustBeEmail(string msg)
+		{
+			const string expr = @"\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b";
+			self.MustRegexpr(expr, msg);
 		}
 
 		public virtual void MissingField(string field, object value)
 		{
-			this.Field(field, value);
-			this.MustBeNotAssigned(Errors.MUST_BE_EMPTY);
+			self.Field(field, value);
+			self.MustBeNotAssigned(Errors.MUST_BE_EMPTY);
+		}
+
+		public override void Validate(object state)
+		{
 		}
 	}
 }

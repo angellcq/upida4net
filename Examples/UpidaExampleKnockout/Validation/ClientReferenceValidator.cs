@@ -8,7 +8,7 @@ namespace UpidaExampleKnockout.Validation
 		public override void Validate(object state)
 		{
 			this.Field("id", this.Target.Id);
-			this.Required(Errors.NOT_VALID_NUMBER);
+			this.Required(Errors.MUST_BE_NUMBER);
 
 			this.MissingField("name", Target.Name);
 		}

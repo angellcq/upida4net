@@ -18,6 +18,11 @@ namespace MyClients.Validation
 			this.self = self;
 		}
 
+		public virtual bool isAssignedAndNotNull()
+		{
+			return self.IsAssigned() && !self.IsNull();
+		}
+
 		public virtual void Required()
 		{
 			self.MustBeAssigned(Errors.REQUIRED);
@@ -33,7 +38,7 @@ namespace MyClients.Validation
 
 		public virtual void RequiredIfAssigned()
 		{
-			if (self.IsAssigned())
+			if (self.isAssignedAndNotNull())
 			{
 				self.Required(Errors.MUST_BE_NUMBER);
 			}

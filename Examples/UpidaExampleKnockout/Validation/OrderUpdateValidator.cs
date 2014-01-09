@@ -8,7 +8,7 @@ namespace UpidaExampleKnockout.Validation
 		public override void Validate(object state)
 		{
 			this.Field("id", Target.Id);
-			this.Required(Errors.NOT_VALID_NUMBER);
+			this.Required(Errors.MUST_BE_NUMBER);
 
 			this.MissingField("createdOn", this.Target.CreatedOn);
 
@@ -29,7 +29,7 @@ namespace UpidaExampleKnockout.Validation
 			this.MustHaveLengthBetween(5, 5, Errors.LENGTH_ZIP);
 
 			this.Field("total", Target.Total);
-			this.Required(Errors.NOT_VALID_NUMBER);
+			this.Required(Errors.MUST_BE_MONEY);
 			this.MustBeGreaterThan(0f, Errors.GREATER_ZERO);
 
 			this.MissingField("orderItems", this.Target.OrderItems);
