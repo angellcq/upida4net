@@ -31,25 +31,34 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Iesi.Collections">
-      <HintPath>..\..\packages\Iesi.Collections.3.2.0.4000\lib\Net35\Iesi.Collections.dll</HintPath>
+      <HintPath>..\..\Libs\Iesi.Collections.3.2.0.4000\Iesi.Collections.dll</HintPath>
     </Reference>
     <Reference Include="NHibernate">
-      <HintPath>..\..\packages\NHibernate.3.3.3.4001\lib\Net35\NHibernate.dll</HintPath>
+      <HintPath>..\..\Libs\NHibernate.3.3.3.4001\NHibernate.dll</HintPath>
     </Reference>
-    <Reference Include="nunit.framework, Version=2.6.3.13283, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+    <Reference Include="nunit.framework, Version=2.6.2.12296, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
+      <HintPath>..\..\Libs\NUnit.2.6.3\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="Rhino.Mocks">
-      <HintPath>..\..\packages\RhinoMocks.3.6.1\lib\net\Rhino.Mocks.dll</HintPath>
+      <HintPath>..\..\Libs\RhinoMocks.3.6.1\Rhino.Mocks.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libs\Microsoft.AspNet.WebApi.Core.4.0.20710.0\System.Web.Http.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Business\ClientBusinessTest.cs" />
     <Compile Include="Business\OrderBusinessTest.cs" />
+    <Compile Include="Controllers\ClientControllerTest.cs" />
+    <Compile Include="Controllers\OrderControllerTest.cs" />
+    <Compile Include="Dao\ClientDaoTest.cs" />
+    <Compile Include="Dao\DaobaseTest.cs" />
+    <Compile Include="Dao\OrderDaoTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Validation\ClientReferenceValidatorTest.cs" />
     <Compile Include="Validation\ClientSaveValidatorTest.cs" />
@@ -60,13 +69,7 @@
     <Compile Include="Validation\OrderUpdateItemsValidatorTest.cs" />
     <Compile Include="Validation\OrderUpdateValidatorTest.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Controllers\" />
-    <Folder Include="Dao\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\..\Examples\UpidaExampleAngular\UpidaExampleAngular.csproj">
       <Project>{6b6b56a4-af5a-412d-a38c-aa08d269db0c}</Project>

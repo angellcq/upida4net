@@ -34,6 +34,7 @@ myclients.app.controller(
 		data.logins = new Array();
 		angular.forEach($scope.loginRows, function (p, i) {
 			var item = {};
+			item.id = p.id;
 			item.name = p.name;
 			item.password = p.password;
 			item.enabled = p.enabled;

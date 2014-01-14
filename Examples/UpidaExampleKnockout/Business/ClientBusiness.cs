@@ -16,13 +16,13 @@ namespace UpidaExampleKnockout.Business
 			this.clientDao = clientDao;
 		}
 
-		public IList<Client> GetAll()
+		public virtual IList<Client> GetAll()
 		{
 			IList<Client> items = this.clientDao.GetAll();
 			return this.mapper.FilterList(items, Levels.GRID);
 		}
 
-		public void Save(Client item)
+		public virtual void Save(Client item)
 		{
 			using (ITransaction tx = this.clientDao.BeginTransaction())
 			{

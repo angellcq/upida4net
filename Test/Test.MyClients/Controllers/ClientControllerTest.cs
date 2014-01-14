@@ -35,7 +35,7 @@ namespace Test.MyClients.Controllers
 		}
 
 		[Test]
-		public void getAllTest()
+		public void GetAllTest()
 		{
 			IList<Client> expected = new List<Client>();
 			this.clientBusiness.Expect((m) => m.GetAll()).Return(expected);

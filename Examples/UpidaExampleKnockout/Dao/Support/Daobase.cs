@@ -7,18 +7,18 @@ namespace UpidaExampleKnockout.Dao.Support
 	public class Daobase<T> : IDaobase<T>
 		where T : class
 	{
-		private readonly ISessionFactory sessionFactory;
+		private readonly SessionFactoryExt sessionFactory;
 
-		public Daobase(ISessionFactory sessionFactory)
+		public Daobase(SessionFactoryExt sessionFactory)
 		{
 			this.sessionFactory = sessionFactory;
 		}
 
-		protected ISession Session
+		public ISession Session
 		{
 			get
 			{
-				return this.sessionFactory.GetCurrent();
+				return this.sessionFactory.GetCurrentSession();
 			}
 		}
 

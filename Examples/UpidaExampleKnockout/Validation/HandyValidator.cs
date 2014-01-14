@@ -19,7 +19,7 @@ namespace UpidaExampleKnockout.Validation
 			this.self = self;
 		}
 
-		public bool isAssignedAndNotNull()
+		public virtual bool isAssignedAndNotNull()
 		{
 			return self.IsAssigned() && !self.IsNull();
 		}
@@ -37,11 +37,11 @@ namespace UpidaExampleKnockout.Validation
 			self.MustBeNotNull(Errors.REQUIRED);
 		}
 
-		public virtual void RequiredIfAssigned()
+		public virtual void RequiredIfAssigned(string msg)
 		{
 			if (self.isAssignedAndNotNull())
 			{
-				self.Required(Errors.MUST_BE_NUMBER);
+				self.Required(msg);
 			}
 		}
 

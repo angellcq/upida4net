@@ -7,22 +7,22 @@ namespace UpidaExampleKnockout.Validation
 	{
 		public override void Validate(object state)
 		{
-			this.Field("id", this.Target.Id);
-			this.Required(Errors.MUST_BE_NUMBER);
+			self.Field("id", this.Target.Id);
+			self.Required(Errors.MUST_BE_NUMBER);
 
-			this.MissingField("createdOn", this.Target.CreatedOn);
-			this.MissingField("shipAddress", this.Target.ShipAddress);
-			this.MissingField("shipCity", this.Target.ShipCity);
-			this.MissingField("shipCountry", this.Target.ShipCountry);
-			this.MissingField("shipZip", this.Target.ShipZip);
-			this.MissingField("total", this.Target.Total);
+			self.MissingField("createdOn", this.Target.CreatedOn);
+			self.MissingField("shipAddress", this.Target.ShipAddress);
+			self.MissingField("shipCity", this.Target.ShipCity);
+			self.MissingField("shipCountry", this.Target.ShipCountry);
+			self.MissingField("shipZip", this.Target.ShipZip);
+			self.MissingField("total", this.Target.Total);
 
-			this.Field("orderItems", this.Target.OrderItems);
-			this.Required();
-			this.MustHaveCountBetween(1, 500, Errors.WRONG_COUNT);
-			this.NestedList<OrderItem>(Groups.MERGE, null);
+			self.Field("orderItems", this.Target.OrderItems);
+			self.Required();
+			self.MustHaveCountBetween(1, 500, Errors.WRONG_COUNT);
+			self.NestedList<OrderItem>(Groups.MERGE, null);
 
-			this.MissingField("client", this.Target.Client);
+			self.MissingField("client", this.Target.Client);
 		}
 	}
 }

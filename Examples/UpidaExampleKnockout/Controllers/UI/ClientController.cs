@@ -6,12 +6,12 @@ namespace UpidaExampleKnockout.Controllers.UI
 	{
 		public ActionResult List()
 		{
-			return View();
+			return this.View();
 		}
 
 		public ActionResult Create()
 		{
-			return View();
+			return this.View();
 		}
 	}
 }

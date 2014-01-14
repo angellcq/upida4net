@@ -1,32 +1,30 @@
 ﻿using System.Collections.Generic;
 using NHibernate;
+using NHibernate.Transform;
 using UpidaExampleKnockout.Domain;
-using criteria = NHibernate.Criterion;
 
 namespace UpidaExampleKnockout.Dao.Support
 {
 	public class OrderDao : Daobase<Order>, IOrderDao
 	{
-		public OrderDao(ISessionFactory sessionFactory)
+		public OrderDao(SessionFactoryExt sessionFactory)
 			: base(sessionFactory)
 		{
 		}
 
 		public IList<Order> GetByClient(int clientId)
 		{
-			return this.Session
-				.CreateCriteria<Order>()
-				.Add(criteria.Restrictions.Eq("Client.id", clientId))
+			return this.Session.CreateQuery("from Order o where o.Client.Id = :clientId")
+				.SetParameter<int>("clientId", clientId)
+				.SetResultTransformer(Transformers.DistinctRootEntity)
 				.List<Order>();
 		}
 
 		public Order GetById(int id)
 		{
-			return (Order)this.Session
-				.CreateCriteria<Order>()
-				.Add(criteria.Restrictions.Eq("id", id))
-				.SetFetchMode("orderItems", FetchMode.Join)
-				.SetFetchMode("client", FetchMode.Join)
+			return this.Session.CreateQuery("from Order o inner join fetch o.Client left outer join fetch o.OrderItems where o.Id = :id")
+				.SetParameter<int>("id", id)
+				.SetResultTransformer(Transformers.DistinctRootEntity)
 				.UniqueResult<Order>();
 		}
 	}

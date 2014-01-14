@@ -6,15 +6,14 @@ namespace UpidaExampleAngular.Dao.Support
 {
 	public class ClientDao : Daobase<Client>, IClientDao
 	{
-		public ClientDao(ISessionFactory sessionFactory)
+		public ClientDao(SessionFactoryExt sessionFactory)
 			: base(sessionFactory)
 		{
 		}
 
 		public IList<Client> GetAll()
 		{
-			return this.Session
-				.CreateCriteria<Client>()
+			return this.Session.CreateQuery("from Client")
 				.List<Client>();
 		}
 	}

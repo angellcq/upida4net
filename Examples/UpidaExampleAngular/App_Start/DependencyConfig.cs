@@ -26,6 +26,7 @@ namespace UpidaExampleAngular
 			builder.RegisterFilterProvider();
 
 			builder.Register((context) => new Configuration().Configure().BuildSessionFactory()).As<ISessionFactory>().SingleInstance();
+			builder.RegisterType<SessionFactoryExt>().As<SessionFactoryExt>().SingleInstance();
 			builder.RegisterType<Mapper>().As<IMapper>().SingleInstance();
 			builder.RegisterType<ValidationContext>().As<IValidationContext>().SingleInstance();
 

@@ -14,7 +14,7 @@ namespace MyClients.Dao.Support
 			this.sessionFactory = sessionFactory;
 		}
 
-		protected ISession Session
+		public ISession Session
 		{
 			get
 			{

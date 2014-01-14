@@ -7,10 +7,10 @@ namespace UpidaExampleKnockout.Validation
 	{
 		public override void Validate(object state)
 		{
-			this.Field("id", this.Target.Id);
-			this.Required(Errors.MUST_BE_NUMBER);
+			self.Field("id", this.Target.Id);
+			self.Required(Errors.MUST_BE_NUMBER);
 
-			this.MissingField("name", Target.Name);
+			self.MissingField("name", Target.Name);
 		}
 	}
 }

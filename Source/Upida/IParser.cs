@@ -5,7 +5,7 @@ namespace Upida
 	public interface IParser
 	{
 		/// <summary>
-		/// must throw ArgumentException if parsing failed
+		/// Must throw ArgumentException if parsing failed
 		/// </summary>
 		/// <param name="?"></param>
 		/// <returns></returns>

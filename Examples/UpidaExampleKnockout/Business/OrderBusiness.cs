@@ -16,25 +16,25 @@ namespace UpidaExampleKnockout.Business
 			this.orderDao = orderDao;
 		}
 
-		public IList<Order> GetByClient(int clientId)
+		public virtual IList<Order> GetByClient(int clientId)
 		{
 			IList<Order> items = this.orderDao.GetByClient(clientId);
 			return this.mapper.FilterList(items, Levels.GRID);
 		}
 
-		public Order Get(int id)
+		public virtual Order Get(int id)
 		{
 			Order item = this.orderDao.GetById(id);
 			return this.mapper.Filter(item, Levels.DEEP);
 		}
 
-		public Order GetFull(int id)
+		public virtual Order GetFull(int id)
 		{
 			Order item = this.orderDao.GetById(id);
 			return this.mapper.Filter(item, Levels.FULL);
 		}
 
-		public void Save(Order item)
+		public virtual void Save(Order item)
 		{
 			using (var tx = this.orderDao.BeginTransaction())
 			{
@@ -45,7 +45,7 @@ namespace UpidaExampleKnockout.Business
 			}
 		}
 
-		public void Update(Order item)
+		public virtual void Update(Order item)
 		{
 			using (var tx = this.orderDao.BeginTransaction())
 			{
