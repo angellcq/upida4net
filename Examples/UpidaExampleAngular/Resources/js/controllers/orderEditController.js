@@ -4,6 +4,7 @@ angularExample.app.controller(
 
 	$scope.id = $routeParams.id;
 	$scope.clientId = null;
+	$scope.clientName = null;
 	$scope.shipCountry = null;
 	$scope.shipCity = null;
 	$scope.shipZip = null;
@@ -34,6 +35,7 @@ angularExample.app.controller(
 			$scope.shipAddress = item.shipAddress;
 			$scope.total = item.total;
 			$scope.clientId = item.client.id;
+			$scope.clientName = item.client.name;
 		});
 	};
 

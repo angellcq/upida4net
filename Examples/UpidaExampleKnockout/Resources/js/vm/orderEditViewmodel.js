@@ -2,6 +2,7 @@ $(function () {
 	vm = {
 		id: $upida.query("id"),
 		clientId: null,
+		clientName: ko.observable(null),
 		shipCountry: ko.observable(null),
 		shipCity: ko.observable(null),
 		shipZip: ko.observable(null),
@@ -36,6 +37,7 @@ $(function () {
 			vm.shipAddress(item.shipAddress);
 			vm.total(item.total);
 			vm.clientId = item.client.id;
+			vm.clientName(item.client.name);
 			vm.indexLink($upida.url("order/list?clientId=") + item.client.id);
 		});
 	};

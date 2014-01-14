@@ -2,6 +2,7 @@ $(function () {
 	vm = {
 		id: $upida.query("id"),
 		clientId: null,
+		clientName: ko.observable(null),
 		orderItemRows: ko.observableArray([]),
 		products: [{id:1, name:'product A'}, {id:2, name:'product B'}, {id:3, name:'product C'}, {id:4, name:'product D'}, {id:5, name:'product E'}],
 		clientsLink: $upida.url("client/list"),
@@ -46,6 +47,7 @@ $(function () {
 		$upida.get("api/order/getfull?id=" + vm.id)
 		.then(function (item) {
 			vm.clientId = item.client.id;
+			vm.clientName(item.client.name);
 			vm.indexLink($upida.url("order/list?clientId=") + item.client.id);
 			$.each(item.orderItems, function (i, p) {
 				var row = new vm.OrderItemRow();

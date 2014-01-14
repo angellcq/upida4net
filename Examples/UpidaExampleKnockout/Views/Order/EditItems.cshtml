@@ -8,6 +8,7 @@
 <h2>Edit Order Items</h2>
 <span class="error" data-bind="html: $$mainerror"></span>
 <br />
+Client: <b data-bind="text: clientName"></b><br />
 <!-- ko foreach: orderItemRows -->
 Product:
 <select data-bind="options: $root.products, value: productId, optionsText: 'name', optionsValue: 'id', optionsCaption: 'Select...'"></select>

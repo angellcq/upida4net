@@ -4,6 +4,7 @@
 <br />
 <span class="error" mainerror></span>
 <hr />
+Client: <b ng-bind="clientName"></b>
 <div ng-repeat="row in orderItemRows">
 	Product:
 	<select ng-model="row.product" ng-options="product.name for product in products">

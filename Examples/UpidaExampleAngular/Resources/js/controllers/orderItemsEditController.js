@@ -4,6 +4,7 @@ angularExample.app.controller(
 
 	$scope.id = $routeParams.id;
 	$scope.clientId = null;
+	$scope.clientName = null;
 	$scope.orderItemRows = new Array();
 	$scope.products = [{id:1, name:'product A'}, {id:2, name:'product B'}, {id:3, name:'product C'}, {id:4, name:'product D'}, {id:5, name:'product E'}];
 
@@ -46,6 +47,7 @@ angularExample.app.controller(
 		upida.get("order/getfull?id=" + $scope.id, $scope)
 		.then(function (item) {
 			$scope.clientId = item.client.id;
+			$scope.clientName = item.client.name;
 			angular.forEach(item.orderItems, function (p, i) {
 				var row = new $scope.OrderItemRow();
 				row.id = p.id;
