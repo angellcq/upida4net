@@ -16,7 +16,8 @@ namespace Upida.Validation
 		private bool validTarget;
 		private bool validField;
 		private bool stopped;
-		private IList<Failure> failures;
+		private Severity severity;
+		private FailureList failures;
 
 		/// <summary>
 		/// True if current field is valid so far
@@ -70,7 +71,7 @@ namespace Upida.Validation
 		/// Returns list of failures for the target object
 		/// </summary>
 		/// <returns></returns>
-		public virtual IList<Failure> GetFailures()
+		public virtual FailureList GetFailures()
 		{
 			return this.failures;
 		}
@@ -82,6 +83,11 @@ namespace Upida.Validation
 			this.parent = parent;
 			this.validTarget = true;
 			this.failures = null;
+		}
+
+		public virtual void SetSeverity(Severity severity)
+		{
+			this.severity = severity;
 		}
 
 		/// <summary>
@@ -97,6 +103,7 @@ namespace Upida.Validation
 			this.name = name;
 			this.stopped = false;
 			this.validField = true;
+			this.severity = Severity.None;
 			if (null != value)
 			{
 				this.target.AddAssignedField(name);
@@ -114,6 +121,7 @@ namespace Upida.Validation
 			this.name = name;
 			this.stopped = false;
 			this.validField = true;
+			this.severity = Severity.None;
 		}
 
 		/// <summary>
@@ -188,7 +196,7 @@ namespace Upida.Validation
 		/// <param name="msg">failure message</param>
 		public virtual void Fail(string msg)
 		{
-			this.Fail(new Failure(string.Concat(this.path, this.name), msg));
+			this.Fail(new Failure(string.Concat(this.path, this.name), msg, this.severity));
 			this.validField = false;
 		}
 
@@ -205,10 +213,14 @@ namespace Upida.Validation
 			{
 				if (null == this.failures)
 				{
-					this.failures = new List<Failure>();
+					this.failures = new FailureList();
 				}
 
 				this.failures.Add(failure);
+				if (this.severity > this.failures.Severity)
+				{
+					this.failures.Severity = this.severity;
+				}
 			}
 			else
 			{

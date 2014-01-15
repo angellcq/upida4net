@@ -37,6 +37,7 @@ namespace Test.MyClients.Validation
 			using (this.mocks.Ordered())
 			{
 				this.mocked.Expect((m) => m.Field("id", this.data.Id));
+				this.mocked.Expect((m) => m.SetSeverity(Severity.Fatal));
 				this.mocked.Expect((m) => m.Required(Errors.MUST_BE_NUMBER));
 
 				this.mocked.Expect((m) => m.Field("name", this.data.Name));

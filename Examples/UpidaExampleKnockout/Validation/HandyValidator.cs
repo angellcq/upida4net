@@ -54,6 +54,7 @@ namespace UpidaExampleKnockout.Validation
 		public virtual void MissingField(string field, object value)
 		{
 			self.Field(field, value);
+			self.SetSeverity(Severity.Fatal);
 			self.MustBeNotAssigned(Errors.MUST_BE_EMPTY);
 		}
 

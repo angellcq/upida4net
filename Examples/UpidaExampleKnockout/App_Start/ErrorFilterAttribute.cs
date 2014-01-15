@@ -1,5 +1,4 @@
-﻿using System;
-using System.Net;
+﻿using System.Net;
 using System.Net.Http;
 using System.Web.Http.Filters;
 using Upida.Validation;
@@ -14,6 +13,10 @@ namespace UpidaExampleKnockout
 			if (context.Exception is ValidationException)
 			{
 				response = (context.Exception as ValidationException).BuildFailResponse();
+				if (Severity.Fatal == response.Failures.Severity)
+				{
+					response.Main = "You are trying to break validation !!!";
+				}
 			}
 			else
 			{

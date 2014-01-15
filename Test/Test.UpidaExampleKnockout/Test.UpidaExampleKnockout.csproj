@@ -49,11 +49,11 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Libs\Microsoft.AspNet.WebApi.Core.4.0.20710.0\System.Web.Http.dll</HintPath>
     </Reference>
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
+    <Reference Include="Upida-2.9.2, Version=2.9.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Binary\Upida-2.9.2.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Business\ClientBusinessTest.cs" />
@@ -77,10 +77,6 @@
     <ProjectReference Include="..\..\Examples\UpidaExampleKnockout\UpidaExampleKnockout.csproj">
       <Project>{77bb7116-68c7-4820-9334-f7d11d46d55b}</Project>
       <Name>UpidaExampleKnockout</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Source\Upida\Upida.csproj">
-      <Project>{4b226445-4cbe-4815-a369-d27c258502f5}</Project>
-      <Name>Upida</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

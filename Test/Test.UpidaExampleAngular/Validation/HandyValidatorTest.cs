@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
 using Rhino.Mocks;
 using Upida;
+using Upida.Validation;
 using UpidaExampleAngular.Validation;
 
 namespace Test.UpidaExampleAngular.Validation
@@ -113,6 +114,34 @@ namespace Test.UpidaExampleAngular.Validation
 
 			this.mocks.ReplayAll();
 			this.target.RequiredIfAssigned(Errors.MUST_BE_NUMBER);
+			this.mocks.VerifyAll();
+		}
+
+		[Test]
+		public void MustBeEmailTest()
+		{
+			string msg = "RANDOM MESSAGE";
+			const string expr = @"\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b";
+			this.mocked.Expect((m) => m.MustRegexpr(expr, msg));
+			this.mocks.ReplayAll();
+			this.target.MustBeEmail(msg);
+			this.mocks.VerifyAll();
+		}
+
+		[Test]
+		public void MissingFieldTest()
+		{
+			string field = "FIELD_NAME";
+			object value = "VALUE";
+			using (this.mocks.Ordered())
+			{
+				this.mocked.Expect((m) => m.Field(field, value));
+				this.mocked.Expect((m) => m.SetSeverity(Severity.Fatal));
+				this.mocked.Expect((m) => m.MustBeNotAssigned(Errors.MUST_BE_EMPTY));
+			}
+
+			this.mocks.ReplayAll();
+			this.target.MissingField(field, value);
 			this.mocks.VerifyAll();
 		}
 	}

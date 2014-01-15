@@ -8,6 +8,7 @@ namespace UpidaExampleAngular.Validation
 		public override void Validate(object state)
 		{
 			self.Field("id", this.Target.Id);
+			self.SetSeverity(Severity.Fatal);
 			self.Required(Errors.MUST_BE_NUMBER);
 
 			self.MissingField("createdOn", this.Target.CreatedOn);

@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Upida</RootNamespace>
-    <AssemblyName>Upida</AssemblyName>
+    <AssemblyName>Upida-2.9.2</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -71,7 +71,9 @@
     <Compile Include="Aspnetmvc\AspMvcValidatorFactory.cs" />
     <Compile Include="Validation\FailResponse.cs" />
     <Compile Include="Validation\Failure.cs" />
+    <Compile Include="Validation\FailureList.cs" />
     <Compile Include="Validation\IValidatorFactory.cs" />
+    <Compile Include="Validation\Severity.cs" />
     <Compile Include="Validation\ValidateWithAttribute.cs" />
     <Compile Include="Validation\Groups.cs" />
     <Compile Include="Validation\IValidationContext.cs" />

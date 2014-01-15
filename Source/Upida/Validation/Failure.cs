@@ -7,11 +7,13 @@
 	{
 		private string key;
 		private string text;
+		private Severity severity;
 
-		public Failure(string key, string text)
+		public Failure(string key, string text, Severity severity)
 		{
 			this.key = key;
 			this.text = text;
+			this.severity = severity;
 		}
 
 		/// <summary>
@@ -28,6 +30,11 @@
 		public string Text
 		{
 			get { return this.text; }
+		}
+
+		public Severity GetSeverity()
+		{
+			return this.severity;
 		}
 	}
 }

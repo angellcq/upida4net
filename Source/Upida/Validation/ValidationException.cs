@@ -5,11 +5,11 @@ namespace Upida.Validation
 {
 	public class ValidationException : Exception
 	{
-		private IList<Failure> failures;
+		private FailureList failures;
 		private Type typeValidatorType;
 		private object group;
 
-		public ValidationException(IList<Failure> errors, Type typeValidatorType, object group)
+		public ValidationException(FailureList errors, Type typeValidatorType, object group)
 		{
 			this.failures = errors;
 			this.typeValidatorType = typeValidatorType;

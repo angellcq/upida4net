@@ -9,15 +9,15 @@ namespace Upida.Validation
 	public class FailResponse
 	{
 		private string main;
-		private IList<Failure> failures;
+		private FailureList failures;
 
 		public FailResponse()
 		{
 			this.main = string.Empty;
-			this.failures = new List<Failure>();
+			this.failures = new FailureList();
 		}
 
-		public FailResponse(String main)
+		public FailResponse(string main)
 			: this()
 		{
 			this.main = main;
@@ -29,12 +29,13 @@ namespace Upida.Validation
 		public string Main
 		{
 			get { return this.main; }
+			set { this.main = value; }
 		}
 
 		/// <summary>
 		/// List of failures
 		/// </summary>
-		public IList<Failure> Failures
+		public FailureList Failures
 		{
 			get { return this.failures; }
 			set { this.failures = value; }
