@@ -32,7 +32,7 @@ $upida.module.factory("upida", ["$http", "$q", function($http, $q) {
 	service.post = function(method, input, $scope) {
 		service.ajaxStart();
 		var deferred = $q.defer();
-		return service.$http({
+		service.$http({
 			method: 'POST',
 			url: service.url(method),
 			data: input
