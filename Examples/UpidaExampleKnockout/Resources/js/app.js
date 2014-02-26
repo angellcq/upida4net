@@ -1,4 +1,4 @@
-﻿$upida.baseUrl = "/";
+﻿$upida.settings.baseUrl = "/";
 
 $upida.onBeforeAjax = function () {
 	$.blockUI({

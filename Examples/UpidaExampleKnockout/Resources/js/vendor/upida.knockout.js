@@ -1,8 +1,10 @@
 var $upida = $upida || {};
-$upida.baseUrl = "/";
+$upida.settings = {};
+$upida.settings.baseUrl = "/";
+$upida.settings.errorLine = "<br />";
 
 $upida.url = function(link) {
-	return $upida.baseUrl + link;
+	return $upida.settings.baseUrl + link;
 };
 
 $upida.onBeforeAjax = null;
@@ -133,7 +135,7 @@ $upida.showErrors = function(fail) {
 	$.each(fail.failures, function (i, p) {
 		var current = $upida.vm.$$errors.get(p.key);
 		if(current()) {
-			current(current() + "<br />" + p.text);
+			current(current() + $upida.settings.errorLine + p.text);
 		}
 		else {
 			$upida.vm.$$errors.push(p.key, p.text);

@@ -24,4 +24,4 @@ myclients.app.config(function ($routeProvider) {
 		});
 });
 
-$upida.baseUrl = "/api/";
+$upida.settings.baseUrl = "/api/";

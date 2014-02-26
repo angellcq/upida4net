@@ -1,12 +1,15 @@
 var $upida = $upida || {};
-$upida.baseUrl = "/";
+$upida.settings = {};
+$upida.settings.baseUrl = "/";
+$upida.settings.errorLine = "<br />";
+
 $upida.module = angular.module("upidamodule", []);
 $upida.module.factory("upida", ["$http", "$q", function($http, $q) {
 	var service = { onBeforeAjax: null, onAfterAjax: null };
 	service.$http = $http;
 
 	service.url = function(link) {
-		return $upida.baseUrl + link;
+		return $upida.settings.baseUrl + link;
 	};
 
 	service.navigate = function(link) {
@@ -102,7 +105,7 @@ $upida.module.factory("upida", ["$http", "$q", function($http, $q) {
 		angular.forEach(fail.failures, function (p, i) {
 			var current = service.find(errors, function(m) { return m.key == p.key; });
 			if(current) {
-				current.text = current.text + "<br />" + p.text;
+				current.text = current.text + $upida.settings.errorLine + p.text;
 			}
 			else {
 				errors.push(p);
@@ -153,11 +156,12 @@ $upida.module.directive("errorkey", function () {
 				if (!errors) return;
 				var key = attrs.errorkey;
 				if (errors) {
-					angular.forEach(errors, function (p, i) {
-						if (key == p.key) {
-							element.html(p.text);
+					for(var i=0; i<errors.length; i++) {
+						if (key == errors[i].key) {
+							element.html(errors[i].text);
+							break;
 						}
-					});
+					}
 				}
 			});
 		}
