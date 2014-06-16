@@ -101,7 +101,6 @@ $upida.module.factory("upida", ["$http", "$q", function($http, $q) {
 	service.showErrors = function($scope, fail) {
 		if(!$scope) return;
 		var errors = new Array();
-		errors.main = fail.main;
 		angular.forEach(fail.failures, function (p, i) {
 			var current = service.find(errors, function(m) { return m.key == p.key; });
 			if(current) {
@@ -117,7 +116,6 @@ $upida.module.factory("upida", ["$http", "$q", function($http, $q) {
 	service.clearErrors = function($scope) {
 		if(!$scope) return;
 		$scope.$$errors = new Array();
-		$scope.$$errors.main = "";
 	};
 
 	service.find = function (obsArray, isItemFunc) {
@@ -134,18 +132,6 @@ $upida.module.factory("upida", ["$http", "$q", function($http, $q) {
 
 	return service;
 }]);
-
-$upida.module.directive("mainerror", function () {
-	return {
-		restrict: 'A',
-		link: function (scope, element, attrs) {
-			scope.$watch('$$errors', function (errors, oldVal) {
-				if (!errors) return;
-				element.text(errors.main);
-			});
-		}
-	};
-});
 
 $upida.module.directive("errorkey", function () {
 	return {

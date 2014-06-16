@@ -5,25 +5,19 @@ namespace Upida.Validation
 {
 	public class ValidationContext : IValidationContext
 	{
-		public IList<Failure> Validate<T>(T target, object group) where T : Dtobase
+		public IFailureList Validate<T>(T target, object group) where T : Dtobase
 		{
 			return this.Validate(target, group, null);
 		}
 
-		public IList<Failure> Validate<T>(T target, object group, object state) where T : Dtobase
+		public IFailureList Validate<T>(T target, object group, object state) where T : Dtobase
 		{
 			ValidatorBase<T> validator = UpidaContext.Current().BuildValidator<T>(group);
 			if (null != validator)
 			{
 				validator.SetTarget(target, null, null);
 				validator.Validate(state);
-
-				if (!validator.IsValid)
-				{
-					return validator.GetFailures();
-				}
-
-				return null;
+				return validator.GetFailures();
 			}
 			else
 			{
@@ -52,6 +46,19 @@ namespace Upida.Validation
 			else
 			{
 				throw new ApplicationException("TypeValidator not found. type:" + typeof(T).Name + ", group:" + group);
+			}
+		}
+
+		public IFailureList CreateFailureList()
+		{
+			return new FailureList();
+		}
+
+		public void Assert(IFailureList errors)
+		{
+			if (null != errors && !errors.IsEmpty)
+			{
+				throw new ValidationException(errors);
 			}
 		}
 	}

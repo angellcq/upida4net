@@ -148,7 +148,9 @@ namespace Upida
 			}
 			else
 			{
-				throw new ApplicationException("Unable to find parser for property: " + name + ", of type: " + type.FullName + ". You must setup custom parser for this property in the Dto attribute.");
+				throw new ApplicationException(
+					"Unable to find parser for property: " + name + ", of type: " + type.FullName +
+					". Property class either must derive from Dtobase or You must setup custom parser for this property in the Dto attribute.");
 			}
 
 			return parser;

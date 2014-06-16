@@ -7,5 +7,6 @@ namespace MyClients.Dao
 	{
 		IList<Client> GetAll();
 		Client GetById(int id);
+		long GetCount();
 	}
 }

@@ -28,5 +28,12 @@ namespace MyClients.Dao.Support
 				.SetResultTransformer(Transformers.DistinctRootEntity)
 				.List<Client>();
 		}
+
+		public long GetCount()
+		{
+			return this.Session
+				.CreateQuery("select count(*) from Client")
+				.UniqueResult<long>();
+		}
 	}
 }

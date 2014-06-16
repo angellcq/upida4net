@@ -2,6 +2,7 @@
 using System.Web.Http;
 using MyClients.Business;
 using MyClients.Domain;
+using System;
 
 namespace MyClients.Controllers.API
 {
@@ -32,6 +33,12 @@ namespace MyClients.Controllers.API
 		public void Update(Client item)
 		{
 			this.clientBusiness.Update(item);
+		}
+
+		[HttpPost]
+		public void Delete(int id)
+		{
+			this.clientBusiness.Delete(id);
 		}
 	}
 }

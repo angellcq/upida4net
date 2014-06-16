@@ -8,34 +8,32 @@ namespace Upida.Validation
 	/// </summary>
 	public class FailResponse
 	{
-		private string main;
-		private FailureList failures;
+		private IFailureList failures;
 
 		public FailResponse()
 		{
-			this.main = string.Empty;
-			this.failures = new FailureList();
+			this.failures = null;
 		}
 
-		public FailResponse(string main)
-			: this()
+		public FailResponse(IFailureList failures)
 		{
-			this.main = main;
+			this.failures = failures;
 		}
 
 		/// <summary>
-		/// Default message
+		/// Creates an instance of FailureResponse class with one failure in it
 		/// </summary>
-		public string Main
+		/// <param name="message"></param>
+		public FailResponse(string message)
 		{
-			get { return this.main; }
-			set { this.main = value; }
+			this.failures = new FailureList();
+			this.failures.Fail(message);
 		}
 
 		/// <summary>
 		/// List of failures
 		/// </summary>
-		public FailureList Failures
+		public IFailureList Failures
 		{
 			get { return this.failures; }
 			set { this.failures = value; }

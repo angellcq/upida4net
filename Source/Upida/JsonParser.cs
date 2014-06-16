@@ -77,7 +77,7 @@ namespace Upida
 			}
 			catch (Exception ex)
 			{
-				throw new Exception("parse exception: ", ex);
+				throw new Exception("JSON parsing failed", ex);
 			}
 		}
 

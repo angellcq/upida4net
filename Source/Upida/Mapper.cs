@@ -81,7 +81,9 @@ namespace Upida
 			}
 			catch (Exception ex)
 			{
-				throw new Exception("Map error", ex);
+				throw new Exception(
+					"Mapping failed from '" + source.GetType().Name +
+					"' to '" + dest.GetType().Name + "'", ex);
 			}
 		}
 
@@ -108,7 +110,7 @@ namespace Upida
 			}
 			else
 			{
-				throw new ApplicationException("Collection is neither IList nor iesi.ISet: " + destCollectionType.FullName);
+				throw new ApplicationException("Collection is neither IList nor iesi.ISet: " + destCollectionType.FullName + ". Only IList or iesi.ISet can be mapped.");
 			}
 
 			foreach (Dtobase item in sourceCollection)
@@ -216,7 +218,7 @@ namespace Upida
 			}
 			catch (Exception ex)
 			{
-				throw new Exception("map error", ex);
+				throw new Exception("Mapping failed. Type is - '" + source.GetType().Name + "'", ex);
 			}
 		}
 
@@ -314,7 +316,9 @@ namespace Upida
 			}
 			catch (Exception ex)
 			{
-				throw new Exception("Serialize error", ex);
+				throw new Exception(
+					"Filtering failed. Type is - '" + item.GetType().Name +
+					"'. Level is - '" + level + "'", ex);
 			}
 		}
 	}

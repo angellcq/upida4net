@@ -13,10 +13,7 @@ namespace UpidaExampleAngular
 			if (context.Exception is ValidationException)
 			{
 				response = (context.Exception as ValidationException).BuildFailResponse();
-				if (Severity.Fatal == response.Failures.Severity)
-				{
-					response.Main = "You are trying to break validation !!!";
-				}
+				response.Failures.FailIf(Severity.Fatal == response.Failures.Severity, "You are trying to break validation !!!");
 			}
 			else
 			{

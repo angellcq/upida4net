@@ -17,7 +17,7 @@ namespace Upida.Validation
 		private bool validField;
 		private bool stopped;
 		private Severity severity;
-		private FailureList failures;
+		private IFailureList failures;
 
 		/// <summary>
 		/// True if current field is valid so far
@@ -71,9 +71,9 @@ namespace Upida.Validation
 		/// Returns list of failures for the target object
 		/// </summary>
 		/// <returns></returns>
-		public virtual FailureList GetFailures()
+		public virtual IFailureList GetFailures()
 		{
-			return this.failures;
+			return this.failures ?? new FailureList();
 		}
 
 		public virtual void SetTarget(T target, string path, IValidatorBase parent)
@@ -216,11 +216,7 @@ namespace Upida.Validation
 					this.failures = new FailureList();
 				}
 
-				this.failures.Add(failure);
-				if (this.severity > this.failures.Severity)
-				{
-					this.failures.Severity = this.severity;
-				}
+				this.failures.Fail(failure);
 			}
 			else
 			{

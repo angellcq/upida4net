@@ -5,11 +5,16 @@ namespace Upida.Validation
 {
 	public class ValidationException : Exception
 	{
-		private FailureList failures;
+		private IFailureList failures;
 		private Type typeValidatorType;
 		private object group;
 
-		public ValidationException(FailureList errors, Type typeValidatorType, object group)
+		public ValidationException(IFailureList errors)
+		{
+			this.failures = errors;
+		}
+
+		public ValidationException(IFailureList errors, Type typeValidatorType, object group)
 		{
 			this.failures = errors;
 			this.typeValidatorType = typeValidatorType;
@@ -23,19 +28,19 @@ namespace Upida.Validation
 			return response;
 		}
 
-		public IList<Failure> GetFailures()
+		public IFailureList Failures
 		{
-			return this.failures;
+			get { return this.failures; }
 		}
 
-		public Type GetTypeValidatorType()
+		public Type TypeValidatorType
 		{
-			return this.typeValidatorType;
+			get { return this.typeValidatorType; }
 		}
 
-		public object GetGroup()
+		public object Group
 		{
-			return this.group;
+			get { return this.group; }
 		}
 	}
 }

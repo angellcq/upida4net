@@ -27,6 +27,13 @@ myclients.app.controller(
 		});
 	};
 
+	$scope.onDelete = function (clientId) {
+		upida.post("client/delete/" + clientId, null, $scope)
+		.then(function () {
+			$scope.loadClients();
+		});
+	};
+
 	$scope.$on('$routeChangeSuccess', function () {
 		$scope.loadClients();
 	});

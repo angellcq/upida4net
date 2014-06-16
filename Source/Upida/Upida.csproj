@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Upida</RootNamespace>
-    <AssemblyName>Upida-2.9.9</AssemblyName>
+    <AssemblyName>Upida-3.0</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -72,6 +72,7 @@
     <Compile Include="Validation\FailResponse.cs" />
     <Compile Include="Validation\Failure.cs" />
     <Compile Include="Validation\FailureList.cs" />
+    <Compile Include="Validation\IFailureList.cs" />
     <Compile Include="Validation\IValidatorFactory.cs" />
     <Compile Include="Validation\Severity.cs" />
     <Compile Include="Validation\ValidateWithAttribute.cs" />

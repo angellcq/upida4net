@@ -4,9 +4,9 @@ namespace Upida.Validation
 {
 	public enum Severity
 	{
-		None,
+		None = 0,
 		Low,
-		How,
+		High,
 		Fatal
 	}
 }

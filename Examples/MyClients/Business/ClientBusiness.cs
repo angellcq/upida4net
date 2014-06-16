@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using MyClients.Dao;
+﻿using MyClients.Dao;
 using MyClients.Domain;
 using NHibernate;
+using System.Collections.Generic;
 using Upida;
 using Upida.Validation;
 
@@ -51,6 +51,22 @@ namespace MyClients.Business
 				Client existing = this.clientDao.GetById(item.Id.Value);
 				this.mapper.MapTo(item, existing);
 				this.clientDao.Merge(existing);
+				tx.Commit();
+			}
+		}
+
+		public virtual void Delete(int id)
+		{
+			var failures = this.validator.CreateFailureList();
+			using (ITransaction tx = this.clientDao.BeginTransaction())
+			{
+				Client existing = this.clientDao.GetById(id);
+				failures.FailIf(null == existing, "Client does not exist");
+				this.validator.Assert(failures);
+				long count = this.clientDao.GetCount();
+				failures.FailIf(1 == count, "Cannot delete the only client");
+				this.validator.Assert(failures);
+				this.clientDao.Delete(existing);
 				tx.Commit();
 			}
 		}
