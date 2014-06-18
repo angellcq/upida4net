@@ -30,11 +30,17 @@ namespace Upida.Validation
 			this.group = group;
 		}
 
+		/// <summary>
+		/// Type validator class
+		/// </summary>
 		public Type Validator
 		{
 			get { return this.validator; }
 		}
 
+		/// <summary>
+		/// Validation group
+		/// </summary>
 		public object Group
 		{
 			get { return this.group; }

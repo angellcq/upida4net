@@ -7,7 +7,6 @@ namespace Upida.Validation
 	public abstract class ConstraintValidator<T> : ValidatorBase<T>
 		where T : Dtobase
 	{
-
 		/// <summary>
 		/// Checks if field value is assigned
 		/// </summary>

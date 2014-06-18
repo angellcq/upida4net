@@ -109,6 +109,10 @@
       <Private>True</Private>
       <HintPath>..\..\Libs\Microsoft.AspNet.WebPages.2.0.20710.0\System.Web.WebPages.dll</HintPath>
     </Reference>
+    <Reference Include="Upida-3.0, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Binary\Upida-3.0.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\DependencyConfig.cs" />
@@ -182,12 +186,6 @@
     <None Include="Properties\PublishProfiles\myclients - Web Deploy.pubxml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Notfound.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Source\Upida\Upida.csproj">
-      <Project>{4b226445-4cbe-4815-a369-d27c258502f5}</Project>
-      <Name>Upida</Name>
-    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

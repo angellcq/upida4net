@@ -76,6 +76,12 @@ namespace Upida.Validation
 			return this.failures ?? new FailureList();
 		}
 
+		/// <summary>
+		/// Sets target validated object
+		/// </summary>
+		/// <param name="target">target validated object</param>
+		/// <param name="path">path to this object in hierarchy (null for root)</param>
+		/// <param name="parent">parent validator</param>
 		public virtual void SetTarget(T target, string path, IValidatorBase parent)
 		{
 			this.target = target;
@@ -85,6 +91,11 @@ namespace Upida.Validation
 			this.failures = null;
 		}
 
+		/// <summary>
+		/// Sets severity of the next checking.
+		/// Severity is reset to None after checking is done.
+		/// </summary>
+		/// <param name="severity"></param>
 		public virtual void SetSeverity(Severity severity)
 		{
 			this.severity = severity;

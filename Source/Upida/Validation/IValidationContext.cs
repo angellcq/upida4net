@@ -10,7 +10,7 @@ namespace Upida.Validation
 		/// <typeparam name="T">type of object to validate</typeparam>
 		/// <param name="target">object to validate</param>
 		/// <param name="group">validation group</param>
-		/// <returns></returns>
+		/// <returns>list of failures</returns>
 		IFailureList Validate<T>(T target, object group) where T : Dtobase;
 
 		/// <summary>
@@ -20,7 +20,7 @@ namespace Upida.Validation
 		/// <param name="target">object to validate</param>
 		/// <param name="group">validation group</param>
 		/// <param name="state">optional state data</param>
-		/// <returns></returns>
+		/// <returns>list of failures</returns>
 		IFailureList Validate<T>(T target, object group, object state) where T : Dtobase;
 
 		/// <summary>

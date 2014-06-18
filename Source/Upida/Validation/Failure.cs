@@ -32,6 +32,10 @@
 			get { return this.text; }
 		}
 
+		/// <summary>
+		/// Returns severety of the failure
+		/// </summary>
+		/// <returns></returns>
 		public Severity GetSeverity()
 		{
 			return this.severity;
