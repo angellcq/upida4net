@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using NHibernate;
-using NHibernate.Transform;
+﻿using NHibernate;
 using NUnit.Framework;
 using Rhino.Mocks;
+using System.Collections.Generic;
 using UpidaExampleAngular.Dao;
 using UpidaExampleAngular.Dao.Support;
 using UpidaExampleAngular.Domain;
@@ -42,6 +40,23 @@ namespace Test.UpidaExampleAngular.Dao
 
 			mocks.ReplayAll();
 			IList<Client> actual = this.target.GetAll();
+			Assert.AreEqual(expected, actual);
+			this.mocks.VerifyAll();
+		}
+
+		[Test]
+		public void GetCountTest()
+		{
+			long expected = 20;
+			using (mocks.Ordered())
+			{
+				this.sessionFactory.Expect((m) => m.GetCurrentSession()).Return(this.session);
+				this.session.Expect((m) => m.CreateQuery("select count(*) from Client")).Return(this.query);
+				this.query.Expect((m) => m.UniqueResult<long>()).Return(expected);
+			}
+
+			mocks.ReplayAll();
+			long actual = this.target.GetCount();
 			Assert.AreEqual(expected, actual);
 			this.mocks.VerifyAll();
 		}

@@ -67,5 +67,22 @@ namespace Test.MyClients.Dao
 			Assert.AreEqual(expected, actual);
 			this.mocks.VerifyAll();
 		}
+
+		[Test]
+		public void GetCountTest()
+		{
+			long expected = 20;
+			using (mocks.Ordered())
+			{
+				this.sessionFactory.Expect((m) => m.GetCurrentSession()).Return(this.session);
+				this.session.Expect((m) => m.CreateQuery("select count(*) from Client")).Return(this.query);
+				this.query.Expect((m) => m.UniqueResult<long>()).Return(expected);
+			}
+
+			mocks.ReplayAll();
+			long actual = this.target.GetCount();
+			Assert.AreEqual(expected, actual);
+			this.mocks.VerifyAll();
+		}
 	}
 }

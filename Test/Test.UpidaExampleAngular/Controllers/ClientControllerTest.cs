@@ -22,7 +22,7 @@ namespace Test.UpidaExampleAngular.Controllers
 		{
 			this.mocks = new MockRepository();
 			this.validator = this.mocks.Stub<IValidationContext>();
-			this.clientBusiness = this.mocks.Stub<ClientBusiness>(null, null);
+			this.clientBusiness = this.mocks.Stub<ClientBusiness>(null, null, null);
 			this.target = new ClientController(this.validator, this.clientBusiness);
 		}
 
@@ -49,6 +49,16 @@ namespace Test.UpidaExampleAngular.Controllers
 
 			this.mocks.ReplayAll();
 			this.target.Save(input);
+		}
+
+		[Test]
+		public void DeleteTest()
+		{
+			int input = 4235;
+			this.clientBusiness.Expect((m) => m.Delete(input));
+			mocks.ReplayAll();
+			this.target.Delete(input);
+			this.clientBusiness.VerifyAllExpectations();
 		}
 	}
 }

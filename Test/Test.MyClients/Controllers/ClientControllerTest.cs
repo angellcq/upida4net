@@ -65,5 +65,15 @@ namespace Test.MyClients.Controllers
 			this.target.Update(input);
 			this.clientBusiness.VerifyAllExpectations();
 		}
+
+		[Test]
+		public void DeleteTest()
+		{
+			int input = 4235;
+			this.clientBusiness.Expect((m) => m.Delete(input));
+			mocks.ReplayAll();
+			this.target.Delete(input);
+			this.clientBusiness.VerifyAllExpectations();
+		}
 	}
 }

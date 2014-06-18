@@ -69,5 +69,24 @@ namespace Test.UpidaExampleAngular.Dao
 			Assert.AreEqual(expected, actual);
 			this.mocks.VerifyAll();
 		}
+
+		[Test]
+		public void GetCountTest()
+		{
+			int input = 500;
+			long expected = 20;
+			using (mocks.Ordered())
+			{
+				this.sessionFactory.Expect((m) => m.GetCurrentSession()).Return(this.session);
+				this.session.Expect((m) => m.CreateQuery("select count(*) from Order o where o.Client.Id = :clientId")).Return(this.query);
+				this.query.Expect((m) => m.SetParameter<int>("clientId", input)).Return(this.query);
+				this.query.Expect((m) => m.UniqueResult<long>()).Return(expected);
+			}
+
+			mocks.ReplayAll();
+			long actual = this.target.GetCount(input);
+			Assert.AreEqual(expected, actual);
+			this.mocks.VerifyAll();
+		}
 	}
 }
