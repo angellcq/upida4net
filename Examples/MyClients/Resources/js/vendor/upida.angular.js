@@ -137,15 +137,23 @@ $upida.module.directive("errorkey", function () {
 	return {
 		restrict: 'A',
 		link: function (scope, element, attrs) {
-			scope.$watch('$$errors', function (errors, oldVal) {
+			scope.$watch('$$errors', function (errors, oldVal, a, b) {
 				element.text("");
 				if (!errors) return;
 				var key = attrs.errorkey;
 				if (errors) {
-					for(var i=0; i<errors.length; i++) {
-						if (key == errors[i].key) {
-							element.html(errors[i].text);
-							break;
+					for (var i = 0; i < errors.length; i++) {
+						if (key) {
+							if (key == errors[i].key) {
+								element.html(errors[i].text);
+								break;
+							}
+						}
+						else {
+							if (!errors[i].key) {
+								element.html(errors[i].text);
+								break;
+							}
 						}
 					}
 				}

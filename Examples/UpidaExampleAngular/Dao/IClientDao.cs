@@ -6,5 +6,7 @@ namespace UpidaExampleAngular.Dao
 	public interface IClientDao : IDaobase<Client>
 	{
 		IList<Client> GetAll();
+		Client GetById(int id);
+		long GetCount();
 	}
 }

@@ -1,7 +1,7 @@
 <a href="#/client/list">CLIENTS</a>&nbsp;|
 <a ng-href="#/order/create/{{clientId}}">NEW ORDER</a>
 <h2>Orders</h2>
-<span class="error" mainerror></span>
+<span class="error" errorkey></span>
 <hr />
 <table border="1" style="width: 80%;">
 <thead>
@@ -10,7 +10,7 @@
 		<th colspan="4">Shipping</th>
 		<th rowspan="2">CreatedOn</th>
 		<th rowspan="2">Total</th>
-		<th rowspan="2" colspan="2">ACTIONS</th>
+		<th rowspan="2" colspan="3">ACTIONS</th>
 	</tr>
 	<tr class="head">
 		<th>Country</th>
@@ -35,6 +35,9 @@
 		</td>
 		<td>
 			<a ng-href="#/order/edititems/{{row.id}}">Edit Items</a>
+		</td>
+		<td>
+			<input type="button" ng-click="onDelete(row.id)" value="Delete" />
 		</td>
 	</tr>
 </tbody>

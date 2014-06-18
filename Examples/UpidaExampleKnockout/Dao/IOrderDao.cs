@@ -7,5 +7,6 @@ namespace UpidaExampleKnockout.Dao
 	{
 		IList<Order> GetByClient(int clientId);
 		Order GetById(int id);
+		long GetCount(int clientId);
 	}
 }

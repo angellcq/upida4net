@@ -15,7 +15,8 @@ angularExample.app.controller(
 		this.total = null;
 	};
 
-	$scope.loadOrders = function() {
+	$scope.loadOrders = function () {
+		$scope.orderRows = new Array();
 		upida.get("order/getbyclient?clientId=" + $scope.clientId, $scope)
 		.then(function (items) {
 			angular.forEach(items, function (p, i) {
@@ -28,6 +29,13 @@ angularExample.app.controller(
 				row.total = p.total;
 				$scope.orderRows.push(row);
 			});
+		});
+	};
+
+	$scope.onDelete = function (orderId) {
+		upida.post("order/delete/" + orderId, null, $scope)
+		.then(function () {
+			$scope.loadOrders();
 		});
 	};
 

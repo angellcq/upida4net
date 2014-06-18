@@ -125,13 +125,11 @@ $upida.vm = null;
 $upida.bind = function(vm) {
 	$upida.vm = vm;
 	$upida.vm.$$errors = ko.observableDictionary();
-	$upida.vm.$$mainerror = ko.observable();
 	ko.applyBindings(vm);
 };
 
 $upida.showErrors = function(fail) {
 	$upida.vm.$$errors.removeAll();
-	$upida.vm.$$mainerror(fail.main);
 	$.each(fail.failures, function (i, p) {
 		var current = $upida.vm.$$errors.get(p.key);
 		if(current()) {
@@ -146,7 +144,6 @@ $upida.showErrors = function(fail) {
 $upida.clearErrors = function(fail) {
 	if ($upida.vm.$$errors) {
 		$upida.vm.$$errors.removeAll();
-		$upida.vm.$$mainerror("");
 	}
 };
 

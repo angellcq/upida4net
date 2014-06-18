@@ -20,7 +20,8 @@ $(function () {
 		this.editItemsLink = $upida.url("order/edititems?id=") + id;
 	};
 
-	vm.loadOrders = function() {
+	vm.loadOrders = function () {
+		vm.orderRows.removeAll();
 		$upida.get("api/order/getbyclient?clientId=" + vm.clientId)
 		.then(function (items) {
 			$.each(items, function (i, p) {
@@ -33,6 +34,13 @@ $(function () {
 				row.total(p.total);
 				vm.orderRows.push(row);
 			});
+		});
+	};
+
+	vm.onDelete = function (item) {
+		$upida.post("api/order/delete/" + item.id())
+		.then(function() {
+			vm.loadOrders();
 		});
 	};
 

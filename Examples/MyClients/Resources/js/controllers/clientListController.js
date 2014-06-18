@@ -1,7 +1,7 @@
 myclients.app.controller(
 	"clientListController", ["$scope", "upida", function ($scope, upida) {
 
-	$scope.clientRows = new Array();
+	$scope.clientRows;
 
 	$scope.ClientRow = function (id) {
 		this.id = id;
@@ -11,7 +11,8 @@ myclients.app.controller(
 		this.logins = new Array();
 	};
 
-	$scope.loadClients = function() {
+	$scope.loadClients = function () {
+		$scope.clientRows = new Array();
 		upida.get("client/getall", $scope)
 		.then(function (items) {
 			angular.forEach(items, function (p, i) {
@@ -34,7 +35,7 @@ myclients.app.controller(
 		});
 	};
 
-	$scope.$on('$routeChangeSuccess', function () {
+	$scope.$on("$routeChangeSuccess", function () {
 		$scope.loadClients();
 	});
 }]);

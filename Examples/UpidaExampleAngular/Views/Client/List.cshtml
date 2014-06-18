@@ -1,13 +1,13 @@
 <a href="#/client/create">NEW CLIENT</a>
 <h2>Clients</h2>
-<span class="error" mainerror></span>
+<span class="error" errorkey></span>
 <hr />
 <table border="1" style="width: 50%;">
 <thead>
 	<tr class="head">
 		<th>ID</th>
 		<th>NAME</th>
-		<th colspan="2">ACTIONS</th>
+		<th colspan="3">ACTIONS</th>
 	</tr>
 </thead>
 <tbody>
@@ -19,6 +19,9 @@
 		</td>
 		<td>
 			<a ng-href="#/order/create/{{row.id}}">New Order</a>
+		</td>
+		<td>
+			<input type="button" ng-click="onDelete(row.id)" value="Delete" />
 		</td>
 	</tr>
 </tbody>

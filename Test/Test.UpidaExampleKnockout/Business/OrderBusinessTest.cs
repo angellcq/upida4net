@@ -6,6 +6,7 @@ using Upida;
 using UpidaExampleKnockout.Business;
 using UpidaExampleKnockout.Dao;
 using UpidaExampleKnockout.Domain;
+using Upida.Validation;
 
 namespace Test.UpidaExampleKnockout.Business
 {
@@ -15,6 +16,7 @@ namespace Test.UpidaExampleKnockout.Business
 		private MockRepository mocks;
 		private IOrderDao orderDao;
 		private IMapper mapper;
+		private IValidationContext validator;
 		private ITransaction transaction;
 		private OrderBusiness target;
 
@@ -24,8 +26,9 @@ namespace Test.UpidaExampleKnockout.Business
 			this.mocks = new MockRepository();
 			this.orderDao = this.mocks.Stub<IOrderDao>();
 			this.mapper = this.mocks.Stub<IMapper>();
+			this.validator = this.mocks.Stub<IValidationContext>();
 			this.transaction = this.mocks.Stub<ITransaction>();
-			this.target = new OrderBusiness(this.mapper, this.orderDao);
+			this.target = new OrderBusiness(this.mapper, this.validator, this.orderDao);
 		}
 
 		[Test]

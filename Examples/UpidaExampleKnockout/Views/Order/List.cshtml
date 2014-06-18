@@ -6,7 +6,7 @@
 <a data-bind="attr: {'href': clientsLink}">CLIENTS</a>&nbsp;|
 <a data-bind="attr: {'href': createLink}">NEW ORDER</a>&nbsp;|
 <h2>Orders</h2>
-<span class="error" data-bind="html: $$mainerror"></span>
+<span class="error" data-bind="html: $$errors.get()"></span>
 <hr />
 <table border="1" style="width: 80%;">
 <thead>
@@ -15,7 +15,7 @@
 		<th colspan="4">Shipping</th>
 		<th rowspan="2">CreatedOn</th>
 		<th rowspan="2">Total</th>
-		<th rowspan="2" colspan="2">ACTIONS</th>
+		<th rowspan="2" colspan="3">ACTIONS</th>
 	</tr>
 	<tr class="head">
 		<th>Country</th>
@@ -40,6 +40,9 @@
 		</td>
 		<td>
 			<a data-bind="attr: {'href': editItemsLink}">Edit Items</a>
+		</td>
+		<td>
+			<input type="button" value="Delete" data-bind="click: $root.onDelete" />
 		</td>
 	</tr>
 </tbody>

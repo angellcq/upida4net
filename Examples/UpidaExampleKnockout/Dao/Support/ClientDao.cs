@@ -16,5 +16,17 @@ namespace UpidaExampleKnockout.Dao.Support
 			return this.Session.CreateQuery("from Client")
 				.List<Client>();
 		}
+
+		public Client GetById(int id)
+		{
+			return this.Session.Get<Client>(id);
+		}
+
+		public long GetCount()
+		{
+			return this.Session
+				.CreateQuery("select count(*) from Client")
+				.UniqueResult<long>();
+		}
 	}
 }

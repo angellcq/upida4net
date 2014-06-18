@@ -27,5 +27,12 @@ namespace UpidaExampleAngular.Dao.Support
 				.SetResultTransformer(Transformers.DistinctRootEntity)
 				.UniqueResult<Order>();
 		}
+
+		public long GetCount(int clientId)
+		{
+			return this.Session.CreateQuery("select count(*) from Order o where o.Client.Id = :clientId")
+				.SetParameter<int>("clientId", clientId)
+				.UniqueResult<long>();
+		}
 	}
 }

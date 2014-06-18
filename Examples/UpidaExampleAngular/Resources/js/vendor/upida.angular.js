@@ -4,15 +4,15 @@ $upida.settings.baseUrl = "/";
 $upida.settings.errorLine = "<br />";
 
 $upida.module = angular.module("upidamodule", []);
-$upida.module.factory("upida", ["$http", "$q", function($http, $q) {
+$upida.module.factory("upida", ["$http", "$q", function ($http, $q) {
 	var service = { onBeforeAjax: null, onAfterAjax: null };
 	service.$http = $http;
 
-	service.url = function(link) {
+	service.url = function (link) {
 		return $upida.settings.baseUrl + link;
 	};
 
-	service.navigate = function(link) {
+	service.navigate = function (link) {
 		window.location.replace(service.url(link));
 	};
 
@@ -26,13 +26,13 @@ $upida.module.factory("upida", ["$http", "$q", function($http, $q) {
 		return undefined === val || null == val || "" === val;
 	};
 
-	service.getDirectPromise = function(data) {
+	service.getDirectPromise = function (data) {
 		var deferred = $q.defer();
 		deferred.resolve(data);
 		return deferred.promise;
 	};
 
-	service.post = function(method, input, $scope) {
+	service.post = function (method, input, $scope) {
 		service.ajaxStart();
 		var deferred = $q.defer();
 		service.$http({
@@ -40,12 +40,12 @@ $upida.module.factory("upida", ["$http", "$q", function($http, $q) {
 			url: service.url(method),
 			data: input
 		})
-		.success(function(data, status, headers, config) {
+		.success(function (data, status, headers, config) {
 			service.clearErrors($scope);
 			deferred.resolve(data);
 			service.ajaxEnd();
 		})
-		.error(function(data, status, headers, config) {
+		.error(function (data, status, headers, config) {
 			deferred.reject();
 			service.ajaxEnd();
 			service.showErrors($scope, data);
@@ -53,19 +53,19 @@ $upida.module.factory("upida", ["$http", "$q", function($http, $q) {
 		return deferred.promise;
 	};
 
-	service.get = function(method, $scope) {
+	service.get = function (method, $scope) {
 		service.ajaxStart();
 		var deferred = $q.defer();
 		service.$http({
 			method: 'GET',
 			url: service.url(method)
 		})
-		.success(function(data, status, headers, config) {
+		.success(function (data, status, headers, config) {
 			service.clearErrors($scope);
 			deferred.resolve(data);
 			service.ajaxEnd();
 		})
-		.error(function(data, status, headers, config) {
+		.error(function (data, status, headers, config) {
 			deferred.reject();
 			service.ajaxEnd();
 			service.showErrors($scope, data);
@@ -73,21 +73,21 @@ $upida.module.factory("upida", ["$http", "$q", function($http, $q) {
 		return deferred.promise;
 	};
 
-	service.all = function(promises) {
+	service.all = function (promises) {
 		return $q.all(promises);
 	};
 
 	service.ajaxCallCount = 0;
 
-	service.ajaxStart = function() {
-		if(0 == service.ajaxCallCount) {
-			if(service.onBeforeAjax) service.onBeforeAjax();
+	service.ajaxStart = function () {
+		if (0 == service.ajaxCallCount) {
+			if (service.onBeforeAjax) service.onBeforeAjax();
 		}
 
 		service.ajaxCallCount++;
 	};
 
-	service.ajaxEnd = function() {
+	service.ajaxEnd = function () {
 		service.ajaxCallCount--;
 		if (0 == service.ajaxCallCount) {
 			setTimeout(function () {
@@ -98,13 +98,12 @@ $upida.module.factory("upida", ["$http", "$q", function($http, $q) {
 		}
 	};
 
-	service.showErrors = function($scope, fail) {
-		if(!$scope) return;
+	service.showErrors = function ($scope, fail) {
+		if (!$scope) return;
 		var errors = new Array();
-		errors.main = fail.main;
 		angular.forEach(fail.failures, function (p, i) {
-			var current = service.find(errors, function(m) { return m.key == p.key; });
-			if(current) {
+			var current = service.find(errors, function (m) { return m.key == p.key; });
+			if (current) {
 				current.text = current.text + $upida.settings.errorLine + p.text;
 			}
 			else {
@@ -114,10 +113,9 @@ $upida.module.factory("upida", ["$http", "$q", function($http, $q) {
 		$scope.$$errors = errors;
 	};
 
-	service.clearErrors = function($scope) {
-		if(!$scope) return;
+	service.clearErrors = function ($scope) {
+		if (!$scope) return;
 		$scope.$$errors = new Array();
-		$scope.$$errors.main = "";
 	};
 
 	service.find = function (obsArray, isItemFunc) {
@@ -128,38 +126,34 @@ $upida.module.factory("upida", ["$http", "$q", function($http, $q) {
 				return;
 			}
 		});
-	
+
 		return foundItem;
 	};
 
 	return service;
 }]);
 
-$upida.module.directive("mainerror", function () {
-	return {
-		restrict: 'A',
-		link: function (scope, element, attrs) {
-			scope.$watch('$$errors', function (errors, oldVal) {
-				if (!errors) return;
-				element.text(errors.main);
-			});
-		}
-	};
-});
-
 $upida.module.directive("errorkey", function () {
 	return {
 		restrict: 'A',
 		link: function (scope, element, attrs) {
-			scope.$watch('$$errors', function (errors, oldVal) {
+			scope.$watch('$$errors', function (errors, oldVal, a, b) {
 				element.text("");
 				if (!errors) return;
 				var key = attrs.errorkey;
 				if (errors) {
-					for(var i=0; i<errors.length; i++) {
-						if (key == errors[i].key) {
-							element.html(errors[i].text);
-							break;
+					for (var i = 0; i < errors.length; i++) {
+						if (key) {
+							if (key == errors[i].key) {
+								element.html(errors[i].text);
+								break;
+							}
+						}
+						else {
+							if (!errors[i].key) {
+								element.html(errors[i].text);
+								break;
+							}
 						}
 					}
 				}

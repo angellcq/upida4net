@@ -6,6 +6,7 @@ using Upida;
 using UpidaExampleAngular.Business;
 using UpidaExampleAngular.Dao;
 using UpidaExampleAngular.Domain;
+using Upida.Validation;
 
 namespace Test.UpidaExampleAngular.Business
 {
@@ -15,6 +16,7 @@ namespace Test.UpidaExampleAngular.Business
 		private MockRepository mocks;
 		private IClientDao clientDao;
 		private IMapper mapper;
+		private IValidationContext validator;
 		private ITransaction transaction;
 		private ClientBusiness target;
 
@@ -24,8 +26,9 @@ namespace Test.UpidaExampleAngular.Business
 			this.mocks = new MockRepository();
 			this.clientDao = mocks.Stub<IClientDao>();
 			this.mapper = mocks.Stub<IMapper>();
+			this.validator = mocks.Stub<IValidationContext>();
 			this.transaction = mocks.Stub<ITransaction>();
-			this.target = new ClientBusiness(this.mapper, this.clientDao);
+			this.target = new ClientBusiness(this.mapper, this.validator, this.clientDao);
 		}
 
 		[Test]

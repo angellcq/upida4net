@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Web.Http;
 using Upida.Validation;
 using UpidaExampleAngular.Business;
 using UpidaExampleAngular.Domain;
@@ -24,6 +25,12 @@ namespace UpidaExampleAngular.Controllers.Api
 		{
 			this.validator.AssertValid(item, Groups.SAVE);
 			this.clientBusiness.Save(item);
+		}
+
+		[HttpPost]
+		public void Delete(int id)
+		{
+			this.clientBusiness.Delete(id);
 		}
 	}
 }

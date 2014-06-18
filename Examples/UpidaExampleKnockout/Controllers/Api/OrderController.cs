@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Web.Http;
 using Upida.Validation;
 using UpidaExampleKnockout.Business;
 using UpidaExampleKnockout.Domain;
@@ -46,6 +47,12 @@ namespace UpidaExampleKnockout.Controllers.Api
 		{
 			this.validator.AssertValid(item, Groups.UPDATE_A);
 			this.orderBusiness.Update(item);
+		}
+
+		[HttpPost]
+		public void Delete(int id)
+		{
+			this.orderBusiness.Delete(id);
 		}
 	}
 }

@@ -11,7 +11,8 @@ $(function () {
 		this.newOrderLink = $upida.url("order/create?clientId=" + id);
 	};
 
-	vm.loadClients = function() {
+	vm.loadClients = function () {
+		vm.clientRows.removeAll();
 		$upida.get("api/client/getall")
 		.then(function (items) {
 			$.each(items, function (i, p) {
@@ -19,6 +20,13 @@ $(function () {
 				row.name(p.name);
 				vm.clientRows.push(row);
 			});
+		});
+	};
+
+	vm.onDelete = function (item) {
+		$upida.post("api/client/delete/" + item.id())
+		.then(function() {
+			vm.loadClients();
 		});
 	};
 

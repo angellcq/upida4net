@@ -8,15 +8,22 @@ angularExample.app.controller(
 		this.name = null;
 	};
 
-	$scope.loadClients = function() {
+	$scope.loadClients = function () {
+		$scope.clientRows = new Array();
 		upida.get("client/getall", $scope)
 		.then(function (items) {
-			$scope.clientRows = new Array();
 			angular.forEach(items, function (p, i) {
 				var row = new $scope.ClientRow(p.id);
 				row.name = p.name;
 				$scope.clientRows.push(row);
 			});
+		});
+	};
+
+	$scope.onDelete = function (id) {
+		upida.post("client/delete/" + id, null, $scope)
+		.then(function () {
+			$scope.loadClients();
 		});
 	};
 
