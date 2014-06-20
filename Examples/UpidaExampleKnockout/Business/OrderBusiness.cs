@@ -63,10 +63,10 @@ namespace UpidaExampleKnockout.Business
 			using (var tx = this.orderDao.BeginTransaction())
 			{
 				Order existing = this.orderDao.GetById(id);
-				failures.FailIf(null == existing, "Order does not exist", Severity.Fatal);
+				failures.FailIfNull(existing, null, "Order does not exist", Severity.Fatal);
 				this.validator.Assert(failures);
 				long count = this.orderDao.GetCount(existing.Client.Id.Value);
-				failures.FailIf(1 == count, "Cannot delete the only order in the client");
+				failures.FailIfEqual(1, count, null, "Cannot delete the only order in the client");
 				this.validator.Assert(failures);
 				this.orderDao.Delete(existing);
 				tx.Commit();

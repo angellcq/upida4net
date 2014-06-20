@@ -27,7 +27,7 @@ namespace Upida.Validation
 		public FailResponse(string message)
 		{
 			this.failures = new FailureList();
-			this.failures.Fail(message);
+			this.failures.Fail(null, message);
 		}
 
 		/// <summary>

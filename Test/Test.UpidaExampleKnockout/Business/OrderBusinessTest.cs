@@ -149,58 +149,14 @@ namespace Test.UpidaExampleKnockout.Business
 				this.validator.Expect((m) => m.CreateFailureList()).Return(this.failures);
 				this.orderDao.Expect((m) => m.BeginTransaction()).Return(this.transaction);
 				this.orderDao.Expect((m) => m.GetById(input)).Return(existing);
-				this.failures.Expect((m) => m.FailIf(false, "Order does not exist", Severity.Fatal));
+				this.failures.Expect((m) => m.FailIfNull(existing, null, "Order does not exist", Severity.Fatal));
 				this.validator.Expect((m) => m.Assert(this.failures));
 				this.orderDao.Expect((m) => m.GetCount(existing.Client.Id.Value)).Return(count);
-				this.failures.Expect((m) => m.FailIf(false, "Cannot delete the only order in the client"));
+				this.failures.Expect((m) => m.FailIfEqual(1, count, null, "Cannot delete the only order in the client"));
 				this.validator.Expect((m) => m.Assert(this.failures));
 				this.orderDao.Expect((m) => m.Delete(existing));
 				this.transaction.Expect((m) => m.Commit());
 				this.transaction.Expect((m) => m.Dispose());
-			}
-
-			mocks.ReplayAll();
-			this.target.Delete(input);
-			this.mocks.VerifyAll();
-		}
-
-		[Test]
-		[ExpectedException(typeof(Exception), ExpectedMessage = "EXPECTED")]
-		public void DeleteTest_NotExisting()
-		{
-			int input = 4235;
-
-			using (mocks.Ordered())
-			{
-				this.validator.Expect((m) => m.CreateFailureList()).Return(this.failures);
-				this.orderDao.Expect((m) => m.BeginTransaction()).Return(this.transaction);
-				this.orderDao.Expect((m) => m.GetById(input)).Return(null);
-				this.failures.Expect((m) => m.FailIf(true, "Order does not exist", Severity.Fatal)).Throw(new Exception("EXPECTED"));
-			}
-
-			mocks.ReplayAll();
-			this.target.Delete(input);
-			this.mocks.VerifyAll();
-		}
-
-		[Test]
-		[ExpectedException(typeof(Exception), ExpectedMessage = "EXPECTED")]
-		public void DeleteTest_CountOne()
-		{
-			int input = 4235;
-			Order existing = new Order();
-			existing.Id = 6786;
-			existing.Client = new Client() { Id = 123 };
-
-			using (mocks.Ordered())
-			{
-				this.validator.Expect((m) => m.CreateFailureList()).Return(this.failures);
-				this.orderDao.Expect((m) => m.BeginTransaction()).Return(this.transaction);
-				this.orderDao.Expect((m) => m.GetById(input)).Return(existing);
-				this.failures.Expect((m) => m.FailIf(false, "Order does not exist", Severity.Fatal));
-				this.validator.Expect((m) => m.Assert(this.failures));
-				this.orderDao.Expect((m) => m.GetCount(existing.Client.Id.Value)).Return(1);
-				this.failures.Expect((m) => m.FailIf(true, "Cannot delete the only order in the client")).Throw(new Exception("EXPECTED"));
 			}
 
 			mocks.ReplayAll();

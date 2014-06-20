@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace Upida.Validation
@@ -51,91 +52,52 @@ namespace Upida.Validation
 			}
 		}
 
-		/// <summary>
-		/// Adds a new failure object to the list
-		/// </summary>
-		/// <param name="text">text of the failure</param>
-		public void Fail(string text)
-		{
-			this.Fail(null, text, Severity.None);
-		}
-
-		/// <summary>
-		/// Adds a new failure object to the list
-		/// </summary>
-		/// <param name="text">text of the failure</param>
-		/// <param name="severity">severity of the failure</param>
-		public void Fail(string text, Severity severity)
-		{
-			this.Fail(null, text, severity);
-		}
-
-		/// <summary>
-		/// Adds a new failure object to the list
-		/// </summary>
-		/// <param name="key">key of the failure</param>
-		/// <param name="text">text of the failure</param>
-		public void Fail(string key, string text)
-		{
-			this.Fail(key, text, Severity.None);
-		}
-
-		/// <summary>
-		/// Adds a new failure object to the list
-		/// </summary>
-		/// <param name="key">key of the failure</param>
-		/// <param name="text">text of the failure</param>
-		/// <param name="severity">severity of the failure</param>
-		public void Fail(string key, string text, Severity severity)
+		public void Fail(string key, string text, Severity severity = Severity.None)
 		{
 			this.Fail(new Failure(key, text, severity));
 		}
 
-		/// <summary>
-		/// Adds a new failure object to the list if condition is true
-		/// </summary>
-		/// <param name="condition">condition</param>
-		/// <param name="text">text of the failure</param>
-		public void FailIf(bool condition, string text)
-		{
-			this.FailIf(condition, null, text, Severity.None);
-		}
-
-		/// <summary>
-		/// Adds a new failure object to the list if condition is true
-		/// </summary>
-		/// <param name="condition">condition</param>
-		/// <param name="text">text of the failure</param>
-		/// <param name="severity">severity of the failure</param>
-		public void FailIf(bool condition, string text, Severity severity)
-		{
-			this.FailIf(condition, null, text, severity);
-		}
-
-		/// <summary>
-		/// Adds a new failure object to the list if condition is true
-		/// </summary>
-		/// <param name="condition">condition</param>
-		/// <param name="key">key of the failure</param>
-		/// <param name="text">text of the failure</param>
-		public void FailIf(bool condition, string key, string text)
-		{
-			this.FailIf(condition, key, text, Severity.None);
-		}
-
-		/// <summary>
-		/// Adds a new failure object to the list if condition is true
-		/// </summary>
-		/// <param name="condition">condition</param>
-		/// <param name="key">key of the failure</param>
-		/// <param name="text">text of the failure</param>
-		/// <param name="severity">severity of the failure</param>
-		public void FailIf(bool condition, string key, string text, Severity severity)
+		public void FailIf(bool condition, string key, string text, Severity severity = Severity.None)
 		{
 			if (condition)
 			{
 				this.Fail(key, text, severity);
 			}
+		}
+
+		public void FailIfNot(bool condition, string key, string text, Severity severity = Severity.None)
+		{
+			this.FailIf(!condition, key, text, severity);
+		}
+
+		public void FailIfNull(object target, string key, string text, Severity severity = Severity.None)
+		{
+			this.FailIf(null == target, key, text, severity);
+		}
+
+		public void FailIfNotNull(object target, string key, string text, Severity severity = Severity.None)
+		{
+			this.FailIf(null != target, key, text, severity);
+		}
+
+		public void FailIfEqual<T>(T a, T b, string key, string text, Severity severity = Severity.None)
+		{
+			this.FailIf(object.Equals(a, b), key, text, severity);
+		}
+
+		public void FailIfNotEqual<T>(T a, T b, string key, string text, Severity severity = Severity.None)
+		{
+			this.FailIf(!object.Equals(a, b), key, text, severity);
+		}
+
+		public void FailIfEmpty(ICollection collection, string key, string text, Severity severity = Severity.None)
+		{
+			this.FailIf(0 == collection.Count, key, text, severity);
+		}
+
+		public void FailIfNotEmpty(ICollection collection, string key, string text, Severity severity = Severity.None)
+		{
+			this.FailIf(0 != collection.Count, key, text, severity);
 		}
 	}
 }

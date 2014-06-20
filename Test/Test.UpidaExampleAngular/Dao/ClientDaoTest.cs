@@ -60,5 +60,22 @@ namespace Test.UpidaExampleAngular.Dao
 			Assert.AreEqual(expected, actual);
 			this.mocks.VerifyAll();
 		}
+
+		[Test]
+		public void GetByIdTest()
+		{
+			int input = 25;
+			Client expected = new Client() { Id = 25 };
+			using (mocks.Ordered())
+			{
+				this.sessionFactory.Expect((m) => m.GetCurrentSession()).Return(this.session);
+				this.session.Expect((m) => m.Get<Client>(input)).Return(expected);
+			}
+
+			mocks.ReplayAll();
+			Client actual = this.target.GetById(input);
+			Assert.AreEqual(expected, actual);
+			this.mocks.VerifyAll();
+		}
 	}
 }

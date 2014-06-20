@@ -61,10 +61,10 @@ namespace MyClients.Business
 			using (ITransaction tx = this.clientDao.BeginTransaction())
 			{
 				Client existing = this.clientDao.GetById(id);
-				failures.FailIf(null == existing, "Client does not exist");
+				failures.FailIfNull(existing, null, "Client does not exist", Severity.Fatal);
 				this.validator.Assert(failures);
 				long count = this.clientDao.GetCount();
-				failures.FailIf(1 == count, "Cannot delete the only client");
+				failures.FailIfEqual(1, count, null, "Cannot delete the only client");
 				this.validator.Assert(failures);
 				this.clientDao.Delete(existing);
 				tx.Commit();

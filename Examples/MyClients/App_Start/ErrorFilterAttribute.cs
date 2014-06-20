@@ -13,7 +13,7 @@ namespace MyClients
 			if (context.Exception is ValidationException)
 			{
 				response = (context.Exception as ValidationException).BuildFailResponse();
-				response.Failures.FailIf(Severity.Fatal == response.Failures.Severity, "You are trying to break validation !!!");
+				response.Failures.FailIfEqual(Severity.Fatal, response.Failures.Severity, null, "You are trying to break validation !!!");
 			}
 			else
 			{

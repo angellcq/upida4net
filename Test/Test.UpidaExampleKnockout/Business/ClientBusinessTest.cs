@@ -84,58 +84,14 @@ namespace Test.UpidaExampleKnockout.Business
 				this.validator.Expect((m) => m.CreateFailureList()).Return(this.failures);
 				this.clientDao.Expect((m) => m.BeginTransaction()).Return(this.transaction);
 				this.clientDao.Expect((m) => m.GetById(input)).Return(existing);
-				this.failures.Expect((m) => m.FailIf(false, "Client does not exist", Severity.Fatal));
+				this.failures.Expect((m) => m.FailIfNull(existing, null, "Client does not exist", Severity.Fatal));
 				this.validator.Expect((m) => m.Assert(this.failures));
 				this.clientDao.Expect((m) => m.GetCount()).Return(count);
-				this.failures.Expect((m) => m.FailIf(false, "Cannot delete the only client"));
+				this.failures.Expect((m) => m.FailIfEqual(1, count, null, "Cannot delete the only client"));
 				this.validator.Expect((m) => m.Assert(this.failures));
 				this.clientDao.Expect((m) => m.Delete(existing));
 				this.transaction.Expect((m) => m.Commit());
 				this.transaction.Expect((m) => m.Dispose());
-			}
-
-			mocks.ReplayAll();
-			this.target.Delete(input);
-			this.mocks.VerifyAll();
-		}
-
-		[Test]
-		[ExpectedException(typeof(Exception), ExpectedMessage = "EXPECTED")]
-		public void DeleteTest_NotExisting()
-		{
-			int input = 4235;
-
-			using (mocks.Ordered())
-			{
-				this.validator.Expect((m) => m.CreateFailureList()).Return(this.failures);
-				this.clientDao.Expect((m) => m.BeginTransaction()).Return(this.transaction);
-				this.clientDao.Expect((m) => m.GetById(input)).Return(null);
-				this.failures.Expect((m) => m.FailIf(true, "Client does not exist", Severity.Fatal)).Throw(new Exception("EXPECTED"));
-
-			}
-
-			mocks.ReplayAll();
-			this.target.Delete(input);
-			this.mocks.VerifyAll();
-		}
-
-		[Test]
-		[ExpectedException(typeof(Exception), ExpectedMessage = "EXPECTED")]
-		public void DeleteTest_CountOne()
-		{
-			int input = 4235;
-			Client existing = new Client();
-			existing.Id = 6786;
-
-			using (mocks.Ordered())
-			{
-				this.validator.Expect((m) => m.CreateFailureList()).Return(this.failures);
-				this.clientDao.Expect((m) => m.BeginTransaction()).Return(this.transaction);
-				this.clientDao.Expect((m) => m.GetById(input)).Return(existing);
-				this.failures.Expect((m) => m.FailIf(false, "Client does not exist", Severity.Fatal));
-				this.validator.Expect((m) => m.Assert(this.failures));
-				this.clientDao.Expect((m) => m.GetCount()).Return(1);
-				this.failures.Expect((m) => m.FailIf(true, "Cannot delete the only client")).Throw(new Exception("EXPECTED"));
 			}
 
 			mocks.ReplayAll();
