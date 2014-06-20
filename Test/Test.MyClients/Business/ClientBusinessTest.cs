@@ -116,7 +116,7 @@ namespace Test.MyClients.Business
 		}
 
 		[Test]
-		public void DeleteTest_Ok()
+		public void DeleteTest()
 		{
 			int input = 4235;
 			long count = 3;
