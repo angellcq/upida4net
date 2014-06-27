@@ -1,0 +1,70 @@
+<a ng-href="#/client/list">CLIENTS</a>&nbsp;|
+<a ng-href="#/order/list/{{clientId}}">ORDERS</a>
+<h2>New Order</h2>
+<br />
+<span class="error" errorkey></span>
+<hr />
+<table>
+	<tr>
+		<td>Ship to Country</td>
+		<td>
+			<input type="text" ng-model="shipCountry" />
+			<span class="error" errorkey="shipCountry"></span>
+		</td>
+	</tr>
+	<tr>
+		<td>Ship to City</td>
+		<td>
+			<input type="text" ng-model="shipCity" />
+			<span class="error" errorkey="shipCity"></span>
+		</td>
+	</tr>
+	<tr>
+		<td>Ship to Zip</td>
+		<td>
+			<input type="text" ng-model="shipZip" />
+			<span class="error" errorkey="shipZip"></span>
+		</td>
+	</tr>
+	<tr>
+		<td>Ship to Address</td>
+		<td>
+			<input type="text" ng-model="shipAddress" />
+			<span class="error" errorkey="shipAddress"></span>
+		</td>
+	</tr>
+	<tr>
+		<td>Total ($)</td>
+		<td>
+			<input type="text" ng-model="total" />
+			<span class="error" errorkey="total"></span>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2"><hr /></td>
+	</tr>
+	<tr>
+		<td>Products:</td>
+		<td>
+			<div ng-repeat="row in orderItemRows">
+				Product:
+				<select ng-model="row.product" ng-options="product.name for product in products">
+					<option value="">Select ...</option>
+				</select>
+				<span class="error" errorkey="{{'orderItems['+ $index + '].productId'}}"></span>
+				&nbsp;&nbsp;Count:
+				<input ng-model="row.count" />
+				<span class="error" errorkey="{{'orderItems['+ $index + '].count'}}"></span>
+				&nbsp;&nbsp;Price:
+				<input ng-model="row.price" />
+				<span class="error" errorkey="{{'orderItems['+ $index + '].price'}}"></span>
+				&nbsp;&nbsp;
+				<input type="button" ng-click="removeProduct(row)" value="remove" />
+			</div>
+			<input type="button" ng-click="addProduct()" value="add" />
+			<span class="error" errorkey="orderItems"></span>
+		</td>
+	</tr>
+</table>
+<hr />
+<input type="button" ng-click="onSave()" value="Save" />

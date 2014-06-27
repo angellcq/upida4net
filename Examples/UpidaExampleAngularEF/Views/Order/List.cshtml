@@ -1,0 +1,44 @@
+<a href="#/client/list">CLIENTS</a>&nbsp;|
+<a ng-href="#/order/create/{{clientId}}">NEW ORDER</a>
+<h2>Orders</h2>
+<span class="error" errorkey></span>
+<hr />
+<table border="1" style="width: 80%;">
+<thead>
+	<tr class="head">
+		<th rowspan="2">ID</th>
+		<th colspan="4">Shipping</th>
+		<th rowspan="2">CreatedOn</th>
+		<th rowspan="2">Total</th>
+		<th rowspan="2" colspan="3">ACTIONS</th>
+	</tr>
+	<tr class="head">
+		<th>Country</th>
+		<th>City</th>
+		<th>Zip</th>
+		<th>Address</th>
+	</tr>
+</thead>
+<tbody>
+	<tr ng-repeat="row in orderRows">
+		<td>
+			<a ng-href="#/order/show/{{row.id}}" ng-bind="row.id|idtext"></a>
+		</td>
+		<td ng-bind="row.shipCountry"></td>
+		<td ng-bind="row.shipCity"></td>
+		<td ng-bind="row.shipZip"></td>
+		<td ng-bind="row.shipAddress"></td>
+		<td ng-bind="row.createdOn|datetime"></td>
+		<td ng-bind="row.total"></td>
+		<td>
+			<a ng-href="#/order/edit/{{row.id}}">Edit</a>
+		</td>
+		<td>
+			<a ng-href="#/order/edititems/{{row.id}}">Edit Items</a>
+		</td>
+		<td>
+			<input type="button" ng-click="onDelete(row.id)" value="Delete" />
+		</td>
+	</tr>
+</tbody>
+</table>

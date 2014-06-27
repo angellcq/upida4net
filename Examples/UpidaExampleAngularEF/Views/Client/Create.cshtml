@@ -1,0 +1,15 @@
+<a href="#/client/list">ALL CLIENTS</a>
+<h2>New Client</h2>
+<span class="error" errorkey></span>
+<hr />
+<table>
+	<tr>
+		<td>Name</td>
+		<td>
+			<input type="text" ng-model="name" />
+			<span class="error" errorkey="name"></span>
+		</td>
+	</tr>
+</table>
+<hr />
+<input type="button" ng-click="onSave()" value="Save" />
