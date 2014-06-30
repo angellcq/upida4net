@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Iesi.Collections;
+using System.Reflection;
 
 namespace Upida
 {
@@ -97,6 +98,9 @@ namespace Upida
 
 			IList destList = null;
 			ISet destSet = null;
+			IEnumerable destHashSet = null;
+			MethodInfo hashSetAdd = null;
+			MethodInfo hashSetClear = null;
 			Type destCollectionType = destCollection.GetType();
 			if (SET_TYPE.IsAssignableFrom(destCollectionType))
 			{
@@ -108,13 +112,19 @@ namespace Upida
 				destList = (IList)destCollection;
 				destList.Clear();
 			}
-			else
+			else // Treat as System.Collections.GenericHashSet<?>
 			{
-				throw new ApplicationException("Collection is neither IList nor iesi.ISet: " + destCollectionType.FullName + ". Only IList or iesi.ISet can be mapped.");
+				destHashSet = (IEnumerable)destCollection;
+				Type hashSetType = destCollection.GetType();
+				hashSetAdd = hashSetType.GetMethod("Add");
+				hashSetClear = hashSetType.GetMethod("Clear");
+				hashSetClear.Invoke(destHashSet, null);
 			}
 
+			List<Dtobase> sourceItems = new List<Dtobase>();
 			foreach (Dtobase item in sourceCollection)
 			{
+				sourceItems.Add(item);
 				Dtobase matchedDestItem = null;
 				foreach (Dtobase destItem in destItems)
 				{
@@ -136,6 +146,10 @@ namespace Upida
 					{
 						destList.Add(matchedDestItem);
 					}
+					else
+					{
+						hashSetAdd.Invoke(destHashSet, new object[] { matchedDestItem });
+					}
 				}
 				else
 				{
@@ -147,10 +161,39 @@ namespace Upida
 					{
 						destList.Add(item);
 					}
+					else
+					{
+						hashSetAdd.Invoke(destHashSet, new object[] { item });
+					}
 
 					if (item is IChild)
 					{
 						((IChild)item).ConnectToParent(parent);
+					}
+				}
+			}
+
+			if (sourceItems.Count < destItems.Count)
+			{
+				foreach (Dtobase original in destItems)
+				{
+					if (!(original is IChildEx))
+					{
+						break;
+					}
+
+					bool itemDeleted = true;
+					foreach (Dtobase updated in sourceItems)
+					{
+						if (object.Equals(original, updated))
+						{
+							itemDeleted = false;
+						}
+					}
+
+					if (itemDeleted)
+					{
+						(original as IChildEx).DisconnectFromParrent();
 					}
 				}
 			}

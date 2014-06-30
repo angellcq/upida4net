@@ -7,7 +7,7 @@ namespace UpidaExampleAngularEF.Dao.Support
 {
 	public class ClientDao : Daobase<Client>, IClientDao
 	{
-		public ClientDao(MyContextFactory sessionFactory)
+		public ClientDao(DbSessionFactory sessionFactory)
 			: base(sessionFactory)
 		{
 		}
@@ -30,7 +30,6 @@ namespace UpidaExampleAngularEF.Dao.Support
 		public void Save(Client item)
 		{
 			this.Session.Clients.Add(item);
-			this.Session.SaveChanges();
 		}
 
 		public void Delete(Client item)

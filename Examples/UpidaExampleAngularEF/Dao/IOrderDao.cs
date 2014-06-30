@@ -9,6 +9,7 @@ namespace UpidaExampleAngularEF.Dao
 		Order GetById(int id);
 		long GetCount(int clientId);
 		void Save(Order item);
+		void Update(Order item);
 		void Delete(Order item);
 	}
 }

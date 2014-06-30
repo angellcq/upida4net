@@ -25,28 +25,22 @@ namespace UpidaExampleAngularEF.Business
 
 		public virtual void Save(Client item)
 		{
-			using (TransactionScope tx = new TransactionScope())
-			{
-				this.mapper.Map(item);
-				this.clientDao.Save(item);
-				tx.Complete();
-			}
+			this.mapper.Map(item);
+			this.clientDao.Save(item);
+			this.clientDao.SaveChanges();
 		}
 
 		public virtual void Delete(int id)
 		{
 			var failures = this.validator.CreateFailureList();
-			using (TransactionScope tx = new TransactionScope())
-			{
-				Client existing = this.clientDao.GetById(id);
-				failures.FailIfNull(existing, null, "Client does not exist", Severity.Fatal);
-				this.validator.Assert(failures);
-				long count = this.clientDao.GetCount();
-				failures.FailIfEqual(1, count, null, "Cannot delete the only client");
-				this.validator.Assert(failures);
-				this.clientDao.Delete(existing);
-				tx.Complete();
-			}
+			Client existing = this.clientDao.GetById(id);
+			failures.FailIfNull(existing, null, "Client does not exist", Severity.Fatal);
+			this.validator.Assert(failures);
+			long count = this.clientDao.GetCount();
+			failures.FailIfEqual(1, count, null, "Cannot delete the only client");
+			this.validator.Assert(failures);
+			this.clientDao.Delete(existing);
+			this.clientDao.SaveChanges();
 		}
 	}
 }

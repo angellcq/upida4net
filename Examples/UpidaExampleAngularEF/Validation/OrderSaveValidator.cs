@@ -34,9 +34,11 @@ namespace UpidaExampleAngularEF.Validation
 			self.MustHaveCountBetween(1, 500, Errors.WRONG_COUNT);
 			self.NestedList<OrderItem>(Groups.SAVE, null);
 
-			self.Field("client", this.Target.Client);
-			self.Required();
-			self.Nested<Client>(Groups.REFERENCE, null);
+			self.Field("client_Id", this.Target.Client_Id);
+			self.SetSeverity(Severity.Fatal);
+			self.Required(Errors.MUST_BE_NUMBER);
+
+			self.MissingField("client", this.Target.Client);
 		}
 	}
 }

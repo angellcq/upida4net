@@ -29,7 +29,7 @@ angularExample.app.controller(
 
 	$scope.onSave = function () {
 		var item = {};
-		item.client = upida.getReff($scope.clientId);
+		item.client_Id = $scope.clientId;
 		item.shipCountry = $scope.shipCountry;
 		item.shipCity = $scope.shipCity;
 		item.shipZip = $scope.shipZip;

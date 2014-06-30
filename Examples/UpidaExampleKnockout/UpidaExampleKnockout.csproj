@@ -114,9 +114,8 @@
       <HintPath>..\..\Libs\Microsoft.AspNet.WebPages.2.0.20710.0\System.Web.WebPages.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Upida-3.0, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Binary\Upida-3.0.dll</HintPath>
+    <Reference Include="Upida.Net-3.1">
+      <HintPath>..\..\Binary\Upida.Net-3.1.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

@@ -23,7 +23,7 @@ namespace UpidaExampleAngularEF
 			builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
 			builder.RegisterFilterProvider();
 
-			builder.RegisterType<MyContextFactory>().As<MyContextFactory>().SingleInstance();
+			builder.RegisterType<DbSessionFactory>().As<DbSessionFactory>().SingleInstance();
 			builder.RegisterType<Mapper>().As<IMapper>().SingleInstance();
 			builder.RegisterType<ValidationContext>().As<IValidationContext>().SingleInstance();
 

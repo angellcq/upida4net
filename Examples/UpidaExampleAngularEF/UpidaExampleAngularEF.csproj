@@ -51,11 +51,12 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Libs\Autofac.WebApi.3.1.0\Autofac.Integration.WebApi.dll</HintPath>
     </Reference>
-    <Reference Include="EntityFramework">
-      <HintPath>..\..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libs\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer">
-      <HintPath>..\..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <HintPath>..\..\Libs\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Iesi.Collections">
       <HintPath>..\..\Libs\Iesi.Collections.3.2.0.4000\Iesi.Collections.dll</HintPath>
@@ -119,8 +120,9 @@
       <HintPath>..\..\Libs\Microsoft.AspNet.WebPages.2.0.20710.0\System.Web.WebPages.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml" />
-    <Reference Include="Upida-3.0">
-      <HintPath>..\..\Binary\Upida-3.0.dll</HintPath>
+    <Reference Include="Upida.Net-3.1, Version=3.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Binary\Upida.Net-3.1.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -140,34 +142,10 @@
     <Compile Include="Dao\IOrderDao.cs" />
     <Compile Include="Dao\Support\ClientDao.cs" />
     <Compile Include="Dao\Support\Daobase.cs" />
-    <Compile Include="Dao\Support\MyContext.cs" />
+    <Compile Include="Dao\Support\DbSession.cs" />
     <Compile Include="Dao\Support\OrderDao.cs" />
-    <Compile Include="Dao\Support\MyContextFactory.cs" />
+    <Compile Include="Dao\Support\DbSessionFactory.cs" />
     <Compile Include="Domain\Client.cs" />
-    <Compile Include="Domain\Delete\Client.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Domain\Delete\Model1.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Domain\Delete\Model1.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Domain\Delete\Model1.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Domain\Delete\Order.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Domain\Delete\OrderItem.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="Domain\Order.cs" />
     <Compile Include="Domain\OrderItem.cs" />
     <Compile Include="Domain\Util.cs" />
@@ -222,24 +200,6 @@
     <Content Include="Views\Order\EditItems.cshtml" />
     <Content Include="Views\Order\List.cshtml" />
     <Content Include="Views\Order\Show.cshtml" />
-    <Content Include="packages.config" />
-    <EntityDeploy Include="Domain\Delete\Model1.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Domain\Delete\Model1.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Model1.edmx</DependentUpon>
-      <LastGenOutput>Model1.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Domain\Delete\Model1.edmx.diagram">
-      <DependentUpon>Model1.edmx</DependentUpon>
-    </Content>
-    <Content Include="Domain\Delete\Model1.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Model1.edmx</DependentUpon>
-      <LastGenOutput>Model1.cs</LastGenOutput>
-    </Content>
     <None Include="Properties\PublishProfiles\upidaangular - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\upidaangular - Web Deploy.pubxml" />
     <Content Include="Views\Home\Index.cshtml" />

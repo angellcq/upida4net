@@ -1,10 +1,12 @@
 ﻿using System;
 using UpidaExampleAngularEF.Dao.Support;
+using UpidaExampleAngularEF.Domain;
 
 namespace UpidaExampleAngularEF.Dao
 {
 	public interface IDaobase<T>
 	{
-		MyContext Session { get; }
+		DbSession Session { get; }
+		void SaveChanges();
 	}
 }
