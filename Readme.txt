@@ -13,6 +13,7 @@ This example shows you how to use Upida to create robust validation.
 This is also great example on how to create MVVM applications with angular.js and Upida.
 This example shows you how to use Upida to create robust validation.
 
+4 - UpidaExampleAngularEF - Same as UpidaExampleAngular, but uses Entity Framework instead of NHibernate.
 
 You can start using Upida in your own projects.
 The file "upida.angular.js" or "upida.knockout.js" can greatly simplify your efforts.
