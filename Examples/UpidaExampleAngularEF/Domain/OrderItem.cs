@@ -52,7 +52,7 @@ namespace UpidaExampleAngularEF.Domain
 			}
 		}
 
-		public void DisconnectFromParrent()
+		public void DisconnectFromParent()
 		{
 			this.Order = null;
 			this.Order_Id = null;

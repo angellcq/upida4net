@@ -91,8 +91,18 @@ namespace Upida
 		private void MapToCollection(IEnumerable sourceCollection, IEnumerable destCollection, Dtobase parent)
 		{
 			List<Dtobase> destItems = new List<Dtobase>();
+			bool firstIteration = true;
+			bool child = false;
+			bool childEx = false;
 			foreach (Dtobase item in destCollection)
 			{
+				if (firstIteration)
+				{
+					firstIteration = false;
+					child = item is IChild;
+					childEx = item is IChildEx;
+				}
+
 				destItems.Add(item);
 			}
 
@@ -166,22 +176,17 @@ namespace Upida
 						hashSetAdd.Invoke(destHashSet, new object[] { item });
 					}
 
-					if (item is IChild)
+					if (child)
 					{
 						((IChild)item).ConnectToParent(parent);
 					}
 				}
 			}
 
-			if (sourceItems.Count < destItems.Count)
+			if (childEx && sourceItems.Count < destItems.Count)
 			{
 				foreach (Dtobase original in destItems)
 				{
-					if (!(original is IChildEx))
-					{
-						break;
-					}
-
 					bool itemDeleted = true;
 					foreach (Dtobase updated in sourceItems)
 					{
@@ -193,7 +198,7 @@ namespace Upida
 
 					if (itemDeleted)
 					{
-						(original as IChildEx).DisconnectFromParrent();
+						((IChildEx)original).DisconnectFromParent();
 					}
 				}
 			}

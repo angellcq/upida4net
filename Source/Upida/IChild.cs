@@ -9,6 +9,6 @@ namespace Upida
 
 	public interface IChildEx : IChild
 	{
-		void DisconnectFromParrent();
+		void DisconnectFromParent();
 	}
 }
