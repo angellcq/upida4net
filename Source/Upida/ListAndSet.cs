@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using iesi = Iesi.Collections;
 
 namespace Upida
 {
-	public class ListAndSet<T> : List<T>, iesi.Generic.ISet<T>, iesi.ISet
+	public class ListAndSet<T> : List<T>, ISet<T>
 	{
 		public ListAndSet()
 		{
@@ -37,24 +36,9 @@ namespace Upida
 			throw new NotImplementedException();
 		}
 
-		public iesi.Generic.ISet<T> ExclusiveOr(iesi.Generic.ISet<T> a)
-		{
-			throw new NotImplementedException();
-		}
-
-		public iesi.Generic.ISet<T> Intersect(iesi.Generic.ISet<T> a)
-		{
-			throw new NotImplementedException();
-		}
-
 		public bool IsEmpty
 		{
 			get { return 0 == base.Count; }
-		}
-
-		public iesi.Generic.ISet<T> Minus(iesi.Generic.ISet<T> a)
-		{
-			throw new NotImplementedException();
 		}
 
 		public bool RemoveAll(ICollection<T> c)
@@ -63,11 +47,6 @@ namespace Upida
 		}
 
 		public bool RetainAll(ICollection<T> c)
-		{
-			throw new NotImplementedException();
-		}
-
-		public iesi.Generic.ISet<T> Union(iesi.Generic.ISet<T> a)
 		{
 			throw new NotImplementedException();
 		}
@@ -98,21 +77,6 @@ namespace Upida
 			throw new NotImplementedException();
 		}
 
-		public iesi.ISet ExclusiveOr(iesi.ISet a)
-		{
-			throw new NotImplementedException();
-		}
-
-		public iesi.ISet Intersect(iesi.ISet a)
-		{
-			throw new NotImplementedException();
-		}
-
-		public iesi.ISet Minus(iesi.ISet a)
-		{
-			throw new NotImplementedException();
-		}
-
 		public bool Remove(object o)
 		{
 			return base.Remove((T)o);
@@ -128,7 +92,53 @@ namespace Upida
 			throw new NotImplementedException();
 		}
 
-		public iesi.ISet Union(iesi.ISet a)
+
+		public void ExceptWith(IEnumerable<T> other)
+		{
+			throw new NotImplementedException();
+		}
+
+		public void IntersectWith(IEnumerable<T> other)
+		{
+			throw new NotImplementedException();
+		}
+
+		public bool IsProperSubsetOf(IEnumerable<T> other)
+		{
+			throw new NotImplementedException();
+		}
+
+		public bool IsProperSupersetOf(IEnumerable<T> other)
+		{
+			throw new NotImplementedException();
+		}
+
+		public bool IsSubsetOf(IEnumerable<T> other)
+		{
+			throw new NotImplementedException();
+		}
+
+		public bool IsSupersetOf(IEnumerable<T> other)
+		{
+			throw new NotImplementedException();
+		}
+
+		public bool Overlaps(IEnumerable<T> other)
+		{
+			throw new NotImplementedException();
+		}
+
+		public bool SetEquals(IEnumerable<T> other)
+		{
+			throw new NotImplementedException();
+		}
+
+		public void SymmetricExceptWith(IEnumerable<T> other)
+		{
+			throw new NotImplementedException();
+		}
+
+		public void UnionWith(IEnumerable<T> other)
 		{
 			throw new NotImplementedException();
 		}

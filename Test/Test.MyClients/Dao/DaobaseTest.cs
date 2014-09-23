@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using MyClients.Dao.Support;
 using NHibernate;
-using NHibernate.Transform;
 using NUnit.Framework;
 using Rhino.Mocks;
-using MyClients.Dao;
-using MyClients.Dao.Support;
-using MyClients.Domain;
 
 namespace Test.MyClients.Dao
 {

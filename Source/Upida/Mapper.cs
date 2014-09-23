@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using Iesi.Collections;
 using System.Reflection;
 
 namespace Upida
 {
 	public class Mapper : IMapper
 	{
-		private static Type SET_TYPE = typeof(ISet);
 		private static Type LIST_TYPE = typeof(IList);
 
 		/// <summary>
@@ -107,22 +105,16 @@ namespace Upida
 			}
 
 			IList destList = null;
-			ISet destSet = null;
 			IEnumerable destHashSet = null;
 			MethodInfo hashSetAdd = null;
 			MethodInfo hashSetClear = null;
 			Type destCollectionType = destCollection.GetType();
-			if (SET_TYPE.IsAssignableFrom(destCollectionType))
-			{
-				destSet = (ISet)destCollection;
-				destSet.Clear();
-			}
-			else if (LIST_TYPE.IsAssignableFrom(destCollectionType))
+			if (LIST_TYPE.IsAssignableFrom(destCollectionType))
 			{
 				destList = (IList)destCollection;
 				destList.Clear();
-			}
-			else // Treat as System.Collections.GenericHashSet<?>
+			} 
+			else // Treat as ISet<?>
 			{
 				destHashSet = (IEnumerable)destCollection;
 				Type hashSetType = destCollection.GetType();
@@ -148,11 +140,7 @@ namespace Upida
 				if (null != matchedDestItem)
 				{
 					this.MapTo(item, matchedDestItem, item.GetType());
-					if (null != destSet)
-					{
-						destSet.Add(matchedDestItem);
-					}
-					else if (null != destList)
+					if (null != destList)
 					{
 						destList.Add(matchedDestItem);
 					}
@@ -163,11 +151,7 @@ namespace Upida
 				}
 				else
 				{
-					if (null != destSet)
-					{
-						destSet.Add(item);
-					}
-					else if (null != destList)
+					if (null != destList)
 					{
 						destList.Add(item);
 					}

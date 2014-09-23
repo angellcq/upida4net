@@ -1,7 +1,7 @@
-﻿using Upida;
+﻿using System.Collections.Generic;
+using Upida;
 using Upida.Validation;
 using UpidaExampleAngular.Validation;
-using iesi = Iesi.Collections.Generic;
 
 namespace UpidaExampleAngular.Domain
 {
@@ -16,7 +16,7 @@ namespace UpidaExampleAngular.Domain
 		public virtual string Name { get; set; }
 
 		[Dto(Levels.FULL, Nested = Levels.ID)]
-		public virtual iesi.ISet<Order> Orders { get; set; }
+		public virtual ISet<Order> Orders { get; set; }
 
 		public override bool Equals(object obj)
 		{

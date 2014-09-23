@@ -1,7 +1,7 @@
-﻿using Upida;
+﻿using System.Collections.Generic;
+using Upida;
 using Upida.Validation;
 using UpidaExampleKnockout.Validation;
-using iesi = Iesi.Collections.Generic;
 
 namespace UpidaExampleKnockout.Domain
 {
@@ -16,7 +16,7 @@ namespace UpidaExampleKnockout.Domain
 		public virtual string Name { get; set; }
 
 		[Dto(Levels.FULL, Nested = Levels.ID)]
-		public virtual iesi.ISet<Order> Orders { get; set; }
+		public virtual ISet<Order> Orders { get; set; }
 
 		public override bool Equals(object obj)
 		{

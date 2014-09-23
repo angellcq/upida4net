@@ -1,13 +1,12 @@
-﻿using System.Collections.Generic;
-using MyClients.Business;
+﻿using MyClients.Business;
 using MyClients.Dao;
 using MyClients.Domain;
 using NHibernate;
 using NUnit.Framework;
 using Rhino.Mocks;
+using System.Collections.Generic;
 using Upida;
 using Upida.Validation;
-using System;
 
 namespace Test.MyClients.Business
 {

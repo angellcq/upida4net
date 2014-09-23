@@ -30,11 +30,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Iesi.Collections">
-      <HintPath>..\..\Libs\Iesi.Collections.3.2.0.4000\Iesi.Collections.dll</HintPath>
-    </Reference>
     <Reference Include="NHibernate">
-      <HintPath>..\..\Libs\NHibernate.3.3.3.4001\NHibernate.dll</HintPath>
+      <HintPath>..\..\packages\NHibernate.4.0.1.4000\lib\net40\NHibernate.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework, Version=2.6.2.12296, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -47,10 +44,10 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\Program Files (x86)\Microsoft ASP.NET\ASP.NET MVC 4\Assemblies\System.Web.Http.dll</HintPath>
+      <HintPath>..\..\packages\Microsoft.AspNet.WebApi.Core.5.2.2\lib\net45\System.Web.Http.dll</HintPath>
     </Reference>
-    <Reference Include="Upida.Net-3.1">
-      <HintPath>..\..\Binary\Upida.Net-3.1.dll</HintPath>
+    <Reference Include="Upida.Net-3.2">
+      <HintPath>..\..\Binary\Upida.Net-3.2.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

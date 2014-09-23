@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Iesi.Collections.Generic;
-using MyClients.Domain;
+﻿using MyClients.Domain;
 using MyClients.Validation;
 using NUnit.Framework;
 using Rhino.Mocks;
+using System.Collections.Generic;
 using Upida.Validation;
 
 namespace Test.MyClients.Validation
@@ -71,7 +66,7 @@ namespace Test.MyClients.Validation
 			data.Age = 23;
 			data.Name = "NAME";
 			data.Lastname = "LAST NAME";
-			data.Logins = new HashedSet<Login>();
+			data.Logins = new HashSet<Login>();
 			return data;
 		}
 	}

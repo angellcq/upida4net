@@ -1,6 +1,6 @@
-﻿using Iesi.Collections.Generic;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using Rhino.Mocks;
+using System.Collections.Generic;
 using UpidaExampleAngular.Domain;
 using UpidaExampleAngular.Validation;
 
@@ -46,7 +46,7 @@ namespace Test.UpidaExampleAngular.Validation
 			Client data = new Client();
 			data.Id = 123;
 			data.Name = "Client Name";
-			data.Orders = new HashedSet<Order>();
+			data.Orders = new HashSet<Order>();
 			return data;
 		}
 	}

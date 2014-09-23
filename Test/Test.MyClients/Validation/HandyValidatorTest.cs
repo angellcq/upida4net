@@ -1,5 +1,4 @@
-﻿using System;
-using MyClients.Validation;
+﻿using MyClients.Validation;
 using NUnit.Framework;
 using Rhino.Mocks;
 using Upida;

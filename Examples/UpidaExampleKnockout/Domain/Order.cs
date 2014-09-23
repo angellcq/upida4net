@@ -1,8 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using Upida;
 using Upida.Validation;
 using UpidaExampleKnockout.Validation;
-using iesi = Iesi.Collections.Generic;
 
 namespace UpidaExampleKnockout.Domain
 {
@@ -36,7 +36,7 @@ namespace UpidaExampleKnockout.Domain
 		public virtual float? Total { get; set; }
 
 		[Dto(Levels.FULL, Nested = Levels.LOOKUP)]
-		public virtual iesi.ISet<OrderItem> OrderItems { get; set; }
+		public virtual ISet<OrderItem> OrderItems { get; set; }
 
 		public override bool Equals(object obj)
 		{

@@ -1,10 +1,10 @@
 ﻿using System;
-using Iesi.Collections.Generic;
 using NUnit.Framework;
 using Rhino.Mocks;
 using Upida.Validation;
 using UpidaExampleAngular.Domain;
 using UpidaExampleAngular.Validation;
+using System.Collections.Generic;
 
 namespace Test.UpidaExampleAngular.Validation
 {
@@ -69,7 +69,7 @@ namespace Test.UpidaExampleAngular.Validation
 			data.ShipAddress = "ADDRESS";
 			data.ShipZip = "ZIPZIP";
 			data.Total = 234.234f;
-			data.OrderItems = new HashedSet<OrderItem>();
+			data.OrderItems = new HashSet<OrderItem>();
 			return data;
 		}
 	}

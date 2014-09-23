@@ -1,7 +1,7 @@
 ﻿using Upida;
 using Upida.Validation;
 using MyClients.Validation;
-using iesi = Iesi.Collections.Generic;
+using System.Collections.Generic;
 
 namespace MyClients.Domain
 {
@@ -22,7 +22,7 @@ namespace MyClients.Domain
 		public virtual int? Age { get; set; }
 
 		[Dto(Levels.GRID, Nested = Levels.LOOKUP)]
-		public virtual iesi.ISet<Login> Logins { get; set; }
+		public virtual ISet<Login> Logins { get; set; }
 
 		public override bool Equals(object obj)
 		{
