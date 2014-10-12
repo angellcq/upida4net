@@ -18,6 +18,12 @@
 	border-radius: 3px 3px 3px 3px;
 }
 
+.inputError {
+	border:thin;
+	border-style:solid;
+	border-color:#B94A48;
+}
+
 .head {
 	vertical-align: top;
 	text-align: center;

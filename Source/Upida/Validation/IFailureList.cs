@@ -4,6 +4,9 @@ using System.Collections.Generic;
 
 namespace Upida.Validation
 {
+	/// <summary>
+	/// Represents list of validation failures
+	/// </summary>
 	public interface IFailureList : IList<Failure>
 	{
 		/// <summary>

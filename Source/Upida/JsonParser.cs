@@ -28,7 +28,7 @@ namespace Upida
 				}
 
 				Dtobase dto = (Dtobase)Activator.CreateInstance(type);
-				PropertyMeta[] properties = UpidaContext.Current().GetPropertyDefs(type);
+				PropertyMeta[] properties = UpidaContext.Current.GetPropertyDefs(type);
 				for (int i = 0; i < properties.Length; i++)
 				{
 					PropertyMeta propertyDef = properties[i];
@@ -56,7 +56,7 @@ namespace Upida
 							else if (PropertyMeta.ClassType.Collection == propertyDef.PropertyClassType ||
 								PropertyMeta.ClassType.CustomTypeCollection == propertyDef.PropertyClassType)
 							{
-								IList list = (IList)UpidaContext.Current().BuildList(propertyDef.NestedGenericClass);
+								IList list = (IList)UpidaContext.Current.BuildList(propertyDef.NestedGenericClass);
 								foreach (JToken item in propertyValue)
 								{
 									list.Add(this.Parse(item, propertyDef.NestedGenericClass));

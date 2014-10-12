@@ -19,7 +19,7 @@ namespace Upida
 				meta.DtoDynamic = annotation.Dynamic;
 				meta.PropertyClassType = this.BuildClassType(meta.PropertyClass, annotation);
 				meta.NestedGenericClass = this.BuildNestedGenericClass(meta.PropertyClass);
-				meta.Parser = UpidaContext.Current().BuildParser(meta.Name, meta.PropertyClass, meta.PropertyClassType, annotation);
+				meta.Parser = UpidaContext.Current.BuildParser(meta.Name, meta.PropertyClass, meta.PropertyClassType, annotation);
 			}
 
 			return meta;

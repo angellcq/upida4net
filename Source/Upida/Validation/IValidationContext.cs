@@ -2,6 +2,9 @@
 
 namespace Upida.Validation
 {
+	/// <summary>
+	/// Defines base validation context members
+	/// </summary>
 	public interface IValidationContext
 	{
 		/// <summary>

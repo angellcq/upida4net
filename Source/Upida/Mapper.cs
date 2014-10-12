@@ -39,11 +39,11 @@ namespace Upida
 
 			try
 			{
-				PropertyMeta[] properties = UpidaContext.Current().GetPropertyDefs(type);
+				PropertyMeta[] properties = UpidaContext.Current.GetPropertyDefs(type);
 				for (int i = 0; i < properties.Length; i++)
 				{
 					PropertyMeta property = properties[i];
-					if (!property.Valid || !property.isAssigned(source))
+					if (!property.Valid || !property.IsAssigned(source))
 					{
 						continue;
 					}
@@ -215,18 +215,19 @@ namespace Upida
 
 		private void Map(Dtobase source, Type type)
 		{
+			PropertyMeta property = null;
 			try
 			{
-				PropertyMeta[] properties = UpidaContext.Current().GetPropertyDefs(type);
+				PropertyMeta[] properties = UpidaContext.Current.GetPropertyDefs(type);
 				for (int i = 0; i < properties.Length; i++)
 				{
-					PropertyMeta property = properties[i];
+					property = properties[i];
 					if (!property.Valid)
 					{
 						continue;
 					}
 
-					Object sourceValue = property.Read(source);
+					object sourceValue = property.Read(source);
 					if (null != sourceValue)
 					{
 						if (PropertyMeta.ClassType.Class == property.PropertyClassType)
@@ -236,7 +237,7 @@ namespace Upida
 						else if (PropertyMeta.ClassType.Collection == property.PropertyClassType)
 						{
 							IEnumerable sourceSet = (IEnumerable)sourceValue;
-							foreach (Object item in sourceSet)
+							foreach (object item in sourceSet)
 							{
 								this.Map((Dtobase)item, property.NestedGenericClass);
 								if (item is IChild)
@@ -250,7 +251,7 @@ namespace Upida
 			}
 			catch (Exception ex)
 			{
-				throw new Exception("Mapping failed. Type is - '" + source.GetType().Name + "'", ex);
+				throw new Exception("Mapping failed. Type:'" + source.GetType().Name + "'. Name:'" + property.Name + "'", ex);
 			}
 		}
 
@@ -282,7 +283,7 @@ namespace Upida
 
 		private IList FilterList(IEnumerable items, Type type, byte level)
 		{
-			IList list = (IList)UpidaContext.Current().BuildList(type);
+			IList list = (IList)UpidaContext.Current.BuildList(type);
 
 			foreach (Dtobase item in items)
 			{
@@ -303,7 +304,7 @@ namespace Upida
 				}
 
 				Dtobase dto = (Dtobase)Activator.CreateInstance(type);
-				PropertyMeta[] properties = UpidaContext.Current().GetPropertyDefs(type);
+				PropertyMeta[] properties = UpidaContext.Current.GetPropertyDefs(type);
 				for (int i = 0; i < properties.Length; i++)
 				{
 					PropertyMeta property = properties[i];
@@ -349,8 +350,8 @@ namespace Upida
 			catch (Exception ex)
 			{
 				throw new Exception(
-					"Filtering failed. Type is - '" + item.GetType().Name +
-					"'. Level is - '" + level + "'", ex);
+					"Filtering failed. Type:'" + item.GetType().Name +
+					"'. Level:'" + level + "'", ex);
 			}
 		}
 	}

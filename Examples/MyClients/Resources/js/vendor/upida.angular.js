@@ -133,14 +133,14 @@ $upida.module.factory("upida", ["$http", "$q", function($http, $q) {
 	return service;
 }]);
 
-$upida.module.directive("errorkey", function () {
+$upida.module.directive("upErrorBody", function () {
 	return {
 		restrict: 'A',
 		link: function (scope, element, attrs) {
-			scope.$watch('$$errors', function (errors, oldVal, a, b) {
-				element.text("");
+			scope.$watch('$$errors', function (errors, oldVal) {
+				element.html("");
 				if (!errors) return;
-				var key = attrs.errorkey;
+				var key = attrs.upErrorKey;
 				if (errors) {
 					for (var i = 0; i < errors.length; i++) {
 						if (key) {
@@ -152,6 +152,36 @@ $upida.module.directive("errorkey", function () {
 						else {
 							if (!errors[i].key) {
 								element.html(errors[i].text);
+								break;
+							}
+						}
+					}
+				}
+			});
+		}
+	};
+});
+
+$upida.module.directive("upErrorCss", function () {
+	return {
+		restrict: 'A',
+		link: function (scope, element, attrs) {
+			scope.$watch('$$errors', function (errors, oldVal) {
+				if (!errors) return;
+				var key = attrs.upErrorKey;
+				var cssClass = attrs.upErrorCss;
+				element.removeClass(cssClass);
+				if (errors) {
+					for (var i = 0; i < errors.length; i++) {
+						if (key) {
+							if (key == errors[i].key) {
+								element.addClass(cssClass);
+								break;
+							}
+						}
+						else {
+							if (!errors[i].key) {
+								element.addClass(cssClass);
 								break;
 							}
 						}

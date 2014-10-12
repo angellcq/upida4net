@@ -8,15 +8,16 @@ namespace Upida
 	public class UpidaContext
 	{
 		private static readonly UpidaContext CURRENT = new UpidaContext();
-		private PropertyMetaFactory propertyMetaFactory = new PropertyMetaFactory();
 
-		public static UpidaContext Current()
+		public static UpidaContext Current
 		{
-			return CURRENT;
+			get { return CURRENT; }
 		}
 
+		private readonly PropertyMetaFactory propertyMetaFactory = new PropertyMetaFactory();
 		private readonly IDictionary<Type, PropertyMeta[]> PROPERTY_DEF_MAP = new Dictionary<Type, PropertyMeta[]>();
 		private readonly IDictionary<string, Type> TYPEVALIDATOR_MAP = new Dictionary<string, Type>();
+		private IValidatorFactory validatorFactory;
 
 		private readonly Type STRING_TYPE = typeof(string);
 		private readonly Type LONG_TYPE = typeof(long?);
@@ -45,8 +46,6 @@ namespace Upida
 		private readonly Type FLOAT_PRIM = typeof(float);
 		private readonly Type BOOLEAN_PRIM = typeof(bool);
 		private readonly Type CHAR_PRIM = typeof(char);
-
-		private IValidatorFactory validatorFactory;
 
 		public PropertyMeta[] GetPropertyDefs(Type type)
 		{
@@ -167,6 +166,11 @@ namespace Upida
 		public ValidatorBase<T> BuildValidator<T>(object group)
 			where T : Dtobase
 		{
+			if (null == validatorFactory)
+			{
+				throw new ApplicationException("Validator factory is not set. Please, implement your validator factory (or use the AspMvcValidatorFactory class), and set the factory using the UpidaContext.SetValidatorFactory() method.");
+			}
+
 			Type type = typeof(T);
 			string key = string.Concat(type.GetHashCode(), '-', group.GetHashCode());
 			Type validatorType;
@@ -175,10 +179,10 @@ namespace Upida
 				return this.validatorFactory.GetInstance(validatorType) as ValidatorBase<T>;
 			}
 
-			object[] fluents = typeof(T).GetCustomAttributes(typeof(ValidateWithAttribute), false);
-			for (int i = 0; i < fluents.Length; i++)
+			object[] attrs = typeof(T).GetCustomAttributes(typeof(ValidateWithAttribute), false);
+			for (int i = 0; i < attrs.Length; i++)
 			{
-				ValidateWithAttribute fluent = (ValidateWithAttribute)fluents[i];
+				ValidateWithAttribute fluent = (ValidateWithAttribute)attrs[i];
 				if (object.Equals(fluent.Group, group))
 				{
 					TYPEVALIDATOR_MAP[key] = fluent.Validator;
