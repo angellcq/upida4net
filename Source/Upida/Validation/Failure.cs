@@ -9,6 +9,12 @@
 		private string text;
 		private Severity severity;
 
+		/// <summary>
+		/// Creates instance of the Failure class
+		/// </summary>
+		/// <param name="key">key</param>
+		/// <param name="text">text</param>
+		/// <param name="severity">severity</param>
 		public Failure(string key, string text, Severity severity)
 		{
 			this.key = key;

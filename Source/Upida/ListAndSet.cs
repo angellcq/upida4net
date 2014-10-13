@@ -4,6 +4,10 @@ using System.Collections.Generic;
 
 namespace Upida
 {
+	/// <summary>
+	/// Represents common class for IList and ISet collections. Used internally by JSON deserializer.
+	/// </summary>
+	/// <typeparam name="T"></typeparam>
 	public class ListAndSet<T> : List<T>, ISet<T>
 	{
 		public ListAndSet()

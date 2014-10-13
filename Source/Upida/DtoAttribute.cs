@@ -11,11 +11,18 @@ namespace Upida
 		private bool isCustomType;
 		private bool dynamic;
 
+		/// <summary>
+		/// Creates instance of the DtoAttribute class
+		/// </summary>
 		public DtoAttribute()
 			: this(byte.MaxValue)
 		{
 		}
 
+		/// <summary>
+		/// Creates instance of the DtoAttribute class
+		/// </summary>
+		/// <param name="value">serialization level</param>
 		public DtoAttribute(byte value)
 		{
 			this.value = value;

@@ -10,18 +10,25 @@ namespace Upida.Validation
 	{
 		private IFailureList failures;
 
+		/// <summary>
+		/// Creates instance of the FailResponse class
+		/// </summary>
 		public FailResponse()
 		{
 			this.failures = null;
 		}
 
+		/// <summary>
+		/// Creates instance of the FailResponse class and fills it with a list of failures
+		/// </summary>
+		/// <param name="failures">list of failures</param>
 		public FailResponse(IFailureList failures)
 		{
 			this.failures = failures;
 		}
 
 		/// <summary>
-		/// Creates an instance of FailureResponse class with one failure in it
+		/// Creates an instance of the FailureResponse class with one failure in it
 		/// </summary>
 		/// <param name="message"></param>
 		public FailResponse(string message)

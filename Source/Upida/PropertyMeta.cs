@@ -43,7 +43,7 @@ namespace Upida
 			return this.DtoLevel <= level;
 		}
 
-		public bool isAssigned(Dtobase target)
+		public bool IsAssigned(Dtobase target)
 		{
 			return target.IsFieldAssigned(this.name);
 		}

@@ -4,6 +4,10 @@ using System.Collections.Generic;
 
 namespace Upida.Validation
 {
+	/// <summary>
+	/// Represents basic set of type validator members
+	/// </summary>
+	/// <typeparam name="T"></typeparam>
 	public abstract class ValidatorBase<T> : IValidatorBase
 		where T : Dtobase
 	{
@@ -158,7 +162,7 @@ namespace Upida.Validation
 		{
 			if (this.stopped) return;
 
-			ValidatorBase<R> nestedValidator = UpidaContext.Current().BuildValidator<R>(group);
+			ValidatorBase<R> nestedValidator = UpidaContext.Current.BuildValidator<R>(group);
 			if (null != nestedValidator)
 			{
 				string fullPath = string.Concat(this.path, this.name, ".");
@@ -182,7 +186,7 @@ namespace Upida.Validation
 		{
 			if (this.stopped) return;
 
-			ValidatorBase<R> nestedValidator = UpidaContext.Current().BuildValidator<R>(group);
+			ValidatorBase<R> nestedValidator = UpidaContext.Current.BuildValidator<R>(group);
 			if (null != nestedValidator)
 			{
 				int index = 0;

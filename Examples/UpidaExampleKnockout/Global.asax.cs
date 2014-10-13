@@ -11,7 +11,7 @@ namespace UpidaExampleKnockout
 	{
 		protected void Application_Start()
 		{
-			UpidaContext.Current().SetValidatorFactory(new AspMvcValidatorFactory());
+			UpidaContext.Current.SetValidatorFactory(new AspMvcValidatorFactory());
 			AreaRegistration.RegisterAllAreas();
 
 			GlobalConfiguration.Configure(WebApiConfig.Register);

@@ -114,8 +114,8 @@
       <Private>True</Private>
       <HintPath>..\..\Libs\Microsoft.AspNet.WebPages.3.2.2\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
-    <Reference Include="Upida.Net-3.2">
-      <HintPath>..\..\Binary\Upida.Net-3.2.dll</HintPath>
+    <Reference Include="Upida.Net-3.2.5">
+      <HintPath>..\..\Binary\Upida.Net-3.2.5.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

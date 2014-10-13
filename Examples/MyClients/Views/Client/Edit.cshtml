@@ -1,6 +1,6 @@
 <a href="#/client/list">ALL CLIENTS</a>|
 <h2>Edit Client</h2>
-<span class="error" errorkey></span>
+<span class="error" up-error-body></span>
 <hr />
 <table>
 	<tr>
@@ -13,21 +13,21 @@
 		<td>Name</td>
 		<td>
 			<input type="text" ng-model="name" />
-			<span class="error" errorkey="name"></span>
+			<span class="error" up-error-key="name" up-error-body></span>
 		</td>
 	</tr>
 	<tr>
 		<td>Last name</td>
 		<td>
 			<input type="text" ng-model="lastname" />
-			<span class="error" errorkey="lastname"></span>
+			<span class="error" up-error-key="lastname" up-error-body></span>
 		</td>
 	</tr>
 	<tr>
 		<td>Age</td>
 		<td>
 			<input type="text" ng-model="age" />
-			<span class="error" errorkey="age"></span>
+			<span class="error" up-error-key="age" up-error-body></span>
 		</td>
 	</tr>
 	<tr>
@@ -50,15 +50,15 @@
 						</td>
 						<td>
 							<input type="text" ng-model="row.name" />
-							<span class="error" errorkey="{{'logins['+ $index + '].name'}}"></span>
+							<span class="error" up-error-key="{{'logins['+ $index + '].name'}}" up-error-body></span>
 						</td>
 						<td>
 							<input type="text" ng-model="row.password" />
-							<span class="error" errorkey="{{'logins['+ $index + '].password'}}"></span>
+							<span class="error" up-error-key="{{'logins['+ $index + '].password'}}" up-error-body></span>
 						</td>
 						<td>
 							<input type="checkbox" ng-model="row.enabled" />
-							<span class="error" errorkey="{{'logins['+ $index + '].enabled'}}"></span>
+							<span class="error" up-error-key="{{'logins['+ $index + '].enabled'}}" up-error-body></span>
 						</td>
 						<td>
 							<input type="button" ng-click="onRemoveLoginClick(row)" value="Delete" />
@@ -68,7 +68,7 @@
 			</table>
 			<div style="padding-bottom: 0.5em;">
 				<input type="button" ng-click="onAddLoginClick()" value="Add" />
-				<span class="error" errorkey="logins"></span>
+				<span class="error" up-error-key="logins" up-error-body></span>
 			</div>
 		</td>
 	</tr>

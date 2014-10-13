@@ -4,6 +4,10 @@ using System.Text.RegularExpressions;
 
 namespace Upida.Validation
 {
+	/// <summary>
+	/// Represents standard set of validation routines
+	/// </summary>
+	/// <typeparam name="T">validated type</typeparam>
 	public abstract class ConstraintValidator<T> : ValidatorBase<T>
 		where T : Dtobase
 	{
@@ -17,7 +21,7 @@ namespace Upida.Validation
 		}
 
 		/// <summary>
-		/// Validates if field is assigned some value by parser and calls Stop on failure
+		/// Validates if field is assigned some value by parser. Stops if failed.
 		/// </summary>
 		/// <param name="msg">failure message</param>
 		/// <returns></returns>
@@ -57,7 +61,7 @@ namespace Upida.Validation
 		}
 
 		/// <summary>
-		/// Validates if field is correctly parsed and calls Stop on failure
+		/// Validates if field is correctly parsed. Stops if failed.
 		/// </summary>
 		/// <param name="msg">failure message</param>
 		/// <returns></returns>
@@ -97,7 +101,7 @@ namespace Upida.Validation
 		}
 
 		/// <summary>
-		/// Validates if field value is not null
+		/// Validates if field value is not null. Stops if failed.
 		/// </summary>
 		/// <param name="msg">failure message</param>
 		/// <returns></returns>
@@ -281,7 +285,7 @@ namespace Upida.Validation
 		}
 
 		/// <summary>
-		/// Checks if field value is less than 'm'
+		/// Checks if field value is less than 'm'. IComparable.
 		/// </summary>
 		/// <returns></returns>
 		public virtual bool IsLessThan(object m)
@@ -290,7 +294,7 @@ namespace Upida.Validation
 		}
 
 		/// <summary>
-		/// Validates field value is less than 'm'
+		/// Validates field value is less than 'm'. IComparable.
 		/// </summary>
 		/// <param name="m"></param>
 		/// <param name="msg">failure message</param>
@@ -306,7 +310,7 @@ namespace Upida.Validation
 		}
 
 		/// <summary>
-		/// Checks if field value is greater than or equal to 'm'
+		/// Checks if field value is greater than or equal to 'm'. IComparable.
 		/// </summary>
 		/// <returns></returns>
 		public virtual bool IsGreaterOrEqualTo(object m)
@@ -315,7 +319,7 @@ namespace Upida.Validation
 		}
 
 		/// <summary>
-		/// Validates field value is greater than or equal to 'm'
+		/// Validates field value is greater than or equal to 'm'. IComparable.
 		/// </summary>
 		/// <param name="m"></param>
 		/// <param name="msg">failure message</param>
@@ -331,7 +335,7 @@ namespace Upida.Validation
 		}
 
 		/// <summary>
-		/// Checks if field value is greater than 'm'
+		/// Checks if field value is greater than 'm'. IComparable.
 		/// </summary>
 		/// <returns></returns>
 		public virtual bool IsGreaterThan(object m)
@@ -340,7 +344,7 @@ namespace Upida.Validation
 		}
 
 		/// <summary>
-		/// Validates field value is greater than 'm'
+		/// Validates field value is greater than 'm'. IComparable.
 		/// </summary>
 		/// <param name="m"></param>
 		/// <param name="msg">failure message</param>
@@ -356,7 +360,7 @@ namespace Upida.Validation
 		}
 
 		/// <summary>
-		/// Checks if field value collection size is between min and max values inclusively (field must be a collection)
+		/// Checks if field value collection size is between min and max values inclusively (field must implement ICollection)
 		/// </summary>
 		/// <returns></returns>
 		public virtual bool IsCountBetween(int min, int max)
@@ -366,7 +370,7 @@ namespace Upida.Validation
 		}
 
 		/// <summary>
-		/// Validates collection size is between min and max values inclusively (field must be a collection)
+		/// Validates collection size is between min and max values inclusively (field must implement ICollection)
 		/// </summary>
 		/// <param name="min">min value</param>
 		/// <param name="max">max value</param>

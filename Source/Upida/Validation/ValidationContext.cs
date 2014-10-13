@@ -27,7 +27,7 @@ namespace Upida.Validation
 		/// <returns>list of failures</returns>
 		public IFailureList Validate<T>(T target, object group, object state) where T : Dtobase
 		{
-			ValidatorBase<T> validator = UpidaContext.Current().BuildValidator<T>(group);
+			ValidatorBase<T> validator = UpidaContext.Current.BuildValidator<T>(group);
 			if (null != validator)
 			{
 				validator.SetTarget(target, null, null);
@@ -60,7 +60,7 @@ namespace Upida.Validation
 		/// <param name="state">optional state data</param>
 		public void AssertValid<T>(T target, object group, object state) where T : Dtobase
 		{
-			ValidatorBase<T> validator = UpidaContext.Current().BuildValidator<T>(group);
+			ValidatorBase<T> validator = UpidaContext.Current.BuildValidator<T>(group);
 			if (null != validator)
 			{
 				validator.SetTarget(target, null, null);

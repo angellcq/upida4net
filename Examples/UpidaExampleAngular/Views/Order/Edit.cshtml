@@ -2,7 +2,7 @@
 <a ng-href="#/order/list/{{clientId}}">ORDERS</a>
 <h2>Edit Order (Shipping only)</h2>
 <br />
-<span class="error" errorkey></span>
+<span class="error" up-error-body></span>
 <br />
 <table>
 	<tr>
@@ -13,35 +13,35 @@
 		<td>Ship to Country</td>
 		<td>
 			<input type="text" ng-model="shipCountry" />
-			<span class="error" errorkey="shipCountry"></span>
+			<span class="error" up-error-key="shipCountry" up-error-body></span>
 		</td>
 	</tr>
 	<tr>
 		<td>Ship to City</td>
 		<td>
 			<input type="text" ng-model="shipCity" />
-			<span class="error" errorkey="shipCity"></span>
+			<span class="error" up-error-key="shipCity" up-error-body></span>
 		</td>
 	</tr>
 	<tr>
 		<td>Ship to Zip</td>
 		<td>
 			<input type="text" ng-model="shipZip" />
-			<span class="error" errorkey="shipZip"></span>
+			<span class="error" up-error-key="shipZip" up-error-body></span>
 		</td>
 	</tr>
 	<tr>
 		<td>Ship to Address</td>
 		<td>
 			<input type="text" ng-model="shipAddress" />
-			<span class="error" errorkey="shipAddress"></span>
+			<span class="error" up-error-key="shipAddress" up-error-body></span>
 		</td>
 	</tr>
 	<tr>
 		<td>Total ($)</td>
 		<td>
 			<input type="text" ng-model="total" />
-			<span class="error" errorkey="total"></span>
+			<span class="error" up-error-key="total" up-error-body></span>
 		</td>
 	</tr>
 </table>

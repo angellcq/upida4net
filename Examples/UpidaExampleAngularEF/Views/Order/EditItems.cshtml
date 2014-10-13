@@ -2,7 +2,7 @@
 <a ng-href="#/order/list/{{clientId}}">ORDERS</a>
 <h2>Edit Order Items</h2>
 <br />
-<span class="error" errorkey></span>
+<span class="error" up-error-body></span>
 <hr />
 Client: <b ng-bind="clientName"></b>
 <div ng-repeat="row in orderItemRows">
@@ -10,17 +10,17 @@ Client: <b ng-bind="clientName"></b>
 	<select ng-model="row.product" ng-options="product.name for product in products">
 		<option value="">Select ...</option>
 	</select>
-	<span class="error" errorkey="{{'orderItems['+ $index + '].productId'}}"></span>
+	<span class="error" up-error-key="{{'orderItems['+ $index + '].productId'}}" up-error-body></span>
 	&nbsp;&nbsp;Count:
 	<input ng-model="row.count" />
-	<span class="error" errorkey="{{'orderItems['+ $index + '].count'}}"></span>
+	<span class="error" up-error-key="{{'orderItems['+ $index + '].count'}}" up-error-body></span>
 	&nbsp;&nbsp;Price:
 	<input ng-model="row.price" />
-	<span class="error" errorkey="{{'orderItems['+ $index + '].price'}}"></span>
+	<span class="error" up-error-key="{{'orderItems['+ $index + '].price'}}" up-error-body></span>
 	&nbsp;&nbsp;
 	<input type="button" ng-click="removeProduct(row)" value="remove" />
 </div>
 <input type="button" ng-click="addProduct()" value="add" />
-<span class="error" errorkey="orderItems"></span>
+<span class="error" up-error-key="orderItems" up-error-body></span>
 <hr />
 <input type="button" ng-click="onSave()" value="Save" />
