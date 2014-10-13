@@ -3,6 +3,9 @@ using System.Collections.Generic;
 
 namespace Upida
 {
+    /// <summary>
+    /// Defines Mapper class methods
+    /// </summary>
 	public interface IMapper
 	{
 		/// <summary>

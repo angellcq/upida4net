@@ -4,6 +4,26 @@
         <name>Upida.Net-3.2.5</name>
     </assembly>
     <members>
+        <member name="T:Upida.Aspnetmvc.UpidaJsonFormatter">
+            <summary>
+            Represents JSON formatter above the standard Newtonsoft formatter
+            </summary>
+        </member>
+        <member name="M:Upida.Aspnetmvc.UpidaJsonFormatter.#ctor">
+            <summary>
+            Creates an instance of the UpidaJsonFormatter
+            </summary>
+        </member>
+        <member name="M:Upida.Aspnetmvc.UpidaJsonFormatter.ReadFromStreamAsync(System.Type,System.IO.Stream,System.Net.Http.HttpContent,System.Net.Http.Formatting.IFormatterLogger)">
+            <summary>
+            Parses JSON data from stream and converts it into a Dto object of the specific type.
+            </summary>
+            <param name="type">specific type</param>
+            <param name="readStream">incoming JSON stream</param>
+            <param name="content">content</param>
+            <param name="formatterLogger">formatterLogger</param>
+            <returns></returns>
+        </member>
         <member name="M:Upida.IMapper.MapTo``1(``0,``0)">
             <summary>
             If implementd, recursively copies fields from the incoming domain object to the persistent dsestination object.
@@ -142,6 +162,17 @@
             <param name="?"></param>
             <returns></returns>
         </member>
+        <member name="M:Upida.DtoAttribute.#ctor">
+            <summary>
+            Creates instance of the DtoAttribute class
+            </summary>
+        </member>
+        <member name="M:Upida.DtoAttribute.#ctor(System.Byte)">
+            <summary>
+            Creates instance of the DtoAttribute class
+            </summary>
+            <param name="value">serialization level</param>
+        </member>
         <member name="P:Upida.DtoAttribute.Value">
             <summary>
             Gets or sets value that represents serialization level, applied to current property
@@ -176,10 +207,40 @@
             </summary>
             <typeparam name="T"></typeparam>
         </member>
+        <member name="T:Upida.Aspnetmvc.AspMvcValidatorFactory">
+            <summary>
+            Validator Factory used in ASP.Net Mvc project
+            </summary>
+        </member>
+        <member name="M:Upida.Validation.IValidatorFactory.GetInstance(System.Type)">
+            <summary>
+            Creates instance of the Type Validator
+            </summary>
+            <param name="typeValidatorType">type of the Type Validator</param>
+            <returns>instance</returns>
+        </member>
+        <member name="M:Upida.Aspnetmvc.AspMvcValidatorFactory.GetInstance(System.Type)">
+            <summary>
+            Creates instance of the Type Validator
+            </summary>
+            <param name="typeValidatorType">Type Validator class</param>
+            <returns></returns>
+        </member>
         <member name="T:Upida.Validation.FailResponse">
             <summary>
             Represents result of validation
             </summary>
+        </member>
+        <member name="M:Upida.Validation.FailResponse.#ctor">
+            <summary>
+            Creates instance of the FailResponse class
+            </summary>
+        </member>
+        <member name="M:Upida.Validation.FailResponse.#ctor(Upida.Validation.IFailureList)">
+            <summary>
+            Creates instance of the FailResponse class and fills it with a list of failures
+            </summary>
+            <param name="failures">list of failures</param>
         </member>
         <member name="M:Upida.Validation.FailResponse.#ctor(System.String)">
             <summary>
@@ -197,6 +258,14 @@
             Represents a single validation failure
             </summary>
         </member>
+        <member name="M:Upida.Validation.Failure.#ctor(System.String,System.String,Upida.Validation.Severity)">
+            <summary>
+            Creates instance of the Failure class
+            </summary>
+            <param name="key">key</param>
+            <param name="text">text</param>
+            <param name="severity">severity</param>
+        </member>
         <member name="M:Upida.Validation.Failure.GetSeverity">
             <summary>
             Returns severety of the failure
@@ -211,6 +280,11 @@
         <member name="P:Upida.Validation.Failure.Text">
             <summary>
             Text message of the failure
+            </summary>
+        </member>
+        <member name="T:Upida.Validation.IFailureList">
+            <summary>
+            Represents list of validation failures
             </summary>
         </member>
         <member name="M:Upida.Validation.IFailureList.Fail(Upida.Validation.Failure)">
@@ -286,6 +360,11 @@
             Validation group
             </summary>
         </member>
+        <member name="T:Upida.Validation.IValidationContext">
+            <summary>
+            Defines base validation context members
+            </summary>
+        </member>
         <member name="M:Upida.Validation.IValidationContext.Validate``1(``0,System.Object)">
             <summary>
             Validates target and returns list of failures or Null
@@ -340,6 +419,29 @@
             </summary>
             <param name="errors">list of failures</param>
         </member>
+        <member name="T:Upida.Validation.IValidatorBase">
+            <summary>
+            Defines base type validator members
+            </summary>
+        </member>
+        <member name="M:Upida.Validation.IValidatorBase.Fail(System.String)">
+            <summary>
+            Registers a failure
+            </summary>
+            <param name="msg">failure message</param>
+        </member>
+        <member name="M:Upida.Validation.IValidatorBase.Fail(Upida.Validation.Failure)">
+            <summary>
+            Registers a failure
+            </summary>
+            <param name="failure">failure object</param>
+        </member>
+        <member name="M:Upida.Validation.IValidatorBase.Validate(System.Object)">
+            <summary>
+            Validates current object and passes state information
+            </summary>
+            <param name="state">state information</param>
+        </member>
         <member name="M:Upida.Validation.ValidationContext.Validate``1(``0,System.Object)">
             <summary>
             Validates target and returns list of failures or Null
@@ -393,6 +495,12 @@
             Create list of failures and, based on this list, throw ValidationException, using the AssertIsEmpty() method.
             </summary>
             <param name="errors">list of failures</param>
+        </member>
+        <member name="T:Upida.Validation.ValidatorBase`1">
+            <summary>
+            Represents basic set of type validator members
+            </summary>
+            <typeparam name="T"></typeparam>
         </member>
         <member name="M:Upida.Validation.ValidatorBase`1.GetFailures">
             <summary>
@@ -495,6 +603,12 @@
             <summary>
             Represents name of the current field
             </summary>
+        </member>
+        <member name="T:Upida.Validation.ConstraintValidator`1">
+            <summary>
+            Represents standard set of validation routines
+            </summary>
+            <typeparam name="T">validated type</typeparam>
         </member>
         <member name="M:Upida.Validation.ConstraintValidator`1.IsAssigned">
             <summary>

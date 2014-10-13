@@ -2,6 +2,9 @@
 
 namespace Upida
 {
+    /// <summary>
+    /// Defines JsonParser class methods
+    /// </summary>
 	public interface IParser
 	{
 		/// <summary>

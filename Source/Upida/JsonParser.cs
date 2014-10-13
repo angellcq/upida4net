@@ -4,6 +4,9 @@ using System.Collections;
 
 namespace Upida
 {
+    /// <summary>
+    /// Represents JSON parsing utility
+    /// </summary>
 	public class JsonParser : IJsonParser
 	{
 		// <summary>

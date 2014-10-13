@@ -10,20 +10,39 @@ namespace Upida
 	/// <typeparam name="T"></typeparam>
 	public class ListAndSet<T> : List<T>, ISet<T>
 	{
+        /// <summary>
+        /// Initializes a new instance of the System.Collections.Generic.List<T> class
+        /// that is empty and has the default initial capacity.
+        /// </summary>
 		public ListAndSet()
 		{
 		}
 
+        /// <summary>
+        /// Initializes a new instance of the ListAndSet<T> class that is empty and has the specified initial capacity.
+        /// </summary>
+        /// <param name="initialCapacity"></param>
 		public ListAndSet(int initialCapacity)
 			: base(initialCapacity)
 		{
 		}
 
+        /// <summary>
+        /// Initializes a new instance of the System.Collections.Generic.List<T> class
+        /// that contains elements copied from the specified collection and has sufficient
+        /// capacity to accommodate the number of elements copied.
+        /// </summary>
+        /// <param name="collection"></param>
 		public ListAndSet(IEnumerable<T> collection)
 			: base(collection)
 		{
 		}
 
+        /// <summary>
+        /// Adds an object to the end of the List
+        /// </summary>
+        /// <param name="o"></param>
+        /// <returns></returns>
 		public new bool Add(T o)
 		{
 			base.Add(o);

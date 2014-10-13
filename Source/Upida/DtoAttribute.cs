@@ -2,6 +2,9 @@
 
 namespace Upida
 {
+    /// <summary>
+    /// Represents marker attribute for DTO class properties
+    /// </summary>
 	[AttributeUsage(AttributeTargets.Property)]
 	public class DtoAttribute : Attribute
 	{
