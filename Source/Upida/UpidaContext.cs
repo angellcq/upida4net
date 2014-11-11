@@ -5,197 +5,219 @@ using Upida.Validation;
 
 namespace Upida
 {
-	public class UpidaContext
-	{
-		private static readonly UpidaContext CURRENT = new UpidaContext();
+    public class UpidaContext
+    {
+        private static readonly UpidaContext CURRENT = new UpidaContext();
 
-		public static UpidaContext Current
-		{
-			get { return CURRENT; }
-		}
+        /// <summary>
+        /// Gets current Upida context
+        /// </summary>
+        public static UpidaContext Current
+        {
+            get { return CURRENT; }
+        }
 
-		private readonly PropertyMetaFactory propertyMetaFactory = new PropertyMetaFactory();
-		private readonly IDictionary<Type, PropertyMeta[]> PROPERTY_DEF_MAP = new Dictionary<Type, PropertyMeta[]>();
-		private readonly IDictionary<string, Type> TYPEVALIDATOR_MAP = new Dictionary<string, Type>();
-		private IValidatorFactory validatorFactory;
+        private readonly PropertyMetaFactory propertyMetaFactory = new PropertyMetaFactory();
+        private readonly IDictionary<Type, PropertyMeta[]> PROPERTY_DEF_MAP = new Dictionary<Type, PropertyMeta[]>();
+        private readonly IDictionary<string, Type> TYPEVALIDATOR_MAP = new Dictionary<string, Type>();
+        private IValidatorFactory validatorFactory;
 
-		private readonly Type STRING_TYPE = typeof(string);
-		private readonly Type LONG_TYPE = typeof(long?);
-		private readonly Type ULONG_TYPE = typeof(ulong?);
-		private readonly Type INTEGER_TYPE = typeof(int?);
-		private readonly Type UINTEGER_TYPE = typeof(uint?);
-		private readonly Type SHORT_TYPE = typeof(short?);
-		private readonly Type USHORT_TYPE = typeof(ushort?);
-		private readonly Type BYTE_TYPE = typeof(byte?);
-		private readonly Type SBYTE_TYPE = typeof(sbyte?);
-		private readonly Type DOUBLE_TYPE = typeof(double?);
-		private readonly Type FLOAT_TYPE = typeof(float?);
-		private readonly Type BOOLEAN_TYPE = typeof(bool?);
-		private readonly Type CHAR_TYPE = typeof(char?);
-		private readonly Type DATE_TYPE = typeof(DateTime?);
+        private readonly Type STRING_TYPE = typeof(string);
+        private readonly Type LONG_TYPE = typeof(long?);
+        private readonly Type ULONG_TYPE = typeof(ulong?);
+        private readonly Type INTEGER_TYPE = typeof(int?);
+        private readonly Type UINTEGER_TYPE = typeof(uint?);
+        private readonly Type SHORT_TYPE = typeof(short?);
+        private readonly Type USHORT_TYPE = typeof(ushort?);
+        private readonly Type BYTE_TYPE = typeof(byte?);
+        private readonly Type SBYTE_TYPE = typeof(sbyte?);
+        private readonly Type DOUBLE_TYPE = typeof(double?);
+        private readonly Type FLOAT_TYPE = typeof(float?);
+        private readonly Type BOOLEAN_TYPE = typeof(bool?);
+        private readonly Type CHAR_TYPE = typeof(char?);
+        private readonly Type DATE_TYPE = typeof(DateTime?);
+        private readonly Type GUID_TYPE = typeof(Guid?);
 
-		private readonly Type LONG_PRIM = typeof(long);
-		private readonly Type ULONG_PRIM = typeof(ulong);
-		private readonly Type INTEGER_PRIM = typeof(int);
-		private readonly Type UINTEGER_PRIM = typeof(uint);
-		private readonly Type SHORT_PRIM = typeof(short);
-		private readonly Type USHORT_PRIM = typeof(ushort);
-		private readonly Type BYTE_PRIM = typeof(byte);
-		private readonly Type SBYTE_PRIM = typeof(sbyte);
-		private readonly Type DOUBLE_PRIM = typeof(double);
-		private readonly Type FLOAT_PRIM = typeof(float);
-		private readonly Type BOOLEAN_PRIM = typeof(bool);
-		private readonly Type CHAR_PRIM = typeof(char);
+        private readonly Type LONG_PRIM = typeof(long);
+        private readonly Type ULONG_PRIM = typeof(ulong);
+        private readonly Type INTEGER_PRIM = typeof(int);
+        private readonly Type UINTEGER_PRIM = typeof(uint);
+        private readonly Type SHORT_PRIM = typeof(short);
+        private readonly Type USHORT_PRIM = typeof(ushort);
+        private readonly Type BYTE_PRIM = typeof(byte);
+        private readonly Type SBYTE_PRIM = typeof(sbyte);
+        private readonly Type DOUBLE_PRIM = typeof(double);
+        private readonly Type FLOAT_PRIM = typeof(float);
+        private readonly Type BOOLEAN_PRIM = typeof(bool);
+        private readonly Type CHAR_PRIM = typeof(char);
+        private readonly Type GUID_PRIM = typeof(Guid);
 
-		public PropertyMeta[] GetPropertyDefs(Type type)
-		{
-			PropertyMeta[] defs;
-			bool found = PROPERTY_DEF_MAP.TryGetValue(type, out defs);
-			if (found)
-			{
-				return defs;
-			}
+        public PropertyMeta[] GetPropertyDefs(Type type)
+        {
+            PropertyMeta[] defs;
+            bool found = PROPERTY_DEF_MAP.TryGetValue(type, out defs);
+            if (found)
+            {
+                return defs;
+            }
 
-			PropertyInfo[] properties = type.GetProperties(BindingFlags.Public | BindingFlags.Instance);
-			defs = new PropertyMeta[properties.Length];
-			for (int i = 0; i < properties.Length; i++)
-			{
-				defs[i] = this.propertyMetaFactory.Create(properties[i]);
-			}
+            PropertyInfo[] properties = type.GetProperties(BindingFlags.Public | BindingFlags.Instance);
+            defs = new PropertyMeta[properties.Length];
+            for (int i = 0; i < properties.Length; i++)
+            {
+                defs[i] = this.propertyMetaFactory.Create(properties[i]);
+            }
 
-			PROPERTY_DEF_MAP.Add(type, defs);
-			return defs;
-		}
+            PROPERTY_DEF_MAP.Add(type, defs);
+            return defs;
+        }
 
-		public IParser BuildParser(string name, Type propertyClass, PropertyMeta.ClassType propertyClassType, DtoAttribute annotation)
-		{
-			if (PropertyMeta.ClassType.Value != propertyClassType)
-			{
-				return null;
-			}
+        public IParser BuildParser(string name, Type propertyClass, PropertyMeta.ClassType propertyClassType, DtoAttribute annotation)
+        {
+            if (PropertyMeta.ClassType.Value != propertyClassType)
+            {
+                return null;
+            }
 
-			IParser parser = null;
-			try
-			{
-				if (null != annotation.Parser)
-				{
-					parser = (IParser)Activator.CreateInstance(annotation.Parser);
-					return parser;
-				}
-			}
-			catch (Exception ex)
-			{
-				throw new ApplicationException("Unable to instantiate parser for - property:" + name + " of type:" + propertyClass.Name, ex);
-			}
+            IParser parser = null;
+            try
+            {
+                if (null != annotation.Parser)
+                {
+                    parser = (IParser)Activator.CreateInstance(annotation.Parser);
+                    return parser;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("Unable to instantiate parser for - property:" + name + " of type:" + propertyClass.Name, ex);
+            }
 
-			Type type = propertyClass;
-			if (this.STRING_TYPE == type)
-			{
-				parser = StandardParsers.STRING_PARSER;
-			}
-			else if (this.LONG_TYPE == type || this.LONG_PRIM == type)
-			{
-				parser = StandardParsers.LONG_PARSER;
-			}
-			else if (this.ULONG_TYPE == type || this.ULONG_PRIM == type)
-			{
-				parser = StandardParsers.ULONG_PARSER;
-			}
-			else if (this.INTEGER_TYPE == type || this.INTEGER_PRIM == type)
-			{
-				parser = StandardParsers.INT_PARSER;
-			}
-			else if (this.UINTEGER_TYPE == type || this.UINTEGER_PRIM == type)
-			{
-				parser = StandardParsers.UINT_PARSER;
-			}
-			else if (this.DOUBLE_TYPE == type || this.DOUBLE_PRIM == type)
-			{
-				parser = StandardParsers.DOUBLE_PARSER;
-			}
-			else if (this.DATE_TYPE == type)
-			{
-				parser = StandardParsers.DATETIME_PARSER;
-			}
-			else if (this.BOOLEAN_TYPE == type || this.BOOLEAN_PRIM == type)
-			{
-				parser = StandardParsers.BOOL_PARSER;
-			}
-			else if (this.SHORT_TYPE == type || this.SHORT_PRIM == type)
-			{
-				parser = StandardParsers.SHORT_PARSER;
-			}
-			else if (this.BYTE_TYPE == type || this.BYTE_PRIM == type)
-			{
-				parser = StandardParsers.BYTE_PARSER;
-			}
-			else if (this.SBYTE_TYPE == type || this.SBYTE_PRIM == type)
-			{
-				parser = StandardParsers.SBYTE_PARSER;
-			}
-			else if (this.FLOAT_TYPE == type || this.FLOAT_PRIM == type)
-			{
-				parser = StandardParsers.FLOAT_PARSER;
-			}
-			else if (this.CHAR_TYPE == type || this.CHAR_PRIM == type)
-			{
-				parser = StandardParsers.CHAR_PARSER;
-			}
-			else if (type.IsEnum)
-			{
-				parser = StandardParsers.ENUM_PARSER;
-			}
-			else
-			{
-				throw new ApplicationException(
-					"Unable to find parser for property: " + name + ", of type: " + type.FullName +
-					". Property class either must derive from Dtobase or You must setup custom parser for this property in the Dto attribute.");
-			}
+            Type type = propertyClass;
+            if (this.STRING_TYPE == type)
+            {
+                parser = StandardParsers.STRING_PARSER;
+            }
+            else if (this.LONG_TYPE == type || this.LONG_PRIM == type)
+            {
+                parser = StandardParsers.LONG_PARSER;
+            }
+            else if (this.ULONG_TYPE == type || this.ULONG_PRIM == type)
+            {
+                parser = StandardParsers.ULONG_PARSER;
+            }
+            else if (this.INTEGER_TYPE == type || this.INTEGER_PRIM == type)
+            {
+                parser = StandardParsers.INT_PARSER;
+            }
+            else if (this.UINTEGER_TYPE == type || this.UINTEGER_PRIM == type)
+            {
+                parser = StandardParsers.UINT_PARSER;
+            }
+            else if (this.DOUBLE_TYPE == type || this.DOUBLE_PRIM == type)
+            {
+                parser = StandardParsers.DOUBLE_PARSER;
+            }
+            else if (this.DATE_TYPE == type)
+            {
+                parser = StandardParsers.DATETIME_PARSER;
+            }
+            else if (this.BOOLEAN_TYPE == type || this.BOOLEAN_PRIM == type)
+            {
+                parser = StandardParsers.BOOL_PARSER;
+            }
+            else if (this.SHORT_TYPE == type || this.SHORT_PRIM == type)
+            {
+                parser = StandardParsers.SHORT_PARSER;
+            }
+            else if (this.BYTE_TYPE == type || this.BYTE_PRIM == type)
+            {
+                parser = StandardParsers.BYTE_PARSER;
+            }
+            else if (this.SBYTE_TYPE == type || this.SBYTE_PRIM == type)
+            {
+                parser = StandardParsers.SBYTE_PARSER;
+            }
+            else if (this.FLOAT_TYPE == type || this.FLOAT_PRIM == type)
+            {
+                parser = StandardParsers.FLOAT_PARSER;
+            }
+            else if (this.CHAR_TYPE == type || this.CHAR_PRIM == type)
+            {
+                parser = StandardParsers.CHAR_PARSER;
+            }
+            else if (type.IsEnum)
+            {
+                parser = StandardParsers.ENUM_PARSER;
+            }
+            else if (this.GUID_TYPE == type || this.GUID_PRIM == type)
+            {
+                parser = StandardParsers.GUID_PARSER;
+            }
+            else if (type.GenericTypeArguments != null && type.GenericTypeArguments.Length == 1 && type.GenericTypeArguments[0].IsEnum)
+            {
+                parser = StandardParsers.ENUM_NULLABLE_PARSER;
+            }
+            else
+            {
+                throw new ApplicationException(
+                    "Unable to find parser for property: " + name + ", of type: " + type.FullName +
+                    ". Property class either must derive from Dtobase or You must setup custom parser for this property in the Dto attribute.");
+            }
 
-			return parser;
-		}
+            return parser;
+        }
 
-		public object BuildList(Type type)
-		{
-			Type listAndSetType = typeof(ListAndSet<>);
-			Type[] typeArgs = { type };
-			Type makeme = listAndSetType.MakeGenericType(typeArgs);
-			return Activator.CreateInstance(makeme);
-		}
+        public object BuildList(Type type)
+        {
+            Type listAndSetType = typeof(ListAndSet<>);
+            Type[] typeArgs = { type };
+            Type makeme = listAndSetType.MakeGenericType(typeArgs);
+            return Activator.CreateInstance(makeme);
+        }
 
-		public ValidatorBase<T> BuildValidator<T>(object group)
-			where T : Dtobase
-		{
-			if (null == validatorFactory)
-			{
-				throw new ApplicationException("Validator factory is not set. Please, implement your validator factory (or use the AspMvcValidatorFactory class), and set the factory using the UpidaContext.SetValidatorFactory() method.");
-			}
+        public ValidatorBase<T> BuildValidator<T>(Enum group)
+            where T : Dtobase
+        {
+            if (null == validatorFactory)
+            {
+                throw new ApplicationException("Validator factory is not set. Please, implement your validator factory and set the factory using the UpidaContext.SetValidatorFactory() method.");
+            }
 
-			Type type = typeof(T);
-			string key = string.Concat(type.GetHashCode(), '-', group.GetHashCode());
-			Type validatorType;
-			if (true == TYPEVALIDATOR_MAP.TryGetValue(key, out validatorType))
-			{
-				return this.validatorFactory.GetInstance(validatorType) as ValidatorBase<T>;
-			}
+            Type type = typeof(T);
+            string key = string.Concat(type.GetHashCode(), '_', group);
+            Type validatorType;
+            if (true == TYPEVALIDATOR_MAP.TryGetValue(key, out validatorType))
+            {
+                return this.validatorFactory.GetInstance(validatorType) as ValidatorBase<T>;
+            }
 
-			object[] attrs = typeof(T).GetCustomAttributes(typeof(ValidateWithAttribute), false);
-			for (int i = 0; i < attrs.Length; i++)
-			{
-				ValidateWithAttribute fluent = (ValidateWithAttribute)attrs[i];
-				if (object.Equals(fluent.Group, group))
-				{
-					TYPEVALIDATOR_MAP[key] = fluent.Validator;
-					return this.validatorFactory.GetInstance(fluent.Validator) as ValidatorBase<T>;
-				}
-			}
+            return null;
+        }
 
-			return null;
-		}
+        /// <summary>
+        /// Registers Validator Factory object
+        /// </summary>
+        /// <param name="validatorFactory">Validator Factory object</param>
+        public void SetValidatorFactory(IValidatorFactory validatorFactory)
+        {
+            this.validatorFactory = validatorFactory;
+        }
 
-		public void SetValidatorFactory(IValidatorFactory validatorFactory)
-		{
-			this.validatorFactory = validatorFactory;
-		}
-	}
+        /// <summary>
+        /// Registaers a validator class for a domain class
+        /// </summary>
+        /// <typeparam name="T">domain class</typeparam>
+        /// <typeparam name="V">validator class</typeparam>
+        public void SetClassValidator<T, V>(params Enum[] groups)
+            where T : Dtobase
+        {
+            for (int i = 0; i < groups.Length; i++)
+            {
+                this.TYPEVALIDATOR_MAP.Add(
+                    string.Concat(typeof(T).GetHashCode(), '_', groups[i]),
+                    typeof(V));
+            }
+        }
+    }
 }
