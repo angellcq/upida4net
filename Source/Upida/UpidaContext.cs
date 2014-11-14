@@ -61,14 +61,24 @@ namespace Upida
                 return defs;
             }
 
-            PropertyInfo[] properties = type.GetProperties(BindingFlags.Public | BindingFlags.Instance);
-            defs = new PropertyMeta[properties.Length];
-            for (int i = 0; i < properties.Length; i++)
+            lock (type)
             {
-                defs[i] = this.propertyMetaFactory.Create(properties[i]);
+                found = PROPERTY_DEF_MAP.TryGetValue(type, out defs);
+                if (found)
+                {
+                    return defs;
+                }
+
+                PropertyInfo[] properties = type.GetProperties(BindingFlags.Public | BindingFlags.Instance);
+                defs = new PropertyMeta[properties.Length];
+                for (int i = 0; i < properties.Length; i++)
+                {
+                    defs[i] = this.propertyMetaFactory.Create(properties[i]);
+                }
+
+                PROPERTY_DEF_MAP.Add(type, defs);
             }
 
-            PROPERTY_DEF_MAP.Add(type, defs);
             return defs;
         }
 
