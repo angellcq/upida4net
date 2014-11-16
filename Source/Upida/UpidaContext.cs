@@ -19,8 +19,6 @@ namespace Upida
 
         private readonly PropertyMetaFactory propertyMetaFactory = new PropertyMetaFactory();
         private readonly IDictionary<Type, PropertyMeta[]> PROPERTY_DEF_MAP = new Dictionary<Type, PropertyMeta[]>();
-        private readonly IDictionary<string, Type> TYPEVALIDATOR_MAP = new Dictionary<string, Type>();
-        private IValidatorFactory validatorFactory;
 
         private readonly Type STRING_TYPE = typeof(string);
         private readonly Type LONG_TYPE = typeof(long?);
@@ -51,6 +49,19 @@ namespace Upida
         private readonly Type BOOLEAN_PRIM = typeof(bool);
         private readonly Type CHAR_PRIM = typeof(char);
         private readonly Type GUID_PRIM = typeof(Guid);
+
+        private PathHelper pathHelper = new PathHelper();
+        private Checker checker = new Checker();
+
+        public PathHelper PathHelper
+        {
+            get { return this.pathHelper; }
+        }
+
+        public Checker Checker
+        {
+            get { return this.checker; }
+        }
 
         public PropertyMeta[] GetPropertyDefs(Type type)
         {
@@ -184,50 +195,6 @@ namespace Upida
             Type[] typeArgs = { type };
             Type makeme = listAndSetType.MakeGenericType(typeArgs);
             return Activator.CreateInstance(makeme);
-        }
-
-        public ValidatorBase<T> BuildValidator<T>(Enum group)
-            where T : Dtobase
-        {
-            if (null == validatorFactory)
-            {
-                throw new ApplicationException("Validator factory is not set. Please, implement your validator factory and set the factory using the UpidaContext.SetValidatorFactory() method.");
-            }
-
-            Type type = typeof(T);
-            string key = string.Concat(type.GetHashCode(), '_', group);
-            Type validatorType;
-            if (true == TYPEVALIDATOR_MAP.TryGetValue(key, out validatorType))
-            {
-                return this.validatorFactory.GetInstance(validatorType) as ValidatorBase<T>;
-            }
-
-            return null;
-        }
-
-        /// <summary>
-        /// Registers Validator Factory object
-        /// </summary>
-        /// <param name="validatorFactory">Validator Factory object</param>
-        public void SetValidatorFactory(IValidatorFactory validatorFactory)
-        {
-            this.validatorFactory = validatorFactory;
-        }
-
-        /// <summary>
-        /// Registaers a validator class for a domain class
-        /// </summary>
-        /// <typeparam name="T">domain class</typeparam>
-        /// <typeparam name="V">validator class</typeparam>
-        public void SetClassValidator<T, V>(params Enum[] groups)
-            where T : Dtobase
-        {
-            for (int i = 0; i < groups.Length; i++)
-            {
-                this.TYPEVALIDATOR_MAP.Add(
-                    string.Concat(typeof(T).GetHashCode(), '_', groups[i]),
-                    typeof(V));
-            }
         }
     }
 }

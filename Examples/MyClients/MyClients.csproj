@@ -110,9 +110,6 @@
       <Private>True</Private>
       <HintPath>..\..\Libs\Microsoft.AspNet.WebPages.3.2.2\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
-    <Reference Include="Upida.Net-3.2.5">
-      <HintPath>..\..\Binary\Upida.Net-3.2.5.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\DependencyConfig.cs" />
@@ -133,12 +130,15 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Validation\ClientSaveValidator.cs" />
-    <Compile Include="Validation\ClientUpdateValidator.cs" />
+    <Compile Include="Validation\IClientValidator.cs" />
+    <Compile Include="Validation\ILoginValidator.cs" />
+    <Compile Include="Validation\Impl\ClientValidator.cs" />
     <Compile Include="Validation\Errors.cs" />
-    <Compile Include="Validation\HandyValidator.cs" />
-    <Compile Include="Validation\LoginMergeValidator.cs" />
-    <Compile Include="Validation\LoginSaveValidator.cs" />
+    <Compile Include="Validation\Impl\HandyValidator.cs" />
+    <Compile Include="Validation\IHandyValidator.cs" />
+    <Compile Include="Validation\IHandyValidatorFactory.cs" />
+    <Compile Include="Validation\Impl\HandyValidatorFactory.cs" />
+    <Compile Include="Validation\Impl\LoginValidator.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -182,6 +182,12 @@
   <ItemGroup>
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Notfound.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Source\Upida\Upida.csproj">
+      <Project>{4b226445-4cbe-4815-a369-d27c258502f5}</Project>
+      <Name>Upida</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
