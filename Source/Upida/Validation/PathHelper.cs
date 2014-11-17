@@ -9,17 +9,22 @@ namespace Upida.Validation
         {
             StringBuilder text = new StringBuilder();
             LinkedListNode<PathNode> current = path.First;
-            while (null != current.Next)
+            while (null != current)
             {
                 text.Append(current.Value.Name);
                 if (current.Value.Index.HasValue)
                 {
                     text.Append('[');
                     text.Append(current.Value.Index.Value);
-                    text.Append('[');
+                    text.Append(']');
                 }
 
-                text.Append('.');
+                if (string.Empty != current.Value.Name)
+                {
+                    text.Append('.');
+                }
+
+                current = current.Next;
             }
 
             text.Append(name);

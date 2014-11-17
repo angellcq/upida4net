@@ -4,8 +4,8 @@ namespace MyClients.Validation
 {
     public interface IClientValidator
     {
-        void ValidateForSave(Client target);
+        void AssertValidForSave(Client target);
 
-        void ValidateForUpdate(Client target);
+        void AssertValidForUpdate(Client target);
     }
 }

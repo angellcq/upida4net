@@ -6,8 +6,6 @@ using iesi = Iesi.Collections.Generic;
 
 namespace MyClients.Domain
 {
-	[ValidateWith(typeof(LoginSaveValidator), Groups.SAVE)]
-	[ValidateWith(typeof(LoginMergeValidator), Groups.MERGE)]
 	public class Login : Dtobase, IChild
 	{
 		[Dto(Levels.ID)]

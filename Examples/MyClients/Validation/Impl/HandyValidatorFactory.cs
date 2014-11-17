@@ -6,11 +6,9 @@ namespace MyClients.Validation.Impl
 {
     public class HandyValidatorFactory : IHandyValidatorFactory
     {
-        public IHandyValidator Get(IHandyValidator parent)
+        public IHandyValidator Get()
         {
-            HandyValidator item = new HandyValidator();
-            item.SetParent(parent);
-            return item;
+            return new HandyValidator();
         }
     }
 }

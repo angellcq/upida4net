@@ -20,7 +20,10 @@ namespace MyClients.Validation.Impl
         {
             this.MustBeAssigned(Errors.REQUIRED);
             this.MustBeValidFormat(wrongFormatMessage);
-            this.MustBeNotNull(Errors.REQUIRED);
+            if (this.IsFieldValid)
+            {
+                this.MustBeNotNull(Errors.REQUIRED);
+            }
         }
 
         public void RequiredIfAssigned()
@@ -40,7 +43,6 @@ namespace MyClients.Validation.Impl
         public void MissingField(string field, object value)
         {
             this.SetField(field, value);
-            this.SetSeverity(Severity.Fatal);
             this.MustBeNotAssigned(Errors.MUST_BE_EMPTY);
         }
     }

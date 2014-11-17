@@ -35,7 +35,7 @@ namespace MyClients.Business
 
         public virtual void Save(Client item)
         {
-            this.validator.AssertValid(item, Groups.SAVE);
+            this.validator.AssertValidForSave(item);
             using (ITransaction tx = this.clientDao.BeginTransaction())
             {
                 this.mapper.Map(item);
@@ -46,7 +46,7 @@ namespace MyClients.Business
 
         public virtual void Update(Client item)
         {
-            this.validator.AssertValid(item, Groups.UPDATE);
+            this.validator.AssertValidForUpdate(item);
             using (ITransaction tx = this.clientDao.BeginTransaction())
             {
                 Client existing = this.clientDao.GetById(item.Id.Value);
@@ -58,15 +58,15 @@ namespace MyClients.Business
 
         public virtual void Delete(int id)
         {
-            var failures = this.validator.CreateFailureList();
+            //var failures = this.validator.CreateFailureList();
             using (ITransaction tx = this.clientDao.BeginTransaction())
             {
                 Client existing = this.clientDao.GetById(id);
-                failures.FailIfNull(existing, null, "Client does not exist", Severity.Fatal);
-                this.validator.Assert(failures);
+                //failures.FailIfNull(existing, null, "Client does not exist", Severity.Fatal);
+                //this.validator.Assert(failures);
                 long count = this.clientDao.GetCount();
-                failures.FailIfEqual(1, count, null, "Cannot delete the only client");
-                this.validator.Assert(failures);
+                //failures.FailIfEqual(1, count, null, "Cannot delete the only client");
+                //this.validator.Assert(failures);
                 this.clientDao.Delete(existing);
                 tx.Commit();
             }

@@ -124,6 +124,7 @@
     <Compile Include="Dao\Support\Daobase.cs" />
     <Compile Include="Dao\Support\SessionFactoryExt.cs" />
     <Compile Include="Domain\Client.cs" />
+    <Compile Include="Domain\Levels.cs" />
     <Compile Include="Domain\Login.cs" />
     <Compile Include="Domain\Util.cs" />
     <Compile Include="Global.asax.cs">
@@ -131,14 +132,12 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Validation\IClientValidator.cs" />
-    <Compile Include="Validation\ILoginValidator.cs" />
     <Compile Include="Validation\Impl\ClientValidator.cs" />
     <Compile Include="Validation\Errors.cs" />
     <Compile Include="Validation\Impl\HandyValidator.cs" />
     <Compile Include="Validation\IHandyValidator.cs" />
     <Compile Include="Validation\IHandyValidatorFactory.cs" />
     <Compile Include="Validation\Impl\HandyValidatorFactory.cs" />
-    <Compile Include="Validation\Impl\LoginValidator.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />

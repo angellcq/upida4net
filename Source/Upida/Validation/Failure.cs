@@ -7,7 +7,6 @@
     {
         private string key;
         private string text;
-        private Severity severity;
 
         /// <summary>
         /// Creates instance of the Failure class
@@ -15,11 +14,10 @@
         /// <param name="key">key</param>
         /// <param name="text">text</param>
         /// <param name="severity">severity</param>
-        public Failure(string key, string text, Severity severity)
+        public Failure(string key, string text)
         {
             this.key = key;
             this.text = text;
-            this.severity = severity;
         }
 
         /// <summary>
@@ -36,15 +34,6 @@
         public string Text
         {
             get { return this.text; }
-        }
-
-        /// <summary>
-        /// Returns severety of the failure
-        /// </summary>
-        /// <returns></returns>
-        public Severity GetSeverity()
-        {
-            return this.severity;
         }
     }
 }

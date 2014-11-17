@@ -34,10 +34,7 @@ namespace MyClients
             builder.RegisterType<ClientDao>().As<IClientDao>().SingleInstance();
             builder.RegisterType<ClientBusiness>().As<ClientBusiness>().SingleInstance();
 
-            builder.RegisterType<ClientValidator>().As<ClientValidator>().InstancePerDependency();
-            builder.RegisterType<ClientUpdateValidator>().As<ClientUpdateValidator>().InstancePerDependency();
-            builder.RegisterType<LoginSaveValidator>().As<LoginSaveValidator>().InstancePerDependency();
-            builder.RegisterType<LoginMergeValidator>().As<LoginMergeValidator>().InstancePerDependency();
+            builder.RegisterType<ClientValidator>().As<IClientValidator>().SingleInstance().PropertiesAutowired(PropertyWiringOptions.None);
 
             var container = builder.Build();
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));

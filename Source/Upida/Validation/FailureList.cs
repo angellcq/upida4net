@@ -23,15 +23,6 @@ namespace Upida.Validation
         }
 
         /// <summary>
-        /// The highest severity in the list of failures
-        /// </summary>
-        public virtual Severity Severity
-        {
-            get { return this.severity; }
-            internal set { this.severity = value; }
-        }
-
-        /// <summary>
         /// True if list is empty
         /// </summary>
         public virtual bool IsEmpty
@@ -46,58 +37,19 @@ namespace Upida.Validation
         public void Fail(Failure item)
         {
             this.Add(item);
-            if (item.GetSeverity() > this.severity)
-            {
-                this.severity = item.GetSeverity();
-            }
         }
 
-        public void Fail(string key, string text, Severity severity = Severity.None)
+        public void Fail(string key, string text)
         {
-            this.Fail(new Failure(key, text, severity));
+            this.Fail(new Failure(key, text));
         }
 
-        public void FailIf(bool condition, string key, string text, Severity severity = Severity.None)
+        public void FailIf(bool condition, string key, string text)
         {
             if (condition)
             {
-                this.Fail(key, text, severity);
+                this.Fail(key, text);
             }
-        }
-
-        public void FailIfNot(bool condition, string key, string text, Severity severity = Severity.None)
-        {
-            this.FailIf(!condition, key, text, severity);
-        }
-
-        public void FailIfNull(object target, string key, string text, Severity severity = Severity.None)
-        {
-            this.FailIf(null == target, key, text, severity);
-        }
-
-        public void FailIfNotNull(object target, string key, string text, Severity severity = Severity.None)
-        {
-            this.FailIf(null != target, key, text, severity);
-        }
-
-        public void FailIfEqual<T>(T a, T b, string key, string text, Severity severity = Severity.None)
-        {
-            this.FailIf(object.Equals(a, b), key, text, severity);
-        }
-
-        public void FailIfNotEqual<T>(T a, T b, string key, string text, Severity severity = Severity.None)
-        {
-            this.FailIf(!object.Equals(a, b), key, text, severity);
-        }
-
-        public void FailIfEmpty(ICollection collection, string key, string text, Severity severity = Severity.None)
-        {
-            this.FailIf(0 == collection.Count, key, text, severity);
-        }
-
-        public void FailIfNotEmpty(ICollection collection, string key, string text, Severity severity = Severity.None)
-        {
-            this.FailIf(0 != collection.Count, key, text, severity);
         }
     }
 }

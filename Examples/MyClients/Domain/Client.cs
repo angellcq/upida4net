@@ -5,8 +5,6 @@ using System.Collections.Generic;
 
 namespace MyClients.Domain
 {
-	[ValidateWith(typeof(ClientSaveValidator), Groups.SAVE)]
-	[ValidateWith(typeof(ClientUpdateValidator), Groups.UPDATE)]
 	public class Client : Dtobase
 	{
 		[Dto(Levels.ID)]
@@ -21,7 +19,7 @@ namespace MyClients.Domain
 		[Dto(Levels.GRID)]
 		public virtual int? Age { get; set; }
 
-		[Dto(Levels.GRID, Nested = Levels.LOOKUP)]
+		[Dto(Levels.GRID, Levels.LOOKUP)]
 		public virtual ISet<Login> Logins { get; set; }
 
 		public override bool Equals(object obj)

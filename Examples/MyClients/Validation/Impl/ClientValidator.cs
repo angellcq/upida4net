@@ -6,13 +6,12 @@ namespace MyClients.Validation.Impl
 {
     public class ClientValidator : IClientValidator
     {
-        private IHandyValidatorFactory validatorFactory;
-        private ILoginValidator loginvalidator;
+        public IHandyValidatorFactory ValidatorFactory { get; set; }
 
-        public void ValidateForSave(Client target)
+        public void AssertValidForSave(Client target)
         {
-            if (null == target) return;
-            IHandyValidator context = this.validatorFactory.Get(null);
+            IHandyValidator context = this.ValidatorFactory.Get();
+            context.SetTarget(target);
 
             context.MissingField("id", target.Id);
 
@@ -32,16 +31,38 @@ namespace MyClients.Validation.Impl
             context.Required();
             context.MustHaveCountBetween(1, 5, Errors.NUMBER_OF_LOGINS);
 
-            context.SetNested();
-            this.loginvalidator.ValidateForSave(target.Logins, context);
+            if (context.IsFieldValid)
+            {
+                context.AddNested();
+                int index = 0;
+                foreach (Login login in target.Logins)
+                {
+                    context.SetIndex(index++);
+                    context.SetTarget(login);
+                    context.MissingField("id", login.Id);
+
+                    context.SetField("name", target.Name);
+                    context.Required();
+                    context.MustHaveLengthBetween(3, 20, Errors.LENGTH_3_20);
+
+                    context.SetField("password", login.Password);
+                    context.Required();
+                    context.MustHaveLengthBetween(3, 20, Errors.LENGTH_3_20);
+
+                    context.SetField("enabled", login.Enabled);
+                    context.Required(Errors.NOT_VALID_BOOL);
+
+                    context.MissingField("client", login.Client);
+                }
+            }
 
             context.Assert();
         }
 
-        public void ValidateForUpdate(Client target)
+        public void AssertValidForUpdate(Client target)
         {
-            if (null == target) return;
-            IHandyValidator context = this.validatorFactory.Get(null);
+            IHandyValidator context = this.ValidatorFactory.Get();
+            context.SetTarget(target);
 
             context.SetField("id", target.Id);
             context.Required();
@@ -61,7 +82,32 @@ namespace MyClients.Validation.Impl
             context.SetField("logins", target.Logins);
             context.Required();
             context.MustHaveCountBetween(1, 5, Errors.NUMBER_OF_LOGINS);
-            this.loginvalidator.ValidateForMerge(target.Logins, context);
+
+            if (context.IsFieldValid)
+            {
+                context.AddNested();
+                int index = 0;
+                foreach (Login login in target.Logins)
+                {
+                    context.SetIndex(index++);
+                    context.SetTarget(login);
+                    context.SetField("id", login.Id);
+                    context.RequiredIfAssigned();
+
+                    context.SetField("name", login.Name);
+                    context.Required();
+                    context.MustHaveLengthBetween(3, 20, Errors.LENGTH_3_20);
+
+                    context.SetField("password", login.Password);
+                    context.Required();
+                    context.MustHaveLengthBetween(3, 20, Errors.LENGTH_3_20);
+
+                    context.SetField("enabled", login.Enabled);
+                    context.Required(Errors.NOT_VALID_BOOL);
+
+                    context.MissingField("client", login.Client);
+                }
+            }
 
             context.Assert();
         }
