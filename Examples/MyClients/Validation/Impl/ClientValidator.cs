@@ -31,6 +31,8 @@ namespace MyClients.Validation.Impl
             context.SetField("logins", target.Logins);
             context.Required();
             context.MustHaveCountBetween(1, 5, Errors.NUMBER_OF_LOGINS);
+
+            context.SetNested();
             this.loginvalidator.ValidateForSave(target.Logins, context);
 
             context.Assert();

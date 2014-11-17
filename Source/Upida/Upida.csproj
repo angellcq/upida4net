@@ -69,6 +69,7 @@
     <Compile Include="Validation\PathHelper.cs" />
     <Compile Include="Validation\FailureList.cs" />
     <Compile Include="Validation\IFailureList.cs" />
+    <Compile Include="Validation\PathNode.cs" />
     <Compile Include="Validation\Severity.cs" />
     <Compile Include="Validation\IValidator.cs" />
     <Compile Include="Validation\ValidationException.cs" />

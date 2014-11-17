@@ -1,40 +1,29 @@
-﻿using System;
+﻿using System.Collections.Generic;
+using System.Text;
 
 namespace Upida.Validation
 {
     public class PathHelper
     {
-        public string BuildPath(IValidator validator)
+        public string BuildPath(LinkedList<PathNode> path, string name)
         {
-            if (null == validator) return string.Empty;
-
-            if (validator.Index.HasValue)
+            StringBuilder text = new StringBuilder();
+            LinkedListNode<PathNode> current = path.First;
+            while (null != current.Next)
             {
-                return string.Concat(
-                    validator.Path,
-                    "[",
-                    validator.Index.Value,
-                    "]",
-                    ".",
-                    validator.FieldName);
-            }
-            else
-            {
-                return string.Concat(
-                    validator.Path,
-                    ".",
-                    validator.FieldName);
-            }
-        }
+                text.Append(current.Value.Name);
+                if (current.Value.Index.HasValue)
+                {
+                    text.Append('[');
+                    text.Append(current.Value.Index.Value);
+                    text.Append('[');
+                }
 
-        public string BuildPath(IValidator validator, string nestedField)
-        {
-            return string.Concat(this.BuildPath(validator), ".", nestedField);
-        }
+                text.Append('.');
+            }
 
-        public string BuildPath(IValidator validator, int index, string nestedField)
-        {
-            return string.Concat(this.BuildPath(validator), "[", index, "].", nestedField);
+            text.Append(name);
+            return text.ToString();
         }
     }
 }

@@ -8,12 +8,11 @@ namespace MyClients.Validation.Impl
     {
         private IHandyValidatorFactory validatorFactory;
 
-        public void ValidateForSave(IEnumerable<Login> logins, IHandyValidator parentContext)
+        public void ValidateForSave(IEnumerable<Login> logins, IHandyValidator context)
         {
             if (null == logins) return;
 
             int index = 0;
-            IHandyValidator context = this.validatorFactory.Get(parentContext);
             foreach (Login target in logins)
             {
                 context.SetIndex(index++);
@@ -34,12 +33,11 @@ namespace MyClients.Validation.Impl
             }
         }
 
-        public void ValidateForMerge(IEnumerable<Login> logins, IHandyValidator parentContext)
+        public void ValidateForMerge(IEnumerable<Login> logins, IHandyValidator context)
         {
             if (null == logins) return;
 
             int index = 0;
-            IHandyValidator context = this.validatorFactory.Get(parentContext);
             foreach (Login target in logins)
             {
                 context.SetIndex(index++);

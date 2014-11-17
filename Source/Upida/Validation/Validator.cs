@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 
 namespace Upida.Validation
 {
@@ -8,8 +9,7 @@ namespace Upida.Validation
     /// </summary>
     public abstract class Validator : IValidator
     {
-        protected string path;
-        protected int? index;
+        protected LinkedList<PathNode> path = new LinkedList<PathNode>();
         protected string fieldName;
         protected object fieldValue;
         protected Dtobase target;
@@ -28,16 +28,6 @@ namespace Upida.Validation
             get { return this.fieldName; }
         }
 
-        public string Path
-        {
-            get { return this.path; }
-        }
-
-        public int? Index
-        {
-            get { return this.index; }
-        }
-
         /// <summary>
         /// Returns list of failures for the target object
         /// </summary>
@@ -47,25 +37,9 @@ namespace Upida.Validation
             get { return this.failures ?? new FailureList(); }
         }
 
-        public void SetParent(IValidator parent)
-        {
-            this.parent = parent;
-            this.path = this.pathHelper.BuildPath(parent);
-        }
-
-        /// <summary>
-        /// Sets target validated object
-        /// </summary>
-        /// <param name="target">target validated object</param>
-        /// <param name="parent">parent validator</param>
-        public void SetTarget(Dtobase target)
-        {
-            this.target = target;
-        }
-
         public void SetIndex(int index)
         {
-            this.index = index;
+            this.path.Last.Value.Index = index;
         }
 
         /// <summary>
@@ -102,6 +76,16 @@ namespace Upida.Validation
             return this.checker.IsValidFormat(this.fieldName, this.target);
         }
 
+        public void AddNested()
+        {
+            this.path.AddLast(new PathNode() { Name = this.fieldName });
+        }
+
+        public void RemoveNested()
+        {
+            this.path.RemoveLast();
+        }
+
         /// <summary>
         /// Sets severity of the next checking.
         /// Severity is reset to None after checking is done.
@@ -129,28 +113,7 @@ namespace Upida.Validation
         /// <param name="msg">failure message</param>
         public void Fail(string msg)
         {
-            this.Fail(new Failure(this.pathHelper.BuildPath(this), msg, this.severity));
-        }
-
-        /// <summary>
-        /// Registers a failure against the current property's child property
-        /// </summary>
-        /// <param name="nestedField">child property</param>
-        /// <param name="msg">failure message</param>
-        public void FailNested(string nestedField, string msg)
-        {
-            this.Fail(new Failure(this.pathHelper.BuildPath(this, nestedField), msg, this.severity));
-        }
-
-        /// <summary>
-        /// Registers a failure against the current indexedt property's child property ( i.e. currentProperty[index].childProperty)
-        /// </summary>
-        /// <param name="index">index of the current property</param>
-        /// <param name="nestedField">child property</param>
-        /// <param name="msg">failure message</param>
-        public void FailNested(int index, string nestedField, string msg)
-        {
-            this.Fail(new Failure(this.pathHelper.BuildPath(this, index, nestedField), msg, this.severity));
+            this.Fail(new Failure(this.pathHelper.BuildPath(this.path, this.fieldName), msg, this.severity));
         }
 
         /// <summary>
