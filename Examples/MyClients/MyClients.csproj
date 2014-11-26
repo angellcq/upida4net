@@ -132,9 +132,9 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Validation\IClientValidator.cs" />
+    <Compile Include="Validation\Impl\BasicValidator.cs" />
     <Compile Include="Validation\Impl\ClientValidator.cs" />
     <Compile Include="Validation\Errors.cs" />
-    <Compile Include="Validation\Impl\HandyValidator.cs" />
     <Compile Include="Validation\IHandyValidator.cs" />
     <Compile Include="Validation\IHandyValidatorFactory.cs" />
     <Compile Include="Validation\Impl\HandyValidatorFactory.cs" />
