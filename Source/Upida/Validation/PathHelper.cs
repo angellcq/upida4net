@@ -19,7 +19,8 @@ namespace Upida.Validation
                     text.Append(']');
                 }
 
-                if (string.Empty != current.Value.Name)
+                if (!string.IsNullOrEmpty(current.Value.Name) ||
+                    current.Value.Index.HasValue)
                 {
                     text.Append('.');
                 }

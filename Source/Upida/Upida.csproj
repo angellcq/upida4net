@@ -66,6 +66,8 @@
     <Compile Include="Validation\Checker.cs" />
     <Compile Include="Validation\FailResponse.cs" />
     <Compile Include="Validation\Failure.cs" />
+    <Compile Include="Validation\IMath.cs" />
+    <Compile Include="Validation\Math.cs" />
     <Compile Include="Validation\PathHelper.cs" />
     <Compile Include="Validation\FailureList.cs" />
     <Compile Include="Validation\IFailureList.cs" />

@@ -62,5 +62,15 @@ namespace Upida
                 ? false
                 : this.wrongFields.Contains(field);
         }
+
+        public virtual ISet<string> GetAssignedFields()
+        {
+            return this.assignedFields;
+        }
+
+        public virtual ISet<string> GetWrongFields()
+        {
+            return this.wrongFields;
+        }
     }
 }

@@ -23,7 +23,10 @@ namespace Upida.Validation
         void Fail(Failure failure);
 
         bool IsAssigned();
+        bool IsNull();
         bool IsValidFormat();
+        void MustHaveMinAssignedFieldsCount(int count, string msg);
+        void MustHaveMaxAssignedFieldsCount(int count, string msg);
         void MustBeAssigned(string msg);
         void MustBeNotAssigned(string msg);
         void MustBeValidFormat(string msg);
@@ -43,5 +46,6 @@ namespace Upida.Validation
         void MustRegexpr(string expr, string msg);
 
         void Assert();
+        IMath Math { get; }
     }
 }

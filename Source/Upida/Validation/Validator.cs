@@ -7,13 +7,14 @@ namespace Upida.Validation
     /// <summary>
     /// Represents basic set of type validator members
     /// </summary>
-    public abstract class Validator : IValidator
+    public class Validator : IValidator
     {
         protected LinkedList<PathNode> path = new LinkedList<PathNode>();
         protected string fieldName;
         protected object fieldValue;
         protected Dtobase target;
         protected IFailureList failures;
+        protected IMath math = new Math();
 
         protected PathHelper pathHelper = UpidaContext.Current.PathHelper;
         protected Checker checker = UpidaContext.Current.Checker;
@@ -25,6 +26,7 @@ namespace Upida.Validation
         public Validator()
         {
             this.path.AddLast(new PathNode() { Name = string.Empty });
+            this.isValid = true;
         }
 
         public bool IsValid
@@ -102,9 +104,32 @@ namespace Upida.Validation
             return this.checker.IsAssigned(this.fieldName, this.target);
         }
 
+        public bool IsNull()
+        {
+            return this.checker.IsNull(this.fieldValue);
+        }
+
         public bool IsValidFormat()
         {
             return this.checker.IsValidFormat(this.fieldName, this.target);
+        }
+
+        public void MustHaveMaxAssignedFieldsCount(int count, string msg)
+        {
+            if (null != this.target.GetAssignedFields() &&
+                count < this.target.GetAssignedFields().Count)
+            {
+                this.FailRoot(msg);
+            }
+        }
+
+        public void MustHaveMinAssignedFieldsCount(int count, string msg)
+        {
+            if (null == this.target.GetAssignedFields() ||
+                count > this.target.GetAssignedFields().Count)
+            {
+                this.FailRoot(msg);
+            }
         }
 
         public void MustBeAssigned(string msg)
@@ -258,6 +283,11 @@ namespace Upida.Validation
             {
                 throw new ValidationException(this.failures);
             }
+        }
+
+        public IMath Math
+        {
+            get { return this.math; }
         }
     }
 }
