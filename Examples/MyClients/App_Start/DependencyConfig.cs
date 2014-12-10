@@ -1,21 +1,20 @@
-﻿using Autofac;
-using Autofac.Integration.Mvc;
-using Autofac.Integration.WebApi;
-using NHibernate;
-using NHibernate.Cfg;
-using System.Reflection;
+﻿using System.Reflection;
 using System.Web.Http;
 using System.Web.Mvc;
-using Upida;
-using Upida.Validation;
-using MyClients.Validation;
-using MyClients.Dao.Support;
+using Autofac;
+using Autofac.Integration.Mvc;
+using Autofac.Integration.WebApi;
 using MyClients.Dao;
-using MyClients.Service;
-using MyClients.Validation.Impl;
-using MyClients.Database.Impl;
-using MyClients.Service.Impl;
+using MyClients.Dao.Support;
 using MyClients.Database;
+using MyClients.Database.Impl;
+using MyClients.Service;
+using MyClients.Service.Impl;
+using MyClients.Validation;
+using MyClients.Validation.Impl;
+using NHibernate;
+using NHibernate.Cfg;
+using Upida;
 
 namespace MyClients
 {
