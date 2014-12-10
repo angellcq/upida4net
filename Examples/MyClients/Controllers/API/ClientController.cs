@@ -1,44 +1,38 @@
 ﻿using System.Collections.Generic;
 using System.Web.Http;
-using MyClients.Business;
 using MyClients.Domain;
-using System;
+using MyClients.Service;
 
 namespace MyClients.Controllers.API
 {
-	public class ClientController : ApiController
-	{
-		private ClientBusiness clientBusiness;
+    public class ClientController : ApiController
+    {
+        public IClientService ClientService { get; set; }
 
-		public ClientController(ClientBusiness clientBusiness)
-		{
-			this.clientBusiness = clientBusiness;
-		}
+        public Client GetById(int id)
+        {
+            return this.ClientService.GetById(id);
+        }
 
-		public Client GetById(int id)
-		{
-			return this.clientBusiness.GetById(id);
-		}
+        public IList<Client> GetAll()
+        {
+            return this.ClientService.GetAll();
+        }
 
-		public IList<Client> GetAll()
-		{
-			return this.clientBusiness.GetAll();
-		}
+        public void Save(Client item)
+        {
+            this.ClientService.Save(item);
+        }
 
-		public void Save(Client item)
-		{
-			this.clientBusiness.Save(item);
-		}
+        public void Update(Client item)
+        {
+            this.ClientService.Update(item);
+        }
 
-		public void Update(Client item)
-		{
-			this.clientBusiness.Update(item);
-		}
-
-		[HttpPost]
-		public void Delete(int id)
-		{
-			this.clientBusiness.Delete(id);
-		}
-	}
+        [HttpPost]
+        public void Delete(int id)
+        {
+            this.ClientService.Delete(id);
+        }
+    }
 }

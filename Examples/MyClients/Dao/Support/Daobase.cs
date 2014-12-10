@@ -1,60 +1,60 @@
-﻿using NHibernate;
-using NHibernate.Context;
-using System;
+﻿using MyClients.Database;
+using NHibernate;
 
 namespace MyClients.Dao.Support
 {
-	public class Daobase<T> : IDaobase<T>
-		where T : class
-	{
-		private readonly SessionFactoryExt sessionFactory;
+    public class Daobase<T> : IDaobase<T>
+        where T : class
+    {
+        public ISessionFactoryEx SessionFactory { get; set; }
 
-		public Daobase(SessionFactoryExt sessionFactory)
-		{
-			this.sessionFactory = sessionFactory;
-		}
+        public void Save(T entity)
+        {
+            this.SessionFactory
+                .GetCurrentSession()
+                .Save(entity);
+        }
 
-		public ISession Session
-		{
-			get
-			{
-				return this.sessionFactory.GetCurrentSession();
-			}
-		}
+        public void Update(T entity)
+        {
+            this.SessionFactory
+                .GetCurrentSession()
+                .Update(entity);
+        }
 
-		public void Save(T entity)
-		{
-			this.Session.Save(entity);
-		}
+        public void Merge(T entity)
+        {
+            this.SessionFactory
+                .GetCurrentSession()
+                .Merge<T>(entity);
+        }
 
-		public void Update(T entity)
-		{
-			this.Session.Update(entity);
-		}
+        public void Delete(T entity)
+        {
+            this.SessionFactory
+                .GetCurrentSession()
+                .Delete(entity);
+        }
 
-		public void Merge(T entity)
-		{
-			this.Session.Merge<T>(entity);
-		}
+        public T Get(object id)
+        {
+            return this.SessionFactory
+                .GetCurrentSession()
+                .Get<T>(id);
+        }
 
-		public void Delete(T entity)
-		{
-			this.Session.Delete(entity);
-		}
+        public T Load(object id)
+        {
+            return this.SessionFactory
+                .GetCurrentSession()
+                .Load<T>(id);
+        }
 
-		public T Get(object id)
-		{
-			return this.Session.Get<T>(id);
-		}
-
-		public T Load(object id)
-		{
-			return this.Session.Load<T>(id);
-		}
-
-		public ITransaction BeginTransaction()
-		{
-			return this.Session.BeginTransaction();
-		}
-	}
+        public ITransaction BeginTransaction()
+        {
+            return this.SessionFactory
+                .GetCurrentSession()
+                .BeginTransaction();
+        }
+    }
 }

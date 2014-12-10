@@ -3,8 +3,8 @@ using Upida;
 
 namespace MyClients.Validation
 {
-    public interface IHandyValidatorFactory
+    public interface IValidationHelperFactory
     {
-        IHandyValidator Get();
+        IHelper Get();
     }
 }

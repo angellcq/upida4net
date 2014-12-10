@@ -72,7 +72,7 @@ namespace Upida
                 return defs;
             }
 
-            lock (type)
+            lock (this)
             {
                 found = PROPERTY_DEF_MAP.TryGetValue(type, out defs);
                 if (found)

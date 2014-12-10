@@ -63,7 +63,6 @@ namespace Upida.Validation
             this.isFieldValid = true;
         }
 
-
         public void AddNested()
         {
             this.path.AddLast(new PathNode() { Name = this.fieldName });
@@ -73,7 +72,6 @@ namespace Upida.Validation
         {
             this.path.RemoveLast();
         }
-
 
         public void FailRoot(string msg)
         {
@@ -275,7 +273,6 @@ namespace Upida.Validation
                 this.Fail(msg);
             }
         }
-
 
         public void Assert()
         {

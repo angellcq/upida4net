@@ -5,8 +5,7 @@ namespace MyClients.Validation
 {
     public interface IClientValidator
     {
-        void AssertValidForSave(Client target, IValidator context);
-
-        void AssertValidForUpdate(Client target, IValidator context);
+        void ValidateForSave(Client target, IHelper context);
+        void ValidateForUpdate(Client target, IHelper context);
     }
 }

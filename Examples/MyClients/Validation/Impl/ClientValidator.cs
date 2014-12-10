@@ -6,110 +6,74 @@ namespace MyClients.Validation.Impl
 {
     public class ClientValidator : IClientValidator
     {
-        public IHandyValidatorFactory ValidatorFactory { get; set; }
+        public ILoginValidator LoginValidator { get; set; }
 
-        public void AssertValidForSave(Client target)
+        public void ValidateForSave(Client target, IHelper context)
         {
-            IHandyValidator context = this.ValidatorFactory.Get();
-            context.SetTarget(target);
-
-            context.MissingField("id", target.Id);
+            context.SetField("id", target.Id);
+            context.Missing();
 
             context.SetField("name", target.Name);
             context.Required();
-            context.MustHaveLengthBetween(3, 20, Errors.LENGTH_3_20);
+            context.Text();
 
             context.SetField("lastname", target.Lastname);
             context.Required();
-            context.MustHaveLengthBetween(3, 20, Errors.LENGTH_3_20);
+            context.Text();
 
             context.SetField("age", target.Age);
-            context.Required(Errors.MUST_BE_NUMBER);
-            context.MustBeGreaterThan(0, Errors.GREATER_ZERO);
+            context.Required();
+            context.Number();
+            context.MustBeGreaterThan(0, "must be greater than zero");
 
             context.SetField("logins", target.Logins);
             context.Required();
-            context.MustHaveCountBetween(1, 5, Errors.NUMBER_OF_LOGINS);
+            context.MustHaveCountBetween(1, 5, "must be at least one login");
 
-            if (context.IsFieldValid)
+            context.AddNested();
+            int index = 0;
+            foreach (Login login in target.Logins)
             {
-                context.AddNested();
-                int index = 0;
-                foreach (Login login in target.Logins)
-                {
-                    context.SetIndex(index++);
-                    context.SetTarget(login);
-                    context.MissingField("id", login.Id);
-
-                    context.SetField("name", target.Name);
-                    context.Required();
-                    context.MustHaveLengthBetween(3, 20, Errors.LENGTH_3_20);
-
-                    context.SetField("password", login.Password);
-                    context.Required();
-                    context.MustHaveLengthBetween(3, 20, Errors.LENGTH_3_20);
-
-                    context.SetField("enabled", login.Enabled);
-                    context.Required(Errors.NOT_VALID_BOOL);
-
-                    context.MissingField("client", login.Client);
-                }
+                context.SetIndex(index++);
+                context.SetTarget(login);
+                this.LoginValidator.ValidateForSave(login, context);
             }
 
-            context.Assert();
+            context.RemoveNested();
         }
 
-        public void AssertValidForUpdate(Client target)
+        public void ValidateForUpdate(Client target, IHelper context)
         {
-            IHandyValidator context = this.ValidatorFactory.Get();
-            context.SetTarget(target);
-
             context.SetField("id", target.Id);
             context.Required();
+            context.Number();
 
             context.SetField("name", target.Name);
             context.Required();
-            context.MustHaveLengthBetween(3, 20, Errors.LENGTH_3_20);
+            context.Text();
 
             context.SetField("lastname", target.Lastname);
             context.Required();
-            context.MustHaveLengthBetween(3, 20, Errors.LENGTH_3_20);
+            context.Text();
 
             context.SetField("age", target.Age);
-            context.Required(Errors.MUST_BE_NUMBER);
-            context.MustBeGreaterThan(0, Errors.GREATER_ZERO);
+            context.Number();
+            context.MustBeGreaterThan(0, "must be greater than zero");
 
             context.SetField("logins", target.Logins);
             context.Required();
-            context.MustHaveCountBetween(1, 5, Errors.NUMBER_OF_LOGINS);
+            context.MustHaveCountBetween(1, 5, "must be at least one login");
 
-            if (context.IsFieldValid)
+            context.AddNested();
+            int index = 0;
+            foreach (Login login in target.Logins)
             {
-                context.AddNested();
-                int index = 0;
-                foreach (Login login in target.Logins)
-                {
-                    context.SetIndex(index++);
-                    context.SetTarget(login);
-                    context.SetField("id", login.Id);
-                    context.RequiredIfAssigned();
-
-                    context.SetField("name", login.Name);
-                    context.Required();
-                    context.MustHaveLengthBetween(3, 20, Errors.LENGTH_3_20);
-
-                    context.SetField("password", login.Password);
-                    context.Required();
-                    context.MustHaveLengthBetween(3, 20, Errors.LENGTH_3_20);
-
-                    context.SetField("enabled", login.Enabled);
-                    context.Required(Errors.NOT_VALID_BOOL);
-
-                    context.MissingField("client", login.Client);
-                }
+                context.SetIndex(index++);
+                context.SetTarget(login);
+                this.LoginValidator.ValidateForMerge(login, context);
             }
 
-            context.Assert();
+            context.RemoveNested();
         }
     }
 }
