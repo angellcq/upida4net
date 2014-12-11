@@ -1,24 +1,21 @@
 ﻿using System.Collections.Generic;
-using MyClients.Service;
 using MyClients.Controllers.API;
 using MyClients.Domain;
+using MyClients.Service;
 using NUnit.Framework;
 using Rhino.Mocks;
 
 namespace Test.MyClients.Controllers
 {
     [TestFixture]
-    public class ClientControllerTest
+    public class ClientControllerTest : TestBase
     {
-        private MockRepository mocks;
         private IClientService clientService;
         private ClientController target;
 
-        [SetUp]
-        public void SetUp()
+        public override void SetUp()
         {
-            this.mocks = new MockRepository();
-            this.clientService = this.mocks.Stub<IClientService>();
+            this.clientService = this.Stub<IClientService>();
             this.target = new ClientController();
             this.target.ClientService = this.clientService;
         }
@@ -26,12 +23,9 @@ namespace Test.MyClients.Controllers
         [Test]
         public void GetByIdTest()
         {
-            int input = 234;
-            Client expected = new Client();
-            expected.Id = input;
-            this.clientService.Expect((m) => m.GetById(input)).Return(expected);
-            mocks.ReplayAll();
-            Client actual = this.target.GetById(input);
+            Client expected = new Client() { Id = 4444 };
+            this.clientService.Expect((m) => m.GetById(1111)).Return(expected);
+            Client actual = this.VerifyTarget(() => this.target.GetById(1111));
             Assert.AreEqual(expected, actual);
         }
 
@@ -40,41 +34,31 @@ namespace Test.MyClients.Controllers
         {
             IList<Client> expected = new List<Client>();
             this.clientService.Expect((m) => m.GetAll()).Return(expected);
-            mocks.ReplayAll();
-            IList<Client> actual = this.target.GetAll();
+            IList<Client> actual = this.VerifyTarget(() => this.target.GetAll());
             Assert.AreEqual(expected, actual);
         }
 
         [Test]
         public void SaveTest()
         {
-            Client input = new Client();
-            input.Id = 4235;
+            Client input = new Client() { Id = 1111 };
             this.clientService.Expect((m) => m.Save(input));
-            mocks.ReplayAll();
-            this.target.Save(input);
-            this.clientService.VerifyAllExpectations();
+            this.VerifyTarget(() => this.target.Save(input));
         }
 
         [Test]
         public void UpdateTest()
         {
-            Client input = new Client();
-            input.Id = 4235;
+            Client input = new Client() { Id = 4444 };
             this.clientService.Expect((m) => m.Update(input));
-            mocks.ReplayAll();
-            this.target.Update(input);
-            this.clientService.VerifyAllExpectations();
+            this.VerifyTarget(() => this.target.Update(input));
         }
 
         [Test]
         public void DeleteTest()
         {
-            int input = 4235;
-            this.clientService.Expect((m) => m.Delete(input));
-            mocks.ReplayAll();
-            this.target.Delete(input);
-            this.clientService.VerifyAllExpectations();
+            this.clientService.Expect((m) => m.Delete(1111));
+            this.VerifyTarget(() => this.target.Delete(1111));
         }
     }
 }

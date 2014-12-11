@@ -57,6 +57,7 @@ namespace MyClients.Validation.Impl
             context.Text();
 
             context.SetField("age", target.Age);
+            context.Required();
             context.Number();
             context.MustBeGreaterThan(0, "must be greater than zero");
 

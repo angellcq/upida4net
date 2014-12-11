@@ -25,8 +25,8 @@ namespace Test.MyClients.Validation
         [Test]
         public void ValidateForSave()
         {
-            Login a = new Login() { Id = 3333, Name = "LOGIN_NAME_A", Enabled = true, Password = "LOGIN_PWD_A", Client = new Client() };
-            Login b = new Login() { Id = 4444, Name = "LOGIN_NAME_B", Enabled = false, Password = "LOGIN_PWD_B", Client = new Client() };
+            Login a = new Login() { Id = 3333, Name = "LOGIN_NAME_A", Enabled = true, Password = "LOGIN_PWD_A", Client = new Client() { Id = 888 } };
+            Login b = new Login() { Id = 4444, Name = "LOGIN_NAME_B", Enabled = false, Password = "LOGIN_PWD_B", Client = new Client() { Id = 999 } };
             Client data = new Client() { Id = 1111, Age = 2222, Name = "NAME", Lastname = "LASTNAME", Logins = new ListAndSet<Login>() { a, b } };
             using (this.Ordered())
             {
@@ -67,8 +67,8 @@ namespace Test.MyClients.Validation
         [Test]
         public void ValidateForUpdateTest()
         {
-            Login a = new Login() { Id = 3333, Name = "LOGIN_NAME_A", Enabled = true, Password = "LOGIN_PWD_A", Client = new Client() };
-            Login b = new Login() { Id = 4444, Name = "LOGIN_NAME_B", Enabled = false, Password = "LOGIN_PWD_B", Client = new Client() };
+            Login a = new Login() { Id = 3333, Name = "LOGIN_NAME_A", Enabled = true, Password = "LOGIN_PWD_A", Client = new Client() { Id = 888 } };
+            Login b = new Login() { Id = 4444, Name = "LOGIN_NAME_B", Enabled = false, Password = "LOGIN_PWD_B", Client = new Client() { Id = 999 } };
             Client data = new Client() { Id = 1111, Age = 2222, Name = "NAME", Lastname = "LASTNAME", Logins = new ListAndSet<Login>() { a, b } };
             using (this.Ordered())
             {

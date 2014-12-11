@@ -1,31 +1,27 @@
-﻿using MyClients.Dao;
+﻿using System.Collections.Generic;
 using MyClients.Dao.Support;
+using MyClients.Database;
 using MyClients.Domain;
 using NHibernate;
 using NHibernate.Transform;
 using NUnit.Framework;
 using Rhino.Mocks;
-using System.Collections.Generic;
-using MyClients.Database;
 
 namespace Test.MyClients.Dao
 {
     [TestFixture]
-    public class ClientDaoTest
+    public class ClientDaoTest : TestBase
     {
-        private MockRepository mocks;
         private ISession session;
         private ISessionFactoryEx sessionFactory;
         private IQuery query;
         private ClientDao target;
 
-        [SetUp]
-        public void SetUp()
+        public override void SetUp()
         {
-            this.mocks = new MockRepository();
-            this.session = this.mocks.Stub<ISession>();
-            this.sessionFactory = this.mocks.Stub<ISessionFactoryEx>();
-            this.query = this.mocks.Stub<IQuery>();
+            this.session = this.Stub<ISession>();
+            this.sessionFactory = this.Stub<ISessionFactoryEx>();
+            this.query = this.Stub<IQuery>();
             this.target = new ClientDao();
             this.target.SessionFactory = this.sessionFactory;
         }
@@ -36,7 +32,7 @@ namespace Test.MyClients.Dao
             int input = 5672;
             Client expected = new Client();
             expected.Id = input;
-            using (mocks.Ordered())
+            using (this.Ordered())
             {
                 this.sessionFactory.Expect((m) => m.GetCurrentSession()).Return(this.session);
                 this.session.Expect((m) => m.CreateQuery("from Client client left outer join fetch client.Logins where client.Id = :id")).Return(this.query);
@@ -45,17 +41,15 @@ namespace Test.MyClients.Dao
                 this.query.Expect((m) => m.UniqueResult<Client>()).Return(expected);
             }
 
-            mocks.ReplayAll();
-            Client actual = this.target.GetById(input);
+            Client actual = this.VerifyTarget(() => this.target.GetById(input));
             Assert.AreEqual(expected, actual);
-            this.mocks.VerifyAll();
         }
 
         [Test]
         public void GetAllTest()
         {
             IList<Client> expected = new List<Client>();
-            using (mocks.Ordered())
+            using (this.Ordered())
             {
                 this.sessionFactory.Expect((m) => m.GetCurrentSession()).Return(this.session);
                 this.session.Expect((m) => m.CreateQuery("from Client client left outer join fetch client.Logins")).Return(this.query);
@@ -63,27 +57,23 @@ namespace Test.MyClients.Dao
                 this.query.Expect((m) => m.List<Client>()).Return(expected);
             }
 
-            mocks.ReplayAll();
-            IList<Client> actual = this.target.GetAll();
+            IList<Client> actual = this.VerifyTarget(() => this.target.GetAll());
             Assert.AreEqual(expected, actual);
-            this.mocks.VerifyAll();
         }
 
         [Test]
         public void GetCountTest()
         {
             long expected = 20;
-            using (mocks.Ordered())
+            using (this.Ordered())
             {
                 this.sessionFactory.Expect((m) => m.GetCurrentSession()).Return(this.session);
                 this.session.Expect((m) => m.CreateQuery("select count(*) from Client")).Return(this.query);
                 this.query.Expect((m) => m.UniqueResult<long>()).Return(expected);
             }
 
-            mocks.ReplayAll();
-            long actual = this.target.GetCount();
+            long actual = this.VerifyTarget(() => this.target.GetCount());
             Assert.AreEqual(expected, actual);
-            this.mocks.VerifyAll();
         }
     }
 }

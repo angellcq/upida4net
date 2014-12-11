@@ -22,7 +22,7 @@ namespace Test.MyClients.Validation
         [Test]
         public void ValidateForSave()
         {
-            Login data = new Login() { Id = 3333, Name = "LOGIN_NAME_A", Enabled = true, Password = "LOGIN_PWD_A", Client = new Client() };
+            Login data = new Login() { Id = 3333, Name = "LOGIN_NAME_A", Enabled = true, Password = "LOGIN_PWD_A", Client = new Client() { Id = 555 } };
             using (this.Ordered())
             {
                 this.context.Expect((m) => m.SetField("id", data.Id));
@@ -49,7 +49,7 @@ namespace Test.MyClients.Validation
         [Test]
         public void ValidateForMerge_Update_Test()
         {
-            Login data = new Login() { Id = 3333, Name = "LOGIN_NAME_A", Enabled = true, Password = "LOGIN_PWD_A", Client = new Client() };
+            Login data = new Login() { Id = 3333, Name = "LOGIN_NAME_A", Enabled = true, Password = "LOGIN_PWD_A", Client = new Client() { Id = 555 } };
             using (this.Ordered())
             {
                 this.context.Expect((m) => m.SetField("id", data.Id));
@@ -77,7 +77,7 @@ namespace Test.MyClients.Validation
         [Test]
         public void ValidateForMerge_Save_Test()
         {
-            Login data = new Login() { Id = 3333, Name = "LOGIN_NAME_A", Enabled = true, Password = "LOGIN_PWD_A", Client = new Client() };
+            Login data = new Login() { Id = 3333, Name = "LOGIN_NAME_A", Enabled = true, Password = "LOGIN_PWD_A", Client = new Client() { Id = 555 } };
             using (this.Ordered())
             {
                 this.context.Expect((m) => m.SetField("id", data.Id));
