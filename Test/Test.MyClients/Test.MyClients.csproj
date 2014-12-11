@@ -54,7 +54,9 @@
     <Compile Include="Dao\ClientDaoTest.cs" />
     <Compile Include="Dao\DaobaseTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestBase.cs" />
     <Compile Include="Validation\ClientValidatorTest.cs" />
+    <Compile Include="Validation\LoginValidatorTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Examples\MyClients\MyClients.csproj">
