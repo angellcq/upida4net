@@ -6,9 +6,4 @@ namespace Upida
     {
         void ConnectToParent(object parent);
     }
-
-    public interface IChildEx : IChild
-    {
-        void DisconnectFromParent();
-    }
 }

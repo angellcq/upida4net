@@ -1,4 +1,4 @@
-﻿using Upida.Validation;
+﻿using Upida.Validation.Impl;
 
 namespace MyClients.Validation.Impl
 {

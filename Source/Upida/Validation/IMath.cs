@@ -2,6 +2,10 @@
 
 namespace Upida.Validation
 {
+    /// <summary>
+    /// Defines arithmetic operations.
+    /// All methods return 'false' if one of the parameters is NULL, otherwise arithmetic result is returned
+    /// </summary>
     public interface IMath
     {
         bool IsLess(long? a, long? b);
@@ -25,17 +29,17 @@ namespace Upida.Validation
         bool IsEqual(short? a, short? b);
         bool IsNotEqual(short? a, short? b);
 
-        bool IsLess(double? a, double? b);
-        bool IsGreater(double? a, double? b);
-        bool IsLessOrEqual(double? a, double? b);
-        bool IsGreaterOrEqual(double? a, double? b);
+        bool IsLess(double? a, double? b, int decimals);
+        bool IsGreater(double? a, double? b, int decimals);
+        bool IsLessOrEqual(double? a, double? b, int decimals);
+        bool IsGreaterOrEqual(double? a, double? b, int decimals);
         bool IsEqual(double? a, double? b, int decimals);
         bool IsNotEqual(double? a, double? b, int decimals);
 
-        bool IsLess(decimal? a, decimal? b);
-        bool IsGreater(decimal? a, decimal? b);
-        bool IsLessOrEqual(decimal? a, decimal? b);
-        bool IsGreaterOrEqual(decimal? a, decimal? b);
+        bool IsLess(decimal? a, decimal? b, int decimals);
+        bool IsGreater(decimal? a, decimal? b, int decimals);
+        bool IsLessOrEqual(decimal? a, decimal? b, int decimals);
+        bool IsGreaterOrEqual(decimal? a, decimal? b, int decimals);
         bool IsEqual(decimal? a, decimal? b, int decimals);
         bool IsNotEqual(decimal? a, decimal? b, int decimals);
     }

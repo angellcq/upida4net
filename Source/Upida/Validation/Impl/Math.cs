@@ -1,7 +1,11 @@
 ﻿using System;
 
-namespace Upida.Validation
+namespace Upida.Validation.Impl
 {
+    /// <summary>
+    /// Defines arithmetic operations.
+    /// All methods return 'false' if one of the parameters is NULL, otherwise arithmetic result is returned
+    /// </summary>
     public class Math : IMath
     {
         public bool IsLess(long? a, long? b)
@@ -118,28 +122,28 @@ namespace Upida.Validation
 
 
 
-        public bool IsLess(double? a, double? b)
+        public bool IsLess(double? a, double? b, int decimals)
         {
             if (!a.HasValue || !b.HasValue) return false;
-            return a.Value < b.Value;
+            return System.Math.Round(a.Value) < System.Math.Round(b.Value);
         }
 
-        public bool IsGreater(double? a, double? b)
+        public bool IsGreater(double? a, double? b, int decimals)
         {
             if (!a.HasValue || !b.HasValue) return false;
-            return a.Value > b.Value;
+            return System.Math.Round(a.Value) > System.Math.Round(b.Value);
         }
 
-        public bool IsLessOrEqual(double? a, double? b)
+        public bool IsLessOrEqual(double? a, double? b, int decimals)
         {
             if (!a.HasValue || !b.HasValue) return false;
-            return a.Value <= b.Value;
+            return System.Math.Round(a.Value) <= System.Math.Round(b.Value);
         }
 
-        public bool IsGreaterOrEqual(double? a, double? b)
+        public bool IsGreaterOrEqual(double? a, double? b, int decimals)
         {
             if (!a.HasValue || !b.HasValue) return false;
-            return a.Value >= b.Value;
+            return System.Math.Round(a.Value) >= System.Math.Round(b.Value);
         }
 
         public bool IsEqual(double? a, double? b, int decimals)
@@ -156,28 +160,28 @@ namespace Upida.Validation
 
 
 
-        public bool IsLess(decimal? a, decimal? b)
+        public bool IsLess(decimal? a, decimal? b, int decimals)
         {
             if (!a.HasValue || !b.HasValue) return false;
-            return a.Value < b.Value;
+            return System.Math.Round(a.Value) < System.Math.Round(b.Value);
         }
 
-        public bool IsGreater(decimal? a, decimal? b)
+        public bool IsGreater(decimal? a, decimal? b, int decimals)
         {
             if (!a.HasValue || !b.HasValue) return false;
-            return a.Value > b.Value;
+            return System.Math.Round(a.Value) > System.Math.Round(b.Value);
         }
 
-        public bool IsLessOrEqual(decimal? a, decimal? b)
+        public bool IsLessOrEqual(decimal? a, decimal? b, int decimals)
         {
             if (!a.HasValue || !b.HasValue) return false;
-            return a.Value <= b.Value;
+            return System.Math.Round(a.Value) <= System.Math.Round(b.Value);
         }
 
-        public bool IsGreaterOrEqual(decimal? a, decimal? b)
+        public bool IsGreaterOrEqual(decimal? a, decimal? b, int decimals)
         {
             if (!a.HasValue || !b.HasValue) return false;
-            return a.Value >= b.Value;
+            return System.Math.Round(a.Value) >= System.Math.Round(b.Value);
         }
 
         public bool IsEqual(decimal? a, decimal? b, int decimals)

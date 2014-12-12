@@ -1,10 +1,19 @@
 ﻿using System.Collections.Generic;
 using System.Text;
 
-namespace Upida.Validation
+namespace Upida.Validation.Impl
 {
-    public class PathHelper
+    /// <summary>
+    /// 
+    /// </summary>
+    public class PathHelper : IPathHelper
     {
+        /// <summary>
+        /// Builds property path using existing path and a nested property name
+        /// </summary>
+        /// <param name="path">existing path</param>
+        /// <param name="name">nested property name</param>
+        /// <returns></returns>
         public string BuildPath(LinkedList<PathNode> path, string name)
         {
             StringBuilder text = new StringBuilder();

@@ -15,6 +15,7 @@ using MyClients.Validation.Impl;
 using NHibernate;
 using NHibernate.Cfg;
 using Upida;
+using Upida.Impl;
 
 namespace MyClients
 {

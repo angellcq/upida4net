@@ -2,36 +2,31 @@
 using System;
 using System.Collections;
 
-namespace Upida
+namespace Upida.Impl
 {
     /// <summary>
     /// Represents JSON parsing utility
     /// </summary>
     public class JsonParser : IJsonParser
     {
-        // <summary>
+        /// <summary>
         /// Parses JSON data into domain object
         /// </summary>
         /// <typeparam name="T">domain object type</typeparam>
         /// <param name="form">JSON tree</param>
-        /// <returns>parsed domain object</returns>
+        /// <returns>parsed domain object instance</returns>
         public T Parse<T>(JToken node)
             where T : Dtobase
         {
             return (T)this.Parse(node, typeof(T));
         }
 
-        public IEnumerable ParseList(JToken node, Type type)
-        {
-            IList list = (IList)UpidaContext.Current.BuildList(type);
-            foreach (JToken item in node.Children())
-            {
-                list.Add(this.Parse(item, type));
-            }
-
-            return list;
-        }
-
+        /// <summary>
+        /// Parses JSON data into domain object
+        /// </summary>
+        /// <param name="node">JSON tree</param>
+        /// <param name="type">domain object type</param>
+        /// <returns>parsed domain object instance</returns>
         public object Parse(JToken node, Type type)
         {
             try
@@ -59,7 +54,7 @@ namespace Upida
                             if (PropertyMeta.ClassType.Value == propertyDef.PropertyClassType)
                             {
                                 dto.AddAssignedField(propertyDef.Name);
-                                propertyDef.Write(dto, this.parseValue(propertyValue, propertyDef));
+                                propertyDef.Write(dto, this.ParseValue(propertyValue, propertyDef));
                             }
                             else if (PropertyMeta.ClassType.Class == propertyDef.PropertyClassType ||
                                 PropertyMeta.ClassType.CustomType == propertyDef.PropertyClassType)
@@ -95,7 +90,24 @@ namespace Upida
             }
         }
 
-        private object parseValue(JToken node, PropertyMeta propertyDef)
+        /// <summary>
+        /// Parses JSON data into a list of domain objects
+        /// </summary>
+        /// <param name="node">JSON tree</param>
+        /// <param name="type">domain object type</param>
+        /// <returns>parsed domain object instance</returns>
+        public IEnumerable ParseList(JToken node, Type type)
+        {
+            IList list = (IList)UpidaContext.Current.BuildList(type);
+            foreach (JToken item in node.Children())
+            {
+                list.Add(this.Parse(item, type));
+            }
+
+            return list;
+        }
+
+        private object ParseValue(JToken node, PropertyMeta propertyDef)
         {
             string text = node.Value<string>();
             if (string.IsNullOrEmpty(text))

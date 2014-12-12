@@ -33,7 +33,7 @@ namespace Upida.Validation
         /// <param name="message"></param>
         public FailResponse(string message)
         {
-            this.failures = new FailureList();
+            this.failures = new Upida.Validation.Impl.FailureList();
             this.failures.Fail(null, message);
         }
 

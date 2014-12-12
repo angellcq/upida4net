@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Upida.Impl;
 
-namespace Upida.Validation
+namespace Upida.Validation.Impl
 {
     /// <summary>
     /// Represents basic set of type validator members
@@ -14,10 +15,10 @@ namespace Upida.Validation
         protected object fieldValue;
         protected Dtobase target;
         protected IFailureList failures;
-        protected IMath math = new Math();
 
-        protected PathHelper pathHelper = UpidaContext.Current.PathHelper;
-        protected Checker checker = UpidaContext.Current.Checker;
+        protected IMath math = UpidaContext.Current.Math;
+        protected IPathHelper pathHelper = UpidaContext.Current.PathHelper;
+        protected IChecker checker = UpidaContext.Current.Checker;
 
         private bool isValid;
         private bool isTargetValid;

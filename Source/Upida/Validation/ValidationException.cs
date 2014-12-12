@@ -3,22 +3,16 @@ using System.Collections.Generic;
 
 namespace Upida.Validation
 {
+    /// <summary>
+    /// Represents Validation exception
+    /// </summary>
     public class ValidationException : Exception
     {
         private IFailureList failures;
-        private Type typeValidatorType;
-        private object group;
 
         public ValidationException(IFailureList errors)
         {
             this.failures = errors;
-        }
-
-        public ValidationException(IFailureList errors, Type typeValidatorType, object group)
-        {
-            this.failures = errors;
-            this.typeValidatorType = typeValidatorType;
-            this.group = group;
         }
 
         public FailResponse BuildFailResponse()
@@ -31,16 +25,6 @@ namespace Upida.Validation
         public IFailureList Failures
         {
             get { return this.failures; }
-        }
-
-        public Type TypeValidatorType
-        {
-            get { return this.typeValidatorType; }
-        }
-
-        public object Group
-        {
-            get { return this.group; }
         }
     }
 }

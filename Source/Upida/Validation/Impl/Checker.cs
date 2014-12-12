@@ -2,9 +2,9 @@
 using System.Collections;
 using System.Text.RegularExpressions;
 
-namespace Upida.Validation
+namespace Upida.Validation.Impl
 {
-    public class Checker
+    public class Checker : IChecker
     {
         /// <summary>
         /// Checks if field value is assigned
@@ -33,6 +33,12 @@ namespace Upida.Validation
             return null == value;
         }
 
+        /// <summary>
+        /// Checks if field value equals to m
+        /// </summary>
+        /// <param name="m">m</param>
+        /// <param name="value">field value</param>
+        /// <returns></returns>
         public bool IsEqualTo(object m, object value)
         {
             return object.Equals(m, value);
@@ -61,7 +67,7 @@ namespace Upida.Validation
         /// Checks if field value is empty string
         /// </summary>
         /// <returns></returns>
-        public virtual bool IsEmptyString(string value)
+        public bool IsEmptyString(string value)
         {
             return string.Equals(string.Empty, value);
         }
@@ -70,7 +76,7 @@ namespace Upida.Validation
         /// Checks if field value length is between min and max values
         /// </summary>
         /// <returns></returns>
-        public virtual bool IsLengthBetween(int min, int max, string value)
+        public bool IsLengthBetween(int min, int max, string value)
         {
             return value.Length >= min && value.Length <= max;
         }
@@ -79,7 +85,7 @@ namespace Upida.Validation
         /// Checks if field value is less than or equal to 'm'
         /// </summary>
         /// <returns></returns>
-        public virtual bool IsLessOrEqualTo(object m, IComparable value)
+        public bool IsLessOrEqualTo(object m, IComparable value)
         {
             return value.CompareTo(m) <= 0;
         }
@@ -88,7 +94,7 @@ namespace Upida.Validation
         /// Checks if field value is less than 'm'. IComparable.
         /// </summary>
         /// <returns></returns>
-        public virtual bool IsLessThan(object m, IComparable value)
+        public bool IsLessThan(object m, IComparable value)
         {
             return value.CompareTo(m) < 0;
         }
@@ -97,7 +103,7 @@ namespace Upida.Validation
         /// Checks if field value is greater than or equal to 'm'. IComparable.
         /// </summary>
         /// <returns></returns>
-        public virtual bool IsGreaterOrEqualTo(object m, IComparable value)
+        public bool IsGreaterOrEqualTo(object m, IComparable value)
         {
             return value.CompareTo(m) >= 0;
         }
@@ -106,7 +112,7 @@ namespace Upida.Validation
         /// Checks if field value is greater than 'm'. IComparable.
         /// </summary>
         /// <returns></returns>
-        public virtual bool IsGreaterThan(object m, IComparable value)
+        public bool IsGreaterThan(object m, IComparable value)
         {
             return value.CompareTo(m) > 0;
         }

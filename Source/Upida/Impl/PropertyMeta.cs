@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Reflection;
 
-namespace Upida
+namespace Upida.Impl
 {
     public class PropertyMeta
     {

@@ -21,7 +21,7 @@
         }
 
         /// <summary>
-        /// Property path of the failure
+        /// Key (property path) of the failure
         /// </summary>
         public string Key
         {

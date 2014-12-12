@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Globalization;
 
-namespace Upida
+namespace Upida.Impl
 {
+    /// <summary>
+    /// Defines set od standard .net types parsers
+    /// </summary>
     public static class StandardParsers
     {
         public static readonly IParser STRING_PARSER = new StringParser();

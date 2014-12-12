@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using Upida.Validation;
 
-namespace Upida
+namespace Upida.Impl
 {
     public class UpidaContext
     {
@@ -17,7 +17,6 @@ namespace Upida
             get { return CURRENT; }
         }
 
-        private readonly PropertyMetaFactory propertyMetaFactory = new PropertyMetaFactory();
         private readonly IDictionary<Type, PropertyMeta[]> PROPERTY_DEF_MAP = new Dictionary<Type, PropertyMeta[]>();
 
         private readonly Type STRING_TYPE = typeof(string);
@@ -50,19 +49,40 @@ namespace Upida
         private readonly Type CHAR_PRIM = typeof(char);
         private readonly Type GUID_PRIM = typeof(Guid);
 
-        private PathHelper pathHelper = new PathHelper();
-        private Checker checker = new Checker();
+        private readonly PropertyMetaFactory propertyMetaFactory = new PropertyMetaFactory();
+        private readonly IPathHelper pathHelper = new Upida.Validation.Impl.PathHelper();
+        private readonly IChecker checker = new Upida.Validation.Impl.Checker();
+        private readonly IMath math = new Upida.Validation.Impl.Math();
 
-        public PathHelper PathHelper
+        /// <summary>
+        /// Gets singleton instance of the PathHelpr class
+        /// </summary>
+        public IPathHelper PathHelper
         {
             get { return this.pathHelper; }
         }
 
-        public Checker Checker
+        /// <summary>
+        /// Gets singleton instance of the Checker class
+        /// </summary>
+        public IChecker Checker
         {
             get { return this.checker; }
         }
 
+        /// <summary>
+        /// Gets singleton instance of the Math class
+        /// </summary>
+        public IMath Math
+        {
+            get { return this.math; }
+        }
+
+        /// <summary>
+        /// Generates an array of ProperyMeta class from a domain class
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
         public PropertyMeta[] GetPropertyDefs(Type type)
         {
             PropertyMeta[] defs;
@@ -93,6 +113,14 @@ namespace Upida
             return defs;
         }
 
+        /// <summary>
+        /// Creates a property parser instance based on property class
+        /// </summary>
+        /// <param name="name">property name</param>
+        /// <param name="propertyClass">property class</param>
+        /// <param name="propertyClassType">property class type</param>
+        /// <param name="annotation">DtoAttribute instance</param>
+        /// <returns></returns>
         public IParser BuildParser(string name, Type propertyClass, PropertyMeta.ClassType propertyClassType, DtoAttribute annotation)
         {
             if (PropertyMeta.ClassType.Value != propertyClassType)
@@ -189,6 +217,11 @@ namespace Upida
             return parser;
         }
 
+        /// <summary>
+        /// Creates a new instance of the generic ListAndSet<T> class
+        /// </summary>
+        /// <param name="type">inner type</param>
+        /// <returns>new instance of ListAndSet<T></returns>
         public object BuildList(Type type)
         {
             Type listAndSetType = typeof(ListAndSet<>);

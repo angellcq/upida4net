@@ -2,10 +2,15 @@
 using System.Collections;
 using System.Reflection;
 
-namespace Upida
+namespace Upida.Impl
 {
     public class PropertyMetaFactory
     {
+        /// <summary>
+        /// Creates an instance of PropertyMeta class based on property descriptor
+        /// </summary>
+        /// <param name="descriptor">property descriptor</param>
+        /// <returns>instance of PropertyMeta class</returns>
         public PropertyMeta Create(PropertyInfo descriptor)
         {
             PropertyMeta meta = new PropertyMeta(descriptor);
