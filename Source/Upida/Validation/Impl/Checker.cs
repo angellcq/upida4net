@@ -4,6 +4,9 @@ using System.Text.RegularExpressions;
 
 namespace Upida.Validation.Impl
 {
+    /// <summary>
+    /// Represents validation checker helper class
+    /// </summary>
     public class Checker : IChecker
     {
         /// <summary>

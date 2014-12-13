@@ -4,6 +4,9 @@ using System.Reflection;
 
 namespace Upida.Impl
 {
+    /// <summary>
+    /// Represents PropertyMeta class factory
+    /// </summary>
     public class PropertyMetaFactory
     {
         /// <summary>
@@ -23,7 +26,7 @@ namespace Upida.Impl
                 meta.DtoCustomType = annotation.IsCustomType;
                 meta.DtoDynamic = annotation.Dynamic;
                 meta.PropertyClassType = this.BuildClassType(meta.PropertyClass, annotation);
-                meta.NestedGenericClass = this.BuildNestedGenericClass(meta.PropertyClass);
+                meta.InnerGenericClass = this.BuildNestedGenericClass(meta.PropertyClass);
                 meta.Parser = UpidaContext.Current.BuildParser(meta.Name, meta.PropertyClass, meta.PropertyClassType, annotation);
             }
 

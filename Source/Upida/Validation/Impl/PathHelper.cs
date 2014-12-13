@@ -4,7 +4,7 @@ using System.Text;
 namespace Upida.Validation.Impl
 {
     /// <summary>
-    /// 
+    /// Represents property path builder class
     /// </summary>
     public class PathHelper : IPathHelper
     {
@@ -13,7 +13,7 @@ namespace Upida.Validation.Impl
         /// </summary>
         /// <param name="path">existing path</param>
         /// <param name="name">nested property name</param>
-        /// <returns></returns>
+        /// <returns>property path text</returns>
         public string BuildPath(LinkedList<PathNode> path, string name)
         {
             StringBuilder text = new StringBuilder();

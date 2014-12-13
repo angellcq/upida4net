@@ -13,7 +13,7 @@ namespace Upida.Impl
         /// Parses JSON data into domain object
         /// </summary>
         /// <typeparam name="T">domain object type</typeparam>
-        /// <param name="form">JSON tree</param>
+        /// <param name="node">JSON tree</param>
         /// <returns>parsed domain object instance</returns>
         public T Parse<T>(JToken node)
             where T : Dtobase
@@ -65,10 +65,10 @@ namespace Upida.Impl
                             else if (PropertyMeta.ClassType.Collection == propertyDef.PropertyClassType ||
                                 PropertyMeta.ClassType.CustomTypeCollection == propertyDef.PropertyClassType)
                             {
-                                IList list = (IList)UpidaContext.Current.BuildList(propertyDef.NestedGenericClass);
+                                IList list = (IList)UpidaContext.Current.BuildList(propertyDef.InnerGenericClass);
                                 foreach (JToken item in propertyValue)
                                 {
-                                    list.Add(this.Parse(item, propertyDef.NestedGenericClass));
+                                    list.Add(this.Parse(item, propertyDef.InnerGenericClass));
                                 }
 
                                 propertyDef.Write(dto, list);

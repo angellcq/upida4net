@@ -10,11 +10,19 @@ namespace Upida.Validation
     {
         private IFailureList failures;
 
+        /// <summary>
+        /// Initializes new instance of the ValidationException class
+        /// </summary>
+        /// <param name="errors">list of failures</param>
         public ValidationException(IFailureList errors)
         {
             this.failures = errors;
         }
 
+        /// <summary>
+        /// Generates FailResponse object
+        /// </summary>
+        /// <returns>instance of FailResponse class</returns>
         public FailResponse BuildFailResponse()
         {
             FailResponse response = new FailResponse();
@@ -22,6 +30,9 @@ namespace Upida.Validation
             return response;
         }
 
+        /// <summary>
+        /// Gets list of failures
+        /// </summary>
         public IFailureList Failures
         {
             get { return this.failures; }

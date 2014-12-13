@@ -5,6 +5,9 @@ using System.Reflection;
 
 namespace Upida.Impl
 {
+    /// <summary>
+    /// Represents Mapping and Filtering helper class
+    /// </summary>
     public class Mapper : IMapper
     {
         private static Type LIST_TYPE = typeof(IList);
@@ -24,7 +27,7 @@ namespace Upida.Impl
         /// <summary>
         /// Recursively copies fields from incoming collection of domain objects to the persistent collection
         /// </summary>
-        /// <param name="type">Type of the source and dest object</param>
+        /// <typeparam name="T">Type of the source and dest objects (Must derive from Dtobase)</typeparam>
         /// <param name="source">Incoming collection of domain objects</param>
         /// <param name="dest">Persistent collection (ISet or IList)</param>
         public void MapToCollection<T>(IEnumerable<T> source, IEnumerable<T> dest)
@@ -36,7 +39,7 @@ namespace Upida.Impl
         /// <summary>
         /// Recursively goes through fields of incoming domain object and assigns parents to nested objects
         /// </summary>
-        /// <typeparam name="T">Must derive from Dtobase</typeparam>
+        /// <typeparam name="T">Type of the source object (Must derive from Dtobase)</typeparam>
         /// <param name="source">Incoming domain object</param>
         public void Map<T>(T source)
             where T : Dtobase
@@ -258,7 +261,7 @@ namespace Upida.Impl
                             IEnumerable sourceSet = (IEnumerable)sourceValue;
                             foreach (object item in sourceSet)
                             {
-                                this.Map((Dtobase)item, property.NestedGenericClass);
+                                this.Map((Dtobase)item, property.InnerGenericClass);
                                 if (item is IChild)
                                 {
                                     (item as IChild).ConnectToParent(source);
@@ -339,7 +342,7 @@ namespace Upida.Impl
                         }
 
                         property.Write(dto,
-                            this.FilterList((IEnumerable)value, property.NestedGenericClass, nestedLevel));
+                            this.FilterList((IEnumerable)value, property.InnerGenericClass, nestedLevel));
                     }
                 }
 

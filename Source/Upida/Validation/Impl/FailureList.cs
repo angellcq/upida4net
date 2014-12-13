@@ -4,6 +4,9 @@ using System.Collections.Generic;
 
 namespace Upida.Validation.Impl
 {
+    /// <summary>
+    /// Represents list of failures
+    /// </summary>
     public class FailureList : List<Failure>, IFailureList
     {
         private Severity severity = Severity.None;

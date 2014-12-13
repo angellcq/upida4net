@@ -63,11 +63,19 @@ namespace Upida
                 : this.wrongFields.Contains(field);
         }
 
+        /// <summary>
+        /// Returns set of assigned field names (fields that were assigned by JSON deserializer)
+        /// </summary>
+        /// <returns>set of field names</returns>
         public virtual ISet<string> GetAssignedFields()
         {
             return this.assignedFields;
         }
 
+        /// <summary>
+        /// Returns set of wrong fields (fields that failed to be parsed)
+        /// </summary>
+        /// <returns>set of field names</returns>
         public virtual ISet<string> GetWrongFields()
         {
             return this.wrongFields;

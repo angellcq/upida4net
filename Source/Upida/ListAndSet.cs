@@ -41,50 +41,76 @@ namespace Upida
         /// <summary>
         /// Adds an object to the end of the List
         /// </summary>
-        /// <param name="o"></param>
-        /// <returns></returns>
+        /// <param name="o">object</param>
+        /// <returns>true if added</returns>
         public new bool Add(T o)
         {
             base.Add(o);
             return true;
         }
 
+        /// <summary>
+        /// Not implemented
+        /// </summary>
         public bool AddAll(ICollection<T> c)
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Not implemented
+        /// </summary>
         public bool ContainsAll(ICollection<T> c)
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// True if collection is empty
+        /// </summary>
         public bool IsEmpty
         {
             get { return 0 == base.Count; }
         }
 
+        /// <summary>
+        /// Not implemented
+        /// </summary>
         public bool RemoveAll(ICollection<T> c)
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Not implemented
+        /// </summary>
         public bool RetainAll(ICollection<T> c)
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Not implemented
+        /// </summary>
         public object Clone()
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Adds an object to the end of the collection
+        /// </summary>
+        /// <param name="o">The object to be added to the end of the collection</param>
+        /// <returns>true if added</returns>
         public bool Add(object o)
         {
             base.Add((T)o);
             return true;
         }
 
+        /// <summary>
+        /// Not implemented
+        /// </summary>
         public bool AddAll(ICollection c)
         {
             throw new NotImplementedException();
@@ -95,72 +121,115 @@ namespace Upida
             return base.Contains((T)o);
         }
 
+        /// <summary>
+        /// Not implemented
+        /// </summary>
         public bool ContainsAll(ICollection c)
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Removes the first occurrence of a specific object from the collection
+        /// </summary>
+        /// <param name="o">The object to remove from the collection</param>
+        /// <returns>true if removed</returns>
         public bool Remove(object o)
         {
             return base.Remove((T)o);
         }
 
+        /// <summary>
+        /// Not implemented
+        /// </summary>
         public bool RemoveAll(ICollection c)
         {
             throw new NotImplementedException();
         }
-
+        
+        /// <summary>
+        /// Not implemented
+        /// </summary>
         public bool RetainAll(ICollection c)
         {
             throw new NotImplementedException();
         }
 
-
+        /// <summary>
+        /// Not implemented
+        /// </summary>
         public void ExceptWith(IEnumerable<T> other)
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Not implemented
+        /// </summary>
         public void IntersectWith(IEnumerable<T> other)
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Not implemented
+        /// </summary>
         public bool IsProperSubsetOf(IEnumerable<T> other)
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Not implemented
+        /// </summary>
         public bool IsProperSupersetOf(IEnumerable<T> other)
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Not implemented
+        /// </summary>
         public bool IsSubsetOf(IEnumerable<T> other)
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Not implemented
+        /// </summary>
         public bool IsSupersetOf(IEnumerable<T> other)
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Not implemented
+        /// </summary>
         public bool Overlaps(IEnumerable<T> other)
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Not implemented
+        /// </summary>
         public bool SetEquals(IEnumerable<T> other)
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Not implemented
+        /// </summary>
         public void SymmetricExceptWith(IEnumerable<T> other)
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Not implemented
+        /// </summary>
         public void UnionWith(IEnumerable<T> other)
         {
             throw new NotImplementedException();

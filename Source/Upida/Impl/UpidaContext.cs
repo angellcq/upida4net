@@ -5,6 +5,9 @@ using Upida.Validation;
 
 namespace Upida.Impl
 {
+    /// <summary>
+    /// Represents Upida context object (used internally to store context data)
+    /// </summary>
     public class UpidaContext
     {
         private static readonly UpidaContext CURRENT = new UpidaContext();
@@ -120,7 +123,7 @@ namespace Upida.Impl
         /// <param name="propertyClass">property class</param>
         /// <param name="propertyClassType">property class type</param>
         /// <param name="annotation">DtoAttribute instance</param>
-        /// <returns></returns>
+        /// <returns>parser instance</returns>
         public IParser BuildParser(string name, Type propertyClass, PropertyMeta.ClassType propertyClassType, DtoAttribute annotation)
         {
             if (PropertyMeta.ClassType.Value != propertyClassType)

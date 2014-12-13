@@ -1,9 +1,12 @@
-﻿using Newtonsoft.Json.Linq;
-using System;
+﻿using System;
 using System.Collections;
+using Newtonsoft.Json.Linq;
 
 namespace Upida
 {
+    /// <summary>
+    /// Defines JSON parser methods
+    /// </summary>
     public interface IJsonParser
     {
         /// <summary>
