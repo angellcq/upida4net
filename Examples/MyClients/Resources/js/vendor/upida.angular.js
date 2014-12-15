@@ -12,10 +12,6 @@ $upida.module.factory("upida", ["$http", "$q", function($http, $q) {
 		return $upida.settings.baseUrl + link;
 	};
 
-	service.navigate = function(link) {
-		window.location.replace(service.url(link));
-	};
-
 	service.getReff = function (id, version) {
 		if (!service.isEmpty(id)) {
 			return { id: id, version: version };

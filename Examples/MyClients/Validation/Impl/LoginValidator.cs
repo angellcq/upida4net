@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using MyClients.Domain;
+﻿using MyClients.Domain;
+using MyClients.Validation.Common;
 
 namespace MyClients.Validation.Impl
 {
     public class LoginValidator : ILoginValidator
     {
-        public void ValidateForSave(Login target, IHelper context)
+        public void ValidateForSave(Login target, IValidationContext context)
         {
             context.SetField("id", target.Id);
             context.Missing();
@@ -28,7 +25,7 @@ namespace MyClients.Validation.Impl
             context.Missing();
         }
 
-        public void ValidateForMerge(Login target, IHelper context)
+        public void ValidateForMerge(Login target, IValidationContext context)
         {
             context.SetField("id", target.Id);
             if (context.IsAssigned())

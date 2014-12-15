@@ -1,6 +1,5 @@
-﻿using System;
-using MyClients.Domain;
-using Upida.Validation;
+﻿using MyClients.Domain;
+using MyClients.Validation.Common;
 
 namespace MyClients.Validation.Impl
 {
@@ -8,7 +7,7 @@ namespace MyClients.Validation.Impl
     {
         public ILoginValidator LoginValidator { get; set; }
 
-        public void ValidateForSave(Client target, IHelper context)
+        public void ValidateForSave(Client target, IValidationContext context)
         {
             context.SetField("id", target.Id);
             context.Missing();
@@ -42,7 +41,7 @@ namespace MyClients.Validation.Impl
             context.RemoveNested();
         }
 
-        public void ValidateForUpdate(Client target, IHelper context)
+        public void ValidateForUpdate(Client target, IValidationContext context)
         {
             context.SetField("id", target.Id);
             context.Required();

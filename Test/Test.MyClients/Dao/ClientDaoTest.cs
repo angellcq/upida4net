@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using MyClients.Dao.Support;
+using MyClients.Dao.Impl;
 using MyClients.Database;
 using MyClients.Domain;
 using NHibernate;

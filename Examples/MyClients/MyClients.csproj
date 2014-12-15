@@ -122,8 +122,8 @@
     <Compile Include="Controllers\UI\HomeController.cs" />
     <Compile Include="Dao\IClientDao.cs" />
     <Compile Include="Dao\IDaobase.cs" />
-    <Compile Include="Dao\Support\ClientDao.cs" />
-    <Compile Include="Dao\Support\Daobase.cs" />
+    <Compile Include="Dao\Impl\ClientDao.cs" />
+    <Compile Include="Dao\Impl\Daobase.cs" />
     <Compile Include="Database\Impl\SessionFactoryEx.cs" />
     <Compile Include="Domain\Client.cs" />
     <Compile Include="Domain\Levels.cs" />
@@ -134,14 +134,14 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Validation\IClientValidator.cs" />
-    <Compile Include="Validation\IHelper.cs" />
+    <Compile Include="Validation\Common\IValidationContext.cs" />
     <Compile Include="Validation\ILoginValidator.cs" />
-    <Compile Include="Validation\Impl\Helper.cs" />
+    <Compile Include="Validation\Common\Impl\ValidationContext.cs" />
     <Compile Include="Validation\Impl\ClientValidator.cs" />
-    <Compile Include="Validation\Impl\ValidationFacade.cs" />
-    <Compile Include="Validation\IValidationFacade.cs" />
-    <Compile Include="Validation\IValidationHelperFactory.cs" />
-    <Compile Include="Validation\Impl\ValidationHelperFactory.cs" />
+    <Compile Include="Validation\Common\Impl\ValidationFacade.cs" />
+    <Compile Include="Validation\Common\IValidationFacade.cs" />
+    <Compile Include="Validation\Common\IValidationHelperFactory.cs" />
+    <Compile Include="Validation\Common\Impl\ValidationContextFactory.cs" />
     <Compile Include="Validation\Impl\LoginValidator.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -193,6 +193,7 @@
       <Name>Upida</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

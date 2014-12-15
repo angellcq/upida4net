@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using MyClients.Dao;
 using MyClients.Domain;
-using MyClients.Validation;
+using MyClients.Validation.Common;
 using NHibernate;
 using Upida;
 

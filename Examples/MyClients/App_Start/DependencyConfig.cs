@@ -5,12 +5,14 @@ using Autofac;
 using Autofac.Integration.Mvc;
 using Autofac.Integration.WebApi;
 using MyClients.Dao;
-using MyClients.Dao.Support;
+using MyClients.Dao.Impl;
 using MyClients.Database;
 using MyClients.Database.Impl;
 using MyClients.Service;
 using MyClients.Service.Impl;
 using MyClients.Validation;
+using MyClients.Validation.Common;
+using MyClients.Validation.Common.Impl;
 using MyClients.Validation.Impl;
 using NHibernate;
 using NHibernate.Cfg;
@@ -32,12 +34,11 @@ namespace MyClients
             builder.Register((context) => new Configuration().Configure().BuildSessionFactory()).As<ISessionFactory>().SingleInstance();
             builder.RegisterType<SessionFactoryEx>().As<ISessionFactoryEx>().SingleInstance();
             builder.RegisterType<Mapper>().As<IMapper>().SingleInstance();
-            builder.RegisterType<ValidationHelperFactory>().As<IValidationHelperFactory>().SingleInstance();
 
             builder.RegisterType<ClientDao>().As<IClientDao>().SingleInstance().PropertiesAutowired(PropertyWiringOptions.None);
             builder.RegisterType<ClientService>().As<IClientService>().SingleInstance().PropertiesAutowired(PropertyWiringOptions.None);
 
-            builder.RegisterType<ValidationHelperFactory>().As<IValidationHelperFactory>().SingleInstance();
+            builder.RegisterType<ValidationContextFactory>().As<IValidationContextFactory>().SingleInstance();
             builder.RegisterType<ValidationFacade>().As<IValidationFacade>().SingleInstance().PropertiesAutowired(PropertyWiringOptions.None);
             builder.RegisterType<ClientValidator>().As<IClientValidator>().SingleInstance().PropertiesAutowired(PropertyWiringOptions.None);
             builder.RegisterType<LoginValidator>().As<ILoginValidator>().SingleInstance().PropertiesAutowired(PropertyWiringOptions.None);

@@ -1,4 +1,4 @@
-﻿using MyClients.Dao.Support;
+﻿using MyClients.Dao.Impl;
 using MyClients.Database;
 using NHibernate;
 using NUnit.Framework;

@@ -1,5 +1,6 @@
 ﻿using MyClients.Domain;
 using MyClients.Validation;
+using MyClients.Validation.Common;
 using MyClients.Validation.Impl;
 using NUnit.Framework;
 using Rhino.Mocks;
@@ -10,12 +11,12 @@ namespace Test.MyClients.Validation
     [TestFixture]
     public class LoginValidatorTest : TestBase
     {
-        private IHelper context;
+        private IValidationContext context;
         private LoginValidator target;
 
         public override void SetUp()
         {
-            this.context = this.Stub<IHelper>();
+            this.context = this.Stub<IValidationContext>();
             this.target = new LoginValidator();
         }
 
