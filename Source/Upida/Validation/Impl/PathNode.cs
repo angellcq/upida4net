@@ -8,6 +8,15 @@ namespace Upida.Validation.Impl
     public class PathNode
     {
         /// <summary>
+        /// Initializes new instance of the PathNode class with name
+        /// </summary>
+        /// <param name="name">node name</param>
+        public PathNode(string name)
+        {
+            this.Name = name;
+        }
+
+        /// <summary>
         /// Node index (valid for arrays and lists)
         /// </summary>
         public int? Index { get; set; }

@@ -29,7 +29,7 @@ namespace Upida.Validation.Impl
         /// </summary>
         public UpidaValidationContext()
         {
-            this.path.AddLast(new PathNode() { Name = string.Empty });
+            this.path.AddLast(new PathNode(string.Empty));
             this.isValid = true;
         }
 
@@ -96,7 +96,7 @@ namespace Upida.Validation.Impl
         /// </summary>
         public void AddNested()
         {
-            this.path.AddLast(new PathNode() { Name = this.fieldName });
+            this.path.AddLast(new PathNode(this.fieldName));
         }
 
         /// <summary>

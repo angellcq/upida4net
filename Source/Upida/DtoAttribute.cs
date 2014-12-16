@@ -45,7 +45,7 @@ namespace Upida
         }
 
         /// <summary>
-        /// Gets or sets value that represents serialization level, applied to current property
+        /// Level of serialization applied to this property
         /// </summary>
         public byte Value
         {
@@ -53,7 +53,8 @@ namespace Upida
         }
 
         /// <summary>
-        /// Gets or sets value that represents serialization level, applied to child properties. Used only when decorated property is DTO class
+        /// If the current property represents nested domain object, then this field defines
+        /// the Level of serialization applied to the child properties of the domain object
         /// </summary>
         public byte Nested
         {
@@ -61,7 +62,7 @@ namespace Upida
         }
 
         /// <summary>
-        /// Gets or sets value that tells if decorated property is custom Hibernate type
+        /// Must be set to true if current property is Custom Type.
         /// </summary>
         public bool IsCustomType
         {
@@ -70,7 +71,9 @@ namespace Upida
         }
 
         /// <summary>
-        /// Gets or sets value that represents parser object, used to parse this property from text
+        /// You can provide your own parser. Creating custom parser is simple.
+        /// You have to implement the IParser interface.
+        /// If parsing is impossible due to wrong format custom parser must throw some Exception
         /// </summary>
         public Type Parser
         {
