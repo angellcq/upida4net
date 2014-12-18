@@ -11,6 +11,10 @@ namespace Upida.Impl
     public class UpidaContext
     {
         private static readonly UpidaContext CURRENT = new UpidaContext();
+        private readonly PropertyMetaFactory propertyMetaFactory = new PropertyMetaFactory();
+        private readonly IPathHelper pathHelper = new Upida.Validation.Impl.PathHelper();
+        private readonly IChecker checker = new Upida.Validation.Impl.Checker();
+        private readonly IMath math = new Upida.Validation.Impl.Math();
 
         /// <summary>
         /// Gets current Upida context
@@ -51,11 +55,6 @@ namespace Upida.Impl
         private readonly Type BOOLEAN_PRIM = typeof(bool);
         private readonly Type CHAR_PRIM = typeof(char);
         private readonly Type GUID_PRIM = typeof(Guid);
-
-        private readonly PropertyMetaFactory propertyMetaFactory = new PropertyMetaFactory();
-        private readonly IPathHelper pathHelper = new Upida.Validation.Impl.PathHelper();
-        private readonly IChecker checker = new Upida.Validation.Impl.Checker();
-        private readonly IMath math = new Upida.Validation.Impl.Math();
 
         /// <summary>
         /// Gets singleton instance of the PathHelpr class

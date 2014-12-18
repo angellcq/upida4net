@@ -3,6 +3,9 @@ using System.Collections;
 
 namespace Upida.Validation
 {
+    /// <summary>
+    /// Defines validation checking routines
+    /// </summary>
     public interface IChecker
     {
         /// <summary>
@@ -32,7 +35,7 @@ namespace Upida.Validation
         bool IsEqualTo(object m, object value);
 
         /// <summary>
-        /// Checks if field value is equal to one of values
+        /// Checks if field value is equal to one of the values
         /// </summary>
         /// <returns></returns>
         bool IsEqualToOneOf(object[] values, object value);
