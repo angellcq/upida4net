@@ -11,9 +11,8 @@
         /// <summary>
         /// Creates instance of the Failure class
         /// </summary>
-        /// <param name="key">key</param>
-        /// <param name="text">text</param>
-        /// <param name="severity">severity</param>
+        /// <param name="key">key (property path)</param>
+        /// <param name="text">failure message</param>
         public Failure(string key, string text)
         {
             this.key = key;

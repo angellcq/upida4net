@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace Upida.Validation
 {
     /// <summary>
-    /// Represents result of validation
+    /// Represents validation summary
     /// </summary>
     public class FailResponse
     {
