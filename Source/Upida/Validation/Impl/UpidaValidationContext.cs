@@ -90,7 +90,7 @@ namespace Upida.Validation.Impl
         }
 
         /// <summary>
-        /// Propogates current field to path.
+        /// Propagates current field to path.
         /// For ex. if current field is 'User', call AddNested(), then call SetField("Name", null) - the failure path would be - User.Name.
         /// Usually after AddNested() call, SetTarget() must be called as well.
         /// </summary>
@@ -100,7 +100,7 @@ namespace Upida.Validation.Impl
         }
 
         /// <summary>
-        /// Goes onу node back in path.
+        /// Goes one node back in path.
         /// </summary>
         public void RemoveNested()
         {
@@ -108,7 +108,7 @@ namespace Upida.Validation.Impl
         }
 
         /// <summary>
-        /// Register failure without path
+        /// Registers failure without path
         /// </summary>
         /// <param name="msg">failure message</param>
         public void FailRoot(string msg)
@@ -117,7 +117,7 @@ namespace Upida.Validation.Impl
         }
 
         /// <summary>
-        /// Register failure using current path
+        /// Registers failure using current path
         /// </summary>
         /// <param name="msg">failure message</param>
         public void Fail(string msg)
@@ -126,7 +126,7 @@ namespace Upida.Validation.Impl
         }
 
         /// <summary>
-        /// Register failure
+        /// Registers failure
         /// </summary>
         /// <param name="failure">failure object</param>
         public void Fail(Failure failure)
@@ -170,7 +170,7 @@ namespace Upida.Validation.Impl
         }
 
         /// <summary>
-        /// Validates if number of assigned fields in the current target is less or equal to max number
+        /// Validates if the number of assigned fields in the current target object is less or equal to max number
         /// </summary>
         /// <param name="count">max number of assigned fields</param>
         /// <param name="msg">failure message</param>
@@ -184,7 +184,7 @@ namespace Upida.Validation.Impl
         }
 
         /// <summary>
-        /// Validates if number of assigned fields in the current target is greater or equal to min number
+        /// Validates if the number of assigned fields in the current target object is greater or equal to min number
         /// </summary>
         /// <param name="count">min number of assigned fields</param>
         /// <param name="msg">failure message</param>
