@@ -359,7 +359,7 @@ namespace Upida.Validation.Impl
         public void MustBeLessThan(object m, string msg)
         {
             if (null == this.fieldValue) return;
-            if (this.checker.IsLessOrEqualTo(m, (IComparable)this.fieldValue))
+            if (this.checker.IsLessThan(m, (IComparable)this.fieldValue))
             {
                 this.Fail(msg);
             }
