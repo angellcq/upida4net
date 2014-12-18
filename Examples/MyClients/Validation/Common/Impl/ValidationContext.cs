@@ -1,9 +1,16 @@
-﻿using Upida.Validation.Impl;
+﻿using Upida;
+using Upida.Impl;
+using Upida.Validation.Impl;
 
 namespace MyClients.Validation.Common.Impl
 {
     public class ValidationContext : UpidaValidationContext, IValidationContext
     {
+        public ValidationContext(IUpidaContext upidaContext)
+            : base(upidaContext)
+        {
+        }
+
         public void Required()
         {
             this.MustBeAssigned("is required");

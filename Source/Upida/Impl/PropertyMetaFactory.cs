@@ -9,6 +9,17 @@ namespace Upida.Impl
     /// </summary>
     public class PropertyMetaFactory
     {
+        private readonly IUpidaContext context;
+
+        /// <summary>
+        /// Initializes new instance of the PropertyMetaFactory class
+        /// </summary>
+        /// <param name="context"></param>
+        public PropertyMetaFactory(IUpidaContext context)
+        {
+            this.context = context;
+        }
+
         /// <summary>
         /// Creates an instance of PropertyMeta class based on property descriptor
         /// </summary>
@@ -27,7 +38,7 @@ namespace Upida.Impl
                 meta.DtoDynamic = annotation.Dynamic;
                 meta.PropertyClassType = this.BuildClassType(meta.PropertyClass, annotation);
                 meta.InnerGenericClass = this.BuildNestedGenericClass(meta.PropertyClass);
-                meta.Parser = UpidaContext.Current.BuildParser(meta.Name, meta.PropertyClass, meta.PropertyClassType, annotation);
+                meta.Parser = this.context.BuildParser(meta.Name, meta.PropertyClass, meta.PropertyClassType, annotation);
             }
 
             return meta;

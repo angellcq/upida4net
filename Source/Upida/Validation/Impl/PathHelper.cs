@@ -40,5 +40,16 @@ namespace Upida.Validation.Impl
             text.Append(name);
             return text.ToString();
         }
+
+        /// <summary>
+        /// Creates a new instance of the path list
+        /// </summary>
+        /// <returns></returns>
+        public LinkedList<PathNode> CreateNew()
+        {
+            LinkedList<PathNode> path = new LinkedList<PathNode>();
+            path.AddLast(new PathNode(string.Empty));
+            return path;
+        }
     }
 }

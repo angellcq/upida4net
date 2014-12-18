@@ -9,6 +9,17 @@ namespace Upida.Impl
     /// </summary>
     public class JsonParser : IJsonParser
     {
+        private IUpidaContext context;
+
+        /// <summary>
+        /// Initializes new instance of the JsonParser class
+        /// </summary>
+        /// <param name="context"></param>
+        public JsonParser(IUpidaContext context)
+        {
+            this.context = context;
+        }
+
         /// <summary>
         /// Parses JSON data into domain object
         /// </summary>
@@ -37,7 +48,7 @@ namespace Upida.Impl
                     return dto;
                 }
 
-                PropertyMeta[] properties = UpidaContext.Current.GetPropertyDefs(type);
+                PropertyMeta[] properties = this.context.GetPropertyDefs(type);
                 for (int i = 0; i < properties.Length; i++)
                 {
                     PropertyMeta propertyDef = properties[i];
@@ -65,7 +76,7 @@ namespace Upida.Impl
                             else if (PropertyMeta.ClassType.Collection == propertyDef.PropertyClassType ||
                                 PropertyMeta.ClassType.CustomTypeCollection == propertyDef.PropertyClassType)
                             {
-                                IList list = (IList)UpidaContext.Current.BuildList(propertyDef.InnerGenericClass);
+                                IList list = (IList)this.context.BuildList(propertyDef.InnerGenericClass);
                                 foreach (JToken item in propertyValue)
                                 {
                                     list.Add(this.Parse(item, propertyDef.InnerGenericClass));
@@ -98,7 +109,7 @@ namespace Upida.Impl
         /// <returns>parsed domain object instance</returns>
         public IEnumerable ParseList(JToken node, Type type)
         {
-            IList list = (IList)UpidaContext.Current.BuildList(type);
+            IList list = (IList)this.context.BuildList(type);
             foreach (JToken item in node.Children())
             {
                 list.Add(this.Parse(item, type));

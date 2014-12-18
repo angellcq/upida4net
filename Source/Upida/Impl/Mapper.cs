@@ -11,6 +11,16 @@ namespace Upida.Impl
     public class Mapper : IMapper
     {
         private static Type LIST_TYPE = typeof(IList);
+        private readonly IUpidaContext context;
+
+        /// <summary>
+        /// Initializes new instance of the Mapper class
+        /// </summary>
+        /// <param name="context"></param>
+        public Mapper(IUpidaContext context)
+        {
+            this.context = context;
+        }
 
         /// <summary>
         /// Recursively copies fields from incoming source object to persistent dest object.
@@ -93,7 +103,7 @@ namespace Upida.Impl
 
             try
             {
-                PropertyMeta[] properties = UpidaContext.Current.GetPropertyDefs(type);
+                PropertyMeta[] properties = this.context.GetPropertyDefs(type);
                 for (int i = 0; i < properties.Length; i++)
                 {
                     PropertyMeta property = properties[i];
@@ -240,7 +250,7 @@ namespace Upida.Impl
             PropertyMeta property = null;
             try
             {
-                PropertyMeta[] properties = UpidaContext.Current.GetPropertyDefs(type);
+                PropertyMeta[] properties = this.context.GetPropertyDefs(type);
                 for (int i = 0; i < properties.Length; i++)
                 {
                     property = properties[i];
@@ -284,7 +294,7 @@ namespace Upida.Impl
                 return null;
             }
 
-            IList list = (IList)UpidaContext.Current.BuildList(type);
+            IList list = (IList)this.context.BuildList(type);
 
             foreach (Dtobase item in items)
             {
@@ -305,7 +315,7 @@ namespace Upida.Impl
                 }
 
                 Dtobase dto = (Dtobase)Activator.CreateInstance(type);
-                PropertyMeta[] properties = UpidaContext.Current.GetPropertyDefs(type);
+                PropertyMeta[] properties = this.context.GetPropertyDefs(type);
                 for (int i = 0; i < properties.Length; i++)
                 {
                     PropertyMeta property = properties[i];

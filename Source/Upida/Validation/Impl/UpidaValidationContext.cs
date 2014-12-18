@@ -10,15 +10,15 @@ namespace Upida.Validation.Impl
     /// </summary>
     public class UpidaValidationContext : IUpidaValidationContext
     {
-        private LinkedList<PathNode> path = new LinkedList<PathNode>();
+        private readonly IMath math;
+        private readonly IPathHelper pathHelper;
+        private readonly IChecker checker;
+        private readonly LinkedList<PathNode> path;
+
         protected string fieldName;
         protected object fieldValue;
         protected Dtobase target;
         protected IFailureList failures;
-
-        private IMath math = UpidaContext.Current.Math;
-        private IPathHelper pathHelper = UpidaContext.Current.PathHelper;
-        private IChecker checker = UpidaContext.Current.Checker;
 
         private bool isValid;
         private bool isTargetValid;
@@ -27,9 +27,12 @@ namespace Upida.Validation.Impl
         /// <summary>
         /// Initializes new instance of the ValidationContext class
         /// </summary>
-        public UpidaValidationContext()
+        public UpidaValidationContext(IUpidaContext context)
         {
-            this.path.AddLast(new PathNode(string.Empty));
+            this.math = context.Math;
+            this.pathHelper = context.PathHelper;
+            this.checker = context.Checker;
+            this.path = this.pathHelper.CreateNew();
             this.isValid = true;
         }
 

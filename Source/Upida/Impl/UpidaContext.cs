@@ -8,13 +8,21 @@ namespace Upida.Impl
     /// <summary>
     /// Represents Upida context object (used internally to store context data)
     /// </summary>
-    public class UpidaContext
+    public class UpidaContext : IUpidaContext
     {
         private static readonly UpidaContext CURRENT = new UpidaContext();
-        private readonly PropertyMetaFactory propertyMetaFactory = new PropertyMetaFactory();
-        private readonly IPathHelper pathHelper = new Upida.Validation.Impl.PathHelper();
-        private readonly IChecker checker = new Upida.Validation.Impl.Checker();
-        private readonly IMath math = new Upida.Validation.Impl.Math();
+        private readonly PropertyMetaFactory propertyMetaFactory;
+        private readonly IPathHelper pathHelper;
+        private readonly IChecker checker;
+        private readonly IMath math;
+
+        private UpidaContext()
+        {
+            this.propertyMetaFactory = new PropertyMetaFactory(this);
+            this.pathHelper = new Upida.Validation.Impl.PathHelper();
+            this.checker = new Upida.Validation.Impl.Checker();
+            this.math = new Upida.Validation.Impl.Math();
+        }
 
         /// <summary>
         /// Gets current Upida context

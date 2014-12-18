@@ -16,7 +16,7 @@ namespace Upida.Aspnetmvc
     /// </summary>
     public class UpidaJsonFormatter : JsonMediaTypeFormatter
     {
-        private IJsonParser parser = new JsonParser();
+        private IJsonParser parser = new JsonParser(UpidaContext.Current);
 
         /// <summary>
         /// Creates an instance of the UpidaJsonFormatter

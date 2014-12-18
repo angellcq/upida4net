@@ -1,4 +1,5 @@
 ﻿using System;
+using Upida.Impl;
 
 namespace MyClients.Validation.Common.Impl
 {
@@ -6,7 +7,7 @@ namespace MyClients.Validation.Common.Impl
     {
         public IValidationContext Get()
         {
-            return new ValidationContext();
+            return new ValidationContext(UpidaContext.Current);
         }
     }
 }

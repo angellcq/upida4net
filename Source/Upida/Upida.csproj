@@ -58,6 +58,7 @@
     <Compile Include="Dtobase.cs" />
     <Compile Include="IChild.cs" />
     <Compile Include="IParser.cs" />
+    <Compile Include="IUpidaContext.cs" />
     <Compile Include="ListAndSet.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Impl\PropertyMeta.cs" />

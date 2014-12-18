@@ -15,5 +15,11 @@ namespace Upida.Validation
         /// <param name="name">nested property name</param>
         /// <returns>property path text</returns>
         string BuildPath(LinkedList<PathNode> path, string name);
+
+        /// <summary>
+        /// Creates a new instance of the path list
+        /// </summary>
+        /// <returns></returns>
+        LinkedList<PathNode> CreateNew();
     }
 }
