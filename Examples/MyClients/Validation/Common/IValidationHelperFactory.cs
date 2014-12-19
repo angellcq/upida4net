@@ -5,6 +5,6 @@ namespace MyClients.Validation.Common
 {
     public interface IValidationContextFactory
     {
-        IValidationContext Get();
+        IValidationContext GetNew();
     }
 }

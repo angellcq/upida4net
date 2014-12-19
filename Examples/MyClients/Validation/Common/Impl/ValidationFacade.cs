@@ -10,7 +10,7 @@ namespace MyClients.Validation.Common.Impl
 
         public void AssertClientForSave(Client target)
         {
-            IValidationContext context = this.ContextFactory.Get();
+            IValidationContext context = this.ContextFactory.GetNew();
             context.SetTarget(target);
             this.ClientValidator.ValidateForSave(target, context);
             context.Assert();
@@ -18,7 +18,7 @@ namespace MyClients.Validation.Common.Impl
 
         public void AssertClientForUpdate(Client target)
         {
-            IValidationContext context = this.ContextFactory.Get();
+            IValidationContext context = this.ContextFactory.GetNew();
             context.SetTarget(target);
             this.ClientValidator.ValidateForUpdate(target, context);
             context.Assert();
@@ -26,9 +26,9 @@ namespace MyClients.Validation.Common.Impl
 
         public void AssertClientExists(Client item)
         {
-            IValidationContext context = this.ContextFactory.Get();
             if (item == null)
             {
+                IValidationContext context = this.ContextFactory.GetNew();
                 context.Fail("Client does not exist");
                 context.Assert();
             }
@@ -36,9 +36,9 @@ namespace MyClients.Validation.Common.Impl
 
         public void AssertMoreThanOneClient(long count)
         {
-            IValidationContext context = this.ContextFactory.Get();
             if (count == 1)
             {
+                IValidationContext context = this.ContextFactory.GetNew();
                 context.Fail("Cannot delete the only client");
                 context.Assert();
             }

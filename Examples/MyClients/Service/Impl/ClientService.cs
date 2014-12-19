@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-using MyClients.Dao;
+﻿using MyClients.Dao;
 using MyClients.Domain;
 using MyClients.Validation.Common;
 using NHibernate;
+using System.Collections.Generic;
 using Upida;
 
 namespace MyClients.Service.Impl

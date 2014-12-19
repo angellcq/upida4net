@@ -5,7 +5,7 @@ namespace MyClients.Validation.Common.Impl
 {
     public class ValidationContextFactory : IValidationContextFactory
     {
-        public IValidationContext Get()
+        public IValidationContext GetNew()
         {
             return new ValidationContext(UpidaContext.Current);
         }

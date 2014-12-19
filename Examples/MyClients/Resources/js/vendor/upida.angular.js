@@ -4,44 +4,27 @@ $upida.settings.baseUrl = "/";
 $upida.settings.errorLine = "<br />";
 
 $upida.module = angular.module("upidamodule", []);
-$upida.module.factory("upida", ["$http", "$q", function($http, $q) {
+$upida.module.factory("upida", ["$http", "$q", function ($http, $q) {
 	var service = { onBeforeAjax: null, onAfterAjax: null };
-	service.$http = $http;
 
 	service.url = function(link) {
-		return $upida.settings.baseUrl + link;
-	};
-
-	service.getReff = function (id, version) {
-		if (!service.isEmpty(id)) {
-			return { id: id, version: version };
-		}
-	};
-
-	service.isEmpty = function (val) {
-		return undefined === val || null == val || "" === val;
-	};
-
-	service.getDirectPromise = function(data) {
-		var deferred = $q.defer();
-		deferred.resolve(data);
-		return deferred.promise;
+	  return $upida.settings.baseUrl + link;
 	};
 
 	service.post = function(method, input, $scope) {
 		service.ajaxStart();
 		var deferred = $q.defer();
-		service.$http({
+		$http({
 			method: 'POST',
 			url: service.url(method),
 			data: input
 		})
-		.success(function(data, status, headers, config) {
+		.success(function(data, status) {
 			service.clearErrors($scope);
 			deferred.resolve(data);
 			service.ajaxEnd();
 		})
-		.error(function(data, status, headers, config) {
+		.error(function(data, status) {
 			deferred.reject();
 			service.ajaxEnd();
 			service.showErrors($scope, data);
@@ -52,16 +35,16 @@ $upida.module.factory("upida", ["$http", "$q", function($http, $q) {
 	service.get = function(method, $scope) {
 		service.ajaxStart();
 		var deferred = $q.defer();
-		service.$http({
+		$http({
 			method: 'GET',
 			url: service.url(method)
 		})
-		.success(function(data, status, headers, config) {
+		.success(function(data, status) {
 			service.clearErrors($scope);
 			deferred.resolve(data);
 			service.ajaxEnd();
 		})
-		.error(function(data, status, headers, config) {
+		.error(function(data, status) {
 			deferred.reject();
 			service.ajaxEnd();
 			service.showErrors($scope, data);

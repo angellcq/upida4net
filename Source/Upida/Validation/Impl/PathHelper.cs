@@ -20,16 +20,22 @@ namespace Upida.Validation.Impl
             LinkedListNode<PathNode> current = path.First;
             while (null != current)
             {
-                text.Append(current.Value.Name);
+                bool written = false;
+                if (null != current.Value.Name)
+                {
+                    text.Append(current.Value.Name);
+                    written = true;
+                }
+
                 if (current.Value.Index.HasValue)
                 {
                     text.Append('[');
                     text.Append(current.Value.Index.Value);
                     text.Append(']');
+                    written = true;
                 }
 
-                if (!string.IsNullOrEmpty(current.Value.Name) ||
-                    current.Value.Index.HasValue)
+                if (written)
                 {
                     text.Append('.');
                 }
@@ -48,7 +54,7 @@ namespace Upida.Validation.Impl
         public LinkedList<PathNode> CreateNew()
         {
             LinkedList<PathNode> path = new LinkedList<PathNode>();
-            path.AddLast(new PathNode(string.Empty));
+            path.AddLast(new PathNode(null));
             return path;
         }
     }

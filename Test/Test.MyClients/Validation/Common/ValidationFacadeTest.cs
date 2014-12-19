@@ -32,7 +32,7 @@ namespace Test.MyClients.Validation
             Client data = new Client() { Id = 1111 };
             using (this.Ordered())
             {
-                this.contextFactory.Expect((m) => m.Get()).Return(this.context);
+                this.contextFactory.Expect((m) => m.GetNew()).Return(this.context);
                 this.context.Expect((m) => m.SetTarget(data));
                 this.clientValidator.Expect((m) => m.ValidateForSave(data, this.context));
                 this.context.Expect((m) => m.Assert());
@@ -47,7 +47,7 @@ namespace Test.MyClients.Validation
             Client data = new Client() { Id = 1111 };
             using (this.Ordered())
             {
-                this.contextFactory.Expect((m) => m.Get()).Return(this.context);
+                this.contextFactory.Expect((m) => m.GetNew()).Return(this.context);
                 this.context.Expect((m) => m.SetTarget(data));
                 this.clientValidator.Expect((m) => m.ValidateForUpdate(data, this.context));
                 this.context.Expect((m) => m.Assert());
@@ -61,7 +61,7 @@ namespace Test.MyClients.Validation
         {
             using (this.Ordered())
             {
-                this.contextFactory.Expect((m) => m.Get()).Return(this.context);
+                this.contextFactory.Expect((m) => m.GetNew()).Return(this.context);
                 this.context.Expect((m) => m.Fail("Client does not exist"));
                 this.context.Expect((m) => m.Assert());
             }
@@ -73,14 +73,12 @@ namespace Test.MyClients.Validation
         public void AssertClientExists_Exists()
         {
             Client data = new Client() { Id = 1111 };
-            this.contextFactory.Expect((m) => m.Get()).Return(this.context);
             this.VerifyTarget(() => this.target.AssertClientExists(data));
         }
 
         [Test]
         public void AssertMoreThanOneClient_2()
         {
-            this.contextFactory.Expect((m) => m.Get()).Return(this.context);
             this.VerifyTarget(() => this.target.AssertMoreThanOneClient(2));
         }
 
@@ -89,7 +87,7 @@ namespace Test.MyClients.Validation
         {
             using (this.Ordered())
             {
-                this.contextFactory.Expect((m) => m.Get()).Return(this.context);
+                this.contextFactory.Expect((m) => m.GetNew()).Return(this.context);
                 this.context.Expect((m) => m.Fail("Cannot delete the only client"));
                 this.context.Expect((m) => m.Assert());
             }

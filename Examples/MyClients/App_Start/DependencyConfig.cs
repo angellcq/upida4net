@@ -34,6 +34,7 @@ namespace MyClients
             builder.Register((context) => new Configuration().Configure().BuildSessionFactory()).As<ISessionFactory>().SingleInstance();
             builder.RegisterType<SessionFactoryEx>().As<ISessionFactoryEx>().SingleInstance();
             builder.RegisterType<Mapper>().As<IMapper>().SingleInstance();
+            builder.Register((context) => UpidaContext.Current).As<IUpidaContext>().SingleInstance();
 
             builder.RegisterType<ClientDao>().As<IClientDao>().SingleInstance().PropertiesAutowired(PropertyWiringOptions.None);
             builder.RegisterType<ClientService>().As<IClientService>().SingleInstance().PropertiesAutowired(PropertyWiringOptions.None);

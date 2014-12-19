@@ -15,7 +15,7 @@ namespace Test.MyClients.Validation
         [Test]
         public void Test()
         {
-            var actual = this.target.Get();
+            var actual = this.target.GetNew();
             Assert.That(actual, Is.Not.Null);
         }
     }
