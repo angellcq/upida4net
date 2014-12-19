@@ -16,7 +16,7 @@ namespace Upida.Impl
         private Type propertyClass;
 
         /// <summary>
-        /// Initializesa new instance of the PropertyMeta class
+        /// Initializes a new instance of the PropertyMeta class
         /// </summary>
         /// <param name="descriptor"></param>
         public PropertyMeta(PropertyInfo descriptor)

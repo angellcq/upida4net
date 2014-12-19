@@ -72,7 +72,7 @@ namespace Upida.Validation.Impl
 
         /// <summary>
         /// Sets current index (used for indexed properties).
-        /// For ex. current target is 'Children' and index is '7' and field 'Name' - failure would have path this path - 'children[7].name'.
+        /// For ex. current target is 'Children' and index is '7' and field 'Name' - failure would have this path - 'children[7].name'.
         /// </summary>
         /// <param name="index">index</param>
         public void SetIndex(int index)

@@ -11,7 +11,7 @@ namespace Upida
     public class ListAndSet<T> : List<T>, ISet<T>
     {
         /// <summary>
-        /// Initializes a new instance of the System.Collections.Generic.List<T> class
+        /// Initializes a new instance of the ListAndSet<T> class
         /// that is empty and has the default initial capacity.
         /// </summary>
         public ListAndSet()
