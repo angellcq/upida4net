@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using Upida.Impl;
 
 namespace Upida.Validation.Impl
 {
@@ -17,7 +16,6 @@ namespace Upida.Validation.Impl
 
         protected string fieldName;
         protected object fieldValue;
-        protected Dtobase target;
         protected IFailureList failures;
 
         private bool isValid;
@@ -66,7 +64,7 @@ namespace Upida.Validation.Impl
         /// <param name="value">target object</param>
         public void SetTarget(Dtobase value)
         {
-            this.target = value;
+            this.pathHelper.SetTopNodeTarget(this.path, value);
             this.isTargetValid = true;
         }
 
@@ -151,7 +149,8 @@ namespace Upida.Validation.Impl
         /// <returns>true is assigned</returns>
         public bool IsAssigned()
         {
-            return this.checker.IsAssigned(this.fieldName, this.target);
+            Dtobase target = this.pathHelper.GetTopNodeTarget(this.path);
+            return this.checker.IsAssigned(this.fieldName, target);
         }
 
         /// <summary>
@@ -169,7 +168,8 @@ namespace Upida.Validation.Impl
         /// <returns>true if valid</returns>
         public bool IsValidFormat()
         {
-            return this.checker.IsValidFormat(this.fieldName, this.target);
+            Dtobase target = this.pathHelper.GetTopNodeTarget(this.path);
+            return this.checker.IsValidFormat(this.fieldName, target);
         }
 
         /// <summary>
@@ -179,8 +179,9 @@ namespace Upida.Validation.Impl
         /// <param name="msg">failure message</param>
         public void MustHaveMaxAssignedFieldsCount(int count, string msg)
         {
-            if (null != this.target.GetAssignedFields() &&
-                count < this.target.GetAssignedFields().Count)
+            Dtobase target = this.pathHelper.GetTopNodeTarget(this.path);
+            if (null != target.GetAssignedFields() &&
+                count < target.GetAssignedFields().Count)
             {
                 this.FailRoot(msg);
             }
@@ -193,8 +194,9 @@ namespace Upida.Validation.Impl
         /// <param name="msg">failure message</param>
         public void MustHaveMinAssignedFieldsCount(int count, string msg)
         {
-            if (null == this.target.GetAssignedFields() ||
-                count > this.target.GetAssignedFields().Count)
+            Dtobase target = this.pathHelper.GetTopNodeTarget(this.path);
+            if (null == target.GetAssignedFields() ||
+                count > target.GetAssignedFields().Count)
             {
                 this.FailRoot(msg);
             }
@@ -206,6 +208,7 @@ namespace Upida.Validation.Impl
         /// <param name="msg">failure message</param>
         public void MustBeAssigned(string msg)
         {
+            Dtobase target = this.pathHelper.GetTopNodeTarget(this.path);
             if (!this.checker.IsAssigned(this.fieldName, target))
             {
                 this.Fail(msg);
@@ -218,6 +221,7 @@ namespace Upida.Validation.Impl
         /// <param name="msg">failure message</param>
         public void MustBeNotAssigned(string msg)
         {
+            Dtobase target = this.pathHelper.GetTopNodeTarget(this.path);
             if (this.checker.IsAssigned(this.fieldName, target))
             {
                 this.Fail(msg);
@@ -230,6 +234,7 @@ namespace Upida.Validation.Impl
         /// <param name="msg">failure message</param>
         public void MustBeValidFormat(string msg)
         {
+            Dtobase target = this.pathHelper.GetTopNodeTarget(this.path);
             if (!this.checker.IsValidFormat(this.fieldName, target))
             {
                 this.Fail(msg);

@@ -25,5 +25,10 @@ namespace Upida.Validation.Impl
         /// Node name
         /// </summary>
         public string Name { get; set; }
+
+        /// <summary>
+        /// Node Target object
+        /// </summary>
+        public Dtobase Target { get; set; }
     }
 }

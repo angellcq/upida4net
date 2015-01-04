@@ -13,7 +13,7 @@ myclients.app.controller(
 
 	$scope.loadClients = function () {
 		$scope.clientRows = new Array();
-		upida.get("client/getall", $scope)
+		upida.get("client/getall")
 		.then(function (items) {
 			angular.forEach(items, function (p, i) {
 				var row = new $scope.ClientRow(p.id);
@@ -29,13 +29,14 @@ myclients.app.controller(
 	};
 
 	$scope.onDelete = function (clientId) {
-		upida.post("client/delete/" + clientId, null, $scope)
+		upida.post("client/delete/" + clientId, null)
 		.then(function () {
 			$scope.loadClients();
 		});
 	};
 
 	$scope.$on("$routeChangeSuccess", function () {
+		upida.setScope($scope);
 		$scope.loadClients();
 	});
 }]);

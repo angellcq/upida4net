@@ -40,14 +40,14 @@ myclients.app.controller(
 			item.enabled = p.enabled;
 			data.logins.push(item);
 		});
-		upida.post("client/update", data, $scope)
+		upida.post("client/update", data)
 		.then(function () {
 			$location.path("client/list");
 		});
 	};
 
 	$scope.loadClient = function () {
-		upida.get("client/getbyid?id=" + $scope.id, $scope)
+		upida.get("client/getbyid?id=" + $scope.id)
 		.then(function (item) {
 			$scope.name = item.name;
 			$scope.lastname = item.lastname;
@@ -64,6 +64,7 @@ myclients.app.controller(
 	};
 
 	$scope.$on('$routeChangeSuccess', function () {
+		upida.setScope($scope);
 		$scope.loadClient();
 	});
 }]);

@@ -36,13 +36,14 @@
 			item.enabled = p.enabled;
 			data.logins.push(item);
 		});
-		upida.post("client/save", data, $scope)
+		upida.post("client/save", data)
 		.then(function () {
 			$location.path("client/list");
 		});
 	};
 
 	$scope.$on("$routeChangeSuccess", function () {
+		upida.setScope($scope);
 		$scope.onAddLoginClick();
 	});
 }]);

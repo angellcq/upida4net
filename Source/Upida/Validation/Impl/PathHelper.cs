@@ -57,5 +57,25 @@ namespace Upida.Validation.Impl
             path.AddLast(new PathNode(null));
             return path;
         }
+
+        /// <summary>
+        /// Sets top node target
+        /// </summary>
+        /// <param name="path">existing path</param>
+        /// <param name="target">target object</param>
+        public void SetTopNodeTarget(LinkedList<PathNode> path, Dtobase target)
+        {
+            path.Last.Value.Target = target;
+        }
+
+        /// <summary>
+        /// Gets top node target
+        /// </summary>
+        /// <param name="path">existing path</param>
+        /// <returns></returns>
+        public Dtobase GetTopNodeTarget(LinkedList<PathNode> path)
+        {
+            return path.Last.Value.Target;
+        }
     }
 }

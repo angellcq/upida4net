@@ -21,5 +21,19 @@ namespace Upida.Validation
         /// </summary>
         /// <returns></returns>
         LinkedList<PathNode> CreateNew();
+
+        /// <summary>
+        /// Sets top node target
+        /// </summary>
+        /// <param name="path">existing path</param>
+        /// <param name="target">target object</param>
+        void SetTopNodeTarget(LinkedList<PathNode> path, Dtobase target);
+
+        /// <summary>
+        /// Gets top node target
+        /// </summary>
+        /// <param name="path">existing path</param>
+        /// <returns></returns>
+        Dtobase GetTopNodeTarget(LinkedList<PathNode> path);
     }
 }
