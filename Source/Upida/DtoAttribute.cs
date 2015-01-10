@@ -19,12 +19,11 @@ namespace Upida
         /// </summary>
         public DtoAttribute()
         {
-            this.value = byte.MaxValue;
-            this.nested = byte.MaxValue;
+            this.value = 1;
         }
 
         /// <summary>
-        /// Creates instance of the DtoAttribute class
+        /// Creates an instance of the DtoAttribute class
         /// </summary>
         /// <param name="value">serialization level</param>
         public DtoAttribute(byte value)

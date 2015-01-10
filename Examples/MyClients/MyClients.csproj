@@ -110,6 +110,10 @@
       <Private>True</Private>
       <HintPath>..\..\Libs\Microsoft.AspNet.WebPages.3.2.2\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
+    <Reference Include="Upida.Net-3.9, Version=3.9.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Binary\Upida.Net-3.9.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\DependencyConfig.cs" />
@@ -186,12 +190,6 @@
   <ItemGroup>
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Notfound.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Source\Upida\Upida.csproj">
-      <Project>{4b226445-4cbe-4815-a369-d27c258502f5}</Project>
-      <Name>Upida</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <PropertyGroup>
